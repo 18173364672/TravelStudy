@@ -1,19 +1,19 @@
 <!doctype html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>后台登录-X-admin1.1</title>
+    <title>研学旅行后台管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="static/css/font.css">
-	<link rel="stylesheet" href="static/css/xadmin.css">
+  <link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon" />
+    <link rel="stylesheet" th:href="@{/css/font.css}">
+	<link rel="stylesheet" th:href="@{/css/xadmin.css}">
     <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
     
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
-    <script src="static/lib/layui/layui.js" charset="utf-8"></script>
+    <script th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
    
-    <script type="text/javascript" src="static/js/xadmin.js"></script>
+    <script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
 <!--    <script type="text/javascript" src="static/js/jquery-1.8.3.js" ></script>-->
 </head>
   <script>
@@ -57,7 +57,7 @@
 <body>
     <!-- 顶部开始 -->
     <div class="container">
-        <div class="logo"><a href="./index.html">X-ADMIN V1.1</a></div>
+        <div class="logo"><a href="./index.html">研学旅行后台管理系统</a></div>
         <div class="open-nav"><i class="iconfont">&#xe699;</i></div>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
@@ -381,28 +381,32 @@
                 </thead>
                 <tbody>
                     
-                                                               <tr>
+                                                               <tr th:each="item,state : ${list}">
                         <td>
                             <input type="checkbox" value="1" name="s1">
                         </td>
-                        <td>
-                            1
+                        <td  th:text="${item.id}">
+                            
                         </td>
-                        <td>
-                            <u style="cursor:pointer" onclick="member_show('张三','manage-activity-jieshao.html','1000','400','400')">
-                               射箭
-                            </u>
+                        
+                       
+                        <td th:text="${item.aName}"> 
+                        	<u style="cursor:pointer" onclick="member_show('张三','manage-activity-jieshao.html','1000','400','400')">
+                        	
+                        	</u>
                         </td>
-                        <td >
-                            建坤生态园
+                        
+                        
+                        <td  th:text="${item.aZbf}">
+                            
                         </td>
                     
                         
-                         <td >
-                           800
+                         <td th:text="${item.aPrice}">
+                           
                         </td>
-                        <td >
-                           5
+                        <td  th:text="${item.count}">
+                           
                         </td>
                         
                           <td >
