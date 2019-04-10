@@ -18,6 +18,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
+import com.accp.config.intercepors.LoginInterceptor;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
@@ -72,11 +73,13 @@ public class WebMvcConfigruation extends WebMvcConfigurationSupport {
 	/**
 	 * 添加拦截器
 	 */
-//	@Override
-//	protected void addInterceptors(InterceptorRegistry registry) {
-//		registry.addInterceptor(my).addPathPatterns("/**").excludePathPatterns("/js/**");
-//		super.addInterceptors(registry);
-//	}
+	@Autowired
+	private LoginInterceptor loginInterceptor;
+	@Override
+	protected void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(loginInterceptor).addPathPatterns("/**").excludePathPatterns("/user/login", "/register","/static","/user/tologin");
+        super.addInterceptors(registry);
+	}
 
 	@Override
 	protected void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
