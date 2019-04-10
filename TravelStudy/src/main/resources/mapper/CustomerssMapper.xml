@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.accp.dao.CustomerssMapper" >
+  <resultMap id="BaseResultMap" type="com.accp.domain.Customerss" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="Username" property="username" jdbcType="VARCHAR" />
+    <result column="UserPassWord" property="userpassword" jdbcType="VARCHAR" />
+    <result column="Email" property="email" jdbcType="VARCHAR" />
+    <result column="Sex" property="sex" jdbcType="VARCHAR" />
+    <result column="Phone" property="phone" jdbcType="VARCHAR" />
+    <result column="Address" property="address" jdbcType="VARCHAR" />
+    <result column="CreateTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="Consumption" property="consumption" jdbcType="DOUBLE" />
+    <result column="FinalTime" property="finaltime" jdbcType="TIMESTAMP" />
+    <result column="Consume" property="consume" jdbcType="INTEGER" />
+    <result column="IdCard" property="idcard" jdbcType="VARCHAR" />
+    <result column="Uimg" property="uimg" jdbcType="VARCHAR" />
+    <result column="State" property="state" jdbcType="INTEGER" />
+    <result column="GroupId" property="groupid" jdbcType="INTEGER" />
+    <result column="Spare1" property="spare1" jdbcType="VARCHAR" />
+    <result column="Spare2" property="spare2" jdbcType="VARCHAR" />
+    <result column="Spare3" property="spare3" jdbcType="VARCHAR" />
+    <result column="Spare4" property="spare4" jdbcType="VARCHAR" />
+    <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Id, Username, UserPassWord, Email, Sex, Phone, Address, CreateTime, Consumption, 
+    FinalTime, Consume, IdCard, Uimg, State, GroupId, Spare1, Spare2, Spare3, Spare4, 
+    Spare5
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.accp.domain.CustomerssExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from customerss
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from customerss
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from customerss
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.accp.domain.CustomerssExample" >
+    delete from customerss
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.accp.domain.Customerss" >
+    insert into customerss (Id, Username, UserPassWord, 
+      Email, Sex, Phone, 
+      Address, CreateTime, Consumption, 
+      FinalTime, Consume, IdCard, 
+      Uimg, State, GroupId, 
+      Spare1, Spare2, Spare3, 
+      Spare4, Spare5)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{userpassword,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{consumption,jdbcType=DOUBLE}, 
+      #{finaltime,jdbcType=TIMESTAMP}, #{consume,jdbcType=INTEGER}, #{idcard,jdbcType=VARCHAR}, 
+      #{uimg,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{groupid,jdbcType=INTEGER}, 
+      #{spare1,jdbcType=VARCHAR}, #{spare2,jdbcType=VARCHAR}, #{spare3,jdbcType=VARCHAR}, 
+      #{spare4,jdbcType=VARCHAR}, #{spare5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.accp.domain.Customerss" >
+    insert into customerss
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="username != null" >
+        Username,
+      </if>
+      <if test="userpassword != null" >
+        UserPassWord,
+      </if>
+      <if test="email != null" >
+        Email,
+      </if>
+      <if test="sex != null" >
+        Sex,
+      </if>
+      <if test="phone != null" >
+        Phone,
+      </if>
+      <if test="address != null" >
+        Address,
+      </if>
+      <if test="createtime != null" >
+        CreateTime,
+      </if>
+      <if test="consumption != null" >
+        Consumption,
+      </if>
+      <if test="finaltime != null" >
+        FinalTime,
+      </if>
+      <if test="consume != null" >
+        Consume,
+      </if>
+      <if test="idcard != null" >
+        IdCard,
+      </if>
+      <if test="uimg != null" >
+        Uimg,
+      </if>
+      <if test="state != null" >
+        State,
+      </if>
+      <if test="groupid != null" >
+        GroupId,
+      </if>
+      <if test="spare1 != null" >
+        Spare1,
+      </if>
+      <if test="spare2 != null" >
+        Spare2,
+      </if>
+      <if test="spare3 != null" >
+        Spare3,
+      </if>
+      <if test="spare4 != null" >
+        Spare4,
+      </if>
+      <if test="spare5 != null" >
+        Spare5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userpassword != null" >
+        #{userpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="consumption != null" >
+        #{consumption,jdbcType=DOUBLE},
+      </if>
+      <if test="finaltime != null" >
+        #{finaltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="consume != null" >
+        #{consume,jdbcType=INTEGER},
+      </if>
+      <if test="idcard != null" >
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="uimg != null" >
+        #{uimg,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="groupid != null" >
+        #{groupid,jdbcType=INTEGER},
+      </if>
+      <if test="spare1 != null" >
+        #{spare1,jdbcType=VARCHAR},
+      </if>
+      <if test="spare2 != null" >
+        #{spare2,jdbcType=VARCHAR},
+      </if>
+      <if test="spare3 != null" >
+        #{spare3,jdbcType=VARCHAR},
+      </if>
+      <if test="spare4 != null" >
+        #{spare4,jdbcType=VARCHAR},
+      </if>
+      <if test="spare5 != null" >
+        #{spare5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.accp.domain.CustomerssExample" resultType="java.lang.Integer" >
+    select count(*) from customerss
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update customerss
+    <set >
+      <if test="record.id != null" >
+        Id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.username != null" >
+        Username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userpassword != null" >
+        UserPassWord = #{record.userpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        Email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        Sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        Phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        Address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.consumption != null" >
+        Consumption = #{record.consumption,jdbcType=DOUBLE},
+      </if>
+      <if test="record.finaltime != null" >
+        FinalTime = #{record.finaltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.consume != null" >
+        Consume = #{record.consume,jdbcType=INTEGER},
+      </if>
+      <if test="record.idcard != null" >
+        IdCard = #{record.idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uimg != null" >
+        Uimg = #{record.uimg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        State = #{record.state,jdbcType=INTEGER},
+      </if>
+      <if test="record.groupid != null" >
+        GroupId = #{record.groupid,jdbcType=INTEGER},
+      </if>
+      <if test="record.spare1 != null" >
+        Spare1 = #{record.spare1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spare2 != null" >
+        Spare2 = #{record.spare2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spare3 != null" >
+        Spare3 = #{record.spare3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spare4 != null" >
+        Spare4 = #{record.spare4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spare5 != null" >
+        Spare5 = #{record.spare5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update customerss
+    set Id = #{record.id,jdbcType=INTEGER},
+      Username = #{record.username,jdbcType=VARCHAR},
+      UserPassWord = #{record.userpassword,jdbcType=VARCHAR},
+      Email = #{record.email,jdbcType=VARCHAR},
+      Sex = #{record.sex,jdbcType=VARCHAR},
+      Phone = #{record.phone,jdbcType=VARCHAR},
+      Address = #{record.address,jdbcType=VARCHAR},
+      CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      Consumption = #{record.consumption,jdbcType=DOUBLE},
+      FinalTime = #{record.finaltime,jdbcType=TIMESTAMP},
+      Consume = #{record.consume,jdbcType=INTEGER},
+      IdCard = #{record.idcard,jdbcType=VARCHAR},
+      Uimg = #{record.uimg,jdbcType=VARCHAR},
+      State = #{record.state,jdbcType=INTEGER},
+      GroupId = #{record.groupid,jdbcType=INTEGER},
+      Spare1 = #{record.spare1,jdbcType=VARCHAR},
+      Spare2 = #{record.spare2,jdbcType=VARCHAR},
+      Spare3 = #{record.spare3,jdbcType=VARCHAR},
+      Spare4 = #{record.spare4,jdbcType=VARCHAR},
+      Spare5 = #{record.spare5,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.accp.domain.Customerss" >
+    update customerss
+    <set >
+      <if test="username != null" >
+        Username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userpassword != null" >
+        UserPassWord = #{userpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        Email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        Sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        Phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        Address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="consumption != null" >
+        Consumption = #{consumption,jdbcType=DOUBLE},
+      </if>
+      <if test="finaltime != null" >
+        FinalTime = #{finaltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="consume != null" >
+        Consume = #{consume,jdbcType=INTEGER},
+      </if>
+      <if test="idcard != null" >
+        IdCard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="uimg != null" >
+        Uimg = #{uimg,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        State = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="groupid != null" >
+        GroupId = #{groupid,jdbcType=INTEGER},
+      </if>
+      <if test="spare1 != null" >
+        Spare1 = #{spare1,jdbcType=VARCHAR},
+      </if>
+      <if test="spare2 != null" >
+        Spare2 = #{spare2,jdbcType=VARCHAR},
+      </if>
+      <if test="spare3 != null" >
+        Spare3 = #{spare3,jdbcType=VARCHAR},
+      </if>
+      <if test="spare4 != null" >
+        Spare4 = #{spare4,jdbcType=VARCHAR},
+      </if>
+      <if test="spare5 != null" >
+        Spare5 = #{spare5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.accp.domain.Customerss" >
+    update customerss
+    set Username = #{username,jdbcType=VARCHAR},
+      UserPassWord = #{userpassword,jdbcType=VARCHAR},
+      Email = #{email,jdbcType=VARCHAR},
+      Sex = #{sex,jdbcType=VARCHAR},
+      Phone = #{phone,jdbcType=VARCHAR},
+      Address = #{address,jdbcType=VARCHAR},
+      CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      Consumption = #{consumption,jdbcType=DOUBLE},
+      FinalTime = #{finaltime,jdbcType=TIMESTAMP},
+      Consume = #{consume,jdbcType=INTEGER},
+      IdCard = #{idcard,jdbcType=VARCHAR},
+      Uimg = #{uimg,jdbcType=VARCHAR},
+      State = #{state,jdbcType=INTEGER},
+      GroupId = #{groupid,jdbcType=INTEGER},
+      Spare1 = #{spare1,jdbcType=VARCHAR},
+      Spare2 = #{spare2,jdbcType=VARCHAR},
+      Spare3 = #{spare3,jdbcType=VARCHAR},
+      Spare4 = #{spare4,jdbcType=VARCHAR},
+      Spare5 = #{spare5,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC 
+"-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- 核心配置文件 -->
+<configuration>
+
+	<settings>
+		<!-- 开启二级缓存，默认是开启 -->
+		<setting name="cacheEnabled" value="true"/>
+		<!-- 延迟加载数据.. -->
+<!-- 		<setting name="lazyLoadingEnabled" value="true"/> -->
+		<!--  -->
+<!-- 		<setting name="aggressiveLazyLoading" value="false"/> -->
+	</settings>
+
+	<plugins>
+		<!-- 如果是4.x以下（包括）：com.github.pagehelper.PageHelper -->
+		<plugin interceptor="com.github.pagehelper.PageInterceptor"></plugin>
+	</plugins>
+</configuration>

@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>后台登录-X-admin1.1</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="static/css/font.css">
+	<link rel="stylesheet" href="static/css/xadmin.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
+    <script src="static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="static/js/xadmin.js"></script>
+</head>
+
+	<script>
+		  
+		  $(function(){
+		  	var s=0;
+		  	$("#yc").click(function(){
+		  		if(s==0){
+		  			$("#jl").show();
+		  			$("#tb").html("&#xe6a6;")
+		  			s=1;
+		  		}else{
+		  			$("#jl").hide();
+		  			$("#tb").html("&#xe6a7;")
+		  			s=0;
+		  			
+		  		}
+		  		
+		  	})
+		  	
+		  	var h=0;
+		  	$("[name='xxjl']").click(function(){
+		  		if(h==0){
+		  			$(this).next().show();
+		  			$(this).find("i").html("&#xe6a6;")
+		  			h=1;
+		  		}else{
+		  			$(this).next().hide();
+		  			$(this).find("i").html("&#xe6a7;")
+		  			h=0;
+		  			
+		  		}
+		  		
+		  	})
+		  	
+		  	
+		  	var x=0;
+		  		$("#yc1").click(function(){
+		  		if(x==0){
+		  			$("#cd").show();
+		  			$("#tb1").html("&#xe6a6;")
+		  			x=1;
+		  		}else{
+		  			$("#cd").hide();
+		  			$("#tb1").html("&#xe6a7;")
+		  			x=0;
+		  			
+		  		}
+		  		
+		  	})
+		  		
+		  		
+		  		 	var z=0;
+		  	$("[name='xxcd']").click(function(){
+		  		if(h==0){
+		  			$(this).next().show();
+		  			$(this).find("i").html("&#xe6a6;")
+		  			h=1;
+		  		}else{
+		  			$(this).next().hide();
+		  			$(this).find("i").html("&#xe6a7;")
+		  			h=0;
+		  			
+		  		}
+		  		
+		  	})
+		  	
+		  })
+		  
+	
+	</script>
+<body>
+    <!-- 中部开始 -->
+    
+    
+    
+    
+    
+    <div class="wrapper">
+        <!-- 右侧主体开始 -->
+        <div class="page-content">
+          <div class="content">
+            <!-- 右侧内容框架，更改从这里开始 -->
+            <form class="layui-form">
+              
+                <div class="layui-form-item">
+                    <label for="L_username" class="layui-form-label">
+                        <span class="x-red">*</span>项目名称
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_username" name="username" required="" lay-verify="nikename"
+                        autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                
+                <div class="layui-form-item layui-form-text">
+                    <label for="L_sign" class="layui-form-label">
+                        <span class="x-red">*</span>项目介绍
+                    </label>
+                    <div class="layui-input-block">
+                        <textarea placeholder="请输入项目介绍" id="L_sign" name="sign" autocomplete="off"
+                        class="layui-textarea" style="height: 80px;"></textarea>
+                    </div>
+                </div>
+                
+                <div class="layui-form-item layui-form-text">
+                    <label for="L_sign" class="layui-form-label">
+                        <span class="x-red">*</span>图片选择
+                    </label>
+                    <div class="layui-input-block">
+                       <input type="file" id="exampleInputFile" multiple="multiple">
+                    </div>
+                </div>
+                
+                
+                
+                
+                 
+                 
+                
+              
+                
+                   <div class="layui-form-item">
+                    <label for="L_username" class="layui-form-label">
+                        <span class="x-red">*</span>请选择类型
+                    </label>
+                    <div class="layui-inline">
+              <select>
+            	<option>请选择类型</option>
+            	<option>射击</option>
+            	<option>拳击</option>
+            	
+            </select>
+            
+          
+           
+            
+                    </div>   
+             
+                </div>
+                
+                 
+                <div id="yc"><xblock><i class="iconfont nav_right" id="tb">&#xe6a7;</i>请选择教练</xblock></div>
+                
+                  <ul id="jl" style="display: none;">
+                  <li><xblock name="xxjl"><i class="iconfont" style="margin-left: 30px;">&#xe6a7;</i>射击教练</xblock><div id="sj" style="display: none;">
+                  			<p><input type="checkbox">赵三&nbsp;&nbsp;<input type="checkbox">李四
+                  			&nbsp;&nbsp;<input type="checkbox">王五
+                  			
+                  			</p>
+                  			
+                  		
+                  	</div>
+                  
+                  	
+                  </li>
+                  	
+                  	<li> <xblock name="xxjl"><i class="iconfont" style="margin-left: 30px;">&#xe6a7;</i>拳击教练</xblock>
+                  		<div id="qj" style="display: none;">
+                  			<p><input type="checkbox">赵三&nbsp;&nbsp;<input type="checkbox">李四
+                  			&nbsp;&nbsp;<input type="checkbox">王五
+                  			
+                  			</p>
+                  			
+                  		
+                  	</div>
+                  		
+                  		
+                  	</li>
+                  </ul>
+                  
+                  
+                    <div id="yc1"><xblock><i class="iconfont nav_right" id="tb1">&#xe6a7;</i>请选择场地</xblock></div>
+                
+                  <ul id="cd" style="display: none;">
+                  <li> <xblock name="xxcd"><i class="iconfont" style="margin-left: 30px;">&#xe6a7;</i>射击场地</xblock><div id="sj1" style="display: none;">
+                  			<p><input type="checkbox">射击1号场地&nbsp;&nbsp;<input type="checkbox">射击2号场地
+                  			&nbsp;&nbsp;<input type="checkbox">射击3号场地
+                  			
+                  			</p>
+                  			
+                  		
+                  	</div>
+                  
+                  	
+                  </li>
+                  	
+                  	<li> <xblock name="xxcd"><i class="iconfont" style="margin-left: 30px;">&#xe6a7;</i>拳击场地</xblock>
+                  		<div id="qj1" style="display: none;">
+                  			<p><input type="checkbox">拳击1号场地&nbsp;&nbsp;<input type="checkbox">拳击2号场地
+                  			&nbsp;&nbsp;<input type="checkbox">拳击3号场地
+                  			
+                  			</p>
+                  			
+                  		
+                  	</div>
+                  		
+                  		
+                  	</li>
+                  </ul>
+                  
+          
+                
+               
+                
+                <div class="layui-form-item">
+                    <label for="L_repass" class="layui-form-label">
+                    </label>
+                    <button  class="layui-btn" lay-filter="add" lay-submit="">
+                        增加
+                    </button>
+                </div>
+            </form>
+            <!-- 右侧内容框架，更改从这里结束 -->
+          </div>
+        </div>
+        <!-- 右侧主体结束 -->
+    </div>
+    <!-- 中部结束 -->
+    
+    
+    
+  
+</body>
+</html>

@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>后台登录-X-admin1.1</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+		<link rel="stylesheet" href="static/css/font.css">
+		<link rel="stylesheet" href="static/css/xadmin.css">
+		<link rel="stylesheet" href="static/lib/layui/css/layui.css" />
+		<link rel="stylesheet" href="static/lib/layui/css/modules/layer/default/layer.css" />
+		<link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
+		<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+		<script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
+		<script src="static/lib/layui/layui.js" charset="utf-8"></script>
+		<script type="text/javascript" src="static/js/xadmin.js"></script>
+		<link rel="stylesheet" href="static/layui-v2.4.5/layui/css/layui.css" />
+		<script src="static/layui-v2.4.5/layui/layui.js"></script>
+	</head>
+
+	<body>
+
+		<div class="layui-collapse" lay-accordion="">
+			<div class="layui-colla-item">
+				<h2 class="layui-colla-title">添加活动</h2>
+				<div class="layui-colla-content">
+					<table class="layui-table">
+                <thead>
+                    <tr>
+                        <th>
+                            <input type="checkbox" id="checkall" value="">
+                        </th>
+                        <th>
+                            ID
+                        </th>
+                        <th>
+                            活动名称
+                        </th>
+                        <th>
+                            活动主办方
+                        </th>
+             
+                                     <th>
+                           活动价格（元/1人）
+                        </th>
+                        <th>
+                           项目使用次数
+                        </th>
+                          <th>
+                          项目
+                        </th> 
+     
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                                                               <tr>
+                        <td>
+                            <input type="checkbox" value="1" name="s1">
+                        </td>
+                        <td>
+                            1
+                        </td>
+                        <td>
+                            <u style="cursor:pointer" onclick="member_show('张三','manage-activity-jieshao.html','1000','400','400')">
+                               射箭
+                            </u>
+                        </td>
+                        <td >
+                            建坤生态园
+                        </td>
+                    
+                        
+                         <td >
+                           800
+                        </td>
+                        <td >
+                           5
+                        </td>
+                        
+                          <td >
+                          	<a title="查看" href="javascript:;" onclick="member_edit('查看项目','manage-activity-show.html','6','1200','510')"
+                            class="ml-5" style="text-decoration:none">
+                查看
+                            </a>
+                           
+                        </td>
+
+ 
+     
+                    </tr>
+                </tbody>
+            </table>
+            
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class="layui-collapse" lay-accordion="">
+			<div class="layui-colla-item">
+				<h2 class="layui-colla-title">添加项目</h2>
+				<div class="layui-colla-content">
+					<table class="layui-table">
+                <thead>
+                    <tr>
+                        <th>
+                            <input type="checkbox" id="checkall" value="">
+                        </th>
+                        <th>
+                            ID
+                        </th>
+                        <th>
+                            项目名称
+                        </th>
+                        <th>
+                            项目介绍
+                        </th>
+             
+                                     <th>
+                           项目价格（元/1人）
+                        </th>
+                          <th>
+                          项目类型
+                        </th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input type="checkbox" value="1" name="s1">
+                        </td>
+                        <td>
+                            1
+                        </td>
+                        <td>
+                            <u style="cursor:pointer" onclick="member_show('张三','member-show.html','10001','360','400')">
+                               一箭穿心
+                            </u>
+                        </td>
+                        <td >
+                            活动人员射箭，环数最高者给予相应奖励。
+                        </td>
+                    
+                        
+                         <td >
+                           800
+                        </td>
+                        
+                          <td >
+                           射击
+                        </td>
+ 
+      
+                    </tr>
+                        <tr>
+                        <td>
+                            <input type="checkbox" value="1" name="s1">
+                        </td>
+                        <td>
+                            1
+                        </td>
+                        <td>
+                            <u style="cursor:pointer" onclick="member_show('项目编辑','member-project-edit.html','10001','360','400')">
+                               拳击手
+                            </u>
+                        </td>
+                        <td >
+                            活动人员进行拳击比赛，分数最高者给予相应奖励。
+                        </td>
+                      
+                        
+                        <td >
+                           1200
+                        </td>
+                                        <td >
+                           拳击
+                        </td>
+
+      
+                    </tr>
+                    
+                                    <tr>
+                        <td>
+                            <input type="checkbox" value="1" name="s1">
+                        </td>
+                        <td>
+                            1
+                        </td>
+                        <td>
+                            <u style="cursor:pointer" onclick="member_show('张三','member-show.html','10001','360','400')">
+                               拳击手
+                            </u>
+                        </td>
+                        
+                        <td >
+                            活动人员进行拳击比赛，分数最高者给予相应奖励。
+                        </td>
+                       
+                         <td >
+                           1200
+                        </td>
+                                       <td >
+                           拳击
+                        </td>
+   
+                    </tr>
+                    
+                                      <tr>
+                        <td>
+                            <input type="checkbox" value="1" name="s1">
+                        </td>
+                        <td>
+                            1
+                        </td>
+                        <td>
+                            <u style="cursor:pointer" onclick="member_show('张三','member-show.html','10001','360','400')">
+                               拳击手
+                            </u>
+                        </td>
+                        <td >
+                            活动人员进行拳击比赛，分数最高者给予相应奖励。
+                        </td>
+                    
+                        
+                         <td >
+                           1200
+                        </td>
+                                     <td >
+                           拳击
+                        </td>
+   
+      
+                    </tr>
+                    
+                                   <tr>
+                        <td>
+                            <input type="checkbox" value="1" name="s1">
+                        </td>
+                        <td>
+                            1
+                        </td>
+                        <td>
+                            <u style="cursor:pointer" onclick="member_show('张三','member-show.html','10001','360','400')">
+                               拳击手
+                            </u>
+                        </td>
+                        <td >
+                            活动人员进行拳击比赛，分数最高者给予相应奖励。
+                        </td>
+                       
+                         <td >
+                           1200
+                        </td>
+                                                      <td >
+                           拳击
+                        </td>
+
+      
+                    </tr>
+                    
+                    
+                                  <tr>
+                        <td>
+                            <input type="checkbox" value="1" name="s1">
+                        </td>
+                        <td>
+                            1
+                        </td>
+                        <td>
+                            <u style="cursor:pointer" onclick="member_show('张三','member-show.html','10001','360','400')">
+                               拳击手
+                            </u>
+                        </td>
+                        <td >
+                            活动人员进行拳击比赛，分数最高者给予相应奖励。
+                        </td>
+                      
+                         <td >
+                           1200
+                        </td>
+                                                      <td >
+                           拳击
+                        </td>
+
+      
+                    </tr>
+                    
+                                     <tr>
+                        <td>
+                            <input type="checkbox" value="1" name="s1">
+                        </td>
+                        <td>
+                            1
+                        </td>
+                        <td>
+                            <u style="cursor:pointer" onclick="member_show('张三','member-show.html','10001','360','400')">
+                               拳击手
+                            </u>
+                        </td>
+                        <td >
+                            活动人员进行拳击比赛，分数最高者给予相应奖励。
+                        </td>
+                      
+                         <td >
+                           1200
+                        </td>
+                                                      <td >
+                           拳击
+                        </td>
+
+      
+                    </tr>
+                    
+                </tbody>
+            </table>
+            
+				</div>
+			</div>
+		</div>
+		
+		<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+		  <legend>已选项目</legend>
+		</fieldset>
+		
+		<table class="layui-table">
+                <thead>
+                    <tr>
+                        <th>
+                            <input type="checkbox" id="checkall" value="">
+                        </th>
+                        <th>
+                            ID
+                        </th>
+                        <th>
+                            活动名称
+                        </th>
+                        <th>
+                            活动主办方
+                        </th>
+             
+                                     <th>
+                           活动价格（元/1人）
+                        </th>
+                        <th>
+                           项目使用次数
+                        </th>
+                          <th>
+                          项目
+                        </th> 
+     
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                                                               <tr>
+                        <td>
+                            <input type="checkbox" value="1" name="s1">
+                        </td>
+                        <td>
+                            1
+                        </td>
+                        <td>
+                            <u style="cursor:pointer" onclick="member_show('张三','manage-activity-jieshao.html','1000','400','400')">
+                               射箭
+                            </u>
+                        </td>
+                        <td >
+                            建坤生态园
+                        </td>
+                    
+                        
+                         <td >
+                           800
+                        </td>
+                        <td >
+                           5
+                        </td>
+                        
+                          <td >
+                          	<a title="查看" href="javascript:;" onclick="member_edit('查看项目','manage-activity-show.html','6','1200','510')"
+                            class="ml-5" style="text-decoration:none">
+                查看
+                            </a>
+                           
+                        </td>
+
+ 
+     
+                    </tr>
+                </tbody>
+            </table>
+		
+		<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+		  <legend>已选项目</legend>
+		</fieldset>
+		
+		<table class="layui-table">
+                <thead>
+                    <tr>
+                        <th>
+                            <input type="checkbox" id="checkall" value="">
+                        </th>
+                        <th>
+                            ID
+                        </th>
+                        <th>
+                            项目名称
+                        </th>
+                        <th>
+                            项目介绍
+                        </th>
+             
+                                     <th>
+                           项目价格（元/1人）
+                        </th>
+                          <th>
+                          项目类型
+                        </th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input type="checkbox" value="1" name="s1">
+                        </td>
+                        <td>
+                            1
+                        </td>
+                        <td>
+                            <u style="cursor:pointer" onclick="member_show('张三','member-show.html','10001','360','400')">
+                               一箭穿心
+                            </u>
+                        </td>
+                        <td >
+                            活动人员射箭，环数最高者给予相应奖励。
+                        </td>
+                    
+                        
+                         <td >
+                           800
+                        </td>
+                        
+                          <td >
+                           射击
+                        </td>
+ 
+      
+                    </tr>
+                        <tr>
+                        <td>
+                            <input type="checkbox" value="1" name="s1">
+                        </td>
+                        <td>
+                            1
+                        </td>
+                        <td>
+                            <u style="cursor:pointer" onclick="member_show('项目编辑','member-project-edit.html','10001','360','400')">
+                               拳击手
+                            </u>
+                        </td>
+                        <td >
+                            活动人员进行拳击比赛，分数最高者给予相应奖励。
+                        </td>
+                      
+                        
+                        <td >
+                           1200
+                        </td>
+                                        <td >
+                           拳击
+                        </td>
+
+      
+                    </tr>
+                    
+                                    <tr>
+                        <td>
+                            <input type="checkbox" value="1" name="s1">
+                        </td>
+                        <td>
+                            1
+                        </td>
+                        <td>
+                            <u style="cursor:pointer" onclick="member_show('张三','member-show.html','10001','360','400')">
+                               拳击手
+                            </u>
+                        </td>
+                        
+                        <td >
+                            活动人员进行拳击比赛，分数最高者给予相应奖励。
+                        </td>
+                       
+                         <td >
+                           1200
+                        </td>
+                                       <td >
+                           拳击
+                        </td>
+   
+                    </tr>
+                    
+	                    
+                </tbody>
+            </table>
+            
+		<div class="" style="position: relative;top: 10px;left: 10px;">
+			<button class="layui-btn layui-btn-danger" onclick="delAll()">删除</button>
+			<button class="layui-btn layui-btn-warm" onclick="delAll()">导入客户信息</button>
+	    	<button class="layui-btn" onclick="member_add('添加活动','manage-activity-add.html','600','500')">确认</button>
+		</div>
+			
+		<!-- 右侧主体结束 -->
+		</div>
+		
+		<script>
+			layui.use('element', function() {
+				var element = layui.element();
+				element.on('tab(demo)', function(data) {
+					console.log(data);
+				});
+			});
+
+			layui.use(['element', 'table', 'layer', 'form', 'laydate'], function() {
+						var element = layui.element;
+						var layer = layui.layer;
+						var table = layui.table;
+						var form = layui.form;
+						var laydate = layui.laydate;
+					}
+		</script>
+	</body>
+
+</html>

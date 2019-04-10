@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>后台登录-X-admin1.1</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="static/css/font.css">
+	<link rel="stylesheet" href="static/css/xadmin.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
+    <script src="static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="static/js/xadmin.js"></script>
+
+</head>
+<body>
+    <!-- 顶部开始 -->
+    <div class="container">
+        <div class="logo"><a href="./index.html">X-ADMIN V1.1</a></div>
+        <div class="open-nav"><i class="iconfont">&#xe699;</i></div>
+        <ul class="layui-nav right" lay-filter="">
+          <li class="layui-nav-item">
+            <a href="javascript:;">admin</a>
+            <dl class="layui-nav-child"> <!-- 二级菜单 -->
+              <dd><a href="">个人信息</a></dd>
+              <dd><a href="">切换帐号</a></dd>
+              <dd><a href="./login.html">退出</a></dd>
+            </dl>
+          </li>
+          <li class="layui-nav-item"><a href="/">前台首页</a></li>
+        </ul>
+    </div>
+    <!-- 顶部结束 -->
+    <!-- 中部开始 -->
+    <div class="wrapper">
+        <!-- 左侧菜单开始 -->
+        <div class="left-nav">
+          <div id="side-nav">
+            <ul id="nav">
+                <li class="list" current>
+                    <a href="./index.html">
+                        <i class="iconfont">&#xe761;</i>
+                        欢迎页面
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="javascript:;">
+                        <i class="iconfont">&#xe70b;</i>
+                        客户管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu ">
+                        <li >
+                            <a href="member-list.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                客户列表
+                            </a>
+                        </li>
+                        <li>
+                            <a href="member-del.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                客户删除
+                            </a>
+                        </li>
+                        <li>
+                            <a href="member-level.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                活动推荐
+                            </a>
+                        </li>
+                        <li>
+                            <a href="member-kiss.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                               活动通知
+                            </a>
+                        </li>
+                        <li>
+                            <a href="member-view.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                               客户资源管理
+                            </a>
+                        </li>
+                        <li>
+                            <a href="member-feedback.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                  客户反馈
+                            </a>
+                        </li>   
+                                                                                            <li>
+                            <a href="member-usergroup.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                  客户组
+                            </a>
+                        </li>  
+                    </ul>
+                </li>
+                <li class="list" >
+                       <a href="javascript:;">
+                        <i class="iconfont">&#xe6b2;</i>
+                       员工管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu" >
+                          <li>
+                            <a href="member-employee.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                员工信息
+                            </a>
+                        </li>
+                        
+                         <li >
+                            <a href="member-organization.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                组织机构
+                            </a>
+                        </li> 
+                        
+                                 <li>
+                            <a href="member-employee-kiss.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                工作通知
+                            </a>
+                        </li> 
+                        </li>
+                    </ul>
+                </li>
+                <li class="list " >
+                    <a href="javascript:;">
+                        <i class="iconfont">&#xe705;</i>
+                        项目管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu">
+                             <li>
+                            <a href="member-project.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                项目信息
+                            </a>
+                        </li>
+                        
+          
+                        
+                                     <li>
+                            <a href="member-project-feedback.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                项目反馈
+                            </a>
+                        </li>
+      
+                                                   <li>
+                            <a href="member-project-comment.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                项目评论
+                            </a>
+                        </li>
+                        
+                                                      <li>
+                            <a href="member-project-ranking.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                项目排名
+                            </a>
+                        </li>
+                        
+    
+                    </ul>
+                </li>
+                
+                <li class="list" >
+                  <a href="javascript:;">
+                        <i class="layui-icon">&#xe62e;</i>
+                        活动管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="manage-activity.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                活动信息
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li class="list" >
+                  <a href="javascript:;">
+                        <i class="layui-icon">&#xe600;</i>
+                        订单管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="manage-order.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                订单信息
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li class="list" >
+                    <a href="javascript:;">
+                        <i class="layui-icon">&#xe62c;</i>
+                        系统统计
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="./echarts1.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                项目人气
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./echarts2.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                每月收入
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./echarts3.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                人气教官
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./echarts4.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                人气活动
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./echarts5.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                每月客户
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./echarts6.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                员工考勤数据
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./echarts7.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                问卷调查
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list">
+                  <a href="javascript:;">
+                        <i class="layui-icon">&#xe614;</i>
+                        系统管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="manage-user.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                用户管理
+                            </a>
+                        </li>
+                        
+               
+                        
+                                     <li>
+                            <a href="manage-plate.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                模块管理
+                            </a>
+                        </li>
+                                                              <li>
+                            <a href="manage-role.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                角色管理
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+          </div>
+        </div>
+        <!-- 左侧菜单结束 -->
+        <!-- 右侧主体开始 -->
+        <div class="page-content">
+          <div class="content">
+            <blockquote class="layui-elem-quote">
+                欢迎使用研学旅行后台管理系统！<span class="f-14">v1.0</span>官方交流群： 519492808
+            </blockquote>
+            <fieldset class="layui-elem-field layui-field-title site-title">
+              <legend><a name="default">信息统计</a></legend>
+            </fieldset>
+            <table class="layui-table">
+                <thead>
+                    <tr>
+                        <th>统计</th>
+                        <th>客户人数</th>
+                        <th>图片库</th>
+                        <th>产品库</th>
+                        <th>用户</th>
+                        <th>管理员</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>总数</td>
+                        <td>92</td>
+                        <td>9</td>
+                        <td>0</td>
+                        <td>8</td>
+                        <td>20</td>
+                    </tr>
+                    <tr>
+                        <td>今日</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>昨日</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>本周</td>
+                        <td>2</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>本月</td>
+                        <td>2</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                    </tr>
+                </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- 右侧主体结束 -->
+    </div>
+    <!-- 中部结束 -->
+    <!-- 底部开始 -->
+    <div class="footer">
+        <div class="copyright">Copyright ©2019 研学旅行管理系统</div>  
+    </div>
+    <!-- 底部结束 -->
+    <!-- 背景切换开始 -->
+	<div class="bg-changer">
+        <div class="swiper-container changer-list">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img class="item" src="static/images/a.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="static/images/b.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="static/images/c.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="static/images/d.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="static/images/e.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="static/images/f.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="static/images/g.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="static/images/h.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="static/images/i.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="static/images/j.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="static/images/k.jpg" alt=""></div>
+                <div class="swiper-slide"><span class="reset">初始化</span></div>
+            </div>
+        </div>
+        <div class="bg-out"></div>
+        <div id="changer-set"><i class="iconfont">&#xe696;</i></div>   
+    </div>
+    <!-- 背景切换结束 -->
+    <script>
+    //百度统计可去掉
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+</body>
+</html>

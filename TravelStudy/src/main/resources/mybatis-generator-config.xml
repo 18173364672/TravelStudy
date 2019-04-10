@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<classPathEntry
+		location="D:\path\to\local\repo\mysql\mysql-connector-java\5.1.6\mysql-connector-java-5.1.6.jar" />
+	<context id="context1">
+		<!-- 注释 -->
+		<commentGenerator>
+			<!-- 是否取消注释 -->
+			<property name="suppressAllComments" value="true" />
+			<property name="suppressDate" value="true" /> <!-- 是否生成注释代时间戳 -->
+		</commentGenerator>
+		<jdbcConnection
+			connectionURL="jdbc:mysql://localhost:3306/travelstudy?serverTimezone=UTC"
+			driverClass="com.mysql.jdbc.Driver" password="123456" userId="root" />
+		<!-- pojo生成位置 -->
+		<javaModelGenerator
+			targetPackage="com.accp.domain" targetProject="src/main/java" />
+		<!-- mapper配置文件生成 -->
+		<sqlMapGenerator targetPackage="mapper"
+			targetProject="src/main/resources" />
+		<!-- dao接口生成 -->
+		<javaClientGenerator
+			targetPackage="com.accp.dao" targetProject="src/main/java"
+			type="XMLMAPPER" />
+
+	
+		 <table domainObjectName="Activity" tableName="activity"></table>
+		<table domainObjectName="Collect" tableName="collect"></table>
+		<table domainObjectName="Comment" tableName="comment"></table>
+		<table domainObjectName="Customergroup" tableName="customergroup"></table>
+		<table domainObjectName="Dynamicpicture" tableName="dynamicpicture"></table>
+		<table domainObjectName="Employee" tableName="employee"></table>
+		<table domainObjectName="Eventitems" tableName="eventitems"></table>
+		<table domainObjectName="Field" tableName="field"></table>
+		<table domainObjectName="Fieldtype" tableName="fieldtype"></table>
+		<table domainObjectName="Notice" tableName="notice"></table>
+		<table domainObjectName="Noticepicture" tableName="noticepicture"></table>
+		<table domainObjectName="Noticesecond" tableName="noticesecond"></table>
+		<table domainObjectName="Order" tableName="order"></table>
+		<table domainObjectName="Orderdetail" tableName="orderdetail"></table>
+		<table domainObjectName="Orderdetails" tableName="orderdetails"></table>
+		<table domainObjectName="Organization" tableName="organization"></table>
+		<table domainObjectName="Plate" tableName="plate"></table>
+		<table domainObjectName="Post" tableName="post"></table>
+		<table domainObjectName="Project" tableName="project"></table>
+		<table domainObjectName="Projectfeedback" tableName="projectfeedback"></table>
+		<table domainObjectName="Projectimg" tableName="projectimg"></table>
+		<table domainObjectName="Role" tableName="role"></table>
+		<table domainObjectName="Roleplate" tableName="roleplate"></table>
+		<table domainObjectName="Social" tableName="social"></table>
+		<table domainObjectName="Thumbup" tableName="thumbup"></table>
+		<table domainObjectName="Userfeedback" tableName="userfeedback"></table>
+		<table domainObjectName="Usernotice" tableName="usernotice"></table>
+		<table domainObjectName="Userprojectdiscuss" tableName="userprojectdiscuss"></table>
+		<table domainObjectName="Userprojectimg" tableName="userprojectimg"></table>
+		<table domainObjectName="Userrole" tableName="userrole"></table>
+		<table domainObjectName="Wages" tableName="wages"></table>
+		<table domainObjectName="BasePay" tableName="BasePay"></table>
+		<table domainObjectName="Royalty" tableName="Royalty"></table>
+		<table domainObjectName="Customerss" tableName="customerss"></table>
+	</context>
+</generatorConfiguration>

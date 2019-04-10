@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>后台登录-X-admin1.1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="static/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="static/css/font.css">
+    <link rel="stylesheet" href="static/css/xadmin.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
+    <script type="text/javascript" src="static/js/echarts.js"></script>
+    <script src="static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="static/js/xadmin.js"></script>
+</head>
+<body>
+    <!-- 顶部开始 -->
+    <div class="container">
+        <div class="logo"><a href="./index.html">X-ADMIN V1.1</a></div>
+        <div class="open-nav"><i class="iconfont">&#xe699;</i></div>
+        <ul class="layui-nav right" lay-filter="">
+          <li class="layui-nav-item">
+            <a href="javascript:;">admin</a>
+            <dl class="layui-nav-child"> <!-- 二级菜单 -->
+              <dd><a href="">个人信息</a></dd>
+              <dd><a href="">切换帐号</a></dd>
+              <dd><a href="./login.html">退出</a></dd>
+            </dl>
+          </li>
+          <li class="layui-nav-item"><a href="/">前台首页</a></li>
+        </ul>
+    </div>
+    <!-- 顶部结束 -->
+    <!-- 中部开始 -->
+    <div class="wrapper">
+        <!-- 左侧菜单开始 -->
+        <div class="left-nav">
+          <div id="side-nav">
+            <ul id="nav">
+                <li class="list" current>
+                    <a href="./index.html">
+                        <i class="iconfont">&#xe761;</i>
+                        欢迎页面
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="javascript:;">
+                        <i class="iconfont">&#xe70b;</i>
+                        客户管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu ">
+                        <li >
+                            <a href="member-list.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                客户列表
+                            </a>
+                        </li>
+                        <li>
+                            <a href="member-del.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                客户删除
+                            </a>
+                        </li>
+                        <li>
+                            <a href="member-level.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                活动推荐
+                            </a>
+                        </li>
+                        <li>
+                            <a href="member-kiss.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                               活动通知
+                            </a>
+                        </li>
+                        <li>
+                            <a href="member-view.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                               客户资源管理
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="member-feedback.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                  客户反馈
+                            </a>
+                        </li>   
+                                                                    <li>
+                            <a href="member-usergroup.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                  客户组
+                            </a>
+                        </li>  
+                    </ul>
+                </li>
+                <li class="list" >
+                       <a href="javascript:;">
+                        <i class="iconfont">&#xe6b2;</i>
+                       员工管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu" >
+                          <li>
+                            <a href="member-employee.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                员工信息
+                            </a>
+                        </li>
+                        
+                         <li >
+                            <a href="member-organization.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                组织机构
+                            </a>
+                        </li> 
+                        
+                                 <li>
+                            <a href="member-employee-kiss.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                工作通知
+                            </a>
+                        </li> 
+                        </li>
+                    </ul>
+                </li>
+                <li class="list " >
+                    <a href="javascript:;">
+                        <i class="iconfont">&#xe705;</i>
+                        项目管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu">
+                             <li>
+                            <a href="member-project.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                项目信息
+                            </a>
+                        </li>
+                        
+          
+                        
+                                     <li>
+                            <a href="member-project-feedback.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                项目反馈
+                            </a>
+                        </li>
+      
+                                                   <li>
+                            <a href="member-project-comment.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                项目评论
+                            </a>
+                        </li>
+                        
+                                                      <li>
+                            <a href="member-project-ranking.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                项目排名
+                            </a>
+                        </li>
+                        
+    
+                    </ul>
+                </li>
+                
+                <li class="list" >
+                  <a href="javascript:;">
+                        <i class="layui-icon">&#xe62e;</i>
+                        活动管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="manage-activity.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                活动信息
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li class="list" >
+                  <a href="javascript:;">
+                        <i class="layui-icon">&#xe600;</i>
+                        订单管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="manage-order.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                订单信息
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li class="list" >
+                    <a href="javascript:;">
+                        <i class="layui-icon">&#xe62c;</i>
+                        系统统计
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu opened">
+                        <li class="current">
+                            <a href="./echarts1.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                项目人气
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./echarts2.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                每月收入
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./echarts3.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                人气教官
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./echarts4.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                人气活动
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./echarts5.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                每月客户
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./echarts6.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                员工考勤数据
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./echarts7.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                问卷调查
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list">
+                  <a href="javascript:;">
+                        <i class="layui-icon">&#xe614;</i>
+                        系统管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="manage-user.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                用户管理
+                            </a>
+                        </li>
+                        
+               
+                        
+                                     <li>
+                            <a href="manage-plate.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                模块管理
+                            </a>
+                        </li>
+                                                              <li>
+                            <a href="manage-role.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                角色管理
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+          </div>
+        </div>
+        <!-- 左侧菜单结束 -->
+        <!-- 右侧主体开始 -->
+        <div class="page-content">
+          <div class="content">
+            <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+            <div id="main" style="width: 100%;height:400px;"></div>
+            
+            <!-- 右侧内容框架，更改从这里结束 -->
+          </div>
+        </div>
+        <!-- 右侧主体结束 -->
+    </div>
+    <!-- 中部结束 -->
+    <!-- 底部开始 -->
+    <div class="footer">
+        <div class="copyright">Copyright ©2019 研学旅行管理系统</div>  
+    </div>
+    <!-- 底部结束 -->
+    <!-- 背景切换开始 -->
+    <div class="bg-changer">
+        <div class="swiper-container changer-list">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img class="item" src="static/images/a.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="static/images/b.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="static/images/c.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="static/images/d.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="static/images/e.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="static/images/f.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="static/images/g.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="static/images/h.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="static/images/i.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="static/images/j.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="static/images/k.jpg" alt=""></div>
+                <div class="swiper-slide"><span class="reset">初始化</span></div>
+            </div>
+        </div>
+        <div class="bg-out"></div>
+        <div id="changer-set"><i class="iconfont">&#xe696;</i></div>   
+    </div>
+    <!-- 背景切换结束 -->
+        
+        <script src="http://cdn.bootcss.com/echarts/3.3.2/echarts.min.js" charset="utf-8"></script>
+        <script type="text/javascript" src="./js/echarts-for-x-admin.js"></script>
+
+        <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'),'echarts-for-x-admin');
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '项目人气统计'
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data:['射击','骑马','采矿','采药','种地']
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: ['1','2','3','4','5','6','7','8','9','10','11','12']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [
+                {
+                    name:'射击',
+                    type:'line',
+                    stack: '总量',
+                    data:[500, 132, 101, 134, 90, 230, 210,222,333,444,555,666]
+                },
+                {
+                    name:'骑马',
+                    type:'line',
+                    stack: '总量',
+                    data:[200, 182, 191, 234, 290, 330, 310,300,290,280,270,260]
+                },
+                {
+                    name:'采矿',
+                    type:'line',
+                    stack: '总量',
+                    data:[150, 232, 201, 154, 190, 330, 410,0,500,0,700,0]
+                },
+                {
+                    name:'采药',
+                    type:'line',
+                    stack: '总量',
+                    data:[320, 332, 301, 334, 390, 330, 320,10100,10,5,6,500]
+                },
+                {
+                    name:'种地',
+                    type:'line',
+                    stack: '总量',
+                    data:[100, 932, 901, 934, 1290, 1330, 1320,2,2,2,2,5000]
+                }
+            ]
+        };
+
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+        
+     	
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>后台登录-X-admin1.1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="static/css/font.css">
+	<link rel="stylesheet" href="static/css/xadmin.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
+    
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
+    <script src="static/lib/layui/layui.js" charset="utf-8"></script>
+   
+    <script type="text/javascript" src="static/js/xadmin.js"></script>
+<!--    <script type="text/javascript" src="static/js/jquery-1.8.3.js" ></script>-->
+</head>
+  <script>
+  	   
+		
+  	   
+  	   
+  	   
+	
+	$(function(){
+	  
+		  $("#checkall").click(function(){
+	  
+	  	 
+	  	if(this.checked==true){
+	  		   $("[name='s1']").each(function(){
+	  		   	this.checked=true;
+	  		   	
+	  		   })
+	  		   
+	  		   
+		  	}else{
+		  		$("[name='s1']").each(function(){
+	  		   	this.checked=false;
+	  		   	
+	  		   })
+		  	}
+
+        
+	  	
+	  })
+	
+	 
+		
+
+		
+	})
+	
+  	
+  </script>
+<body>
+
+        <!-- 右侧主体开始 -->
+        <div class="page-content">
+          <div class="content">
+
+            <table class="layui-table">
+                <thead>
+                    <tr>
+                        <th>
+                            ID
+                        </th>
+                        <th>
+                            活动名称
+                        </th>
+                        <th>
+                            活动介绍
+                        </th>
+             
+                                     <th>
+                           活动适宜年龄段
+                        </th>
+                          <th>
+                          活动益处
+                        </th> 
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            1
+                        </td>
+                        <td>
+                            射箭
+                        </td>
+                        <td >
+                            射箭,是指借助弓的弹力将箭射出
+                        </td>
+                    
+                        
+                         <td >
+                           15岁以上
+                        </td>
+                        
+                          <td >
+                           舒筋活络,反应机敏,肌肉协调
+                        </td>
+ 
+      
+
+                    </tr>
+                        
+                    
+                </tbody>
+            </table>
+                
+            <!-- 右侧内容框架，更改从这里结束 -->
+          </div>
+        </div>
+        <!-- 右侧主体结束 -->
+    </div>
+    <!-- 中部结束 -->
+    <!-- 底部开始 -->
+    <div class="footer">
+        <div class="copyright">Copyright ©2019 研学旅行管理系统</div>  
+    </div>
+    <!-- 底部结束 -->
+    <!-- 背景切换开始 -->
+
+    <!-- 背景切换结束 -->
+    <!-- 页面动态效果 -->
+    <script>
+
+        layui.use(['laydate'], function(){
+          laydate = layui.laydate;//日期插件
+
+          //以上模块根据需要引入
+          //
+          
+
+          
+          var start = {
+            min: '2000-06-16 23:59:59'
+            ,max: '2099-06-16 23:59:59'
+            ,istoday: false
+            ,choose: function(datas){
+              end.min = datas; //开始日选好后，重置结束日的最小日期
+              end.start = datas //将结束日的初始值设定为开始日
+            }
+          };
+          
+          var end = {
+            min: laydate.now()
+            ,max: '2099-06-16 23:59:59'
+            ,istoday: false
+            ,choose: function(datas){
+              start.max = datas; //结束日选好后，重置开始日的最大日期
+            }
+          };
+          
+          document.getElementById('LAY_demorange_s').onclick = function(){
+            start.elem = this;
+            laydate(start);
+          }
+          document.getElementById('LAY_demorange_e').onclick = function(){
+            end.elem = this
+            laydate(end);
+          }
+          
+        });
+
+        //批量删除提交
+         function delAll () {
+            layer.confirm('确认要删除吗？',function(index){
+                //捉到所有被选中的，发异步进行删除
+                layer.msg('删除成功', {icon: 1});
+            });
+         }
+         /*用户-添加*/
+        function member_add(title,url,w,h){
+            x_admin_show(title,url,w,h);
+        }
+        /*用户-查看*/
+        function member_show(title,url,id,w,h){
+            x_admin_show(title,url,w,h);
+        }
+
+         /*用户-停用*/
+        function member_stop(obj,id){
+            layer.confirm('确认要停用吗？',function(index){
+                //发异步把用户状态进行更改
+                $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this,id)" href="javascript:;" title="启用"><i class="layui-icon">&#xe62f;</i></a>');
+                $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-disabled layui-btn-mini">已停用</span>');
+                $(obj).remove();
+                layer.msg('已停用!',{icon: 5,time:1000});
+            });
+        }
+
+        /*用户-启用*/
+        function member_start(obj,id){
+            layer.confirm('确认要启用吗？',function(index){
+                //发异步把用户状态进行更改
+                $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="layui-icon">&#xe601;</i></a>');
+                $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span>');
+                $(obj).remove();
+                layer.msg('已启用!',{icon: 6,time:1000});
+            });
+        }
+        // 用户-编辑
+        function member_edit (title,url,id,w,h) {
+            x_admin_show(title,url,w,h); 
+        }
+        /*密码-修改*/
+        function member_password(title,url,id,w,h){
+            x_admin_show(title,url,w,h);  
+        }
+        /*用户-删除*/
+        function member_del(obj,id){
+            layer.confirm('确认要删除吗？',function(index){
+                //发异步删除数据
+                $(obj).parents("tr").remove();
+                layer.msg('已删除!',{icon:1,time:1000});
+            });
+        }
+        </script>
+        <script>
+        //百度统计可去掉
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+          var s = document.getElementsByTagName("script")[0]; 
+          s.parentNode.insertBefore(hm, s);
+        })();
+        </script>
+</body>
+
+</html>

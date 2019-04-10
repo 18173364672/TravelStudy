@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>后台登录-X-admin1.1</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="static/css/font.css">
+	<link rel="stylesheet" href="static/css/xadmin.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
+    <script src="static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="static/js/xadmin.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="static/css/index.css">
+	<style>
+		.btn-group-lg>.btn, .btn-lg {
+		   font-size: 12px;
+		}
+		#neirong{
+			margin-top: 60px;
+		}	
+	</style>
+	
+	
+	<script type="text/javascript">
+        var checkedList = [] // 选中列表
+
+
+        // 节点单击事件
+        function domClick(e){
+            // 选中子元素所有input框
+            var subItem = e.parentNode.nextElementSibling
+            var inputList = subItem.querySelectorAll(".to__item")
+            for(var i = 0; i < inputList.length; i++){
+                var item = inputList[i]
+                item.querySelector("input").checked = !e.querySelector("input").checked
+                var subName = item.querySelector(".to__name").innerHTML
+            }
+            
+            // 选中当前input框
+            e.querySelector("input").checked = !e.querySelector("input").checked
+            select(e)
+        }
+
+        // 冒泡事件
+        function checkboxClick(e){
+            e.checked = !e.checked
+        }
+
+        // checkedbox选中事件
+        function select(){
+            // 筛选在右侧区域需要遍历的内容
+            checkedList = []
+            var cList = document.getElementsByName("cName")
+            for( var i = 0; i < cList.length; i++){
+                var classArr = (cList[i].parentNode.parentNode.className).split(' ')
+                var className = classArr[classArr.length - 1]
+                var level = parseInt(className.replace(/\w+-/g,'')) // 
+
+                // 设置显示的级别
+                var levelArr = document.querySelectorAll("[class^='to__item level-']")
+                var max = 1
+
+                for (var a = 0; a < levelArr.length; a++) {
+                    var item = levelArr[a];
+                    var arr = item.className.split('-')
+                    if(parseInt(arr[1]) > max){
+                        max = parseInt(arr[1])
+                    }
+                }
+                if(level == max && cList[i].checked == true){
+                    checkedList.push(cList[i].value)
+                }
+            }
+
+            // 右侧区域添加选中内容
+            var dom = document.getElementById("rightCont")
+            dom.innerHTML = ""
+            for (var i = 0; i < checkedList.length; i++) {
+                var item = checkedList[i];
+                var div = document.createElement("div")
+                div.className = "to__item"
+                div.innerHTML = '<span>' + item + '</span><span class="to__close" onclick="cancel(this)"><i>+</i></span>'
+                dom.appendChild(div)
+            }
+        }
+
+        // 取消选中事件
+        function cancel(dom){
+            var cList = document.getElementsByName("cName")
+            for (var i = 0; i < cList.length; i++) {
+                var item = cList[i];
+                if(item.value == dom.previousElementSibling.innerHTML)
+                {
+                    item.checked = false
+                    select();
+                    break;
+                }
+            }
+        }
+
+        // 下拉框点击事件
+        function dropClick(dom){
+            // 切换样式状态
+            if(dom.className.indexOf("to__roate") > -1){
+                dom.className = ""
+            }
+            else{
+                dom.className = "to__roate"
+            }
+            
+            // 显示隐藏内容
+            var domShow = dom.parentNode.parentNode.nextElementSibling
+            if(domShow.className.indexOf("to__show") > -1){
+                domShow.className = "to__subItem"
+            }
+            else{
+                domShow.className = "to__subItem to__show"
+            }
+        }
+
+        window.onload = function(){
+            // 模拟数据
+            var data = [
+                {
+                    name : "研学旅行系统",
+                    child: [
+                        {
+                            name : "员工部",
+                            child : [
+                                {
+                                    name : "小明",
+                                    child : []
+                                },
+                                {
+                                    name : "小红",
+                                    child : []
+                                }
+                            ]
+                        },
+                        {
+                            name : "客户管理",
+                            child : [
+                                {
+                                    name : "小白",
+                                    child : []
+                                },
+                                {
+                                    name : "小黑",
+                                    child : []
+                                }
+                            ]
+                        },
+                        {
+                            name : "其他部",
+                            child : []
+                        }
+                    ]
+                }
+            ]
+            
+            var endHtml = 0
+            var html = ""
+            var level = 1
+
+            // 遍历树形结构
+            function getData(data, dom){
+                if(Object.prototype.toString.call(data) === '[object Array]'){
+                    for(var i = 0; i < data.length; i++){
+
+                        // 添加标题
+                        var item = document.createElement("div")
+                        var arrow = '<span class="to__dropdownList" ><i onclick="dropClick(this)"><svg t="1550632829702" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1783" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%"><defs><style type="text/css"></style></defs><path d="M959.52557 254.29773 511.674589 702.334953 63.824631 254.29773Z" p-id="1784"></path></svg></i></span>'
+
+                        // 设置显示级别
+                        if(level == 3){
+                            arrow = ""
+                        }
+                        item.innerHTML = '<div class="to__item level-' + level + '">' + arrow + '<span onclick="domClick(this)"><input type="checkbox" name="cName" value="' +data[i].name+ '" onclick="checkboxClick(this)" /><div class="to__name">' +data[i].name+ '</div></span></div>'
+                        dom.appendChild(item)
+                        
+                        // 添加子元素
+                        var subItem = document.createElement("div")
+                        subItem.className = "to__subItem"
+                        item.appendChild(subItem)
+
+                        if(data[i].child.length > 0){
+                            level++
+                            getData(data[i].child,subItem)
+                        }
+                        else{
+                            if(i == data.length - 1){
+                                level--
+                            }
+                        }
+                    }
+                }
+            }
+
+            // 赋值
+            var baseDom = document.createElement("div")
+            getData(data,baseDom)
+            document.getElementById("leftCont").innerHTML =  baseDom.innerHTML
+            
+        }
+        
+        
+//      $("#img-change").click(function () {
+//		    $("#file").click();
+//		})
+        
+        
+        
+        
+        
+        
+       //定义id选择器
+		function Id(id){
+		return document.getElementById(id);
+		}
+		//入口函数，两个参数分别为<input type='file'/>的id，还有一个就是图片的id，然后会自动根据文件id得到图片，然后把图片放到指定id的图片标签中
+		function changeToop(fileid,imgid){
+		    var file = Id(fileid);
+		    if(file.value==''){
+		        //设置默认图片
+		    Id("myimg").src='blob:http://127.0.0.1:8080/e3d38dbf-2ad7-4844-b4f7-ca88bb8cfa95';
+		    }else{
+		        preImg(fileid,imgid);
+		    }
+		}
+		//获取input[file]图片的url Important
+		function getFileUrl(fileId) { 
+		    var url; 
+		    var file = Id(fileId);
+		    var agent = navigator.userAgent;
+		    if (agent.indexOf("MSIE")>=1) {
+		    url = file.value; 
+		    } else if(agent.indexOf("Firefox")>0) { 
+		    url = window.URL.createObjectURL(file.files.item(0)); 
+		    } else if(agent.indexOf("Chrome")>0) {
+		    url = window.URL.createObjectURL(file.files.item(0)); 
+		    } 
+		    return url; 
+		} 
+		//读取图片后预览
+		function preImg(fileId,imgId) {
+		var imgPre =Id(imgId);
+		imgPre.src = getFileUrl(fileId); 
+		}
+    </script>
+	
+	
+</head>
+<body>
+    <!-- 顶部开始 -->
+    <div class="container">
+        <div class="logo"><a href="./index.html">X-ADMIN V1.1</a></div>
+        <div class="open-nav"><i class="iconfont">&#xe699;</i></div>
+        <ul class="layui-nav right" lay-filter="">
+          <li class="layui-nav-item">
+            <a href="javascript:;">admin</a>
+            <dl class="layui-nav-child"> <!-- 二级菜单 -->
+              <dd><a href="">个人信息</a></dd>
+              <dd><a href="">切换帐号</a></dd>
+              <dd><a href="./gGao.html">查看公告</a></dd>
+              <dd><a href="./login.html">退出</a></dd>
+            </dl>
+          </li>
+          <li class="layui-nav-item"><a href="/">前台首页</a></li>
+        </ul>
+    </div>
+    <!-- 顶部结束 -->
+    <!-- 中部开始 -->
+    <div class="wrapper">
+        <!-- 左侧菜单开始 -->
+        <div class="left-nav">
+          <div id="side-nav">
+<ul id="nav">
+                <li class="list" current>
+                    <a href="./index.html">
+                        <i class="iconfont">&#xe761;</i>
+                        欢迎页面
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="javascript:;">
+                        <i class="iconfont">&#xe70b;</i>
+                        客户管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu ">
+                        <li >
+                            <a href="member-list.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                客户列表
+                            </a>
+                        </li>
+                        <li>
+                            <a href="member-del.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                客户删除
+                            </a>
+                        </li>
+                        <li>
+                            <a href="member-level.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                活动推荐
+                            </a>
+                        </li>
+                        <li>
+                            <a href="member-kiss.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                               活动通知
+                            </a>
+                        </li>
+                        <li>
+                            <a href="member-view.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                               客户资源管理
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="member-feedback.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                  客户反馈
+                            </a>
+                        </li> 
+                                                                    <li>
+                            <a href="member-usergroup.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                  客户组
+                            </a>
+                        </li>   
+                    </ul>
+                </li>
+                <li class="list" >
+                       <a href="javascript:;">
+                        <i class="iconfont">&#xe6b2;</i>
+                       员工管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu" >
+                          <li>
+                            <a href="member-employee.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                员工信息
+                            </a>
+                        </li>
+                        
+                         <li >
+                            <a href="member-organization.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                组织机构
+                            </a>
+                        </li> 
+                        
+                                 <li>
+                            <a href="member-employee-kiss.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                工作通知
+                            </a>
+                        </li> 
+                        </li>
+                    </ul>
+                </li>
+                <li class="list " >
+                    <a href="javascript:;">
+                        <i class="iconfont">&#xe705;</i>
+                        项目管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu">
+                             <li>
+                            <a href="member-project.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                项目信息
+                            </a>
+                        </li>
+                        
+          
+                        
+                                     <li>
+                            <a href="member-project-feedback.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                项目反馈
+                            </a>
+                        </li>
+      
+                                                   <li>
+                            <a href="member-project-comment.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                项目评论
+                            </a>
+                        </li>
+                        
+                                                      <li>
+                            <a href="member-project-ranking.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                项目排名
+                            </a>
+                        </li>
+                        
+    
+                    </ul>
+                </li>
+                
+                <li class="list" >
+                  <a href="javascript:;">
+                        <i class="layui-icon">&#xe62e;</i>
+                        活动管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="manage-activity.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                活动信息
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li class="list" >
+                  <a href="javascript:;">
+                        <i class="layui-icon">&#xe600;</i>
+                        订单管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="manage-order.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                订单信息
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li class="list" >
+                    <a href="javascript:;">
+                        <i class="layui-icon">&#xe62c;</i>
+                        系统统计
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="./echarts1.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                项目人气
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./echarts2.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                每月收入
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./echarts3.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                人气教官
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./echarts4.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                人气活动
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./echarts5.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                每月客户
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./echarts6.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                员工考勤数据
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./echarts7.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                问卷调查
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="list">
+                  <a href="javascript:;">
+                        <i class="layui-icon">&#xe614;</i>
+                        系统管理
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a href="manage-user.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                用户管理
+                            </a>
+                        </li>
+                        
+               
+                        
+                                     <li>
+                            <a href="manage-plate.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                模块管理
+                            </a>
+                        </li>
+                                                              <li>
+                            <a href="manage-role.html">
+                                <i class="iconfont">&#xe6a7;</i>
+                                角色管理
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                
+            </ul>
+          </div>
+        </div>
+        <!-- 左侧菜单结束 -->
+        <!-- 右侧主体开始 -->
+        <div class="page-content">
+        	<div class="layui-form-item" style="display: inline-block;">
+                <label class="layui-form-label xbs768">请输入标题</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="username"  placeholder="请输入标题" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 120px;">
+        		<textarea placeholder="公告内容" class="layui-textarea" ></textarea>
+        	</div>
+        	<div style="margin-top: -220px; float: left;">
+        		<div id="preview" style="float:left">
+                	<img id="imghead" width="100px" height="100px"  class="logo-size" src=''/>
+                </div>
+                <input id="filgo" style="margin-left: 70px; margin-top: 30px;" type="file" name="logo" onchange="changeToop('filgo','imghead');" value="上传图片">
+        	</div>
+        	<div style="margin-top: -280px; float: right; margin-right: 100px;">
+        		 <button type="submit" class="btn btn-default">发布</button>
+        	</div>
+        	
+        	<div style="border: 1px solid; margin-top: 10px;">
+        		 <div class="to__block">
+			        <div class="to__left">
+			            <div class="to__arrow"><span>←</span><span>→</span></div>
+			            <div class="to__title">选择要发送的人</div>
+			            <div class="to__content" id="leftCont"></div>
+			        </div>
+			        <div class="to__right">
+			            <div class="to__title">已选择</div>
+			            <div class="to__content" id="rightCont"></div>
+			        </div>
+			    </div>
+        	</div>
+        	
+        	
+        </div>
+        <!-- 右侧主体结束 -->
+    </div>
+    <!-- 中部结束 -->
+    <!-- 底部开始 -->
+    <div class="footer">
+        <div class="copyright">Copyright ©2019 研学旅行管理系统</div>  
+    </div>
+    <!-- 底部结束 -->
+    <!-- 背景切换开始 -->
+	<div class="bg-changer">
+        <div class="swiper-container changer-list">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img class="item" src="./images/a.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="./images/b.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="./images/c.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="./images/d.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="./images/e.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="./images/f.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="./images/g.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="./images/h.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="./images/i.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="./images/j.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="./images/k.jpg" alt=""></div>
+                <div class="swiper-slide"><span class="reset">初始化</span></div>
+            </div>
+        </div>
+        <div class="bg-out"></div>
+        <div id="changer-set"><i class="iconfont">&#xe696;</i></div>   
+    </div>
+    <!-- 背景切换结束 -->
+    <script>
+    //百度统计可去掉
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+</body>
+</html>

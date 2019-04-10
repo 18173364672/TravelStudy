@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>后台登录-X-admin1.1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="static/css/font.css">
+	<link rel="stylesheet" href="static/css/xadmin.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
+    <script src="static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="static/js/xadmin.js"></script>
+
+</head>
+
+<script>
+  	   
+		
+  	   
+  	   
+  	   
+	
+	$(function(){
+	  
+		  $("#checkall").click(function(){
+	  
+	  	 
+	  	if(this.checked==true){
+	  		   $("[name='s1']").each(function(){
+	  		   	this.checked=true;
+	  		   	
+	  		   })
+	  		   
+	  		   
+		  	}else{
+		  		$("[name='s1']").each(function(){
+	  		   	this.checked=false;
+	  		   	
+	  		   })
+		  	}
+
+        
+	  	
+	  })
+	
+	 
+		
+
+		
+	})
+	
+  	
+  </script>
+<body>
+    <!-- 中部开始 -->
+    <div class="wrapper">
+        <!-- 右侧主体开始 -->
+        <div class="page-content">
+          <div class="content">
+          	
+        
+          	
+          	<xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button><span class="x-right" style="line-height:40px">共有数据：88 条</span></xblock>
+          	
+          	  <table class="layui-table">
+                <thead>
+                    <tr>
+                        <th>
+                            <input type="checkbox" id="checkall" value="">
+                        </th>
+                        <th>
+                            ID
+                        </th>
+                        <th>
+                            客户姓名
+                        </th>
+                        <th>
+                            性别
+                        </th>
+                        <th>
+                            手机
+                        </th>
+                        <th>
+                            邮箱
+                        </th>
+       
+                                    <th>
+                           操作
+                        </th>
+          
+         
+                        
+   
+           
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input type="checkbox" value="1" name="s1">
+                        </td>
+                        <td>
+                            1
+                        </td>
+                        <td>
+                            <u style="cursor:pointer" onclick="member_show('张三','member-show.html','10001','360','400')">
+                                小明
+                            </u>
+                        </td>
+                        <td >
+                            男
+                        </td>
+                        <td >
+                            13000000000
+                        </td>
+                        <td >
+                            admin@mail.com
+                        </td>
+           <td class="td-manage">
+                           
+                           
+                            
+                            <a title="删除" href="javascript:;" onclick="member_del(this,'1')" 
+                            style="text-decoration:none">
+                                <i class="layui-icon">&#xe640;</i>
+                            </a>
+                        </td>
+                      
+                       
+                    </tr>
+                    
+                     <tr>
+                        <td>
+                            <input type="checkbox" value="1" name="s1">
+                        </td>
+                        <td>
+                            1
+                        </td>
+                        <td>
+                            <u style="cursor:pointer" onclick="member_show('张三','member-show.html','10001','360','400')">
+                                小明
+                            </u>
+                        </td>
+                        <td >
+                            男
+                        </td>
+                        <td >
+                            13000000000
+                        </td>
+                        <td >
+                            admin@mail.com
+                        </td>
+      <td class="td-manage">
+                           
+                           
+                            
+                            <a title="删除" href="javascript:;" onclick="member_del(this,'1')" 
+                            style="text-decoration:none">
+                                <i class="layui-icon">&#xe640;</i>
+                            </a>
+                        </td>
+                      
+                       
+                    </tr>
+                    
+                     <tr>
+                        <td>
+                            <input type="checkbox" value="1" name="s1">
+                        </td>
+                        <td>
+                            1
+                        </td>
+                        <td>
+                            <u style="cursor:pointer" onclick="member_show('张三','member-show.html','10001','360','400')">
+                                小明
+                            </u>
+                        </td>
+                        <td >
+                            男
+                        </td>
+                        <td >
+                            13000000000
+                        </td>
+                        <td >
+                            admin@mail.com
+                        </td>
+    
+                       <td class="td-manage">
+                           
+                           
+                            
+                            <a title="删除" href="javascript:;" onclick="member_del(this,'1')" 
+                            style="text-decoration:none">
+                                <i class="layui-icon">&#xe640;</i>
+                            </a>
+                        </td> 
+                       
+                    </tr>
+              
+                </tbody>
+            </table>
+          	<xblock>
+                	 <button class="layui-btn layui-btn-warm">上一页</button>
+                        <button class="layui-btn layui-btn-danger">下一页</button>
+                </xblock>
+            <!-- 右侧内容框架，更改从这里开始 -->
+           
+            <!-- 右侧内容框架，更改从这里结束 -->
+          </div>
+        </div>
+        <!-- 右侧主体结束 -->
+    </div>
+    <!-- 中部结束 -->
+    <script>
+    	
+    	 function member_del(obj,id){
+            layer.confirm('确认要删除吗？',function(index){
+                //发异步删除数据
+                $(obj).parents("tr").remove();
+                layer.msg('已删除!',{icon:1,time:1000});
+            });
+        }
+    	 
+    	  function delAll () {
+            layer.confirm('确认要删除吗？',function(index){
+                //捉到所有被选中的，发异步进行删除
+                layer.msg('删除成功', {icon: 1});
+            });
+         }
+    	
+    </script>
+    
+    <script>
+    //百度统计可去掉
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+</body>
+</html>
