@@ -1,23 +1,23 @@
 <!doctype html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>后台登录-X-admin1.1</title>
+    <title>研学旅行后台管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="static/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="static/css/font.css">
-    <link rel="stylesheet" href="static/css/xadmin.css">
+    <link rel="stylesheet" th:href="@{/css/font.css}">
+    <link rel="stylesheet" th:href="@{/css/xadmin.css}">
     <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
-    <script type="text/javascript" src="static/js/echarts.js"></script>
+    <script type="text/javascript" th:src="@{/js/echarts.js}"></script>
     <script src="static/lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="static/js/xadmin.js"></script>
+    <script type="text/javascript" src="@{/js/xadmin.js}"></script>
 </head>
 <body>
     <!-- 顶部开始 -->
     <div class="container">
-        <div class="logo"><a href="./index.html">X-ADMIN V1.1</a></div>
+        <div class="logo"><a href="./index.html">研学旅行后台管理系统</a></div>
         <div class="open-nav"><i class="iconfont">&#xe699;</i></div>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
@@ -207,43 +207,43 @@
                     </a>
                     <ul class="sub-menu opened">
                         <li>
-                            <a href="./echarts1.html">
+                            <a href="toRqProject">
                                 <i class="iconfont">&#xe6a7;</i>
                                 项目人气
                             </a>
                         </li>
                         <li>
-                            <a href="./echarts2.html">
+                            <a href="toMonthSr">
                                 <i class="iconfont">&#xe6a7;</i>
                                 每月收入
                             </a>
                         </li>
                         <li>
-                            <a href="./echarts3.html">
+                            <a href="toRqTeacher">
                                 <i class="iconfont">&#xe6a7;</i>
                                 人气教官
                             </a>
                         </li>
                         <li>
-                            <a href="./echarts4.html">
+                            <a href="toRqActivity">
                                 <i class="iconfont">&#xe6a7;</i>
                                 人气活动
                             </a>
                         </li>
                         <li>
-                            <a href="./echarts5.html">
+                            <a href="toMothKh">
                                 <i class="iconfont">&#xe6a7;</i>
                                 每月客户
                             </a>
                         </li>
-                        <li class="current">
-                            <a href="./echarts6.html">
+                        <li  class="current">
+                            <a href="toYgKq">
                                 <i class="iconfont">&#xe6a7;</i>
                                 员工考勤数据
                             </a>
                         </li>
                         <li>
-                            <a href="./echarts7.html">
+                            <a href="toQuestion">
                                 <i class="iconfont">&#xe6a7;</i>
                                 问卷调查
                             </a>
