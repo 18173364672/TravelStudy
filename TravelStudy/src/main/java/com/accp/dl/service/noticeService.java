@@ -1,10 +1,15 @@
 package com.accp.dl.service;
 
-import org.springframework.stereotype.Service;
+import com.accp.domain.Notice;
 
-@Service
-public class noticeService {
-	
+public interface noticeService {
+
+    /**
+     * 新增公告表
+     * @param notice
+     * @return
+     */
+    int add(Notice notice);
 	
 	
 	

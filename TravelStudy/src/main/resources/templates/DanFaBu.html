@@ -22,6 +22,9 @@
 		#neirong{
 			margin-top: 60px;
 		}	
+		.xbs768 {
+		    display: block;
+		}
 	</style>
 	
 	
@@ -123,6 +126,8 @@
         }
 
         window.onload = function(){
+        	
+        	
             // 模拟数据
             var data = [
                 {
@@ -158,7 +163,9 @@
                             name : "其他部",
                             child : []
                         }
+                        //是否循环
                     ]
+                	//是否循环
                 }
             ]
             
@@ -255,343 +262,44 @@
 	
 </head>
 <body>
-    <!-- 顶部开始 -->
-    <div class="container">
-        <div class="logo"><a href="./index.html">研学旅行后台系统</a></div>
-        <div class="open-nav"><i class="iconfont">&#xe699;</i></div>
-        <ul class="layui-nav right" lay-filter="">
-          <li class="layui-nav-item">
-            <a href="javascript:;">admin</a>
-            <dl class="layui-nav-child"> <!-- 二级菜单 -->
-              <dd><a href="">个人信息</a></dd>
-              <dd><a href="">切换帐号</a></dd>
-              <dd><a href="./gGao.html">查看公告</a></dd>
-              <dd><a href="./login.html">退出</a></dd>
-            </dl>
-          </li>
-          <li class="layui-nav-item"><a href="/">前台首页</a></li>
-        </ul>
-    </div>
-    <!-- 顶部结束 -->
-    <!-- 中部开始 -->
-    <div class="wrapper">
-        <!-- 左侧菜单开始 -->
-        <div class="left-nav">
-          <div id="side-nav">
-<ul id="nav">
-                <li class="list" current>
-                    <a href="./index.html">
-                        <i class="iconfont">&#xe761;</i>
-                        欢迎页面
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                </li>
-                <li class="list">
-                    <a href="javascript:;">
-                        <i class="iconfont">&#xe70b;</i>
-                        客户管理
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu ">
-                        <li >
-                            <a href="member-list.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                客户列表
-                            </a>
-                        </li>
-                        <li>
-                            <a href="member-del.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                客户删除
-                            </a>
-                        </li>
-                        <li>
-                            <a href="member-level.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                活动推荐
-                            </a>
-                        </li>
-                        <li>
-                            <a href="member-kiss.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                               活动通知
-                            </a>
-                        </li>
-                        <li>
-                            <a href="member-view.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                               客户资源管理
-                            </a>
-                        </li>
-                        
-                        <li>
-                            <a href="member-feedback.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                  客户反馈
-                            </a>
-                        </li> 
-                                                                    <li>
-                            <a href="member-usergroup.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                  客户组
-                            </a>
-                        </li>   
-                    </ul>
-                </li>
-                <li class="list" >
-                       <a href="javascript:;">
-                        <i class="iconfont">&#xe6b2;</i>
-                       员工管理
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu" >
-                          <li>
-                            <a href="member-employee.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                员工信息
-                            </a>
-                        </li>
-                        
-                         <li >
-                            <a href="member-organization.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                组织机构
-                            </a>
-                        </li> 
-                        
-                                 <li>
-                            <a href="member-employee-kiss.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                工作通知
-                            </a>
-                        </li> 
-                        </li>
-                    </ul>
-                </li>
-                <li class="list " >
-                    <a href="javascript:;">
-                        <i class="iconfont">&#xe705;</i>
-                        项目管理
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu">
-                             <li>
-                            <a href="member-project.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                项目信息
-                            </a>
-                        </li>
-                        
-          
-                        
-                                     <li>
-                            <a href="member-project-feedback.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                项目反馈
-                            </a>
-                        </li>
-      
-                                                   <li>
-                            <a href="member-project-comment.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                项目评论
-                            </a>
-                        </li>
-                        
-                                                      <li>
-                            <a href="member-project-ranking.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                项目排名
-                            </a>
-                        </li>
-                        
-    
-                    </ul>
-                </li>
-                
-                <li class="list" >
-                  <a href="javascript:;">
-                        <i class="layui-icon">&#xe62e;</i>
-                        活动管理
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a href="manage-activity.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                活动信息
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                
-                <li class="list" >
-                  <a href="javascript:;">
-                        <i class="layui-icon">&#xe600;</i>
-                        订单管理
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a href="manage-order.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                订单信息
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                
-                <li class="list" >
-                    <a href="javascript:;">
-                        <i class="layui-icon">&#xe62c;</i>
-                        系统统计
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a href="./echarts1.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                项目人气
-                            </a>
-                        </li>
-                        <li>
-                            <a href="./echarts2.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                每月收入
-                            </a>
-                        </li>
-                        <li>
-                            <a href="./echarts3.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                人气教官
-                            </a>
-                        </li>
-                        <li>
-                            <a href="./echarts4.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                人气活动
-                            </a>
-                        </li>
-                        <li>
-                            <a href="./echarts5.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                每月客户
-                            </a>
-                        </li>
-                        <li>
-                            <a href="./echarts6.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                员工考勤数据
-                            </a>
-                        </li>
-                        <li>
-                            <a href="./echarts7.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                问卷调查
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="list">
-                  <a href="javascript:;">
-                        <i class="layui-icon">&#xe614;</i>
-                        系统管理
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a href="manage-user.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                用户管理
-                            </a>
-                        </li>
-                        
-               
-                        
-                                     <li>
-                            <a href="manage-plate.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                模块管理
-                            </a>
-                        </li>
-                                                              <li>
-                            <a href="manage-role.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                角色管理
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                
-            </ul>
-          </div>
-        </div>
-        <!-- 左侧菜单结束 -->
+   	<div class="wrapper">
         <!-- 右侧主体开始 -->
         <div class="page-content">
-        	<div class="layui-form-item" style="display: inline-block;">
-                <label class="layui-form-label xbs768">请输入标题</label>
-                <div class="layui-input-inline">
-                    <input type="text" name="username"  placeholder="请输入标题" autocomplete="off" class="layui-input">
-                </div>
-            </div>
-            <div style="text-align: center; margin-top: 120px;">
-        		<textarea placeholder="公告内容" class="layui-textarea" ></textarea>
-        	</div>
-        	<div style="margin-top: -220px; float: left;">
-        		<div id="preview" style="float:left">
-                	<img id="imghead" width="100px" height="100px"  class="logo-size" src=''/>
-                </div>
-                <input id="filgo" style="margin-left: 70px; margin-top: 30px;" type="file" name="logo" onchange="changeToop('filgo','imghead');" value="上传图片">
-        	</div>
-        	<div style="margin-top: -280px; float: right; margin-right: 100px;">
-        		 <button type="submit" class="btn btn-default">发布</button>
-        	</div>
-        	
-        	<div style="border: 1px solid; margin-top: 10px;">
-        		 <div class="to__block">
-			        <div class="to__left">
-			            <div class="to__arrow"><span>←</span><span>→</span></div>
-			            <div class="to__title">选择要发送的人</div>
-			            <div class="to__content" id="leftCont"></div>
-			        </div>
-			        <div class="to__right">
-			            <div class="to__title">已选择</div>
-			            <div class="to__content" id="rightCont"></div>
-			        </div>
-			    </div>
-        	</div>
-        	
-        	
-        </div>
+				<div class="layui-form-item" style="display: inline-block;">
+					<label class="layui-form-label xbs768">请输入标题:</label>
+					<div class="layui-input-inline">
+						<input type="text" name="username" placeholder="请输入标题" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div style="text-align: center; margin-top: 120px;">
+					<textarea placeholder="公告内容" class="layui-textarea"></textarea>
+				</div>
+				<div style="margin-top: -220px; float: left;">
+					<div id="preview" style="float:left">
+						<img id="imghead" width="100px" height="100px" class="logo-size" src='' />
+					</div>
+					<input id="filgo" style="margin-left: 70px; margin-top: 30px;" type="file" name="logo" onchange="changeToop('filgo','imghead');" value="上传图片">
+				</div>
+				<div style="margin-top: -280px; float: right; margin-right: 100px;">
+					<button type="submit" class="btn btn-default">发布</button>
+				</div>
+
+				<div style="border: 1px solid; margin-top: 10px;">
+					<div class="to__block">
+						<div class="to__left">
+							<div class="to__arrow"><span>←</span><span>→</span></div>
+							<div class="to__title">选择要发送的人</div>
+							<div class="to__content" id="leftCont"></div>
+						</div>
+						<div class="to__right">
+							<div class="to__title">已选择</div>
+							<div class="to__content" id="rightCont"></div>
+						</div>
+					</div>
+				</div>
+
+			</div>
         <!-- 右侧主体结束 -->
-    </div>
-    <!-- 中部结束 -->
-    <!-- 底部开始 -->
-    <div class="footer">
-        <div class="copyright">Copyright ©2019 研学旅行管理系统</div>  
-    </div>
-    <!-- 底部结束 -->
-    <!-- 背景切换开始 -->
-	<div class="bg-changer">
-        <div class="swiper-container changer-list">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide"><img class="item" th:src="@{/images/a.jpg}" alt=""></div>
-                <div class="swiper-slide"><img class="item" th:src="@{/images/b.jpg}" alt=""></div>
-                <div class="swiper-slide"><img class="item" th:src="@{/images/c.jpg}" alt=""></div>
-                <div class="swiper-slide"><img class="item" th:src="@{/images/d.jpg}" alt=""></div>
-                <div class="swiper-slide"><img class="item" th:src="@{/images/e.jpg}" alt=""></div>
-                <div class="swiper-slide"><img class="item" th:src="@{/images/f.jpg}" alt=""></div>
-                <div class="swiper-slide"><img class="item" th:src="@{/images/g.jpg}" alt=""></div>
-                <div class="swiper-slide"><img class="item" th:src="@{/images/h.jpg}" alt=""></div>
-                <div class="swiper-slide"><img class="item" th:src="@{/images/i.jpg}" alt=""></div>
-                <div class="swiper-slide"><img class="item" th:src="@{/images/j.jpg}" alt=""></div>
-                <div class="swiper-slide"><img class="item" th:src="@{/images/k.jpg}" alt=""></div>
-                <div class="swiper-slide"><span class="reset">初始化</span></div>
-            </div>
-        </div>
-        <div class="bg-out"></div>
-        <div id="changer-set"><i class="iconfont">&#xe696;</i></div>   
     </div>
     <!-- 背景切换结束 -->
     <script>

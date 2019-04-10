@@ -28,6 +28,11 @@ public interface NoticeMapper {
 
     int updateByPrimaryKey(Notice record);
     
-    
+    /**
+     * 新增公告表
+     * @param notice
+     * @return
+     */
+    int add(Notice notice);
     
 }

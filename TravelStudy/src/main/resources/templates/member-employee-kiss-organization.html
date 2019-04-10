@@ -1,17 +1,23 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>后台登录-X-admin1.1</title>
+    <title>研学旅行后台系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="static/css/font.css">
-	<link rel="stylesheet" href="static/css/xadmin.css">
+    <link rel="stylesheet" th:href="@{/css/font.css}">
+	<link rel="stylesheet" th:href="@{/css/xadmin.css}">
     <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
-    <script src="static/lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="static/js/xadmin.js"></script>
+   	<script th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
+    <script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
+
+		<style>
+			.xbs768 {
+			    display: block; 
+			}
+		</style>
 
 </head>
 <body>
@@ -22,42 +28,43 @@
           <div class="content">
             <!-- 右侧内容框架，更改从这里开始 -->
             <form class="layui-form">
-    
-        
-                 
-    
-                <div class="layui-form-item layui-form-text">
-                    <label for="L_sign" class="layui-form-label">
-                        公司通知
-                    </label>
-                    <div class="layui-input-block">
-                        <textarea placeholder="请输入发布内容" id="L_sign" name="sign" autocomplete="off"
-                        class="layui-textarea" style="height: 80px;"></textarea>
-                    </div>
-                </div>
+    				<div class="layui-form-item" style="display: inline-block;">
+						<label class="layui-form-label xbs768">请输入标题:</label>
+						<div class="layui-input-inline">
+							<input type="text" name="username" placeholder="请输入标题" autocomplete="off" class="layui-input">
+						</div>
+					</div>
+                	<div class="layui-form-item layui-form-text">
+                    	<label for="L_sign" class="layui-form-label">
+                       		 公司通知:
+                    	</label>
+	                    <div class="layui-input-block">
+	                        <textarea placeholder="请输入发布内容" id="L_sign" name="sign" autocomplete="off"
+	                        class="layui-textarea" style="height: 80px;"></textarea>
+	                    </div>
+                	</div>
                 
-                <div class="layui-form-item">
-                    <label for="L_username" class="layui-form-label">
-                        <span class="x-red">*</span>请选择部门
-                    </label>
-                    <div class="layui-inline">
-                      <select style="position: absolute;top: 150px;">
-            	<option>请选择部门</option>
-            	<option>客服部</option>
-            	<option>教练部</option>
-            	<option>销售部</option>
-            </select>
-                    </div>
-                </div>
+                	<div class="layui-form-item">
+	                    <label for="L_username" class="layui-form-label">
+	                        <span class="x-red">*</span>请选择部门:
+	                    </label>
+	                    <div class="layui-inline">
+	                      <select style="position: absolute;top: 150px;">
+			            	<option>请选择部门</option>
+			            	<option>客服部</option>
+			            	<option>教练部</option>
+			            	<option>销售部</option>
+			              </select>
+	                   </div>
+                	</div>
                 
-                
-                <div class="layui-form-item">
-                    <label for="L_sign" class="layui-form-label">
-                    </label>
-                    <button class="layui-btn" key="set-mine" lay-filter="save" lay-submit>
-                        发送
-                    </button>
-                </div>
+	                <div class="layui-form-item">
+	                    <label for="L_sign" class="layui-form-label">
+	                    </label>
+	                    <button class="layui-btn" key="set-mine" lay-filter="save" lay-submit>
+	                        	发送
+	                    </button>
+	                </div>
             </form>
             <!-- 右侧内容框架，更改从这里结束 -->
           </div>

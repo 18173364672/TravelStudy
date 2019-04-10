@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
-     <script th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
+    <script th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
     <script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
 
 </head>
@@ -290,9 +290,9 @@
           <div class="content">
             <!-- 右侧内容框架，更改从这里开始 -->
            
-            <xblock><button class="layui-btn layui-btn-normal" onclick="member_add('全公司发送','member-employee-kiss-company.html','600','500')">全公司发送&nbsp;&nbsp;&nbsp;&nbsp;</button></xblock>
-            <xblock><button class="layui-btn layui-btn-lg layui-btn-warm" id="query" onclick="member_add('部门发送','member-employee-kiss-organization.html','600','500')">发送至部门&nbsp;&nbsp;&nbsp;&nbsp;</button></xblock>
-            <xblock><button class="layui-btn layui-btn-lg layui-btn-danger" onclick="member_add('员工发送','member-employee-kiss-employee.html','1200','500')">发送至员工&nbsp;&nbsp;&nbsp;&nbsp;</button></xblock>
+            <xblock><button class="layui-btn layui-btn-normal" onclick="member_add('全公司发送','company','600','500')">全公司发送&nbsp;&nbsp;&nbsp;&nbsp;</button></xblock>
+            <xblock><button class="layui-btn layui-btn-lg layui-btn-warm" onclick="member_add('部门发送','organization','600','500')">发送至部门&nbsp;&nbsp;&nbsp;&nbsp;</button></xblock>
+            <xblock><button class="layui-btn layui-btn-lg layui-btn-danger" onclick="member_add('员工发送','DanFaBu','1200','500')">发送至员工&nbsp;&nbsp;&nbsp;&nbsp;</button></xblock>
            
             <!-- 右侧内容框架，更改从这里结束 -->
           </div>
@@ -387,12 +387,6 @@
                 });
             }
             
-            
-			$(function(){
-				$("#query").click(function(){
-					location.href="DanFaBu.html";
-				});
-			});
             
             
             

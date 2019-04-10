@@ -272,4 +272,20 @@
       Spare5 = #{spare5,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <insert id="add">
+  		INSERT INTO `notice` (`uid`,`title`,`content`)values(#{uid},#{title},#{content});
+  </insert>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 </mapper>
