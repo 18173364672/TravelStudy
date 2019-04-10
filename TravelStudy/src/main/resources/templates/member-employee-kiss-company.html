@@ -21,25 +21,24 @@
         <div class="page-content">
           <div class="content">
             <!-- 右侧内容框架，更改从这里开始 -->
-            <form class="layui-form">
-    
-        
-                 
-    
+            <form class="layui-form" method="post" action="notice/addnotice">
                 <div class="layui-form-item layui-form-text">
-                    <label for="L_sign" class="layui-form-label">
-                        公司通知
-                    </label>
-                    <div class="layui-input-block">
-                        <textarea placeholder="请输入发布内容" id="L_sign" name="sign" autocomplete="off"
-                        class="layui-textarea" style="height: 80px;"></textarea>
-                    </div>
+                    <label class="layui-form-label xbs768">请输入标题:</label>
+                    <div class="layui-form-item" style="display: inline-block;">
+						<div class="layui-input-inline">
+							<input type="text" name="title" placeholder="请输入标题" autocomplete="off" class="layui-input">
+						</div>
+					</div>
+					<div style="text-align: center;">
+						<label class="layui-form-label xbs768">请输入内容:</label>
+						<textarea placeholder="公告内容" class="layui-textarea" style="width: 400px;" name="content"></textarea>
+					</div>
                 </div>
                 <div class="layui-form-item">
                     <label for="L_sign" class="layui-form-label">
                     </label>
                     <button class="layui-btn" key="set-mine" lay-filter="save" lay-submit>
-                        发送
+                        	发送
                     </button>
                 </div>
             </form>

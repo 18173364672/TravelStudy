@@ -1,23 +1,23 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>后台登录-X-admin1.1</title>
+    <title>研学旅行后台系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="static/css/font.css">
-	<link rel="stylesheet" href="static/css/xadmin.css">
+    <link rel="stylesheet" th:href="@{/css/font.css}">
+	<link rel="stylesheet" th:href="@{/css/xadmin.css}">
     <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
-    <script src="static/lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="static/js/xadmin.js"></script>
+     <script th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
+    <script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
 
 </head>
 <body>
     <!-- 顶部开始 -->
     <div class="container">
-        <div class="logo"><a href="./index.html">X-ADMIN V1.1</a></div>
+        <div class="logo"><a href="./index.html">研学旅行后台系统</a></div>
         <div class="open-nav"><i class="iconfont">&#xe699;</i></div>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
@@ -291,7 +291,7 @@
             <!-- 右侧内容框架，更改从这里开始 -->
            
             <xblock><button class="layui-btn layui-btn-normal" onclick="member_add('全公司发送','member-employee-kiss-company.html','600','500')">全公司发送&nbsp;&nbsp;&nbsp;&nbsp;</button></xblock>
-            <xblock><button class="layui-btn layui-btn-lg layui-btn-warm" onclick="member_add('部门发送','member-employee-kiss-organization.html','600','500')">发送至部门&nbsp;&nbsp;&nbsp;&nbsp;</button></xblock>
+            <xblock><button class="layui-btn layui-btn-lg layui-btn-warm" id="query" onclick="member_add('部门发送','member-employee-kiss-organization.html','600','500')">发送至部门&nbsp;&nbsp;&nbsp;&nbsp;</button></xblock>
             <xblock><button class="layui-btn layui-btn-lg layui-btn-danger" onclick="member_add('员工发送','member-employee-kiss-employee.html','1200','500')">发送至员工&nbsp;&nbsp;&nbsp;&nbsp;</button></xblock>
            
             <!-- 右侧内容框架，更改从这里结束 -->
@@ -309,17 +309,17 @@
     <div class="bg-changer">
         <div class="swiper-container changer-list">
             <div class="swiper-wrapper">
-                 <div class="swiper-slide"><img class="item" src="static/images/a.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/b.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/c.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/d.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/e.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/f.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/g.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/h.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/i.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/j.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/k.jpg" alt=""></div>
+                 <div class="swiper-slide"><img class="item" th:src="@{/images/a.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/b.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/c.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/d.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/e.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/f.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/g.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/h.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/i.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/j.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/k.jpg}" alt=""></div>
                 <div class="swiper-slide"><span class="reset">初始化</span></div>
             </div>
         </div>
@@ -386,6 +386,17 @@
                     layer.msg('已删除!',{icon:1,time:1000});
                 });
             }
+            
+            
+			$(function(){
+				$("#query").click(function(){
+					location.href="DanFaBu.html";
+				});
+			});
+            
+            
+            
+            
         </script>
       
 </body>

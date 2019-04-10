@@ -1,20 +1,20 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<title>后台登录-X-admin1.1</title>
+	<title>研学旅行后台系统</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="static/css/font.css">
-	<link rel="stylesheet" href="static/css/xadmin.css">
+    <link rel="stylesheet" th:href="@{/css/font.css}">
+	<link rel="stylesheet" th:href="@{/css/xadmin.css}">
     <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
-    <script src="static/lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="static/js/xadmin.js"></script>
+    <script th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
+    <script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="static/css/index.css">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
 	<style>
 		.btn-group-lg>.btn, .btn-lg {
 		   font-size: 12px;
@@ -257,7 +257,7 @@
 <body>
     <!-- 顶部开始 -->
     <div class="container">
-        <div class="logo"><a href="./index.html">X-ADMIN V1.1</a></div>
+        <div class="logo"><a href="./index.html">研学旅行后台系统</a></div>
         <div class="open-nav"><i class="iconfont">&#xe699;</i></div>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
@@ -576,17 +576,17 @@
 	<div class="bg-changer">
         <div class="swiper-container changer-list">
             <div class="swiper-wrapper">
-                <div class="swiper-slide"><img class="item" src="./images/a.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="./images/b.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="./images/c.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="./images/d.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="./images/e.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="./images/f.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="./images/g.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="./images/h.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="./images/i.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="./images/j.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="./images/k.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/a.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/b.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/c.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/d.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/e.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/f.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/g.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/h.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/i.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/j.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/k.jpg}" alt=""></div>
                 <div class="swiper-slide"><span class="reset">初始化</span></div>
             </div>
         </div>
