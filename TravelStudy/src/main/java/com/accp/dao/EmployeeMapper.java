@@ -27,4 +27,8 @@ public interface EmployeeMapper {
     int updateByPrimaryKeySelective(Employee record);
 
     int updateByPrimaryKey(Employee record);
+    
+    public Employee employeelogin(Employee employee);
+    
+    public List<Employee> empquery(@Param("createtime")String createtime,@Param("employeename")String employeename);
 }

@@ -2,6 +2,10 @@ package com.accp.domain;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Employee {
     private Integer id;
 
@@ -17,6 +21,8 @@ public class Employee {
 
     private String address;
 
+
+   @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date createtime;
 
     private String job;
@@ -26,7 +32,8 @@ public class Employee {
     private Integer state;
 
     private String uimg;
-
+   
+    //部门id
     private String spare1;
 
     private String spare2;
@@ -36,8 +43,19 @@ public class Employee {
     private String spare4;
 
     private String spare5;
+    
+    //部门名称
+    private String oname;
 
-    public Integer getId() {
+    public String getOname() {
+		return oname;
+	}
+
+	public void setOname(String oname) {
+		this.oname = oname;
+	}
+
+	public Integer getId() {
         return id;
     }
 

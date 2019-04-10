@@ -20,6 +20,25 @@
     <result column="Spare4" property="spare4" jdbcType="VARCHAR" />
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
+  
+  <select id="empquery" resultMap="BaseResultMap">
+     select * from employee
+     <where>
+       <if test="employeename!=null">
+        employeename like CONCAT('%',#{employeename},'%')
+       </if>
+       
+       <if test="createtime!=null">
+        and createtime like CONCAT('%',#{createtime},'%')
+       </if>
+     </where>
+  </select>
+  
+  <select id="employeelogin" resultMap="BaseResultMap">
+    select * from  employee where email=#{email} and password=#{password}
+  
+  </select>
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
