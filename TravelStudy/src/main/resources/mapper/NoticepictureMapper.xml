@@ -240,4 +240,22 @@
       Spare5 = #{spare5,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <insert id="addinsert">
+  		INSERT INTO `noticepicture` (`url`)VALUES(#{url});
+  </insert>
+  
+  <select id="selectOrderBy" resultType="com.accp.domain.Noticepicture">
+  		SELECT * FROM `noticepicture` ORDER BY id DESC LIMIT 0,1
+  </select>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 </mapper>

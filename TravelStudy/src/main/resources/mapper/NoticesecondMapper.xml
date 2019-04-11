@@ -272,4 +272,12 @@
       Spare5 = #{spare5,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  
+  <insert id="addNoticesecound">
+  		INSERT INTO `noticesecond` (`Rid`,`iid`,`nid`)VALUES(#{rid},#{iid},#{nid});
+  </insert>
+  
+  
+  
 </mapper>

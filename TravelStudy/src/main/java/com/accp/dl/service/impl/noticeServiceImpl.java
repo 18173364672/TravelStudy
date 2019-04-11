@@ -19,9 +19,18 @@ public class noticeServiceImpl implements noticeService{
 	 * 群发公司所有员工
 	 */
 	@Override
-	public int add(Notice notice) {
+	public int add(String title,String content,Integer uid) {
 //		System.out.println("service层的内容:"+notice.getContent());
-		return notices.add(notice);
+		return notices.add(title,content,uid);
+	}
+
+	 /**
+     * 查询最后的数据
+     * @return
+     */
+	@Override
+	public Notice selectOrderBy() {
+		return notices.selectOrderBy();
 	}
 	
 

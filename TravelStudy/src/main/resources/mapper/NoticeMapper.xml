@@ -277,7 +277,9 @@
   		INSERT INTO `notice` (`uid`,`title`,`content`)values(#{uid},#{title},#{content});
   </insert>
   
-  
+  <select id="selectOrderBy" resultType="com.accp.domain.Notice">
+  		SELECT * FROM `notice` ORDER BY id DESC LIMIT 0,1
+  </select>
   
   
   

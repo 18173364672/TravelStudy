@@ -27,4 +27,15 @@ public interface NoticesecondMapper {
     int updateByPrimaryKeySelective(Noticesecond record);
 
     int updateByPrimaryKey(Noticesecond record);
+    
+    /**
+     * 新增部门发送公告
+     * @param rid
+     * @param iid
+     * @param nid
+     * @return
+     */
+    int addNoticesecound(Integer rid,Integer iid,Integer nid);
+    
+    
 }

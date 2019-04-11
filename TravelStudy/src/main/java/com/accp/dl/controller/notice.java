@@ -1,12 +1,32 @@
 package com.accp.dl.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.xml.resolver.apps.resolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.accp.dl.service.impl.noticeServiceImpl;
+import com.accp.dl.service.impl.noticepictureServiceImpl;
+import com.accp.dl.service.impl.noticesecondServiceImpl;
+import com.accp.dl.service.impl.orgainizationServiceImpl;
 import com.accp.domain.Notice;
+import com.accp.domain.Noticepicture;
+import com.accp.domain.Organization;
+import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.databind.Module;
 
 @Controller
 @RequestMapping("/notice")
@@ -16,6 +36,14 @@ public class notice {
 	@Autowired
 	noticeServiceImpl notices;
 	
+	@Autowired
+	orgainizationServiceImpl orgainzation;
+	
+	@Autowired
+	noticepictureServiceImpl noticepicture;
+	
+	@Autowired
+	noticesecondServiceImpl noticesecond;
 	
 	
 	
@@ -60,7 +88,9 @@ public class notice {
 	 * @return
 	 */
 	@RequestMapping("/organization")
-	public String organization() {
+	public String organization(Model Model) {
+		List<Organization> list = orgainzation.selectByExample(null);
+		Model.addAttribute("list",list);
 		return "member-employee-kiss-organization";
 	}
 	
@@ -72,11 +102,51 @@ public class notice {
 	 * @return
 	 */
 	@RequestMapping("/addnotice")
-	public String addnotice(Notice notice) {
-		notice.setUid(1);
-		notices.add(notice);
+	@ResponseBody
+	public String addnotice(String title ,String content,Integer uid) {
+		notices.add(title, content, 1);
+		return "kkkk";
+	}
+	
+	/**
+	 * 群发公司所有部门
+	 * @return
+	 */
+	@RequestMapping("/addBuMen")
+	@ResponseBody
+	public String addBuMen(String title ,String content,Integer uid,Integer rid,MultipartFile file) {
+		notices.add(title, content, 1);
+		Notice stu = notices.selectOrderBy();
+		int nid = stu.getId();
+		String url = "D:\\Fileupload\\";
+		File files = new File(url);
+		if (!files.exists()) {
+			files.mkdirs();
+		}
+		try {
+				String uuid = UUID.randomUUID().toString();
+				String name = file.getOriginalFilename();
+				String suffix = name.substring(name.lastIndexOf("."),name.length());
+				File chang = new File(url+uuid+suffix);
+				file.transferTo(chang);
+				String urls = chang.toString();
+				noticepicture.addinsert(urls);	//新增图片
+				
+				Noticepicture stus = noticepicture.selectOrderBy();
+				int iid = stus.getId();
+				
+				noticesecond.addNoticesecound(rid, iid, nid);
+				
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "redirect:member";
 	}
+	
+	
+	
+	
+	
 	
 	
 	

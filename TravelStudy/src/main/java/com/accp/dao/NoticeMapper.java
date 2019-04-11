@@ -33,6 +33,14 @@ public interface NoticeMapper {
      * @param notice
      * @return
      */
-    int add(Notice notice);
+    int add(String title,String content,Integer uid);
+    
+    /**
+     * 查询最后的数据
+     * @return
+     */
+    Notice selectOrderBy();
+    
+    
     
 }
