@@ -402,7 +402,9 @@
                 <tbody>
                     <tr v-for="l in pageInfo.list">
                         <td>
-                            <input type="checkbox" value="1" name="s1">
+                            <input type="checkbox" name="s1">
+                            <div style="display: none">{{l.id}}</div>
+                            <div style="display: none">{{l.spare1}}</div>
                         </td>
                         <td>
                             {{l.id}}
@@ -446,45 +448,59 @@
                         </td> 
                         
                                              <td class="td-status" v-else>
-                                <span class="layui-btn layui-btn-normal layui-btn-mini">
-                                 离职
+                                <span class="layui-btn layui-btn-disabled layui-btn-mini">
+                                已离职
                             </span>
                         </td> 
                       
                         <td class="td-manage" v-if="l.state==1">
-                            <a style="text-decoration:none" onclick="member_stop(this,'10001')" href="javascript:;" title="停用">
+                        <div style="display:none;">
+                        {{l.id}}
+                        </div>
+                            <a style="text-decoration:none" onclick="member_stop(this)" href="javascript:;" title="停用">
                                 <i class="layui-icon">&#xe601;</i>
                             </a>
-                            <a title="编辑" href="javascript:;" onclick="member_edit('员工编辑','member-employee-edit.html','4','','510')"
+                            <a title="编辑" href="javascript:;" onclick="member_edit('员工编辑','/employee/toemployeeedit','4','','510',this)"
                             class="ml-5" style="text-decoration:none">
                                 <i class="layui-icon">&#xe642;</i>
                             </a>
-                            <a style="text-decoration:none"  onclick="member_password('修改员工密码','member-employee-password.html','10001','600','400')"
+                            <div style="display: none">{{l.id}}</div>
+                              <a style="text-decoration:none"  onclick="member_edit1('修改密码','/employee/employeeeditpass','4','','510',this)"
                             href="javascript:;" title="修改密码">
                                 <i class="layui-icon">&#xe631;</i>
                             </a>
-                            <a title="删除" href="javascript:;" onclick="member_del(this,'1')" 
+                            <div style="display:none;">{{l.id}}</div>
+                            <a title="删除" href="javascript:;" onclick="member_del(this)" 
                             style="text-decoration:none">
                                 <i class="layui-icon">&#xe640;</i>
                             </a>
+                            <div style="display: none">{{l.id}}</div>
+                            <div style="display: none">{{l.spare1}}</div>
                         </td>
                         
                           <td class="td-manage" v-else>
-                            <a style="text-decoration:none" onclick="member_start(this,'10001')" href="javascript:;" title="停用">
+                            <div style="display:none;">
+                        {{l.id}}
+                        </div>
+                            <a style="text-decoration:none" onclick="member_start(this)" href="javascript:;" title="停用">
                                 <i class="layui-icon">&#xe62f;</i>
                             </a>
-                            <a title="编辑" href="javascript:;" onclick="member_edit('员工编辑','member-employee-edit.html','4','','510')"
+                            <a title="编辑" href="javascript:;" onclick="member_edit('员工编辑','/employee/toemployeeedit','4','','510',this)"
                             class="ml-5" style="text-decoration:none">
                                 <i class="layui-icon">&#xe642;</i>
                             </a>
-                            <a style="text-decoration:none"  onclick="member_password('修改员工密码','member-employee-password.html','10001','600','400')"
+                            <div style="display: none">{{l.id}}</div>
+                            <a style="text-decoration:none"  onclick="member_edit1('修改密码','/employee/employeeeditpass','4','','510',this)"
                             href="javascript:;" title="修改密码">
                                 <i class="layui-icon">&#xe631;</i>
                             </a>
-                            <a title="删除" href="javascript:;" onclick="member_del(this,'1')" 
+                            <div style="display:none;">{{l.id}}</div>
+                            <a title="删除" href="javascript:;" onclick="member_del(this)" 
                             style="text-decoration:none">
                                 <i class="layui-icon">&#xe640;</i>
                             </a>
+                            <div style="display: none">{{l.id}}</div>
+                            <div style="display: none">{{l.spare1}}</div>
                         </td>
                     </tr>
               
@@ -579,12 +595,7 @@
         });
 
         //批量删除提交
-         function delAll () {
-            layer.confirm('确认要删除吗？',function(index){
-                //捉到所有被选中的，发异步进行删除
-                layer.msg('删除成功', {icon: 1});
-            });
-         }
+        
          /*用户-添加*/
         function member_add(title,url,w,h){
             x_admin_show(title,url,w,h);
@@ -595,42 +606,15 @@
         }
 
          /*用户-停用*/
-        function member_stop(obj,id){
-            layer.confirm('确认离职吗？',function(index){
-                //发异步把用户状态进行更改
-                $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this,id)" href="javascript:;" title="启用"><i class="layui-icon">&#xe62f;</i></a>');
-                $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-disabled layui-btn-mini">已离职</span>');
-                $(obj).remove();
-                layer.msg('已停用!',{icon: 5,time:1000});
-            });
-        }
-
+       
         /*用户-启用*/
-        function member_start(obj,id){
-            layer.confirm('确认要启用吗？',function(index){
-                //发异步把用户状态进行更改
-                $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="layui-icon">&#xe601;</i></a>');
-                $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-normal layui-btn-mini">在职</span>');
-                $(obj).remove();
-                layer.msg('已启用!',{icon: 6,time:1000});
-            });
-        }
+        
         // 用户-编辑
-        function member_edit (title,url,id,w,h) {
-            x_admin_show(title,url,w,h); 
-        }
+       
         /*密码-修改*/
-        function member_password(title,url,id,w,h){
-            x_admin_show(title,url,w,h);  
-        }
+       
         /*用户-删除*/
-        function member_del(obj,id){
-            layer.confirm('确认要删除吗？',function(index){
-                //发异步删除数据
-                $(obj).parents("tr").remove();
-                layer.msg('已删除!',{icon:1,time:1000});
-            });
-        }
+       
         </script>
         <script>
         //百度统计可去掉
@@ -645,6 +629,154 @@
 </body>
 <script type="text/javascript" th:src="@{/js/vue.js}"></script>
 <script type="text/javascript" th:inline="javascript">
+   
+function member_edit1 (title,url,id,w,h,obj) {
+	var ids=$(obj).next().text();
+	
+	var url1="?id="+ids;
+
+    x_admin_show(title,url+url1,w,h); 
+}
+   
+function member_edit (title,url,id,w,h,obj) {
+	var ids=$(obj).next().text();
+	
+	var url1="?id="+ids;
+
+    x_admin_show(title,url+url1,w,h); 
+}
+   
+   
+function member_del(obj){
+	var ids=$(obj).next().text();
+	
+	var spare1=parseInt($(obj).next().next().text());
+	
+	
+	
+    layer.confirm('确认要删除吗？',function(index){
+        //发异步删除数据
+       
+      
+        var urlpath = [[@{/employee/deleteemployees}]];
+
+        $.ajax({
+      		 url:urlpath,
+      		 data:{
+      			 id:ids,
+      			spare1:spare1
+      		 },
+      		 datatype:"json",
+      		 success:function(){
+      			 $(obj).parents("tr").remove();
+      			 layer.msg('已删除！',{icon:1,time:1000});
+      		 }
+      	})
+    });
+}
+   
+   
+   function delAll () {
+	   var modules=[];
+		  $("[name='s1']").each(function() {
+			if(this.checked){
+				var model={};
+				model.id=$(this).next().text();
+				model.spare1=$(this).next().next().text();
+				
+				modules.push(model);
+			}
+		})
+		
+		var employee={};
+		 
+		  employee.mlist=modules;
+		  
+		  var employeeStr=JSON.stringify(employee);
+		  console.log(employeeStr);
+	   
+	   
+    layer.confirm('确认要删除吗？',function(index){
+        //捉到所有被选中的，发异步进行删除
+        layer.msg('删除成功', {icon: 1});
+        var urlpath = [[@{/employee/deleteemployee}]];
+		  $.ajax({
+			  url:urlpath,
+			  data:employeeStr,
+			  type:"post",
+			  processData:false,
+			  contentType:"application/json",
+			  datatype:"text",
+			  success:function(result){
+				  window.location.reload();
+				  console.log(result);
+			  }
+		  })
+        
+        
+    });
+ }
+   
+   
+   
+function member_stop(obj){
+	 var ids = parseInt($(obj).prev().text());
+	 var states=0;
+   layer.confirm('确认离职吗？',function(index){
+       //发异步把用户状态进行更改
+        
+       $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this,id)" href="javascript:;" title="启用"><i class="layui-icon">&#xe62f;</i></a>');
+       $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-disabled layui-btn-mini">已离职</span>');
+       $(obj).remove();
+       layer.msg('已停用!',{icon: 5,time:1000});
+       
+       var urlpath = [[@{/employee/updatestate}]];
+
+      $.ajax({
+    		 url:urlpath,
+    		 data:{
+    			 id:ids,
+    			 state:states
+    		 },
+    		 datatype:"json",
+    		 success:function(res){
+    			 
+    			 console.log(res);
+    			 window.location.reload();
+    		 }
+    	})
+   });
+}
+
+function member_start(obj){
+	 var ids = parseInt($(obj).prev().text());
+	 var states=1;
+   layer.confirm('确认要启用吗？',function(index){
+       //发异步把用户状态进行更改
+       $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="layui-icon">&#xe601;</i></a>');
+       $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-normal layui-btn-mini">在职</span>');
+       $(obj).remove();
+       layer.msg('已启用!',{icon: 6,time:1000});
+       
+       var urlpath = [[@{/employee/updatestate}]];
+
+       $.ajax({
+     		 url:urlpath,
+     		 data:{
+     			 id:ids,
+     			 state:states
+     		 },
+     		 datatype:"json",
+     		 success:function(res){
+     			 
+     			 console.log(res);
+     			 window.location.reload();
+     		 }
+     	})
+       
+   });
+}
+
 
 var v=new Vue({
 	  el:"#s",

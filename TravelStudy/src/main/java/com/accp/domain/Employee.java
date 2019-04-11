@@ -1,6 +1,7 @@
 package com.accp.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -20,7 +21,7 @@ public class Employee {
     private String phone;
 
     private String address;
-
+    
 
    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date createtime;
@@ -46,8 +47,48 @@ public class Employee {
     
     //部门名称
     private String oname;
+    
+    private List<Employee> mlist;
+    
+    private String oldpass;
+    
+    public String getOldpass() {
+		return oldpass;
+	}
 
-    public String getOname() {
+	public void setOldpass(String oldpass) {
+		this.oldpass = oldpass;
+	}
+
+	public String getNewpass() {
+		return newpass;
+	}
+
+	public void setNewpass(String newpass) {
+		this.newpass = newpass;
+	}
+
+	public String getRepass() {
+		return repass;
+	}
+
+	public void setRepass(String repass) {
+		this.repass = repass;
+	}
+
+	private String newpass;
+    
+    private String repass;
+
+    public List<Employee> getMlist() {
+		return mlist;
+	}
+
+	public void setMlist(List<Employee> mlist) {
+		this.mlist = mlist;
+	}
+
+	public String getOname() {
 		return oname;
 	}
 

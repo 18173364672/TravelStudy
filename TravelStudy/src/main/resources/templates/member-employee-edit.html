@@ -1,17 +1,17 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<title>后台登录-X-admin1.1</title>
+	<title>研学旅行后台管理系统</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="static/css/font.css">
-	<link rel="stylesheet" href="static/css/xadmin.css">
+    <link rel="stylesheet" th:href="@{/css/font.css}">
+	<link rel="stylesheet" th:href="@{/css/xadmin.css}">
     <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
-    <script src="static/lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="static/js/xadmin.js"></script>
+    <script th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
+    <script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
 </head>
 <body>
     <!-- 中部开始 -->
@@ -20,14 +20,17 @@
         <div class="page-content">
           <div class="content">
             <!-- 右侧内容框架，更改从这里开始 -->
-            <form class="layui-form">
+            <form class="layui-form" th:action="@{/employee/employeeedit}" method="post">
                 <div class="layui-form-item">
                     <label for="L_email" class="layui-form-label">
                         <span class="x-red">*</span>邮箱
                     </label>
                     <div class="layui-input-inline">
+                         <input type="hidden" id="L_email" name="id" required="" 
+                        autocomplete="off" class="layui-input" th:value="${employee.id}">
+                        
                         <input type="text" id="L_email" name="email" required="" lay-verify="email"
-                        autocomplete="off" class="layui-input">
+                        autocomplete="off" class="layui-input" th:value="${employee.email}">
                     </div>
                     <div class="layui-form-mid layui-word-aux">
                         <span class="x-red">*</span>将会成为您唯一的登入名
@@ -38,8 +41,8 @@
                         <span class="x-red">*</span>员工姓名
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="L_username" name="username" required="" lay-verify="nikename"
-                        autocomplete="off" class="layui-input">
+                        <input type="text" id="L_username" name="employeename" required="" lay-verify="nikename"
+                        autocomplete="off" class="layui-input" th:value="${employee.employeename}">
                     </div>
                 </div>
                 
@@ -49,7 +52,7 @@
                     </label>
                     <div class="layui-input-inline">
                         <input type="text" id="L_address" name="address" required="" lay-verify="nikename"
-                        autocomplete="off" class="layui-input">
+                        autocomplete="off" class="layui-input" th:value="${employee.address}">
                     </div>
                 </div>
                 
@@ -59,7 +62,7 @@
                     </label>
                     <div class="layui-input-inline">
                         <input type="text" id="L_phone" name="phone" required="" lay-verify="nikename"
-                        autocomplete="off" class="layui-input">
+                        autocomplete="off" class="layui-input" th:value="${employee.phone}">
                     </div>
                 </div>
                 
@@ -69,8 +72,8 @@
                     </label>
                     <div class="layui-inline">
                         <div class="layui-input-inline">
-                            <input type="radio" name="sex" value="0" checked title="男">
-                            <input type="radio" name="sex" value="1" title="女">
+                            <input type="radio" name="sex" value="男" checked >男
+                            <input type="radio" name="sex" value="女" >女
                         </div>
                     </div>
                 </div>
@@ -81,11 +84,10 @@
                         <span class="x-red">*</span>部门
                     </label>
                     <div class="layui-inline">
-                      <select style="position: absolute;top: 150px;">
-            	<option>请选择部门</option>
-            	<option>客服部</option>
-            	<option>教练部</option>
-            	<option>销售部</option>
+                    <select name="spare1" lay-filter="test"> 
+            	
+            	<option th:each="l,state : ${list}" th:text="${l.name}" th:value="${l.id}"></option>
+            	
             </select>
                     </div>
                 </div>
@@ -98,11 +100,10 @@
                         <span class="x-red">*</span>职位
                     </label>
                     <div class="layui-inline">
-                      <select style="position: absolute;top: 150px;">
-            	<option>请选择职位</option>
-            	<option>普通员工</option>
-            	<option>主管</option>
-            	<option>经理</option>
+                           <select id="zw" name="job">
+            	
+            	
+            	
             </select>
                     </div>
                 </div>
@@ -112,39 +113,19 @@
                         <span class="x-red">*</span>工资（/月）
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="L_phone" name="phone" required="" lay-verify="nikename"
-                        autocomplete="off" class="layui-input">
+                        <input type="text" id="L_phone" name="pay" required="" lay-verify="nikename"
+                        autocomplete="off" class="layui-input" th:value="${employee.pay}">
                     </div>
                 </div>
                  
                 
                 
-                <div class="layui-form-item">
-                    <label for="L_pass" class="layui-form-label">
-                        <span class="x-red">*</span>密码
-                    </label>
-                    <div class="layui-input-inline">
-                        <input type="password" id="L_pass" name="pass" required="" lay-verify="pass"
-                        autocomplete="off" class="layui-input">
-                    </div>
-                    <div class="layui-form-mid layui-word-aux">
-                        6到16个字符
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="L_repass" class="layui-form-label">
-                        <span class="x-red">*</span>确认密码
-                    </label>
-                    <div class="layui-input-inline">
-                        <input type="password" id="L_repass" name="repass" required="" lay-verify="repass"
-                        autocomplete="off" class="layui-input">
-                    </div>
-                </div>
+                
                 <div class="layui-form-item">
                     <label for="L_repass" class="layui-form-label">
                     </label>
-                    <button  class="layui-btn" lay-filter="add" lay-submit="">
-                        增加
+                    <button  class="layui-btn"  lay-submit="">
+                        修改
                     </button>
                 </div>
             </form>
@@ -154,15 +135,53 @@
         <!-- 右侧主体结束 -->
     </div>
     <!-- 中部结束 -->
-    <script>
-    //百度统计可去掉
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })();
-    </script>
+
 </body>
+<script th:src="@{/layui-v2.4.5/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/js/vue.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+      
+      
+      
+
+      
+  	var urlpath = [[@{/employee/queryzw}]];
+     
+$(function(){
+	
+	 layui.use('form', function(){
+		  var form = layui.form;
+		 form.on('select(test)', function(data){
+		  //得到select原始DOM对象
+		  //得到被选中的值
+		 	$.ajax({
+			 url:urlpath,
+			 data:{
+				 id:data.value
+			 },
+			 datatype:"json",
+			 success:function(res){
+				 if(res!=null){
+					 $("#zw").find("option").remove();
+					 $("#zw").append("<option>" + res.spare1 + "</option>");
+					 $("#zw").append("<option>" + res.spare2 + "</option>");
+					 form.render('select');
+				 }
+             
+				
+			 }
+				})
+				});  
+			});
+})
+   
+		      
+
+	
+
+	
+      
+
+</script>
+
 </html>

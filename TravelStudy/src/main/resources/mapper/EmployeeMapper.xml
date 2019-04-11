@@ -21,6 +21,11 @@
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
   
+  <select id="emqueryd" resultMap="BaseResultMap">
+       select * from employee where id=#{id}
+    
+  </select>
+  
   <select id="empquery" resultMap="BaseResultMap">
      select * from employee
      <where>
