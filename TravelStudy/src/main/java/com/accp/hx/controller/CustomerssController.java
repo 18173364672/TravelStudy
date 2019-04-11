@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accp.domain.Customerss;
-import com.accp.hx.select.CustomerssService;
+import com.accp.hx.service.CustomerssService;
 
 @Controller
 @RestController

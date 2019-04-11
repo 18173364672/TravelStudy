@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.accp.dao.CustomerssMapper;
 import com.accp.domain.Customerss;
-import com.accp.hx.select.CustomerssService;
+import com.accp.hx.service.CustomerssService;
 
 @Service
 

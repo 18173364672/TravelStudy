@@ -1,6 +1,7 @@
 package com.accp.domain;
 
 import java.util.Date;
+import java.util.List;
 
 public class Post {
     private Integer id;
@@ -28,8 +29,18 @@ public class Post {
     private String spare4;
 
     private String spare5;
+    
+    private List<Dynamicpicture> dylist;
 
-    public Integer getId() {
+    public List<Dynamicpicture> getDylist() {
+		return dylist;
+	}
+
+	public void setDylist(List<Dynamicpicture> dylist) {
+		this.dylist = dylist;
+	}
+
+	public Integer getId() {
         return id;
     }
 
@@ -132,4 +143,21 @@ public class Post {
     public void setSpare5(String spare5) {
         this.spare5 = spare5;
     }
+
+	public Post( Integer uid, String title, Date dytime, String dycontent, Integer pointsum, Integer tid) {
+		super();
+	
+		this.uid = uid;
+		this.title = title;
+		this.dytime = dytime;
+		this.dycontent = dycontent;
+		this.pointsum = pointsum;
+		this.tid = tid;
+
+
+	}
+    
+    
+    
+    
 }
