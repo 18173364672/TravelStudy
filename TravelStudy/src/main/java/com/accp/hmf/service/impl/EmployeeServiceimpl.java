@@ -8,9 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.accp.dao.EmployeeMapper;
 import com.accp.dao.OrganizationMapper;
+import com.accp.dao.RoyaltyMapper;
 import com.accp.domain.Employee;
 import com.accp.domain.Organization;
 import com.accp.domain.OrganizationExample;
+import com.accp.domain.Royalty;
 import com.accp.hmf.service.EmployeeService;
 import com.fasterxml.jackson.annotation.JacksonInject.Value;
 import com.github.pagehelper.Page;
@@ -25,6 +27,8 @@ public class EmployeeServiceimpl implements EmployeeService{
 	EmployeeMapper em;
 	@Autowired
 	OrganizationMapper om;
+	@Autowired
+	RoyaltyMapper rm;
     
 	@Override
 	public PageInfo<Employee> querypage(Integer currentPage, Integer pageSize,String createtime,String employeename) {
@@ -32,6 +36,17 @@ public class EmployeeServiceimpl implements EmployeeService{
 		Page<Employee> p = PageHelper.startPage(currentPage, pageSize,true);
 	    List<Employee> list=em.empquery(createtime, employeename);
 	    for (Employee employee : list) {
+	    	int count=rm.queryemp(employee.getId());
+	    	if(count==0) {
+	    		employee.setSumpay(employee.getPay());
+	    	}else {
+	    		Double sumpay=0.0;
+	    		 List<Royalty> rlist=rm.querypay(employee.getId());
+	    		 for (Royalty r : rlist) {
+				     sumpay+=r.getBasepay();
+				}
+	    		 employee.setSumpay(employee.getPay()+sumpay);
+	    	}
 			Organization organization=om.queryOrname(Integer.parseInt(employee.getSpare1()));
 			employee.setOname(organization.getName());
 		}
@@ -86,6 +101,18 @@ public class EmployeeServiceimpl implements EmployeeService{
 	public Employee emqueryd(Integer id) {
 		// TODO Auto-generated method stub
 		return em.emqueryd(id);
+	}
+
+	@Override
+	public int queryemp(Integer id) {
+		// TODO Auto-generated method stub
+		return rm.queryemp(id);
+	}
+
+	@Override
+	public List<Royalty> querypay(Integer id) {
+		// TODO Auto-generated method stub
+		return rm.querypay(id);
 	}
 
 	

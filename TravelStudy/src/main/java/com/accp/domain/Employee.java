@@ -79,8 +79,18 @@ public class Employee {
 	private String newpass;
     
     private String repass;
+    
+    private Double sumpay;
 
-    public List<Employee> getMlist() {
+    public Double getSumpay() {
+		return sumpay;
+	}
+
+	public void setSumpay(Double sumpay) {
+		this.sumpay = sumpay;
+	}
+
+	public List<Employee> getMlist() {
 		return mlist;
 	}
 

@@ -1,5 +1,7 @@
 package com.accp.domain;
 
+import java.util.List;
+
 public class Organization {
     private Integer id;
 
@@ -18,8 +20,18 @@ public class Organization {
     private String spare4;
 
     private String spare5;
+    
+    private List<Organization> mlist;
 
-    public Integer getId() {
+    public List<Organization> getMlist() {
+		return mlist;
+	}
+
+	public void setMlist(List<Organization> mlist) {
+		this.mlist = mlist;
+	}
+
+	public Integer getId() {
         return id;
     }
 

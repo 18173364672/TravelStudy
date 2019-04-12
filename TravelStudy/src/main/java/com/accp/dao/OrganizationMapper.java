@@ -29,4 +29,6 @@ public interface OrganizationMapper {
     int updateByPrimaryKey(Organization record);
     
     public Organization queryOrname(Integer id);
+    
+    List<Organization> orpquery(@Param("name") String name);
 }

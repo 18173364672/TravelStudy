@@ -151,7 +151,7 @@
                         </li>
                         
                          <li >
-                            <a href="member-organization.html">
+                            <a th:href="@{/organization/toorganization}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 组织机构
                             </a>
@@ -410,7 +410,7 @@
                             {{l.id}}
                         </td>
                         <td>
-                            <u style="cursor:pointer" onclick="member_show('员工信息','member-show.html','10001','360','400')">
+                            
                                 {{l.employeename}}
                             </u>
                         </td>
@@ -438,8 +438,12 @@
                         </td>
                         
                         <td>
-                         {{l.pay}}
+                        <u style="cursor:pointer" onclick="member_show('详细工资','/employee/querypay','600','600',this)">
+                         {{l.sumpay}}
+                         </u>
+                         <div style="display: none">{{l.id}}</div>
                         </td>
+                        
                                        
                                         <td class="td-status" v-if="l.state==1">
                                 <span class="layui-btn layui-btn-normal layui-btn-mini">
@@ -601,9 +605,7 @@
             x_admin_show(title,url,w,h);
         }
         /*用户-查看*/
-        function member_show(title,url,id,w,h){
-            x_admin_show(title,url,w,h);
-        }
+        
 
          /*用户-停用*/
        
@@ -629,6 +631,14 @@
 </body>
 <script type="text/javascript" th:src="@{/js/vue.js}"></script>
 <script type="text/javascript" th:inline="javascript">
+   
+function member_show(title,url,w,h,obj){
+	var ids=$(obj).next().text();
+	
+	var url1="?id="+ids;
+	
+    x_admin_show(title,url+url1,w,h);
+}
    
 function member_edit1 (title,url,id,w,h,obj) {
 	var ids=$(obj).next().text();

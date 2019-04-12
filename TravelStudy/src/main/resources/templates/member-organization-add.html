@@ -1,17 +1,17 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<title>后台登录-X-admin1.1</title>
+	<title>研学旅行管理系统</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="static/css/font.css">
-	<link rel="stylesheet" href="static/css/xadmin.css">
+    <link rel="stylesheet" th:href="@{/css/font.css}">
+	<link rel="stylesheet" th:href="@{/css/xadmin.css}">
     <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
-    <script src="static/lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="static/js/xadmin.js"></script>
+    <script th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
+    <script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
 </head>
 <body>
     <!-- 中部开始 -->
@@ -20,24 +20,46 @@
         <div class="page-content">
           <div class="content">
             <!-- 右侧内容框架，更改从这里开始 -->
-            <form class="layui-form">
+            <form class="layui-form" th:action="@{/organization/organizationadd}" method="post">
               
                 <div class="layui-form-item">
                     <label for="L_username" class="layui-form-label">
                         <span class="x-red">*</span>部门名称
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="L_username" name="username" required="" lay-verify="nikename"
+                        <input type="text" id="L_username" name="name" required="" lay-verify="nikename"
                         autocomplete="off" class="layui-input">
                     </div>
                 </div>
+                
+                  
+                  <div class="layui-form-item">
+                    <label for="L_username" class="layui-form-label">
+                        <span class="x-red">*</span>职位1
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_address" name="spare1" required="" lay-verify="nikename"
+                        autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                
+                <div class="layui-form-item">
+                    <label for="L_username" class="layui-form-label">
+                        <span class="x-red">*</span>职位2
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_address" name="spare2" required="" lay-verify="nikename"
+                        autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                
                 
                  <div class="layui-form-item">
                     <label for="L_username" class="layui-form-label">
                         <span class="x-red">*</span>工作方向
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="L_address" name="address" required="" lay-verify="nikename"
+                        <input type="text" id="L_address" name="context" required="" lay-verify="nikename"
                         autocomplete="off" class="layui-input">
                     </div>
                 </div>
@@ -51,7 +73,7 @@
                 <div class="layui-form-item">
                     <label for="L_repass" class="layui-form-label">
                     </label>
-                    <button  class="layui-btn" lay-filter="add" lay-submit="">
+                    <button  class="layui-btn" lay-filter="add" lay-submit="" onclick="submit_()">
                         增加
                     </button>
                 </div>
@@ -62,15 +84,16 @@
         <!-- 右侧主体结束 -->
     </div>
     <!-- 中部结束 -->
-    <script>
-    //百度统计可去掉
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })();
-    </script>
+    
 </body>
+<script type="text/javascript" th:inline="javascript">
+
+   function submit_(){
+	  var index=parent.layer.getFrameIndex(window.name);
+	  parent.layer.close(index)
+	  
+}
+
+
+</script>
 </html>

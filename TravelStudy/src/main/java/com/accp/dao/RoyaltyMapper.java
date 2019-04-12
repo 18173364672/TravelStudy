@@ -27,4 +27,8 @@ public interface RoyaltyMapper {
     int updateByPrimaryKeySelective(Royalty record);
 
     int updateByPrimaryKey(Royalty record);
+    
+    int queryemp(Integer id);
+    
+    List<Royalty> querypay(Integer id);
 }

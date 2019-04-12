@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.accp.domain.Employee;
 import com.accp.domain.Organization;
+import com.accp.domain.Royalty;
 import com.accp.hmf.service.EmployeeService;
 import com.github.pagehelper.PageInfo;
 
@@ -20,6 +21,32 @@ import com.github.pagehelper.PageInfo;
 public class EmployeeController {
       @Autowired
       EmployeeService es;
+      
+      
+      @RequestMapping("/querypay")
+      public String querypay(Model model,Integer id) {
+    	  Employee employee=es.emqueryd(id);
+    	  int count=es.queryemp(id);
+    	  if(count==0) {
+    		  employee.setSumpay(employee.getPay());
+    		  model.addAttribute("employee", employee);
+    		 
+    		  return "member-emp-show1";
+    	  }else {
+    		  Double sumpay=0.0;
+    		  List<Royalty> list=es.querypay(id);
+    		  for (Royalty royalty : list) {
+				sumpay+=royalty.getBasepay();
+			 }
+    		  employee.setSumpay(employee.getPay()+sumpay);
+    		  model.addAttribute("list", list);
+    		  model.addAttribute("employee", employee);
+    		
+    		  return "member-emp-show";
+    	  }
+    	  
+    	 
+      }
       
       @RequestMapping("/updatepass")
       public String updatepass(@RequestBody Employee employee) {

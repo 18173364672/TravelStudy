@@ -1,0 +1,67 @@
+package com.accp.hmf.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.accp.dao.EmployeeMapper;
+import com.accp.dao.OrganizationMapper;
+import com.accp.domain.Employee;
+import com.accp.domain.Organization;
+import com.accp.hmf.service.OrganizationService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
+@Service
+@Transactional
+public class OrganizationServiceimpl implements OrganizationService{
+    
+	@Autowired
+	OrganizationMapper om;
+	@Autowired
+	EmployeeMapper em;
+	
+	@Override
+	public PageInfo<Organization> querypage(Integer currentPage, Integer pageSize, String name) {
+		// TODO Auto-generated method stub
+		Page<Organization> p = PageHelper.startPage(currentPage, pageSize,true);
+		List<Organization> list=om.orpquery(name);
+		return p.toPageInfo();
+	}
+
+	@Override
+	public int insertSelective(Organization record) {
+		// TODO Auto-generated method stub
+		return om.insertSelective(record);
+	}
+
+	@Override
+	public Organization queryOrname(Integer id) {
+		// TODO Auto-generated method stub
+		return om.queryOrname(id);
+	}
+
+	@Override
+	public int updateByPrimaryKey(Organization record) {
+		// TODO Auto-generated method stub
+		return om.updateByPrimaryKey(record);
+	}
+
+	@Override
+	public int deleteByPrimaryKey(Integer id) {
+		// TODO Auto-generated method stub
+		return om.deleteByPrimaryKey(id);
+	}
+
+	@Override
+	public List<Employee> emquerybm(Integer id) {
+		// TODO Auto-generated method stub
+		return em.emquerybm(id);
+	}
+     
+	
+	
+}

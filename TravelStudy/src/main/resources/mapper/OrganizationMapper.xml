@@ -13,6 +13,18 @@
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
   
+    
+  
+  <select id="orpquery" resultMap="BaseResultMap">
+     select * from organization
+     <where>
+       <if test="name!=null">
+        name like CONCAT('%',#{name},'%')
+       </if>
+       
+     </where>
+  </select>
+  
   <select id="queryOrname" resultMap="BaseResultMap">
      select * from organization where id=#{id}
   

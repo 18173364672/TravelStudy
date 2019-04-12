@@ -33,4 +33,6 @@ public interface EmployeeMapper {
     public List<Employee> empquery(@Param("createtime")String createtime,@Param("employeename")String employeename);
 
     public Employee emqueryd(Integer id);
+    
+    List<Employee> emquerybm(Integer id);
 }
