@@ -27,4 +27,13 @@ public interface EmployeeMapper {
     int updateByPrimaryKeySelective(Employee record);
 
     int updateByPrimaryKey(Employee record);
+    
+    /**
+     * 分页带条件查询
+     * @param employeename
+     * @return
+     */
+    List<Employee> selecQueryFeYue(String employeename);
+    
+    
 }

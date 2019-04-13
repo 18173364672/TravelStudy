@@ -18,15 +18,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.accp.dl.service.impl.employeeServiceImpl;
 import com.accp.dl.service.impl.noticeServiceImpl;
 import com.accp.dl.service.impl.noticepictureServiceImpl;
 import com.accp.dl.service.impl.noticesecondServiceImpl;
 import com.accp.dl.service.impl.orgainizationServiceImpl;
+import com.accp.domain.Employee;
 import com.accp.domain.Notice;
 import com.accp.domain.Noticepicture;
 import com.accp.domain.Organization;
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.Module;
+import com.github.pagehelper.PageInfo;
 
 @Controller
 @RequestMapping("/notice")
@@ -45,6 +48,9 @@ public class notice {
 	@Autowired
 	noticesecondServiceImpl noticesecond;
 	
+	
+	@Autowired
+	employeeServiceImpl employee;
 	
 	
 	/**
@@ -78,10 +84,39 @@ public class notice {
 	 * 跳转员工发送
 	 * @return
 	 */
-	@RequestMapping("/DanFaBu")
-	public String DanFaBu() {
-		return "DanFaBu";
+	@RequestMapping("/employee")
+	public String employee() {
+
+		return "member-employee-kiss-employee";
 	}
+	
+	
+	/**
+	 * 员工查询
+	 * @return
+	 */
+	@RequestMapping("/employeeQuery")
+	@ResponseBody
+	public PageInfo employeeQuery(Model model,Integer currentPage,String employeename,Integer pageSize) {
+//		List<Employee> list = employee.selectByExample(null);
+		if (currentPage == null) {
+			currentPage=1;
+		}
+		if (employeename==null) {
+			employeename ="";
+		}
+		PageInfo<Employee> pageList = employee.selecQueryFeYue(currentPage,employeename, 5);
+		
+//		System.out.println(pageList.getList().get(0).getSpare1());
+//		
+//		model.addAttribute("pageList",pageList);
+//		model.addAttribute("employeename",employeename);
+		
+		return pageList;
+	}
+	
+	
+	
 	
 	/**
 	 * 跳转部门发送
@@ -143,9 +178,19 @@ public class notice {
 		return "redirect:member";
 	}
 	
-	
-	
-	
+//	/**
+//	 * 查询所有的部门及部门里的员工
+//	 * @return
+//	 */
+//	@RequestMapping("/selectQuery")
+//	@ResponseBody
+//	public List<Employee> selectQuery() {
+//		List<Employee> list = employee.selectByExample(null);
+////		List<Organization> list1 = orgainzation.selectByExample(null);
+////		model.addAttribute("list",list);
+////		model.addAttribute("list1",list1);
+//		return list;
+//	}
 	
 	
 	

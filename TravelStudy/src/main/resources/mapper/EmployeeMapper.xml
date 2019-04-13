@@ -397,4 +397,10 @@
       Spare5 = #{spare5,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="selecQueryFeYue" resultType="com.accp.domain.Employee">
+  		SELECT * FROM `employee` es INNER JOIN `organization` re ON es.`Spare1`=re.id WHERE es.`Employeename` LIKE CONCAT('%',#{employeename},'%')
+  </select>
+  
+  
 </mapper>

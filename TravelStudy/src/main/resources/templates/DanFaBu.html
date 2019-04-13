@@ -28,7 +28,7 @@
 	</style>
 	
 	
-	<script type="text/javascript">
+	<script type="text/javascript" th:inline="javascript">
         var checkedList = [] // 选中列表
 
 
@@ -127,13 +127,77 @@
 
         window.onload = function(){
         	
-        	/* $.ajax({
-        		url:[[@{/notice/addBuMen}]],
-        		
-        	}); */
         	
         	
-            // 模拟数据
+        /* 	var array = new Array();
+            <c:forEach items="${List}" var="address">
+            	array.push("${spare1}");
+            </c:forEach> */
+        	
+        	/*  $.ajax({
+        		url:[[@{/notice/selectQuery}]],
+        		type:"post",
+        		data:[],
+        		dataType:"text",
+        		success:function(result){
+        			console.log(result);
+        			data1 = [];
+        			for(var i = 0 ; i<result.length ; i++){
+        				data1[i].child[i].name.push(result[i].employeename);
+        				alert(data1[i].child[i].name);
+        			}
+        		}
+        	 }); */
+        			/*
+        			// 模拟数据
+                    data = [
+                        {
+                            name : "研学旅行系统",
+                            child: [
+                                {
+	                                    name : "部门",
+	                                    child : [
+	                                        {
+	                                            name : "小明",
+	                                            child : []
+	                                        },
+	                                        {
+	                                            name : "小红",
+	                                            child : []
+	                                        }
+	                                    ]
+                                	
+                                }
+                                
+                                 ,
+                                {
+                                    name : "客户管理",
+                                    child : [
+                                        {
+                                            name : "小白",
+                                            child : []
+                                        },
+                                        {
+                                            name : "小黑",
+                                            child : []
+                                        }
+                                    ]
+                                },
+                                {
+                                    name : "其他部",
+                                    child : []
+                                }
+                                //是否循环 
+                            ]
+                        	//是否循环
+                        }
+                    ]
+        			
+        		}
+        	}); 
+        	*/
+        	
+             // 模拟数据
             var data = [
                 {
                     name : "研学旅行系统",
@@ -219,15 +283,11 @@
 
             // 赋值
             var baseDom = document.createElement("div")
-            getData(data,baseDom)
-            document.getElementById("leftCont").innerHTML =  baseDom.innerHTML
+             getData(data,baseDom)
+             document.getElementById("leftCont").innerHTML =  baseDom.innerHTML
             
         }
         
-        
-//      $("#img-change").click(function () {
-//		    $("#file").click();
-//		})
         
         
         
