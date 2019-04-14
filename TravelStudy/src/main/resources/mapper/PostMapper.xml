@@ -24,8 +24,8 @@
        <result column="url" property="url"/>
     </collection>
   </resultMap>
-  
-   <select id="postselect" resultMap="llistg">
+    
+   <select id="postselect" resultMap="postdy">
   SELECT po.*,dy.url FROM post AS po
 INNER JOIN dynamicpicture AS dy
 ON po.id=dy.dyid

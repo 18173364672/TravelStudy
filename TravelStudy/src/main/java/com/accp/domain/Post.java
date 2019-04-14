@@ -3,6 +3,8 @@ package com.accp.domain;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.catalina.User;
+
 public class Post {
     private Integer id;
 
@@ -31,8 +33,30 @@ public class Post {
     private String spare5;
     
     private List<Dynamicpicture> dylist;
+    
+    private List<Comment> coList;
+    
+    private Customerss Customerss;
+    
+    
+ 
+    public List<Comment> getCoList() {
+		return coList;
+	}
 
-    public List<Dynamicpicture> getDylist() {
+	public void setCoList(List<Comment> coList) {
+		this.coList = coList;
+	}
+
+	public Customerss getCustomerss() {
+		return Customerss;
+	}
+
+	public void setCustomerss(Customerss customerss) {
+		Customerss = customerss;
+	}
+
+	public List<Dynamicpicture> getDylist() {
 		return dylist;
 	}
 
@@ -155,6 +179,10 @@ public class Post {
 		this.tid = tid;
 
 
+	}
+	
+	public Post() {
+		// TODO Auto-generated constructor stub
 	}
     
     
