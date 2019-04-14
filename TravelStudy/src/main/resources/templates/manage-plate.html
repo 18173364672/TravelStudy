@@ -1,24 +1,18 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-	</head>
-	<body><!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>后台登录-X-admin1.1</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<title>研学旅行后台管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="static/css/font.css">
-	<link rel="stylesheet" href="static/css/xadmin.css">
+    <link rel="stylesheet" th:href="@{/css/font.css}">
+	<link rel="stylesheet" th:href="@{/css/xadmin.css}">
     <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
-    <script src="static/lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="static/js/xadmin.js"></script>
-    
+    <script th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
+    <script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
+
 </head>
 
  <script>
@@ -41,18 +35,19 @@
   		  	
   		  })
   		
-  		 
-  		
-  		
-  		
   	})
+  	
+  	function member_add(title,url,w,h){
+              x_admin_show(title,url,w,h);
+             
+    }
   	
   	
   </script>
 <body>
     <!-- 顶部开始 -->
     <div class="container">
-        <div class="logo"><a href="./index.html">X-ADMIN V1.1</a></div>
+        <div class="logo"><a href="./index.html">研学旅行后台管理系统</a></div>
         <div class="open-nav"><i class="iconfont">&#xe699;</i></div>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
@@ -304,13 +299,13 @@
                
                         
                                      <li class="current">
-                            <a href="manage-plate.html">
+                            <a th:href="@{/user/manage-plate}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 模块管理
                             </a>
                         </li>
                                                               <li>
-                            <a href="manage-role.html">
+                            <a th:href="@{/user/manage-role}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 角色管理
                             </a>
@@ -326,12 +321,12 @@
         <div class="page-content">
           <div class="content">
             <!-- 右侧内容框架，更改从这里开始 -->
-            <form class="layui-form xbs" action="" >
+            <form class="layui-form xbs" th:action="@{/user/plate}" >
                 <div class="layui-form-pane" style="text-align: center;">
                   <div class="layui-form-item" style="display: inline-block;">
                    
                     <div class="layui-input-inline">
-                      <input type="text" name="username"  placeholder="请输入项目名" autocomplete="off" class="layui-input">
+                      <input type="text" name="name"  placeholder="请输入板块名或者英文名" autocomplete="off" class="layui-input">
                     </div>
                     <div class="layui-input-inline" style="width:80px">
                         <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
@@ -342,12 +337,8 @@
             <xblock>
             	
             	
-            			<button class="layui-btn layui-btn-danger"><i class="layui-icon">&#xe608;</i>批量处理</button><button class="layui-btn" onclick="member_add('添加员工','manage-plate-add.html','600','500')"><i class="layui-icon">&#xe608;</i>添加</button>
-            			
-                       
-           
-							
-            
+            			<button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe608;</i>批量处理</button><button class="layui-btn"  onclick="member_add('添加板块','/user/plateAdd','600','500')"><i class="layui-icon">&#xe608;</i>添加</button>
+
             	<span class="x-right" style="line-height:40px">共有数据：88 条</span></xblock>
             
             	
@@ -376,89 +367,37 @@
                         </th>
                         
                                                                                 <th>
-                      处理状态
-                        </th> 
-                                                                                <th>
                       操作
                         </th> 
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>
-                            <input type="checkbox" value="1" name="s1">
-                        </td>
-                        <td>
-                           1
-                        </td>
-                        <td>
-                            客户管理
-                        </td>
-                        <td>
-                           0
-                        </td>
-                        <td class="">
-                       http://kehu
-                        </td>
-                        
-                        <td class="">
-                         Customer
-                        </td>
-                      
-                        
-                         
-                   
-                        
-                                        <td class="td-status">
-                                <span class="layui-btn layui-btn-normal layui-btn-mini">
-                                待处理
-                            </span>
-                        </td>
-                        <td class="td-manage">
-                            <a style="text-decoration:none" onclick="member_stop(this,'10001')" href="javascript:;" title="停用">
-                                <i class="layui-icon">&#xe601;</i>
-                            </a>
-                            
-                            
-                        </td>
-                    </tr>
+                    
 
-                    <tr>
+                    <tr th:each="item,state : ${page.list}">
                         <td>
-                            <input type="checkbox" value="1" name="s1">
+                            <input type="checkbox" th:value="${item.pid}" name="s1">
                         </td>
-                        <td>
-                           1
+                        <td th:text="${item.pid}">
+                           
                         </td>
-                        <td>
-                            客户管理
+                        <td th:text="${item.name}">
                         </td>
-                        <td>
-                           0
+                        <td th:text="${item.parentid}">
                         </td>
-                        <td class="">
-                       http://kehu
+                        <td th:text="${item.url}">
                         </td>
                         
-                        <td class="">
-                         Customer
+                        <td th:text="${item.ename}">
                         </td>
                       
-                        
-                         
-                   
-                        
-                                        <td class="td-status">
-                                <span class="layui-btn layui-btn-normal layui-btn-mini">
-                                待处理
-                            </span>
-                        </td>
                         <td class="td-manage">
-                            <a style="text-decoration:none" onclick="member_stop(this,'10001')" href="javascript:;" title="停用">
-                                <i class="layui-icon">&#xe601;</i>
-                            </a>
-                            
-                            
+                        		<a title="修改" href="javascript:void(0)" th:onclick="level_edit('修改板块信息','/user/platetoupdate',[[${item.pid}]],'600','500')" style="text-decoration:none">
+                                	<i class="layui-icon">&#xe642;</i>
+                                </a>
+                                <a title="删除" href="javascript:void(0)" onclick="level_del(this)" th:data="${item.pid}" style="text-decoration:none">
+                                	<i class="layui-icon">&#xe640;</i>
+	                            </a>
                         </td>
                     </tr>       
                     
@@ -467,16 +406,9 @@
                 </tbody>
             </table>
              <xblock>
-            	
-            	
-            			
-            			
-                        <button class="layui-btn layui-btn-warm">上一页</button>
-                        <button class="layui-btn layui-btn-danger">下一页</button>
-           
-							
-            
-            	</xblock><!-- 右侧内容框架，更改从这里结束 -->
+                      <button class="layui-btn layui-btn-warm"><a th:href="@{/user/plate}+'?currentPage='+${currentPage-1}">上一页</a></button>
+                      <button class="layui-btn layui-btn-danger"><a th:href="@{/user/plate}+'?currentPage='+${currentPage+1}">下一页</a></button>
+           	 </xblock><!-- 右侧内容框架，更改从这里结束 -->
           </div>
         </div>
         <!-- 右侧主体结束 -->
@@ -488,20 +420,20 @@
     </div>
     <!-- 底部结束 -->
     <!-- 背景切换开始 -->
-    <div class="bg-changer">
+	<div class="bg-changer">
         <div class="swiper-container changer-list">
             <div class="swiper-wrapper">
-                 <div class="swiper-slide"><img class="item" src="static/images/a.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/b.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/c.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/d.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/e.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/f.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/g.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/h.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/i.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/j.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/k.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/a.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/b.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/c.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/d.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/e.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/f.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/g.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/h.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/i.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/j.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/k.jpg}" alt=""></div>
                 <div class="swiper-slide"><span class="reset">初始化</span></div>
             </div>
         </div>
@@ -578,8 +510,21 @@
         //批量删除提交
              function delAll () {
                 layer.confirm('确认要删除吗？',function(index){
-                    //捉到所有被选中的，发异步进行删除
-                    layer.msg('删除成功', {icon: 1});
+                    var a = $("[name='s1']:checked").length;
+                    var pid = [];
+                    for(var i=0 ; i<a ; i++){
+                    	pid.push($("[name='s1']:checked:eq("+i+")").val());
+                    }
+                    $.ajax({
+                    	url:"/user/platedelAll?pid="+pid,
+                    	data:{},
+                    	type:"post",
+                    	success:function(){
+                    		layer.msg('删除成功', {icon: 1});
+                    		location.reload();
+                    	}
+                    });
+                    
                 });
              }
             // 等级-增加
@@ -589,15 +534,23 @@
             }
             // 等级-编辑
             function level_edit (title,url,id,w,h) {
-                x_admin_show(title,url,w,h); 
+                x_admin_show(title,url+"?pid="+id,w,h); 
             }
            
             /*等级-删除*/
-            function level_del(obj,id){
+            function level_del(obj){
                 layer.confirm('确认要删除吗？',function(index){
+                	var pid = $(obj).attr("data");
                     //发异步删除数据
-                    $(obj).parents("tr").remove();
-                    layer.msg('已删除!',{icon:1,time:1000});
+                    	$.ajax({
+                        	url:"/user/platedel",
+                        	data:{pid:pid},
+                        	type:"post",
+    						success:function(){
+    						 	$(obj).parents("tr").remove();
+    		                    layer.msg('已删除!',{icon:1,time:1000});
+    						},                    	
+                        });
                 });
             }
             
@@ -606,17 +559,5 @@
             }
             
         </script>
-        <script>
-        //百度统计可去掉
-        var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-          var s = document.getElementsByTagName("script")[0]; 
-          s.parentNode.insertBefore(hm, s);
-        })();
-        </script>
 </body>
-</html>
-	</body>
 </html>

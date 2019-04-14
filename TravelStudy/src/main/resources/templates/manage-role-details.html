@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>研学旅行后台管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" th:href="@{/css/font.css}">
+	<link rel="stylesheet" th:href="@{/css/xadmin.css}">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
+    <script th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
+    <script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
+    <script th:src="@{/lib/layui/lay/modules/layer.js}" charset="utf-8"></script>
+
+</head>
+<body>
+    <!-- 中部开始 -->
+    <div class="wrapper">
+        <!-- 右侧主体开始 -->
+        <div class="page-content">
+          <div class="content">
+            <!-- 右侧内容框架，更改从这里开始 -->
+            <table class="layui-table">
+            	<thead>
+            		<tr>
+            			<td>
+            				角色名称
+            			</td>
+            			<td>
+            				板块名称
+            			</td>
+            		</tr>
+            	</thead>
+            	<tbody>
+            		<tr th:each="item,index : ${list}">
+            			<td th:text="${name}">
+            			</td>
+            			<td th:text="${item.name}">
+            			</td>
+            		</tr>
+            	</tbody>
+            </table>
+            <!-- 右侧内容框架，更改从这里结束 -->
+          </div>
+        </div>
+        <!-- 右侧主体结束 -->
+    </div>
+    <!-- 中部结束 -->
+    <script type="text/javascript">
+    	function submit_(){
+    		var index = parent.layer.getFrameIndex(window.name);
+    		parent.layer.close(index);
+    	}
+    </script>
+</body>
+</html>

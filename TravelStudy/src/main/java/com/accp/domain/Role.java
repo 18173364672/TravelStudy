@@ -6,6 +6,8 @@ public class Role {
     private String name;
 
     private String details;
+    
+    private Integer[] pid;
 
     private String spare1;
 
@@ -80,4 +82,12 @@ public class Role {
     public void setSpare5(String spare5) {
         this.spare5 = spare5;
     }
+
+	public Integer[] getPid() {
+		return pid;
+	}
+
+	public void setPid(Integer[] pid) {
+		this.pid = pid;
+	}
 }
