@@ -282,7 +282,9 @@
   </select>
   
   
-  
+  <insert id="toAdd">
+  		INSERT INTO `notice` (`uid`,`title`,`content`,`Spare1`)VALUES(#{uid},#{title},#{content},#{spare1});
+  </insert>
   
   
   

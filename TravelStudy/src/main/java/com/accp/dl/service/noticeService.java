@@ -17,4 +17,20 @@ public interface noticeService {
      * @return
      */
     Notice selectOrderBy();
+    
+    
+    
+    /**
+     * 按员工发送信息
+     * @param title
+     * @param content
+     * @param uid
+     * @param spare1
+     * @return
+     */
+    int toAdd(String title,String content,Integer uid,String spare1);
+    
+    
+    
+    
 }

@@ -32,6 +32,19 @@ public class noticeServiceImpl implements noticeService{
 	public Notice selectOrderBy() {
 		return notices.selectOrderBy();
 	}
+
+	/**
+     * 按员工发送信息
+     * @param title
+     * @param content
+     * @param uid
+     * @param spare1
+     * @return
+     */
+	@Override
+	public int toAdd(String title, String content, Integer uid, String spare1) {
+		return notices.toAdd(title, content, uid, spare1);
+	}
 	
 
 	

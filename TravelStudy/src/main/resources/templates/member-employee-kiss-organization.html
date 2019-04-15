@@ -105,10 +105,13 @@
 				processData:false,
 				success:function(result){
 					console.log(result); 
-					history.go(-1);
+// 					layer.close(layer.index);
+// 					window.parent.location.reload();
+					var index = parent.layer.getFrameIndex(window.name);
+					parent.layer.close(index);
 				},error:function(date){
-					history.go(-1);
-					console.log(date)
+					var index = parent.layer.getFrameIndex(window.name);
+					parent.layer.close(index);
 				}
         		
         	});

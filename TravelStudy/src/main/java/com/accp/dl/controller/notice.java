@@ -97,7 +97,7 @@ public class notice {
 	 */
 	@RequestMapping("/employeeQuery")
 	@ResponseBody
-	public PageInfo employeeQuery(Model model,Integer currentPage,String employeename,Integer pageSize) {
+	public PageInfo<Employee> employeeQuery(Model model,Integer currentPage,String employeename,Integer pageSize) {
 //		List<Employee> list = employee.selectByExample(null);
 		if (currentPage == null) {
 			currentPage=1;
@@ -178,22 +178,14 @@ public class notice {
 		return "redirect:member";
 	}
 	
-//	/**
-//	 * 查询所有的部门及部门里的员工
-//	 * @return
-//	 */
-//	@RequestMapping("/selectQuery")
-//	@ResponseBody
-//	public List<Employee> selectQuery() {
-//		List<Employee> list = employee.selectByExample(null);
-////		List<Organization> list1 = orgainzation.selectByExample(null);
-////		model.addAttribute("list",list);
-////		model.addAttribute("list1",list1);
-//		return list;
-//	}
 	
-	
-	
-	
+	@RequestMapping("toAdd")
+	@ResponseBody
+	public String toAdd(String title ,String content,Integer uid,String spare1[]) {
+		for (int i = 0; i < spare1.length; i++) {
+			notices.toAdd(title, content, 1, spare1[i]);
+		}
+		return "redirect:member";
+	}
 	
 }
