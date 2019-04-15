@@ -22,7 +22,7 @@
   </resultMap>
   
   <select id="emquerybm" resultMap="BaseResultMap">
-   select * from employee where spare1=#{id}
+   select * from employee where spare1=#{id} and state=1
   </select>
   
   <select id="emqueryd" resultMap="BaseResultMap">

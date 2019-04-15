@@ -22,7 +22,7 @@ public class EmployeeController {
       @Autowired
       EmployeeService es;
       
-      
+      //查询工资
       @RequestMapping("/querypay")
       public String querypay(Model model,Integer id) {
     	  Employee employee=es.emqueryd(id);
@@ -48,6 +48,7 @@ public class EmployeeController {
     	 
       }
       
+      //更新密码
       @RequestMapping("/updatepass")
       public String updatepass(@RequestBody Employee employee) {
     	  Employee employee2=es.emqueryd(employee.getId());
@@ -62,6 +63,7 @@ public class EmployeeController {
     	  return "redirect:/employee/employeeeditpass?id="+employee.getId();
       }
       
+      //密码修改页面
       @RequestMapping("/employeeeditpass")
       public String employeeeditpass(Model model,Integer id) {
     	  Employee employee=es.emqueryd(id);
@@ -69,6 +71,8 @@ public class EmployeeController {
     	  return "member-employee-password";
       }
       
+      
+      //员工修改
       @RequestMapping("/employeeedit")
       public String employeeedit(Employee employee) {
     	    es.updateByPrimaryKey(employee);
@@ -76,6 +80,7 @@ public class EmployeeController {
     	  return "redirect:/employee/toemployeeedit?id="+employee.getId();
       }
       
+      //跳转到员工修改页面
       @RequestMapping("/toemployeeedit")
       public String toemployeeedit(Model model,Integer id) {
     	  Employee employee=es.emqueryd(id);
@@ -85,6 +90,8 @@ public class EmployeeController {
     	  return "member-employee-edit";
       }
       
+      
+      //删除单个员工并删除部门在职人数
       @RequestMapping("/deleteemployees")
       public String deleteemployees(Integer id,Integer spare1) {
     	  es.deleteByPrimaryKey(id);
@@ -96,6 +103,8 @@ public class EmployeeController {
     	  return "redirect:/employee/toemployeequerypage";
       }
       
+      
+      //删除多个员工并删除部门在职人数
       @RequestMapping("/deleteemployee")
       public String deleteemployee(@RequestBody Employee employee) {
     	  List<Employee> list=employee.getMlist();
@@ -111,16 +120,37 @@ public class EmployeeController {
     	  return "redirect:/employee/toemployeequerypage";
       }
       
+      
+      //更新状态，在职和离职
       @RequestMapping("/updatestate")
       public String updatestate(Integer id,Integer state) {
     	  Employee employee=new Employee();
+    	  
     	  employee.setId(id);
     	  employee.setState(state);
     	  es.updateByPrimaryKey(employee);
     	  
+    	  Employee e2=es.emqueryd(id);
+    	  
+    	  if(state==0) {
+    		  Organization organization=es.queryOrname(Integer.parseInt(e2.getSpare1()));
+    		  int count=organization.getCount()-1;
+ 	    	  organization.setCount(count);
+ 	    	  es.updateByPrimaryKey(organization);
+    	  }else {
+    		  Organization organization=es.queryOrname(Integer.parseInt(e2.getSpare1()));
+    		  int count=organization.getCount()+1;
+ 	    	  organization.setCount(count);
+ 	    	  es.updateByPrimaryKey(organization);
+    	  }
+    	  
+    	  
+    	  
     	  return "redirect:/employee/toemployeequerypage";
       }
       
+      
+      //员工新增
       @RequestMapping("/employeeadd")
       public String employeeadd(Employee employee) {
     	  employee.setCreatetime(new Date());
@@ -135,6 +165,7 @@ public class EmployeeController {
     	  return "redirect:/employee/toemployeeadd";
       }
       
+      //跳转到员工新增页面
       @RequestMapping("/toemployeeadd")
       public String toemployeeadd(Model model) {
     	  List<Organization> list=es.selectByExample(null);
@@ -151,6 +182,8 @@ public class EmployeeController {
     	  return organization;
       }
       
+      
+      //跳转到员工查询
       @RequestMapping("/toemployeequerypage")
       public String toemployeequerypage() {
     	  
@@ -158,6 +191,7 @@ public class EmployeeController {
       }
       
       
+      //员工信息分页
       @RequestMapping("/employeequerypage")
       @ResponseBody
       public  PageInfo<Employee> querypage(Integer currentPage,String createtime,String employeename) {

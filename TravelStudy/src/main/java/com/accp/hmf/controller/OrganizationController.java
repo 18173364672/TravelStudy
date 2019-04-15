@@ -20,6 +20,8 @@ public class OrganizationController {
 	@Autowired
 	OrganizationService os;
 	
+	
+	//查询部门对应员工
 	@RequestMapping("/organizationquery")
 	public String organizationquery(Model model,Integer id) {
 		
@@ -29,12 +31,16 @@ public class OrganizationController {
 		return "member-or-show";
 	}
 	
+	
+	//部门单个删除
 	@RequestMapping("/organizationdeletes")
 	public String organizationdeletes(Integer id) {
 		os.deleteByPrimaryKey(id);
 		return "redirect:/organization/organizationquerypage";
 	}
 	
+	
+	//部门多个删除
 	@RequestMapping("/organizationdelete")
 	public String organizationdelete(@RequestBody Organization organization) {
 		for (Organization or : organization.getMlist()) {
@@ -51,6 +57,7 @@ public class OrganizationController {
 		
 	}
 	
+	//跳转到部门修改页面
 	@RequestMapping("/toorganizationedit")
 	public String toorganizationedit(Model model,Integer id) {
 		
@@ -60,22 +67,27 @@ public class OrganizationController {
 		return "member-organization-edit";
 	}
 	
+	//部门新增
 	@RequestMapping("/organizationadd")
 	public String organizationadd(Organization organization) {
 		os.insertSelective(organization);
 		return "redirect:/organization/organizationquerypage";
 	}
 	
+	//跳转到部门新增页面
 	@RequestMapping("/toorganizationadd")
 	public String toorganizationadd() {
 		return "member-organization-add";
 	}
 	
+	//跳转到查询页面
 	@RequestMapping("/toorganization")
 	public String toorganization() {
 		return "member-organization";
 	}
 	
+	
+	//部门分页查询
 	 @RequestMapping("/organizationquerypage")
      @ResponseBody
      public  PageInfo<Organization> querypage(Integer currentPage,String name) {
