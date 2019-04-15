@@ -3,6 +3,8 @@ package com.accp.domain;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Employee {
     private Integer id;
 
@@ -17,7 +19,9 @@ public class Employee {
     private String phone;
 
     private String address;
+   
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date createtime;
 
     private String job;
