@@ -11,6 +11,35 @@
     <result column="Spare4" property="spare4" jdbcType="VARCHAR" />
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
+  
+    <select id="queryAll" resultMap="BaseResultMap">
+  	select * from Role 
+  	<where>
+  		<if test="name!=null">
+  			`NAME` like CONCAT('%',#{name},'%')
+  		</if>
+  		<if test="name!=null">
+  			or `details` like CONCAT('%',#{name},'%') 
+  		</if>
+  	</where>
+  </select>
+  
+  <delete id="deleteAll" >
+  		delete from Role
+  		<where>
+  			rid in(
+  			<foreach collection="array" item="rid"  separator=",">
+  				#{rid}
+  			</foreach>
+  			)
+  		</where>
+  </delete>
+  
+  
+  
+  
+  
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -102,7 +131,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.accp.domain.Role" >
+  <insert id="insert" parameterType="com.accp.domain.Role"   keyProperty="rid" useGeneratedKeys="true">
     insert into role (rid, name, details, 
       Spare1, Spare2, Spare3, 
       Spare4, Spare5)

@@ -13,6 +13,36 @@
     <result column="Spare4" property="spare4" jdbcType="VARCHAR" />
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
+  
+  <select id="queryAll" resultMap="BaseResultMap">
+  	select * from Plate
+  	<where>
+  		<if test="name!=null">
+  			`NAME` like CONCAT('%',#{name},'%') 
+  		</if>
+  		<if test="name!=null">
+  			or `ENAME` like CONCAT('%',#{name},'%') 
+  		</if>
+  	</where>
+  </select>
+  
+  <select id="queryPlate" resultMap="BaseResultMap">
+  		SELECT * FROM roleplate AS a JOIN plate AS b ON a.`pid` = b.`pid` WHERE a.`rid` = #{rid}
+  </select>
+  
+  <delete id="deleteAll" >
+  		delete from plate
+  		<where>
+  			pid in(
+  			<foreach collection="array" item="pid"  separator=",">
+  				#{pid}
+  			</foreach>
+  			)
+  		</where>
+  </delete>
+  
+  
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
