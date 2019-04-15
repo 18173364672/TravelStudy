@@ -22,46 +22,38 @@
         <div class="page-content">
           <div class="content">
             <!-- 右侧内容框架，更改从这里开始 -->
-            <form class="layui-form" th:action="@{/user/platetoAdd}" method="post">
+            <form class="layui-form" th:action="@{/user/roleupdate}" method="post">
                 <div class="layui-form-item">
                     <label for="" class="layui-form-label">
-                        <span class="x-red">*</span>板块名称
+                        <span class="x-red">*</span>角色名称
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="L_email" name="name" required="" lay-verify=""
+                    	<input type="hidden" th:value="${role1.rid}" name="rid">
+                        <input type="text" id="L_email" name="name" required="" lay-verify="" th:value="${role1.name}" 
                         autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label for="" class="layui-form-label">
-                        <span class="x-red">*</span>板块路径
+                        <span class="x-red">*</span>角色详情
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="L_username" name="url" required="" lay-verify=""
+                        <input type="text" id="L_username" name="details" required="" lay-verify="" th:value="${role1.details}" 
                         autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 
                 <div class="layui-form-item">
-                    <label for="" class="layui-form-label">
-                        <span class="x-red">*</span>板块英文名
+                    <label for="L_username" class="layui-form-label">
+                        <span class="x-red">*</span>选择功能
                     </label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="L_username" name="ename" required="" lay-verify=""
-                        autocomplete="off" class="layui-input">
-                    </div>
-                </div>
                     
-                   <div class="layui-form-item">
-                    <label for="" class="layui-form-label">
-                        <span class="x-red">*</span>选择上级
-                    </label>
-                    <div class="layui-inline">
-            <select style="position: absolute;top: 150px;" name="parentid">
-            	<option th:each="item,index : ${list}" th:value="${item.pid}" th:text="${item.name}"></option>
-            </select>
+                    <div class="layui-inline" style="margin-left:110px;margin-top:-27px;">
+				            <input type="checkbox" th:each="item,index : ${list}" th:title="${item.name}" th:value="${item.pid}"  name="pid" class="gcs-checkbox">
                     </div>
                 </div>
+                
+                
                 <div class="layui-form-item">
                     <label for="" class="layui-form-label">
                     </label>

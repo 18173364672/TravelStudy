@@ -1,11 +1,14 @@
-package com.accp.dao;
+package com.accp.qyj.service;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 
 import com.accp.domain.Role;
 import com.accp.domain.RoleExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import com.github.pagehelper.PageInfo;
 
-public interface RoleMapper {
+public interface RoleService {
     int countByExample(RoleExample example);
 
     int deleteByExample(RoleExample example);
@@ -31,4 +34,6 @@ public interface RoleMapper {
     List<Role> queryAll(@Param("name")String name);
     
     int deleteAll(Integer[] rid);
+    
+    public PageInfo<Role> queryByPage(Integer currentPage , Integer pageSize , String name);
 }

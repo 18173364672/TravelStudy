@@ -13,11 +13,13 @@ import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
+import com.accp.config.intercepors.LoginInterceptor;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
@@ -33,7 +35,7 @@ public class WebMvcConfigruation extends WebMvcConfigurationSupport {
 	protected void addResourceHandlers(ResourceHandlerRegistry registry) {
 		// registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
 		registry.addResourceHandler("/**").addResourceLocations("classpath:/static/")
-				.addResourceLocations("file:/Volumes/applesdcard/");
+				.addResourceLocations("file:/Volumes/applesdcard/");//过滤上传文件夹
 	}
 
 	/**
@@ -72,11 +74,15 @@ public class WebMvcConfigruation extends WebMvcConfigurationSupport {
 	/**
 	 * 添加拦截器
 	 */
-//	@Override
-//	protected void addInterceptors(InterceptorRegistry registry) {
-//		registry.addInterceptor(my).addPathPatterns("/**").excludePathPatterns("/js/**");
-//		super.addInterceptors(registry);
-//	}
+	
+	@Override
+	protected void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns("/user/tologin", "/user/login" ,"/user/register","/js/**","/css/**","/fonts/**","/images/**","/lib/**","/layui-v2.4.5/**");
+        super.addInterceptors(registry);
+	}
+
+	
+	
 
 	@Override
 	protected void configureMessageConverters(List<HttpMessageConverter<?>> converters) {

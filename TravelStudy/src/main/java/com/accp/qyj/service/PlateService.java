@@ -1,12 +1,15 @@
-package com.accp.dao;
+package com.accp.qyj.service;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 import com.accp.domain.Plate;
 import com.accp.domain.PlateExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 
-public interface PlateMapper {
-    int countByExample(PlateExample example);
+public interface PlateService {
+	int countByExample(PlateExample example);
 
     int deleteByExample(PlateExample example);
 
@@ -28,9 +31,11 @@ public interface PlateMapper {
 
     int updateByPrimaryKey(Plate record);
     
-    List<Plate> queryAll(@Param("name")String name);
+    List<Plate> queryAll(String name);
     
     int deleteAll(Integer[] pid);
+    
+    public PageInfo<Plate> queryByPage(Integer currentPage , Integer pageSize , String name);
     
     List<Plate> queryPlate(@Param("rid") Integer rid);
 }
