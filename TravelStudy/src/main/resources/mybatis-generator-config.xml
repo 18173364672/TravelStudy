@@ -59,5 +59,7 @@
 		<table domainObjectName="BasePay" tableName="BasePay"></table>
 		<table domainObjectName="Royalty" tableName="Royalty"></table>
 		<table domainObjectName="Customerss" tableName="customerss"></table>
+
+		
 	</context>
 </generatorConfiguration>

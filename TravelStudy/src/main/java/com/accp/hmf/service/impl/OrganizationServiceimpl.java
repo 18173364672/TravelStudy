@@ -8,8 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.accp.dao.EmployeeMapper;
 import com.accp.dao.OrganizationMapper;
+import com.accp.dao.OrganizationzwMapper;
 import com.accp.domain.Employee;
 import com.accp.domain.Organization;
+import com.accp.domain.Organizationzw;
 import com.accp.hmf.service.OrganizationService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -23,6 +25,8 @@ public class OrganizationServiceimpl implements OrganizationService{
 	OrganizationMapper om;
 	@Autowired
 	EmployeeMapper em;
+	@Autowired
+	OrganizationzwMapper oim;
 	
 	@Override
 	public PageInfo<Organization> querypage(Integer currentPage, Integer pageSize, String name) {
@@ -60,6 +64,24 @@ public class OrganizationServiceimpl implements OrganizationService{
 	public List<Employee> emquerybm(Integer id) {
 		// TODO Auto-generated method stub
 		return em.emquerybm(id);
+	}
+
+	@Override
+	public int insertSelective(Organizationzw organizationzw) {
+		// TODO Auto-generated method stub
+		return oim.insertSelective(organizationzw);
+	}
+
+	@Override
+	public List<Organizationzw> queryzw(Integer id) {
+		// TODO Auto-generated method stub
+		return oim.queryzw(id);
+	}
+
+	@Override
+	public int deletezw(Integer id) {
+		// TODO Auto-generated method stub
+		return oim.deletezw(id);
 	}
      
 	

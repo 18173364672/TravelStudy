@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.accp.domain.Employee;
 import com.accp.domain.Organization;
+import com.accp.domain.Organizationzw;
 import com.accp.hmf.service.OrganizationService;
 import com.github.pagehelper.PageInfo;
 
@@ -19,6 +20,14 @@ import com.github.pagehelper.PageInfo;
 public class OrganizationController {
 	@Autowired
 	OrganizationService os;
+	
+	
+	//删除职位
+	@RequestMapping("/organizationzwdelete")
+	public String organizationzwdelete(Integer id,Integer bmid) {
+		os.deletezw(id);
+		return "redirect:/organization/toorganizationedit?id="+bmid;
+	}
 	
 	
 	//查询部门对应员工
@@ -50,9 +59,20 @@ public class OrganizationController {
 		return "redirect:/organization/organizationquerypage";
 	}
 	
+	//部门修改
 	@RequestMapping("/organizationedit")
-	public String organizationedit(Organization organization) {
+	public String organizationedit(@RequestBody Organization organization) {
 		os.updateByPrimaryKey(organization);
+		for (Organizationzw oz : organization.getOlist()) {
+			os.deletezw(oz.getId());
+		}
+		
+		for (Organizationzw oz1 : organization.getOlist()) {
+			 oz1.setOrganizationid(organization.getId());
+			 os.insertSelective(oz1);
+		}
+	
+		
 		return "redirect:/organization/toorganizationedit?id="+organization.getId();
 		
 	}
@@ -62,6 +82,8 @@ public class OrganizationController {
 	public String toorganizationedit(Model model,Integer id) {
 		
 		Organization organization=os.queryOrname(id);
+		List<Organizationzw> list=os.queryzw(id);
+		model.addAttribute("list", list);
 		model.addAttribute("organization", organization);
 		
 		return "member-organization-edit";
@@ -69,8 +91,17 @@ public class OrganizationController {
 	
 	//部门新增
 	@RequestMapping("/organizationadd")
-	public String organizationadd(Organization organization) {
+	public String organizationadd(@RequestBody Organization organization) {
 		os.insertSelective(organization);
+		for (Organizationzw oz : organization.getOlist()) {
+			Organizationzw oz1=new Organizationzw();
+			oz1.setOrganizationid(organization.getId());
+			oz1.setNamess(oz.getNamess());
+			os.insertSelective(oz1);
+			
+		}
+		
+		
 		return "redirect:/organization/organizationquerypage";
 	}
 	

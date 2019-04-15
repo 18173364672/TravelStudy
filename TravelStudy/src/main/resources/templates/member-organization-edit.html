@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<title>研学旅行</title>
@@ -20,7 +20,7 @@
         <div class="page-content">
           <div class="content">
             <!-- 右侧内容框架，更改从这里开始 -->
-            <form class="layui-form" th:action="@{/organization/organizationedit}" method="post">
+         
               
                 <div class="layui-form-item">
                     <label for="L_username" class="layui-form-label">
@@ -37,25 +37,7 @@
                 </div>
                 
                   
-                  <div class="layui-form-item">
-                    <label for="L_username" class="layui-form-label">
-                        <span class="x-red">*</span>职位1
-                    </label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="L_address" name="spare1" required="" lay-verify="nikename"
-                        autocomplete="off" class="layui-input" th:value="${organization.spare1}">
-                    </div>
-                </div>
-                
-                <div class="layui-form-item">
-                    <label for="L_username" class="layui-form-label">
-                        <span class="x-red">*</span>职位2
-                    </label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="L_address" name="spare2" required="" lay-verify="nikename"
-                        autocomplete="off" class="layui-input" th:value="${organization.spare2}">
-                    </div>
-                </div>
+              
                 
                 
                  <div class="layui-form-item">
@@ -69,21 +51,55 @@
                 </div>
                 
                
+             
                 
+                <div class="cc">
+                  <div class="layui-form-item" th:each="l,state : ${list}">
+                    <label for="L_username" class="layui-form-label">
+                        <span class="x-red">*</span>职位
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_address" name="zw"  lay-verify="nikename"
+                        autocomplete="off" class="layui-input" th:value="${l.namess}">
+             
+                    </div>
+                    <button class="layui-btn layui-btn-danger" onclick="del(this)"><i class="layui-icon">&#xe640;</i>删除</button>
+                    <input type="hidden" th:value="${l.id}">
+                </div>
+                
+                 <div class="cc1">
+                 
+                 </div>
+                
+                
+                </div>
+                
+                
+                <div class="layui-form-item">
+                    <label for="L_username" class="layui-form-label">
+                        
+                    </label>
+                    <div class="layui-input-inline">
+                         <button class="layui-btn" onclick="tj1()"><i class="layui-icon">&#xe608;</i>添加</button>
+                    </div>
+                </div>
                 
                 
                
                 
+             
+        
+            <!-- 右侧内容框架，更改从这里结束 -->
+          </div>
+             
                 <div class="layui-form-item">
                     <label for="L_repass" class="layui-form-label">
                     </label>
                     <button  class="layui-btn" lay-filter="add" lay-submit="" onclick="submit_()">
-                        增加
+                        修改
                     </button>
                 </div>
-            </form>
-            <!-- 右侧内容框架，更改从这里结束 -->
-          </div>
+          
         </div>
         <!-- 右侧主体结束 -->
     </div>
@@ -92,11 +108,97 @@
 </body>
 <script type="text/javascript" th:inline="javascript">
 
+
+
    function submit_(){
+	   var modules=[];
+		  $("[name='zw']").each(function() {
+			
+				var model={};
+				model.id=$(this).parent().next().next().val();
+				model.namess=$(this).val();
+				
+				
+				modules.push(model);
+		
+		})
+		
+		var organization={};
+		  organization.id=$("[name='id']").val();
+		  organization.name=$("[name='name']").val();
+		  organization.context=$("[name='context']").val();
+		  organization.olist=modules;
+		  
+		  var organizationStr=JSON.stringify(organization);
+		  console.log(organizationStr);
+		  
+		   var urlpath = [[@{/organization/organizationedit}]];
+			  $.ajax({
+				  url:urlpath,
+				  data:organizationStr,
+				  type:"post",
+				  processData:false,
+				  contentType:"application/json",
+				  datatype:"text",
+				  success:function(result){
+					  alert("修改成功");
+					  
+					  
+				  }
+			  })
+	   
 	  var index=parent.layer.getFrameIndex(window.name);
 	  parent.layer.close(index)
 	  
 }
+   
+   function del1(object){
+	   $(object).parent().remove();
+   }
+   
+   function del(object){
+	     var id=$(object).next().val();
+	     var bmid=$("[name='id']").val();
+	     console.log(bmid);
+	        var urlpath = [[@{/organization/organizationzwdelete}]];
+
+	        $.ajax({
+	      		 url:urlpath,
+	      		 data:{
+	      			 id:id,
+	      			bmid:bmid
+	      		 },
+	      		 datatype:"json",
+	      		 success:function(){
+	      			 $(object).parent().remove();
+	      			 window.location.reload();
+	      		 }
+	      	})
+	     
+	     
+	  	
+	  	 
+	  	 
+	  	 
+	  }
+   
+   function tj1(){
+	   document.querySelector(".cc1").innerHTML+="<div class='layui-form-item'><label class='layui-form-label'><span class='x-red'>*</span>职位</label><div class='layui-input-inline'><input type='text' name='zw' class='layui-input'></div><button class='layui-btn layui-btn-danger' onclick='del1(this)'><i class='layui-icon'>&#xe640;</i>删除</button></div>";
+	   
+   }
+   
+   function tj(){
+    	
+
+    	
+    	
+	   	  document.querySelector(".cc").innerHTML+="<div class='layui-form-item'><label class='layui-form-label'><span class='x-red'>*</span>职位</label><div class='layui-input-inline'><input type='text' name='zw' class='layui-input'></div><button class='layui-btn layui-btn-danger' onclick='del(this)'><i class='layui-icon'>&#xe640;</i>删除</button></div>";
+	   	
+	   	
+	   }
+   
+   
+   
 
 
 </script>

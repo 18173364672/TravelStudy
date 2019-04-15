@@ -20,7 +20,7 @@
         <div class="page-content">
           <div class="content">
             <!-- 右侧内容框架，更改从这里开始 -->
-            <form class="layui-form" th:action="@{/organization/organizationadd}" method="post">
+           
               
                 <div class="layui-form-item">
                     <label for="L_username" class="layui-form-label">
@@ -32,28 +32,6 @@
                     </div>
                 </div>
                 
-                  
-                  <div class="layui-form-item">
-                    <label for="L_username" class="layui-form-label">
-                        <span class="x-red">*</span>职位1
-                    </label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="L_address" name="spare1" required="" lay-verify="nikename"
-                        autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                
-                <div class="layui-form-item">
-                    <label for="L_username" class="layui-form-label">
-                        <span class="x-red">*</span>职位2
-                    </label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="L_address" name="spare2" required="" lay-verify="nikename"
-                        autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                
-                
                  <div class="layui-form-item">
                     <label for="L_username" class="layui-form-label">
                         <span class="x-red">*</span>工作方向
@@ -64,22 +42,44 @@
                     </div>
                 </div>
                 
-               
+                  
+                 <div class="layui-form-item">
+                    <label for="L_username" class="layui-form-label">
+                        <span class="x-red">*</span>职位
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_address" name="zw"  lay-verify="nikename"
+                        autocomplete="off" class="layui-input">
+                    </div>
+                    <button class="layui-btn" onclick="tj()"><i class="layui-icon">&#xe608;</i>添加</button>
+                </div>
+                
+                <div class="cc">
+                
+                
+                
+                </div>
                 
                 
                 
                
                 
-                <div class="layui-form-item">
+                
+                
+               
+                
+               
+           
+            <!-- 右侧内容框架，更改从这里结束 -->
+          </div>
+              <div class="layui-form-item">
                     <label for="L_repass" class="layui-form-label">
                     </label>
-                    <button  class="layui-btn" lay-filter="add" lay-submit="" onclick="submit_()">
+                    <button  class="layui-btn" lay-filter="add" onclick="submit_()">
                         增加
                     </button>
                 </div>
-            </form>
-            <!-- 右侧内容框架，更改从这里结束 -->
-          </div>
+       
         </div>
         <!-- 右侧主体结束 -->
     </div>
@@ -89,11 +89,59 @@
 <script type="text/javascript" th:inline="javascript">
 
    function submit_(){
+	   var modules=[];
+		  $("[name='zw']").each(function() {
+			
+				var model={};
+				model.namess=$(this).val();
+				
+				
+				modules.push(model);
+		
+		})
+		
+		var organization={};
+		  
+		  organization.name=$("[name='name']").val();
+		  organization.context=$("[name='context']").val();
+		  organization.olist=modules;
+		  
+		  var organizationStr=JSON.stringify(organization);
+		  console.log(organizationStr);
+	   
+		   var urlpath = [[@{/organization/organizationadd}]];
+			  $.ajax({
+				  url:urlpath,
+				  data:organizationStr,
+				  type:"post",
+				  processData:false,
+				  contentType:"application/json",
+				  datatype:"text",
+				  success:function(result){
+					 
+					  console.log(result);
+				  }
+			  })
+	   
 	  var index=parent.layer.getFrameIndex(window.name);
 	  parent.layer.close(index)
 	  
 }
 
+   function tj(){
+     	
 
+     	
+     	
+   	  document.querySelector(".cc").innerHTML+="<div class='layui-form-item'><label class='layui-form-label'><span class='x-red'>*</span>职位</label><div class='layui-input-inline'><input type='text' name='zw' class='layui-input'></div><button class='layui-btn layui-btn-danger' onclick='del(this)'><i class='layui-icon'>&#xe640;</i>删除</button></div>";
+   	
+   	
+   }
+  
+  function del(object){
+  	 $(object).parent().remove();
+  }
+  
+   
 </script>
 </html>

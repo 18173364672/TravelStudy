@@ -198,10 +198,15 @@ $(function(){
 			 },
 			 datatype:"json",
 			 success:function(res){
+				 console.log(res);
 				 if(res!=null){
 					 $("#zw").find("option").remove();
-					 $("#zw").append("<option>" + res.spare1 + "</option>");
-					 $("#zw").append("<option>" + res.spare2 + "</option>");
+					for(var i=0;i<res.length;i++){
+						 $("#zw").append("<option>" + res[i].namess + "</option>");
+						
+					}
+					
+					
 					 form.render('select');
 				 }
              
