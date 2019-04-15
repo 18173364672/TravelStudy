@@ -329,22 +329,22 @@
         <div class="page-content">
           <div class="content">
             <!-- 右侧内容框架，更改从这里开始 -->
-            <form class="layui-form xbs" action="" >
+            <form class="layui-form xbs" action="queryByName" method="post">
                 <div class="layui-form-pane" style="text-align: center;">
                   <div class="layui-form-item" style="display: inline-block;">
               
                     
                     <div class="layui-input-inline">
-                      <input type="text" name="username"  placeholder="请输入活动名" autocomplete="off" class="layui-input">
+                      <input type="text" name="name"  placeholder="请输入活动名" autocomplete="off" class="layui-input">
                     </div>
                     <div class="layui-input-inline" style="width:80px">
-                        <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+                        <button class="layui-btn"  lay-submit="" lay-filter="sreach"  onclick="submit_()"><i class="layui-icon">&#xe615;</i></button>
                     </div>
                   </div>
                 </div> 
             </form>
             <xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button>
-            	<button class="layui-btn" onclick="member_add('添加活动','manage-activity-add.html','600','500')"><i class="layui-icon">&#xe608;</i>添加活动</button>
+            	<button class="layui-btn" th:onclick="member_add('添加活动','insert','600','500')"><i class="layui-icon">&#xe608;</i>添加活动</button>
             	<span class="x-right" style="line-height:40px">共有数据：88 条</span></xblock>
             <table class="layui-table">
                 <thead>
@@ -385,15 +385,13 @@
                         <td>
                             <input type="checkbox" value="1" name="s1">
                         </td>
-                        <td  th:text="${item.id}">
+                        <td  th:text="${item.id}" name="acid">
                             
                         </td>
                         
                        
-                        <td th:text="${item.aName}"> 
-                        	<u style="cursor:pointer" onclick="member_show('张三','manage-activity-jieshao.html','1000','400','400')">
-                        	
-                        	</u>
+                        <td th:text="${item.aName}" th:onclick="member_select('活动介绍','queryByid',[[${item.id}]],'1200','510')"> 
+
                         </td>
                         
                         
@@ -410,7 +408,7 @@
                         </td>
                         
                           <td >
-                          	<a title="查看" href="javascript:;" onclick="member_edit('查看项目','manage-activity-show.html','6','1200','510')"
+                          	<a title="查看" href="javascript:;" th:onclick="member_edit('查看项目','queryProject','6','1200','510')"
                             class="ml-5" style="text-decoration:none">
                 查看
                             </a>
@@ -421,7 +419,7 @@
      
                         <td class="td-manage">
                            
-                            <a title="编辑" href="javascript:;" onclick="member_edit('活动编辑','manage-activity-up.html','4','','510')"
+                            <a title="编辑" href="javascript:;" th:onclick="member_edit('活动编辑','updateQuery',[[${item.id}]],'','510')"
                             class="ml-5" style="text-decoration:none">
                                 <i class="layui-icon">&#xe642;</i>
                             </a>
@@ -481,6 +479,11 @@
     <!-- 页面动态效果 -->
     <script>
 
+    function shouId(){
+    	var id = $("[name=acid]").html();
+    	location.href="queryByid?id="+id;
+    }
+    
         layui.use(['laydate'], function(){
           laydate = layui.laydate;//日期插件
 
@@ -508,7 +511,7 @@
             }
           };
           
-          document.getElementById('LAY_demorange_s').onclick = function(){
+/*           document.getElementById('LAY_demorange_s').onclick = function(){
             start.elem = this;
             laydate(start);
           }
@@ -516,7 +519,7 @@
             end.elem = this
             laydate(end);
           }
-          
+           */
         });
 
         //批量删除提交
@@ -558,12 +561,12 @@
         }
         // 用户-编辑
         function member_edit (title,url,id,w,h) {
-            x_admin_show(title,url,w,h); 
+            x_admin_show(title,url+"?id="+id,w,h); 
         }
         
         //查看项目
         function member_select (title,url,id,w,h) {
-            x_admin_show(title,url,w,h); 
+        	x_admin_show(title,url+"?id="+id,w,h); 
         }
         
         /*密码-修改*/
@@ -575,7 +578,8 @@
             layer.confirm('确认要删除吗？',function(index){
                 //发异步删除数据
                 $(obj).parents("tr").remove();
-                layer.msg('已删除!',{icon:1,time:1000});
+                layer.msg('已删除!',{icon:"id="+id,time:1000});
+                alert(id);
             });
         }
         /*开始活动*/
@@ -607,6 +611,11 @@
        function member_ck(url,id,w,h){
             x_admin_show(url,w,h);
         }
+          
+       function submit_(){
+       	var index = parent.layer.getFrameIndex(window.name);
+       	parent.layer.close(index);
+       }
          
         </script>
         <script>

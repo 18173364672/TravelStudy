@@ -27,4 +27,6 @@ public interface ActivityMapper {
     int updateByPrimaryKeySelective(Activity record);
 
     int updateByPrimaryKey(Activity record);
+   
+    List<Activity> selectByName(@Param("name") String name);
 }
