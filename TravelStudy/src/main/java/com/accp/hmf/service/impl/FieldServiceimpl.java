@@ -59,6 +59,22 @@ public class FieldServiceimpl implements FieldService{
 		return fm.insertSelective(record);
 	}
 
+
+	
+
+	@Override
+	public int updateByPrimaryKeySelective(Field record) {
+		// TODO Auto-generated method stub
+		return fm.updateByPrimaryKeySelective(record);
+	}
+
+
+	@Override
+	public int deleteByPrimaryKey(Integer id) {
+		// TODO Auto-generated method stub
+		return fm.deleteByPrimaryKey(id);
+	}
+
 	
 
 }

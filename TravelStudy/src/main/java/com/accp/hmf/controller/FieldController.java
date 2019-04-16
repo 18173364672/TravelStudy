@@ -19,6 +19,33 @@ public class FieldController {
 	   @Autowired
 	   FieldService fs;
 	   
+	   @RequestMapping("/fielddeletes")
+	   public String fielddeletes(@RequestBody Field field) {
+		   for (Field f : field.getMlist()) {
+			fs.deleteByPrimaryKey(f.getId());
+		}
+		   
+		   return "redirect:/field/tofieldquerypage";
+	   }
+	   
+	     @RequestMapping("/fielddelete")
+	     public String fielddelete(Integer id) {
+	    	 
+	    	 fs.deleteByPrimaryKey(id);
+	    	 
+	    	 return "redirect:/field/tofieldquerypage";
+	     }
+	   
+	     @RequestMapping("/updatestate")
+	     public String updatestate(Integer id,Integer occupy) {
+	    	 Field field=new Field();
+	    	 field.setId(id);
+	    	 field.setOccupy(occupy);
+	    	 fs.updateByPrimaryKeySelective(field);
+	    	 
+	    	 return "redirect:/field/tofieldquerypage";
+	     }
+	   
 	     @RequestMapping("/fieldadd")
 	     public String fieldadd(@RequestBody Fieldtype fieldtype) {
 	    	 fs.insertSelective(fieldtype);

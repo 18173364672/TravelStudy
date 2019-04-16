@@ -421,16 +421,18 @@
                                <a style="text-decoration:none" onclick="member_stop(this)" href="javascript:;" title="停用">
                                 <i class="layui-icon">&#xe601;</i>
                             </a>
+                            <div style="display: none">{{l.id}}</div>
                              
                             <a title="编辑" href="javascript:;" onclick="member_edit('场地修改','member-project-fieldedit.html','4','','510')"
                             class="ml-5" style="text-decoration:none">
                                 <i class="layui-icon">&#xe642;</i>
                             </a>
                             
-                            <a title="删除" href="javascript:;" onclick="member_del(this,'1')" 
+                            <a title="删除" href="javascript:;" onclick="member_del(this)" 
                             style="text-decoration:none">
                                 <i class="layui-icon">&#xe640;</i>
                             </a>
+                            <div style="display: none">{{l.id}}</div>
                         </td>
                         
                             <td class="td-manage" v-else>
@@ -438,16 +440,17 @@
                               <a style="text-decoration:none" onclick="member_start(this)" href="javascript:;" title="停用">
                                 <i class="layui-icon">&#xe62f;</i>
                             </a>
-                             
+                              <div style="display: none">{{l.id}}</div>
                             <a title="编辑" href="javascript:;" onclick="member_edit('场地修改','member-project-fieldedit.html','4','','510')"
                             class="ml-5" style="text-decoration:none">
                                 <i class="layui-icon">&#xe642;</i>
                             </a>
                             
-                            <a title="删除" href="javascript:;" onclick="member_del(this,'1')" 
+                            <a title="删除" href="javascript:;" onclick="member_del(this)" 
                             style="text-decoration:none">
                                 <i class="layui-icon">&#xe640;</i>
                             </a>
+                            <div style="display: none">{{l.id}}</div>
                         </td>
                      
                     </tr>
@@ -535,12 +538,7 @@
         });
 
         //批量删除提交
-         function delAll () {
-            layer.confirm('确认要删除吗？',function(index){
-                //捉到所有被选中的，发异步进行删除
-                layer.msg('删除成功', {icon: 1});
-            });
-         }
+      
          /*用户-添加*/
         function member_add(title,url,w,h){
             x_admin_show(title,url,w,h);
@@ -551,26 +549,10 @@
         }
 
          /*用户-停用*/
-        function member_stop(obj,id){
-            layer.confirm('确认要占用吗？',function(index){
-                //发异步把用户状态进行更改
-                $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this,id)" href="javascript:;" title="启用"><i class="layui-icon">&#xe62f;</i></a>');
-                $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-disabled layui-btn-mini">已占用</span>');
-                $(obj).remove();
-                layer.msg('已占用!',{icon: 5,time:1000});
-            });
-        }
+       
 
         /*用户-启用*/
-        function member_start(obj,id){
-            layer.confirm('确认要取消占用吗？',function(index){
-                //发异步把用户状态进行更改
-                $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="layui-icon">&#xe601;</i></a>');
-                $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-normal layui-btn-mini">未占用</span>');
-                $(obj).remove();
-                layer.msg('已取消!',{icon: 6,time:1000});
-            });
-        }
+        
         // 用户-编辑
         function member_edit (title,url,id,w,h) {
             x_admin_show(title,url,w,h); 
@@ -580,18 +562,139 @@
             x_admin_show(title,url,w,h);  
         }
         /*用户-删除*/
-        function member_del(obj,id){
-            layer.confirm('确认要删除吗？',function(index){
-                //发异步删除数据
-                $(obj).parents("tr").remove();
-                layer.msg('已删除!',{icon:1,time:1000});
-            });
-        }
+       
         </script>
     
 </body>
 <script type="text/javascript" th:src="@{/js/vue.js}"></script>
 <script type="text/javascript" th:inline="javascript">
+
+function delAll () {
+    layer.confirm('确认要删除吗？',function(index){
+        //捉到所有被选中的，发异步进行删除
+         var modules=[];
+		  $("[name='s1']").each(function() {
+			if(this.checked){
+				var model={};
+				model.id=parseInt($(this).parent().next().text());
+				
+				
+				modules.push(model);
+			}
+		})
+		
+		var field={};
+		 
+		  field.mlist=modules;
+		  
+		  var fieldStr=JSON.stringify(field);
+		  console.log(fieldStr);
+        
+		  var urlpath = [[@{/field/fielddeletes}]];
+		  $.ajax({
+			  url:urlpath,
+			  data:fieldStr,
+			  type:"post",
+			  processData:false,
+			  contentType:"application/json",
+			  datatype:"text",
+			  success:function(result){
+				  window.location.reload();
+				  console.log(result);
+			  }
+		  })
+        
+		  layer.msg('删除成功', {icon: 1});
+    });
+ }
+
+function member_del(obj){
+	var id=$(obj).next().text();
+	
+    layer.confirm('确认要删除吗？',function(index){
+        //发异步删除数据
+        $(obj).parents("tr").remove();
+        layer.msg('已删除!',{icon:1,time:1000});
+        var urlpath = [[@{/field/fielddelete}]];
+
+        $.ajax({
+      		 url:urlpath,
+      		 data:{
+      			 id:id
+      			 
+      		 },
+      		 datatype:"json",
+      		 success:function(){
+      			 
+      			
+      			 window.location.reload();
+      		 }
+      	})
+    });
+}
+
+function member_start(obj){
+	var id=$(obj).next().text();
+	var occupy=0;
+	
+
+    layer.confirm('确认要取消占用吗？',function(index){
+        //发异步把用户状态进行更改
+        $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="layui-icon">&#xe601;</i></a>');
+        $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-normal layui-btn-mini">未占用</span>');
+        $(obj).remove();
+        layer.msg('已取消!',{icon: 6,time:1000});
+        
+        var urlpath = [[@{/field/updatestate}]];
+
+        $.ajax({
+      		 url:urlpath,
+      		 data:{
+      			 id:id,
+      			 occupy:occupy
+      		 },
+      		 datatype:"json",
+      		 success:function(res){
+      			 
+      			 console.log(res);
+      			 window.location.reload();
+      		 }
+      	})
+    });
+}
+
+
+function member_stop(obj){
+	var id=$(obj).next().text();
+	var occupy=1;
+	
+	
+    layer.confirm('确认要占用吗？',function(index){
+        //发异步把用户状态进行更改
+        $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this,id)" href="javascript:;" title="启用"><i class="layui-icon">&#xe62f;</i></a>');
+        $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-disabled layui-btn-mini">已占用</span>');
+        $(obj).remove();
+        layer.msg('已占用!',{icon: 5,time:1000});
+        
+        var urlpath = [[@{/field/updatestate}]];
+
+        $.ajax({
+      		 url:urlpath,
+      		 data:{
+      			 id:id,
+      			 occupy:occupy
+      		 },
+      		 datatype:"json",
+      		 success:function(res){
+      			 
+      			 console.log(res);
+      			 window.location.reload();
+      		 }
+      	})
+        
+    });
+}
+
 
 var v=new Vue({
 	  el:".content",

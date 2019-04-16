@@ -14,5 +14,11 @@ public interface FieldService {
 	 int insertSelective(Fieldtype record);
 	 
 	 int insertSelective(Field record);
+	 
+	 int updateByPrimaryKeySelective(Field record);
+	 
+	 
+	 int deleteByPrimaryKey(Integer id);
+	
 	
 }
