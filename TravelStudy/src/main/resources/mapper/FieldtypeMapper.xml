@@ -10,6 +10,12 @@
     <result column="Spare4" property="spare4" jdbcType="VARCHAR" />
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
+  
+  <select id="queryfname" resultMap="BaseResultMap">
+     select * from fieldtype where id=#{id}
+  
+  </select>
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -109,7 +115,7 @@
       #{spare2,jdbcType=VARCHAR}, #{spare3,jdbcType=VARCHAR}, #{spare4,jdbcType=VARCHAR}, 
       #{spare5,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.accp.domain.Fieldtype" >
+  <insert id="insertSelective" parameterType="com.accp.domain.Fieldtype" useGeneratedKeys="true"  keyProperty="id">
     insert into fieldtype
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

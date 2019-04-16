@@ -1,5 +1,6 @@
 package com.accp.dao;
 
+import com.accp.domain.Field;
 import com.accp.domain.Fieldtype;
 import com.accp.domain.FieldtypeExample;
 import java.util.List;
@@ -27,4 +28,6 @@ public interface FieldtypeMapper {
     int updateByPrimaryKeySelective(Fieldtype record);
 
     int updateByPrimaryKey(Fieldtype record);
+    
+    Fieldtype queryfname(Integer id);
 }

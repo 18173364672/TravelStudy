@@ -84,31 +84,31 @@
 		
 		})
 		
-		var organization={};
+		var fieldtype={};
 		  
-//		  organization.name=$("[name='name']").val();
+		  fieldtype.name=$("[name='name']").val();
 //		  organization.context=$("[name='context']").val();
-		  organization.olist=modules;
+		  fieldtype.flist=modules;
 		  
-		  var organizationStr=JSON.stringify(organization);
-		  console.log(organizationStr);
+		  var fieldtypeStr=JSON.stringify(fieldtype);
+		  console.log(fieldtypeStr);
+		  var urlpath = [[@{/field/fieldadd}]];
+		  
+			  $.ajax({
+				  url:urlpath,
+				  data:fieldtypeStr,
+				  type:"post",
+				  processData:false,
+				  contentType:"application/json",
+				  datatype:"text",
+				  success:function(){
+					 alert("新增成功");
+					  
+				  }
+			  })
 	   
-		  
-//			  $.ajax({
-//				  url:urlpath,
-//				  data:organizationStr,
-//				  type:"post",
-//				  processData:false,
-//				  contentType:"application/json",
-//				  datatype:"text",
-//				  success:function(result){
-//					 
-//					  console.log(result);
-//				  }
-//			  })
-//	   
-//	  var index=parent.layer.getFrameIndex(window.name);
-//	  parent.layer.close(index)
+	  var index=parent.layer.getFrameIndex(window.name);
+	  parent.layer.close(index)
 
       
 

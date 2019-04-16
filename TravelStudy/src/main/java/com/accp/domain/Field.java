@@ -20,8 +20,18 @@ public class Field {
     private String spare4;
 
     private String spare5;
+    
+    private String ftname;
 
-    public Integer getId() {
+    public String getFtname() {
+		return ftname;
+	}
+
+	public void setFtname(String ftname) {
+		this.ftname = ftname;
+	}
+
+	public Integer getId() {
         return id;
     }
 

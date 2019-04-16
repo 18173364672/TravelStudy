@@ -13,6 +13,17 @@
     <result column="Spare4" property="spare4" jdbcType="VARCHAR" />
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
+  
+    <select id="fquery" resultMap="BaseResultMap">
+     select * from field
+     <where>
+       <if test="name!=null">
+        name like CONCAT('%',#{name},'%')
+       </if>
+       
+     </where>
+  </select>
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

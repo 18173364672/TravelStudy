@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>研学旅行</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" th:href="@{/css/font.css}">
 	<link rel="stylesheet" th:href="@{/css/xadmin.css}">
     <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
@@ -14,7 +14,6 @@
     <script th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
    
     <script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
-<!--    <script type="text/javascript" src="static/js/jquery-1.8.3.js" ></script>-->
 </head>
   <script>
   	   
@@ -335,15 +334,17 @@
         <!-- 左侧菜单结束 -->
         <!-- 右侧主体开始 -->
         <div class="page-content">
+       
           <div class="content">
             <!-- 右侧内容框架，更改从这里开始 -->
-            <form class="layui-form xbs" action="" >
+          
+            <form class="layui-form xbs">
                 <div class="layui-form-pane" style="text-align: center;">
                   <div class="layui-form-item" style="display: inline-block;">
               
                     
                     <div class="layui-input-inline">
-                      <input type="text" name="username"  placeholder="请输入场地类型" autocomplete="off" class="layui-input">
+                      <input type="text" name="username"  placeholder="请输入场地类型" autocomplete="off" class="layui-input" v-model="name">
                     </div>
                     <div class="layui-input-inline" style="width:80px">
                         
@@ -351,7 +352,7 @@
                   </div>
                 </div> 
             </form>
-            <xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button><button class="layui-btn" onclick="member_add('添加新场地','member-project-fieldadd.html','600','500')"><i class="layui-icon">&#xe608;</i>添加新场地</button><span class="x-right" style="line-height:40px">共有数据：88 条</span></xblock>
+            <xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button><button class="layui-btn" onclick="member_add('添加新场地','/field/tofieldadd','600','500')"><i class="layui-icon">&#xe608;</i>添加新场地</button><span class="x-right" style="line-height:40px">共有数据：{{pageInfo.total}} 条</span></xblock>
             <table class="layui-table">
                 <thead>
                     <tr>
@@ -382,35 +383,45 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr v-for="l in pageInfo.list">
                         <td>
-                            <input type="checkbox" value="1" name="s1">
+                            <input type="checkbox" name="s1">
                         </td>
                         <td>
-                            1
+                            {{l.id}}
                         </td>
                         <td>
                            
-                               射击
+                              {{l.ftname}}
                           
                         </td>
                         <td >
-                          射击1号场地
+                          {{l.name}}
                         </td>
                     
                         
                          <td >
-                           20
+                           {{l.num}}
                         </td>
                         
-           
-                                        <td class="td-status">
+                         
+                                        <td class="td-status" v-if="l.occupy==0">
                                 <span class="layui-btn layui-btn-normal layui-btn-mini">
                                 未占用
                             </span>
                         </td> 
-                        <td class="td-manage">
-                           
+                        
+                                                         <td class="td-status" v-else>
+                                <span class="layui-btn layui-btn-disabled layui-btn-mini">
+                                已占用
+                            </span>
+                        </td> 
+                        <td class="td-manage" v-if="l.occupy==0">
+                             
+                               <a style="text-decoration:none" onclick="member_stop(this)" href="javascript:;" title="停用">
+                                <i class="layui-icon">&#xe601;</i>
+                            </a>
+                             
                             <a title="编辑" href="javascript:;" onclick="member_edit('场地修改','member-project-fieldedit.html','4','','510')"
                             class="ml-5" style="text-decoration:none">
                                 <i class="layui-icon">&#xe642;</i>
@@ -421,6 +432,24 @@
                                 <i class="layui-icon">&#xe640;</i>
                             </a>
                         </td>
+                        
+                            <td class="td-manage" v-else>
+                             
+                              <a style="text-decoration:none" onclick="member_start(this)" href="javascript:;" title="停用">
+                                <i class="layui-icon">&#xe62f;</i>
+                            </a>
+                             
+                            <a title="编辑" href="javascript:;" onclick="member_edit('场地修改','member-project-fieldedit.html','4','','510')"
+                            class="ml-5" style="text-decoration:none">
+                                <i class="layui-icon">&#xe642;</i>
+                            </a>
+                            
+                            <a title="删除" href="javascript:;" onclick="member_del(this,'1')" 
+                            style="text-decoration:none">
+                                <i class="layui-icon">&#xe640;</i>
+                            </a>
+                        </td>
+                     
                     </tr>
                    
            
@@ -430,13 +459,18 @@
                 </tbody>
             </table>
                 <xblock>
-                	 <button class="layui-btn layui-btn-warm">上一页</button>
-                        <button class="layui-btn layui-btn-danger">下一页</button>
+                	 <button class="layui-btn layui-btn-warm" v-on:click="prePage()">上一页</button>
+                        <button class="layui-btn layui-btn-danger" v-on:click="nextPage()">下一页</button>
                 </xblock>
             	
             <!-- 右侧内容框架，更改从这里结束 -->
+            </div>
+            
           </div>
-        </div>
+          
+      
+          </div>
+        
         <!-- 右侧主体结束 -->
     </div>
     <!-- 中部结束 -->
@@ -496,15 +530,7 @@
               start.max = datas; //结束日选好后，重置开始日的最大日期
             }
           };
-          
-          document.getElementById('LAY_demorange_s').onclick = function(){
-            start.elem = this;
-            laydate(start);
-          }
-          document.getElementById('LAY_demorange_e').onclick = function(){
-            end.elem = this
-            laydate(end);
-          }
+       
           
         });
 
@@ -526,23 +552,23 @@
 
          /*用户-停用*/
         function member_stop(obj,id){
-            layer.confirm('确认要停用吗？',function(index){
+            layer.confirm('确认要占用吗？',function(index){
                 //发异步把用户状态进行更改
                 $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this,id)" href="javascript:;" title="启用"><i class="layui-icon">&#xe62f;</i></a>');
-                $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-disabled layui-btn-mini">已停用</span>');
+                $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-disabled layui-btn-mini">已占用</span>');
                 $(obj).remove();
-                layer.msg('已停用!',{icon: 5,time:1000});
+                layer.msg('已占用!',{icon: 5,time:1000});
             });
         }
 
         /*用户-启用*/
         function member_start(obj,id){
-            layer.confirm('确认要启用吗？',function(index){
+            layer.confirm('确认要取消占用吗？',function(index){
                 //发异步把用户状态进行更改
                 $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="layui-icon">&#xe601;</i></a>');
-                $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span>');
+                $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-normal layui-btn-mini">未占用</span>');
                 $(obj).remove();
-                layer.msg('已启用!',{icon: 6,time:1000});
+                layer.msg('已取消!',{icon: 6,time:1000});
             });
         }
         // 用户-编辑
@@ -562,16 +588,84 @@
             });
         }
         </script>
-        <script>
-        //百度统计可去掉
-        var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-          var s = document.getElementsByTagName("script")[0]; 
-          s.parentNode.insertBefore(hm, s);
-        })();
-        </script>
+    
 </body>
+<script type="text/javascript" th:src="@{/js/vue.js}"></script>
+<script type="text/javascript" th:inline="javascript">
 
+var v=new Vue({
+	  el:".content",
+	  data:{
+		  pageInfo:"pageInfo",
+		  name:""
+	  },
+	  methods:{
+		  getGoodsHref:function(val){
+			    return 'queryd?id='+val
+			},
+			deleteHref:function(val){
+			    return 'delete?id='+val
+			},prePage:function(){
+	    		if(this.pageInfo.prePage==0){
+	    			alert("到顶了");
+	    			return;
+	    		}
+	    		getmethod(this.pageInfo.prePage);
+	    	},
+	    	nextPage:function(){
+	    		if(this.pageInfo.prePage==this.pageInfo.pages){
+	    			alert("到底了");
+	    		}
+	    		getmethod(this.pageInfo.nextPage);
+	    		
+	    	}
+
+	  },
+	  watch:{
+		  name:function(){
+			console.log(v.name);
+			getmethod(1,v.name)
+		},
+	  }
+});
+
+
+	
+	var urlpath = [[@{/field/fieldquerypage}]];
+
+	  $.ajax({
+			 url:urlpath,
+			 data:{},
+			 type:"post",
+			 datatype:"json",
+			 success:function(data){
+				 v.pageInfo=data;
+				 console.log(data);
+			 }
+		});
+
+
+		
+	
+	
+	
+	 function getmethod(page,name){
+	   $.ajax({
+		  	 url:urlpath,
+		  	 data:{
+		  		currentPage:page,
+		  		
+		  		name:name
+		  	 },
+		  	 datatype:"json",
+		  	 success:function(data){
+		  		v.pageInfo=data;
+		  		
+		  	 }
+		   })
+ }
+
+
+
+</script>
 </html>
