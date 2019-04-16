@@ -42,6 +42,15 @@
   </delete>
   
   
+  	<select id="queryPlateByUserId" resultMap="BaseResultMap">
+		SELECT p.* FROM `plate` AS p
+		LEFT JOIN `roleplate` AS rp ON rp.`pid` = p.`pid`
+		LEFT JOIN `role` AS r ON rp.`rid` = r.rid
+		LEFT JOIN `userrole` AS ur ON ur.`rid` = r.`rid`
+		WHERE ur.`uid`=1
+	</select>
+  
+  
   
   <sql id="Example_Where_Clause" >
     <where >

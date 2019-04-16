@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<title>研学旅行后台管理系统</title>
+	<title>研学旅行</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" th:href="@{/css/font.css}">
@@ -47,7 +47,7 @@
 <body>
     <!-- 顶部开始 -->
     <div class="container">
-        <div class="logo"><a href="./index.html">研学旅行后台管理系统</a></div>
+        <div class="logo"><a href="./index.html">研学旅行</a></div>
         <div class="open-nav"><i class="iconfont">&#xe699;</i></div>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
@@ -58,7 +58,6 @@
               <dd><a href="./login.html">退出</a></dd>
             </dl>
           </li>
-          <li class="layui-nav-item"><a href="/">前台首页</a></li>
         </ul>
     </div>
     <!-- 顶部结束 -->
@@ -289,8 +288,8 @@
                         <i class="iconfont nav_right">&#xe697;</i>
                     </a>
                     <ul class="sub-menu opened">
-                        <li>
-                            <a href="manage-user.html">
+                       <li>
+                            <a th:href="@{/user/queryuser}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 用户管理
                             </a>
@@ -298,14 +297,14 @@
                         
                
                         
-                                     <li class="current">
-                            <a th:href="@{/user/manage-plate}">
+                       	<li class="current">
+                            <a th:href="@{/user/plate}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 模块管理
                             </a>
                         </li>
-                                                              <li>
-                            <a th:href="@{/user/manage-role}">
+                        <li>
+                            <a th:href="@{/user/role}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 角色管理
                             </a>
@@ -339,7 +338,7 @@
             	
             			<button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe608;</i>批量处理</button><button class="layui-btn"  onclick="member_add('添加板块','/user/plateAdd','600','500')"><i class="layui-icon">&#xe608;</i>添加</button>
 
-            	<span class="x-right" style="line-height:40px">共有数据：88 条</span></xblock>
+            	<span class="x-right" style="line-height:40px" th:text="'共有数据：'+${page.total}+' 条'"></span></xblock>
             
             	
             <table class="layui-table">
@@ -416,7 +415,7 @@
     <!-- 中部结束 -->
     <!-- 底部开始 -->
     <div class="footer">
-        <div class="copyright">Copyright ©2019 研学旅行</div>  
+        <div class="copyright">Copyright ©2019 研学旅行</div>
     </div>
     <!-- 底部结束 -->
     <!-- 背景切换开始 -->

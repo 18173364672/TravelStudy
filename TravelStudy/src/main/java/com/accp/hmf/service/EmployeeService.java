@@ -12,7 +12,7 @@ public interface EmployeeService {
 	//员工登陆
     public Employee employeelogin(Employee employee);
     
-  //员工信息分页
+    //员工信息分页
     public PageInfo<Employee> querypage(Integer currentPage,Integer pageSize,String createtime,String employeename);
    
     //所有部门
@@ -42,6 +42,5 @@ public interface EmployeeService {
     
     //查询员工所有提成
     List<Royalty> querypay(Integer id);
-    
     
 }

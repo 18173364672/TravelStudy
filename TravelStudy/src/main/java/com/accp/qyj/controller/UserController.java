@@ -1,5 +1,6 @@
 package com.accp.qyj.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,12 +15,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.accp.domain.Employee;
+import com.accp.domain.Organization;
 import com.accp.domain.Plate;
 import com.accp.domain.Role;
 import com.accp.domain.Roleplate;
+import com.accp.hmf.service.EmployeeService;
 import com.accp.qyj.service.PlateService;
 import com.accp.qyj.service.RoleService;
 import com.accp.qyj.service.RoleplateService;
+import com.alibaba.fastjson.JSON;
+import com.github.pagehelper.PageInfo;
 
 @Controller
 @RequestMapping("/user")
@@ -35,6 +40,9 @@ public class UserController {
 	@Autowired
 	RoleplateService roleplateservice;
 	
+	@Autowired
+    EmployeeService es;
+	
 	
 	@RequestMapping("/tologin")
 	public String tologin() {
@@ -42,12 +50,9 @@ public class UserController {
 	}
 	
 	@RequestMapping("/login")
-	public String login(String username , String password , HttpServletRequest req) {
-		if(username.equals("111") && password.equals("222")) {
-			Employee e = new Employee();
-			e.setEmail(username);
-			e.setPassword(password);
-			req.getSession().setAttribute("user", e);
+	public String login(Employee e, HttpServletRequest req) {
+		if(es.employeelogin(e) != null) {
+			req.getSession().setAttribute("user", es.employeelogin(e));
 			return "redirect:/user/index";
 		}
 		return "redirect:/user/tologin";
@@ -57,6 +62,45 @@ public class UserController {
 	public String index() {
 		return "index";
 	}
+	
+	
+	
+	@RequestMapping("/usertoadd")
+	public String usertoadd(Model model) {
+		List<Organization> list=es.selectByExample(null);
+  	  	model.addAttribute("list", list);
+		return "manage-user-add";
+	}
+	
+	@RequestMapping("/useradd")
+	public String useradd(Employee employee) {
+		employee.setCreatetime(new Date());
+  	  employee.setState(1);
+  	 es.insertSelective(employee);
+  	 Organization organization=es.queryOrname(Integer.parseInt(employee.getSpare1()));
+  	 int count=organization.getCount()+1;
+  	 organization.setCount(count);
+  	 es.updateByPrimaryKey(organization);
+		return "redirect:/user/queryuser";
+	}
+	
+	
+	@RequestMapping("/usertoupdate")
+	public String usertoupdate(Model model,Integer id) {
+		Employee employee=es.emqueryd(id);
+  	  	List<Organization> list=es.selectByExample(null);
+  	  	model.addAttribute("list", list);
+  	  	model.addAttribute("employee", employee);
+		return "manage-user-update";
+	}
+	
+	@RequestMapping("/userupdate")
+	public String userupdate(Employee employee) {
+		es.updateByPrimaryKey(employee);
+		return "redirect:/user/queryuser";
+	}
+	
+	
 	
 	@RequestMapping("/plate")
 	public String plate(Model model , String name , Integer currentPage , Integer pageSize) {
@@ -176,6 +220,7 @@ public class UserController {
 		Roleplate rp = new Roleplate();
 		rp.setRid(role.getRid());
 		roleplateservice.deleteByRid(role.getRid());
+		
 		for (int i = 0; i < role.getPid().length; i++) {
 			rp.setPid(role.getPid()[i]);
 			roleplateservice.insert(rp);
@@ -191,4 +236,42 @@ public class UserController {
 	}
 	
 	
+	@RequestMapping("/queryuser")
+	public String queryuser() {
+		return "manage-user";
+	}
+	
+    //员工信息分页
+    @RequestMapping("/user")
+    @ResponseBody
+    public  PageInfo<Employee> querypage(Integer currentPage,String createtime,String employeename) {
+   
+		   if(currentPage==null) {
+			   currentPage = 1;
+		   }
+		   PageInfo<Employee> pageInfo = es.querypage(currentPage,5,createtime,employeename);
+//			model.addAttribute("page",pageInfo);
+			
+			return pageInfo;
+    }
+    
+    //员工修改
+    @RequestMapping("/employeeedit")
+    public String employeeedit(Employee employee) {
+  	    es.updateByPrimaryKey(employee);
+  	
+  	  return "redirect:/user/queryuser";
+    }
+    
+    //跳转到员工修改页面
+    @RequestMapping("/toemployeeedit")
+    public String toemployeeedit(Model model,Integer id) {
+  	  Employee employee=es.emqueryd(id);
+  	  List<Organization> list=es.selectByExample(null);
+  	  model.addAttribute("list", list);
+  	  model.addAttribute("employee", employee);
+  	  return "member-employee-edit";
+    }
+    
+    
 }

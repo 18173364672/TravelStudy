@@ -108,4 +108,10 @@ public class RoleServiceImpl implements RoleService{
 		return page.toPageInfo();
 	}
 
+	@Override
+	public List<Role> queryName(Integer rid) {
+		// TODO Auto-generated method stub
+		return m.queryName(rid);
+	}
+
 }

@@ -3,6 +3,9 @@ package com.accp.dao;
 import com.accp.domain.Plate;
 import com.accp.domain.PlateExample;
 import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Param;
 
 public interface PlateMapper {
@@ -33,4 +36,7 @@ public interface PlateMapper {
     int deleteAll(Integer[] pid);
     
     List<Plate> queryPlate(@Param("rid") Integer rid);
+    
+    @MapKey("url")
+	public Map<String, Plate> queryPlateByUserId(@Param("uid") Integer uid);
 }

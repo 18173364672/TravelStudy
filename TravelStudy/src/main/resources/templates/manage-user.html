@@ -1,25 +1,34 @@
 <!doctype html>
-<html lang="en">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>后台登录-X-admin1.1</title>
+    <title>研学旅行</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="static/css/font.css">
-	<link rel="stylesheet" href="static/css/xadmin.css">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" th:href="@{/css/font.css}">
+	<link rel="stylesheet" th:href="@{/css/xadmin.css}">
     <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
+    
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
-    <script src="static/lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="static/js/xadmin.js"></script>
-    
+    <script th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
+   
+    <script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
+<!--    <script type="text/javascript" src="static/js/jquery-1.8.3.js" ></script>-->
 </head>
-
- <script>
-  	$(function(){
-  		  
-  		  $("#checkall").click(function(){
-  		  	if(this.checked==true){
+  <script>
+  	   
+		
+  	   
+  	   
+  	   
+	
+	$(function(){
+	  
+		  $("#checkall").click(function(){
+	  
+	  	 
+	  	if(this.checked==true){
 	  		   $("[name='s1']").each(function(){
 	  		   	this.checked=true;
 	  		   	
@@ -32,21 +41,23 @@
 	  		   	
 	  		   })
 		  	}
-  		  	
-  		  })
-  		
-  		 
-  		
-  		
-  		
-  	})
-  	
+
+        
+	  	
+	  })
+	
+	 
+		
+
+		
+	})
+	
   	
   </script>
 <body>
     <!-- 顶部开始 -->
     <div class="container">
-        <div class="logo"><a href="./index.html">X-ADMIN V1.1</a></div>
+        <div class="logo"><a href="./index.html">研学旅行</a></div>
         <div class="open-nav"><i class="iconfont">&#xe699;</i></div>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
@@ -57,7 +68,7 @@
               <dd><a href="./login.html">退出</a></dd>
             </dl>
           </li>
-          <li class="layui-nav-item"><a href="/">前台首页</a></li>
+         
         </ul>
     </div>
     <!-- 顶部结束 -->
@@ -111,13 +122,12 @@
                                客户资源管理
                             </a>
                         </li>
-                        
                         <li>
                             <a href="member-feedback.html">
                                 <i class="iconfont">&#xe6a7;</i>
                                   客户反馈
                             </a>
-                        </li>  
+                        </li>   
                                                                                             <li>
                             <a href="member-usergroup.html">
                                 <i class="iconfont">&#xe6a7;</i>
@@ -134,14 +144,14 @@
                     </a>
                     <ul class="sub-menu" >
                           <li>
-                            <a href="member-employee.html">
+                            <a th:href="@{/employee/toemployeequerypage}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 员工信息
                             </a>
                         </li>
                         
                          <li >
-                            <a href="member-organization.html">
+                            <a th:href="@{/organization/toorganization}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 组织机构
                             </a>
@@ -172,7 +182,7 @@
                         
           
                         
-                                     <li>
+                       	<li>
                             <a href="member-project-feedback.html">
                                 <i class="iconfont">&#xe6a7;</i>
                                 项目反馈
@@ -288,7 +298,7 @@
                     </a>
                     <ul class="sub-menu opened">
                         <li class="current">
-                            <a href="manage-user.html">
+                            <a th:href="@{/user/queryuser}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 用户管理
                             </a>
@@ -297,13 +307,13 @@
                
                         
                                      <li>
-                            <a href="manage-plate.html">
+                            <a th:href="@{/user/plate}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 模块管理
                             </a>
                         </li>
-                                                              <li>
-                            <a href="manage-role.html">
+                		<li>
+                            <a th:href="@{/user/role}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 角色管理
                             </a>
@@ -316,385 +326,158 @@
         </div>
         <!-- 左侧菜单结束 -->
         <!-- 右侧主体开始 -->
+       
         <div class="page-content">
           <div class="content">
             <!-- 右侧内容框架，更改从这里开始 -->
-            <form class="layui-form xbs" action="" >
+             <div id="s">
+           
                 <div class="layui-form-pane" style="text-align: center;">
                   <div class="layui-form-item" style="display: inline-block;">
+                    <label class="layui-form-label xbs768">日期范围</label>
+                    <div class="layui-input-inline xbs768">
+                      <input class="layui-input" placeholder="入职时间" id="LAY_demorange_s" v-model="createtime" name="createtime">
+                    </div>
                    
                     <div class="layui-input-inline">
-                      <input type="text" name="username"  placeholder="请输入项目名" autocomplete="off" class="layui-input">
+                      <input type="text"  placeholder="请输入用户名" autocomplete="off" class="layui-input" v-model="name" name="name">
                     </div>
                     <div class="layui-input-inline" style="width:80px">
-                        <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+                        <button class="layui-btn"  name="sea"><i class="layui-icon">&#xe615;</i></button>
                     </div>
                   </div>
                 </div> 
-            </form>
-            <xblock>
-            	
-            	
-            			<button class="layui-btn layui-btn-danger"><i class="layui-icon">&#xe608;</i>批量处理</button><button class="layui-btn" onclick="member_add('添加员工','manage-role-add.html','600','500')"><i class="layui-icon">&#xe608;</i>添加</button>
-            			
-                       
+        
+            
+            
+            
+            <xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button><button class="layui-btn" onclick="member_add('添加员工','/user/usertoadd','600','500')"><i class="layui-icon">&#xe608;</i>添加</button><span class="x-right" style="line-height:40px">共有数据：{{pageInfo.total}}条</span></xblock>
            
-							
-            
-            	<span class="x-right" style="line-height:40px">共有数据：88 条</span></xblock>
-            
-            	
             <table class="layui-table">
                 <thead>
                     <tr>
                         <th>
                             <input type="checkbox" id="checkall" value="">
                         </th>
-                      
                         <th>
-                           id
-                        </th>
-                        <th>
-                           用户名
+                            ID
                         </th>
                         <th>
-                        密码
+                            员工姓名
                         </th>
-                                       <th>
-                       性别
+                        <th>
+                            性别
                         </th>
-                        
-                                       <th>
-                        邮箱
+                        <th>
+                            手机
                         </th>
+                        <th>
+                            邮箱
+                        </th>
+                        <th>
+                            地址
+                        </th>
+                        <th>
+                            加入时间
+                        </th>
+                        <th>
+                            角色名称
+                        </th>
+                        <th>
                         
-                        
-                        
-         
-                                                        <th>
-                      角色
-                        </th> 
-                        
-                                                                                <th>
-                      处理状态
-                        </th> 
-                                                                                <th>
-                      操作
-                        </th> 
+                            操作
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr v-for="l in pageInfo.list">
                         <td>
-                            <input type="checkbox" value="1" name="s1">
+                            <input type="checkbox" name="s1">
+                            <div style="display: none">{{l.id}}</div>
+                            <div style="display: none">{{l.spare1}}</div>
                         </td>
                         <td>
-                           1
+                            {{l.id}}
                         </td>
                         <td>
-                            扈狗币
+                            
+                                {{l.employeename}}
+                            </u>
                         </td>
                         <td >
-                           123456
-                        </td>
-                        <td class="">
-                       妖
-                        </td>
-                        
-                        <td class="">
-                         470759662@qq.com
-                        </td>
-        				<td class="">
-                         最高管理员
-                        </td>
-                      
-                        
-                         
-                   
-                        
-                                        <td class="td-status">
-                                <span class="layui-btn layui-btn-normal layui-btn-mini">
-                                待处理
-                            </span>
-                        </td>
-                        <td class="td-manage">
-                            <a style="text-decoration:none" onclick="member_stop(this,'10001')" href="javascript:;" title="停用">
-                                <i class="layui-icon">&#xe601;</i>
-                            </a>
-                            
-                            
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td>
-                            <input type="checkbox" value="1" name="s1">
-                        </td>
-                        <td>
-                           1
-                        </td>
-                        <td>
-                            扈狗币
+                            {{l.sex}}
                         </td>
                         <td >
-                           123456
-                        </td>
-                        <td class="">
-                       妖
-                        </td>
-                        
-                        <td class="">
-                         470759662@qq.com
-                        </td>
-        				<td class="">
-                         最高管理员
-                        </td>
-                      
-                        
-                         
-                   
-                        
-                                        <td class="td-status">
-                                <span class="layui-btn layui-btn-normal layui-btn-mini">
-                                待处理
-                            </span>
-                        </td>
-                        <td class="td-manage">
-                            <a style="text-decoration:none" onclick="member_stop(this,'10001')" href="javascript:;" title="停用">
-                                <i class="layui-icon">&#xe601;</i>
-                            </a>
-                            
-                            
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td>
-                            <input type="checkbox" value="1" name="s1">
-                        </td>
-                        <td>
-                           1
-                        </td>
-                        <td>
-                            扈狗币
+                           {{l.phone}}
                         </td>
                         <td >
-                           123456
-                        </td>
-                        <td class="">
-                       妖
-                        </td>
-                        
-                        <td class="">
-                         470759662@qq.com
-                        </td>
-        				<td class="">
-                         最高管理员
-                        </td>
-                      
-                        
-                         
-                   
-                        
-                                        <td class="td-status">
-                                <span class="layui-btn layui-btn-normal layui-btn-mini">
-                                待处理
-                            </span>
-                        </td>
-                        <td class="td-manage">
-                            <a style="text-decoration:none" onclick="member_stop(this,'10001')" href="javascript:;" title="停用">
-                                <i class="layui-icon">&#xe601;</i>
-                            </a>
-                            
-                            
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td>
-                            <input type="checkbox" value="1" name="s1">
-                        </td>
-                        <td>
-                           1
-                        </td>
-                        <td>
-                            扈狗币
+                            {{l.email}}
                         </td>
                         <td >
-                           123456
+                            {{l.address}}
                         </td>
-                        <td class="">
-                       妖
+                        <td>
+                            {{l.createtime}}
                         </td>
                         
-                        <td class="">
-                         470759662@qq.com
-                        </td>
-        				<td class="">
-                         最高管理员
+                        <td>
+                        系统管理员
                         </td>
                       
-                        
-                         
-                   
-                        
-                                        <td class="td-status">
-                                <span class="layui-btn layui-btn-normal layui-btn-mini">
-                                待处理
-                            </span>
-                        </td>
-                        <td class="td-manage">
-                            <a style="text-decoration:none" onclick="member_stop(this,'10001')" href="javascript:;" title="停用">
-                                <i class="layui-icon">&#xe601;</i>
+                        <td class="td-manage" v-if="l.state==1">
+                        <div style="display:none;">
+                        {{l.id}}
+                        </div>
+                            <a title="编辑" href="javascript:;" onclick="member_edit('员工编辑','/user/usertoupdate','4','','510',this)"
+                            class="ml-5" style="text-decoration:none">
+                                <i class="layui-icon">&#xe642;</i>
                             </a>
-                            
-                            
+<!--                             <div style="display: none">{{l.id}}</div> -->
+<!--                               <a style="text-decoration:none"  onclick="member_edit1('修改密码','/employee/employeeeditpass','4','','510',this)" -->
+<!--                             href="javascript:;" title="修改密码"> -->
+<!--                                 <i class="layui-icon">&#xe631;</i> -->
+<!--                             </a> -->
+                            <div style="display:none;">{{l.id}}</div>
+                            <a title="删除" href="javascript:;" onclick="member_del(this)" 
+                            style="text-decoration:none">
+                                <i class="layui-icon">&#xe640;</i>
+                            </a>
+                            <div style="display: none">{{l.id}}</div>
+                        </td>
+                        
+                          <td class="td-manage" v-else>
+                            <div style="display:none;">
+                        {{l.id}}
+                        </div>
+                            <a style="text-decoration:none" onclick="member_start(this)" href="javascript:;" title="停用">
+                                <i class="layui-icon">&#xe62f;</i>
+                            </a>
+                            <a title="编辑" href="javascript:;" onclick="member_edit('员工编辑','/employee/toemployeeedit','4','','510',this)"
+                            class="ml-5" style="text-decoration:none">
+                                <i class="layui-icon">&#xe642;</i>
+                            </a>
+                            <div style="display: none">{{l.id}}</div>
+                            <a style="text-decoration:none"  onclick="member_edit1('修改密码','/employee/employeeeditpass','4','','510',this)"
+                            href="javascript:;" title="修改密码">
+                                <i class="layui-icon">&#xe631;</i>
+                            </a>
+                            <div style="display:none;">{{l.id}}</div>
+                            <a title="删除" href="javascript:;" onclick="member_del(this)" 
+                            style="text-decoration:none">
+                                <i class="layui-icon">&#xe640;</i>
+                            </a>
+                            <div style="display: none">{{l.id}}</div>
                         </td>
                     </tr>
-                    
-                    <tr>
-                        <td>
-                            <input type="checkbox" value="1" name="s1">
-                        </td>
-                        <td>
-                           1
-                        </td>
-                        <td>
-                            扈狗币
-                        </td>
-                        <td >
-                           123456
-                        </td>
-                        <td class="">
-                       妖
-                        </td>
-                        
-                        <td class="">
-                         470759662@qq.com
-                        </td>
-        				<td class="">
-                         最高管理员
-                        </td>
-                      
-                        
-                         
-                   
-                        
-                                        <td class="td-status">
-                                <span class="layui-btn layui-btn-normal layui-btn-mini">
-                                待处理
-                            </span>
-                        </td>
-                        <td class="td-manage">
-                            <a style="text-decoration:none" onclick="member_stop(this,'10001')" href="javascript:;" title="停用">
-                                <i class="layui-icon">&#xe601;</i>
-                            </a>
-                            
-                            
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td>
-                            <input type="checkbox" value="1" name="s1">
-                        </td>
-                        <td>
-                           1
-                        </td>
-                        <td>
-                            扈狗币
-                        </td>
-                        <td >
-                           123456
-                        </td>
-                        <td class="">
-                       妖
-                        </td>
-                        
-                        <td class="">
-                         470759662@qq.com
-                        </td>
-        				<td class="">
-                         最高管理员
-                        </td>
-                      
-                        
-                         
-                   
-                        
-                                        <td class="td-status">
-                                <span class="layui-btn layui-btn-normal layui-btn-mini">
-                                待处理
-                            </span>
-                        </td>
-                        <td class="td-manage">
-                            <a style="text-decoration:none" onclick="member_stop(this,'10001')" href="javascript:;" title="停用">
-                                <i class="layui-icon">&#xe601;</i>
-                            </a>
-                            
-                            
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td>
-                            <input type="checkbox" value="1" name="s1">
-                        </td>
-                        <td>
-                           1
-                        </td>
-                        <td>
-                            扈狗币
-                        </td>
-                        <td >
-                           123456
-                        </td>
-                        <td class="">
-                       妖
-                        </td>
-                        
-                        <td class="">
-                         470759662@qq.com
-                        </td>
-        				<td class="">
-                         最高管理员
-                        </td>
-                      
-                        
-                         
-                   
-                        
-                                        <td class="td-status">
-                                <span class="layui-btn layui-btn-normal layui-btn-mini">
-                                待处理
-                            </span>
-                        </td>
-                        <td class="td-manage">
-                            <a style="text-decoration:none" onclick="member_stop(this,'10001')" href="javascript:;" title="停用">
-                                <i class="layui-icon">&#xe601;</i>
-                            </a>
-                            
-                            
-                        </td>
-                    </tr>
-                    
-                            
-                    
-                    
                     
                 </tbody>
             </table>
-             <xblock>
-            	
-            	
-            			
-            			
-                        <button class="layui-btn layui-btn-warm">上一页</button>
-                        <button class="layui-btn layui-btn-danger">下一页</button>
-           
-							
-            
-            	</xblock><!-- 右侧内容框架，更改从这里结束 -->
+                <xblock>
+                	 <span v-on:click="prePage()"><button class="layui-btn layui-btn-warm" >上一页</button></span>
+                        <button class="layui-btn layui-btn-danger" v-on:click="nextPage()">下一页</button>
+                </xblock>
+            	</div>
+            <!-- 右侧内容框架，更改从这里结束 -->
           </div>
         </div>
         <!-- 右侧主体结束 -->
@@ -702,24 +485,24 @@
     <!-- 中部结束 -->
     <!-- 底部开始 -->
     <div class="footer">
-        <div class="copyright">Copyright ©2019 研学旅行</div>  
+        <div class="copyright">Copyright ©2019 研学旅行管理系统</div>  
     </div>
     <!-- 底部结束 -->
     <!-- 背景切换开始 -->
     <div class="bg-changer">
         <div class="swiper-container changer-list">
             <div class="swiper-wrapper">
-                 <div class="swiper-slide"><img class="item" src="static/images/a.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/b.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/c.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/d.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/e.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/f.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/g.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/h.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/i.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/j.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/k.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/a.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/b.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/c.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/d.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/e.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/f.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/g.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/h.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/i.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/j.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/k.jpg}" alt=""></div>
                 <div class="swiper-slide"><span class="reset">初始化</span></div>
             </div>
         </div>
@@ -729,9 +512,7 @@
     <!-- 背景切换结束 -->
     <!-- 页面动态效果 -->
     <script>
-         
-         
-         
+
         layui.use(['laydate'], function(){
           laydate = layui.laydate;//日期插件
 
@@ -769,60 +550,26 @@
           }
           
         });
-           
-               /*用户-停用*/
-        function member_stop(obj,id){
-            layer.confirm('确认处理吗？',function(index){
-                //发异步把用户状态进行更改
-                $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this,id)" href="javascript:;" title="启用"><i class="layui-icon">&#xe62f;</i></a>');
-                $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-disabled layui-btn-mini">已处理</span>');
-                $(obj).remove();
-                layer.msg('已处理!',{icon: 5,time:1000});
-            });
-        }
 
-        /*用户-启用*/
-        function member_start(obj,id){
-            layer.confirm('确认要取消处理吗？',function(index){
-                //发异步把用户状态进行更改
-                $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="layui-icon">&#xe601;</i></a>');
-                $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-normal layui-btn-mini">待处理</span>');
-                $(obj).remove();
-                layer.msg('待处理!',{icon: 6,time:1000});
-            });
-        }
-           
-           
         //批量删除提交
-             function delAll () {
-                layer.confirm('确认要删除吗？',function(index){
-                    //捉到所有被选中的，发异步进行删除
-                    layer.msg('删除成功', {icon: 1});
-                });
-             }
-            // 等级-增加
-            
-            function level_add (title,url,id,w,h) {
-                x_admin_show(title,url,w,h); 
-            }
-            // 等级-编辑
-            function level_edit (title,url,id,w,h) {
-                x_admin_show(title,url,w,h); 
-            }
-           
-            /*等级-删除*/
-            function level_del(obj,id){
-                layer.confirm('确认要删除吗？',function(index){
-                    //发异步删除数据
-                    $(obj).parents("tr").remove();
-                    layer.msg('已删除!',{icon:1,time:1000});
-                });
-            }
-            
-            function level_add_vip (title,url,id,w,h) {
-                x_admin_show(title,url,w,h); 
-            }
-            
+        
+         /*用户-添加*/
+        function member_add(title,url,w,h){
+            x_admin_show(title,url,w,h);
+        }
+        /*用户-查看*/
+        
+
+         /*用户-停用*/
+       
+        /*用户-启用*/
+        
+        // 用户-编辑
+       
+        /*密码-修改*/
+       
+        /*用户-删除*/
+       
         </script>
         <script>
         //百度统计可去掉
@@ -835,4 +582,315 @@
         })();
         </script>
 </body>
+<script type="text/javascript" th:src="@{/js/vue.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+   
+function member_show(title,url,w,h,obj){
+	var ids=$(obj).next().text();
+	
+	var url1="?id="+ids;
+	
+    x_admin_show(title,url+url1,w,h);
+}
+   
+function member_edit1 (title,url,id,w,h,obj) {
+	var ids=$(obj).next().text();
+	
+	var url1="?id="+ids;
+
+    x_admin_show(title,url+url1,w,h); 
+}
+   
+function member_edit (title,url,id,w,h,obj) {
+	var ids=$(obj).next().text();
+	
+	var url1="?id="+ids;
+
+    x_admin_show(title,url+url1,w,h); 
+}
+   
+   
+function member_del(obj){
+	var ids=$(obj).next().text();
+	
+	var spare1=parseInt($(obj).next().next().text());
+	
+	
+	
+    layer.confirm('确认要删除吗？',function(index){
+        //发异步删除数据
+       
+      
+        var urlpath = [[@{/employee/deleteemployees}]];
+
+        $.ajax({
+      		 url:urlpath,
+      		 data:{
+      			 id:ids,
+      			spare1:spare1
+      		 },
+      		 datatype:"json",
+      		 success:function(){
+      			 $(obj).parents("tr").remove();
+      			 layer.msg('已删除！',{icon:1,time:1000});
+      		 }
+      	})
+    });
+}
+   
+   
+   function delAll () {
+	   var modules=[];
+		  $("[name='s1']").each(function() {
+			if(this.checked){
+				var model={};
+				model.id=$(this).next().text();
+				model.spare1=$(this).next().next().text();
+				
+				modules.push(model);
+			}
+		})
+		
+		var employee={};
+		 
+		  employee.mlist=modules;
+		  
+		  var employeeStr=JSON.stringify(employee);
+		  console.log(employeeStr);
+	   
+	   
+    layer.confirm('确认要删除吗？',function(index){
+        //捉到所有被选中的，发异步进行删除
+        layer.msg('删除成功', {icon: 1});
+        var urlpath = [[@{/employee/deleteemployee}]];
+		  $.ajax({
+			  url:urlpath,
+			  data:employeeStr,
+			  type:"post",
+			  processData:false,
+			  contentType:"application/json",
+			  datatype:"text",
+			  success:function(result){
+				  window.location.reload();
+				  console.log(result);
+			  }
+		  })
+        
+        
+    });
+ }
+   
+   
+   
+function member_stop(obj){
+	 var ids = parseInt($(obj).prev().text());
+	 var states=0;
+   layer.confirm('确认离职吗？',function(index){
+       //发异步把用户状态进行更改
+        
+       $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this,id)" href="javascript:;" title="启用"><i class="layui-icon">&#xe62f;</i></a>');
+       $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-disabled layui-btn-mini">已离职</span>');
+       $(obj).remove();
+       layer.msg('已停用!',{icon: 5,time:1000});
+       
+       var urlpath = [[@{/employee/updatestate}]];
+
+      $.ajax({
+    		 url:urlpath,
+    		 data:{
+    			 id:ids,
+    			 state:states
+    		 },
+    		 datatype:"json",
+    		 success:function(res){
+    			 
+    			 console.log(res);
+    			 window.location.reload();
+    		 }
+    	})
+   });
+}
+
+function member_start(obj){
+	 var ids = parseInt($(obj).prev().text());
+	 var states=1;
+   layer.confirm('确认要启用吗？',function(index){
+       //发异步把用户状态进行更改
+       $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="layui-icon">&#xe601;</i></a>');
+       $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-normal layui-btn-mini">在职</span>');
+       $(obj).remove();
+       layer.msg('已启用!',{icon: 6,time:1000});
+       
+       var urlpath = [[@{/employee/updatestate}]];
+
+       $.ajax({
+     		 url:urlpath,
+     		 data:{
+     			 id:ids,
+     			 state:states
+     		 },
+     		 datatype:"json",
+     		 success:function(res){
+     			 
+     			 console.log(res);
+     			 window.location.reload();
+     		 }
+     	})
+       
+   });
+}
+
+
+var v=new Vue({
+	  el:"#s",
+	  data:{
+		  pageInfo:"pageInfo",
+		  name:""
+	  },
+	  methods:{
+		  getGoodsHref:function(val){
+			    return 'queryd?id='+val
+			},
+			deleteHref:function(val){
+			    return 'delete?id='+val
+			},prePage:function(){
+	    		if(this.pageInfo.prePage==0){
+	    			alert("到顶了");
+	    			return;
+	    		}
+	    		getmethod(this.pageInfo.prePage);
+	    	},
+	    	nextPage:function(){
+	    		if(this.pageInfo.prePage==this.pageInfo.pages){
+	    			alert("到底了");
+	    		}
+	    		getmethod(this.pageInfo.nextPage);
+	    		
+	    	}
+
+	  },
+	  watch:{
+		  name:function(){
+  			console.log(v.name);
+  			getmethod(1,v.name)
+  		},
+  		createtime:function(){
+  			
+  		}
+		  
+	  }
+
+	  
+});
+   
+   var urlpath = [[@{/user/user}]];
+
+  $.ajax({
+		 url:urlpath,
+		 data:{},
+		 datatype:"json",
+		 success:function(data){
+			 v.pageInfo=data;
+			 console.log(v.list);
+		 }
+	})
+	
+	
+	
+	 function getmethod(page,name){
+	   $.ajax({
+		  	 url:urlpath,
+		  	 data:{
+		  		currentPage:page,
+		  		
+		  		employeename:name
+		  	 },
+		  	 datatype:"json",
+		  	 success:function(data){
+		  		v.pageInfo=data;
+		  		
+		  	 }
+		   })
+   }
+	
+	
+	$(function(){
+		
+		$("[name='sea']").click(function(){
+			var createtime=$("[name='createtime']").val();
+			var employeename=$("[name='name']").val();
+			
+			 $.ajax({
+				 url:urlpath,
+				 data:{
+					 createtime:createtime,
+					 employeename:employeename
+				 },
+				 datatype:"json",
+				 success:function(data){
+					 v.pageInfo=data;
+					 console.log(v.list);
+				 }
+			})
+			
+			
+		})
+		
+		
+// 		  var uid=0;
+// 		  $("li").click(function(){
+// 			  uid=$(this).attr("uid");
+// 			  console.log(uid);
+			  
+			  
+// 		  })
+		  
+// 		  $("[name='sends']").click(function(){
+// 			  console.log(555);
+// 			  if(uid==0){
+// 				  return false;
+// 			  }
+			  
+// 			  var message=$("[name='message']").val();
+// 			  console.log(message);
+// 			  $.ajax({
+// 				  url:"/send",
+// 				  data:{
+// 					  msg:message,
+// 					  tarId:uid
+// 				  }
+// 			  })
+// 		  })
+		  
+		
+		
+// 		 $("[type='button']").click(function(){
+// 		    	var name=$("[name='name']").val();
+// 		    	var cid=$("[name='cid']").val();
+// 		    	var student={};
+// 		    	student.name=name;
+// 		    	student.cid=cid;
+// 		    	var studentStr=JSON.stringify(student);
+// 		    	console.log(studentStr);
+		    	
+// 	 	    	 $.ajax({
+// 	 				  url:"insert",
+// 	 				  data:studentStr,
+// 	 				  type:"post",
+// 	 				  processData:false,
+// 	 				  contentType:"application/json",
+// 	 				  datatype:"text",
+// 	 				  success:function(result){
+// 	 					  alert("新增成功");
+// 	 					  window.location.href="/queryall";
+						  
+// 	 				  }
+// 	 			  })
+// 		    })
+		
+		
+	})
+
+</script>
+
 </html>

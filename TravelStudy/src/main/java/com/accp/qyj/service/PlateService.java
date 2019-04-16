@@ -1,7 +1,9 @@
 package com.accp.qyj.service;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Param;
 import com.accp.domain.Plate;
 import com.accp.domain.PlateExample;
@@ -38,4 +40,6 @@ public interface PlateService {
     public PageInfo<Plate> queryByPage(Integer currentPage , Integer pageSize , String name);
     
     List<Plate> queryPlate(@Param("rid") Integer rid);
+    
+	public Map<String, Plate> queryPlateByUserId(Integer uid);
 }

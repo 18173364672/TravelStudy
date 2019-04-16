@@ -36,4 +36,6 @@ public interface RoleService {
     int deleteAll(Integer[] rid);
     
     public PageInfo<Role> queryByPage(Integer currentPage , Integer pageSize , String name);
+    
+    List<Role> queryName(@Param("rid") Integer rid);
 }

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<title>后台登录-X-admin1.1</title>
+	<title>研学旅行</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" th:href="@{/css/font.css}">
@@ -22,7 +22,7 @@
         <div class="page-content">
           <div class="content">
             <!-- 右侧内容框架，更改从这里开始 -->
-            <form class="layui-form" th:action="@{/employee/employeeadd}"  method="post">
+            <form class="layui-form" th:action="@{/user/useradd}"  method="post">
                 <div class="layui-form-item">
                     <label for="L_email" class="layui-form-label">
                         <span class="x-red">*</span>邮箱
@@ -78,52 +78,7 @@
                         </div>
                     </div>
                 </div>
-                
-                    
-                   <div class="layui-form-item">
-                    <label for="L_username" class="layui-form-label">
-                        <span class="x-red">*</span>部门
-                    </label>
-                    <div class="layui-inline">
-                      <select name="spare1" lay-filter="test"> 
-            	
-            	<option th:each="l,state : ${list}" th:text="${l.name}" th:value="${l.id}"></option>
-            	
-            </select>
-                    </div>
-                </div>
-                
-                
-                
-                    
-                   <div class="layui-form-item" id="s">
-                    <label for="L_username" class="layui-form-label">
-                        <span class="x-red">*</span>职位
-                    </label>
-                    
-                    <div class="layui-inline">
-                      <select id="zw" name="job">
-            	
-            	
-            	
-            </select>
-            
-                    </div>
-                </div>
-                
-                
-                <div class="layui-form-item">
-                    <label for="L_username" class="layui-form-label">
-                        <span class="x-red">*</span>工资（/月）
-                    </label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="L_phone" name="pay" required="" lay-verify="nikename"
-                        autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                 
-                
-                
+
                 <div class="layui-form-item">
                     <label for="L_pass" class="layui-form-label">
                         <span class="x-red">*</span>密码
@@ -177,7 +132,6 @@
       function submit_(){
     	  var index=parent.layer.getFrameIndex(window.name);
     	  parent.layer.close(index)
-    	  
       }
       
 
@@ -185,7 +139,6 @@
   	var urlpath = [[@{/employee/queryzw}]];
      
 $(function(){
-	
 	 layui.use('form', function(){
 		  var form = layui.form;
 		 form.on('select(test)', function(data){
@@ -211,13 +164,5 @@ $(function(){
 				});  
 			});
 })
-   
-		      
-
-	
-
-	
-      
-
 </script>
 </html>

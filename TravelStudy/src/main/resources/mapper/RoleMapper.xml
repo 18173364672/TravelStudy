@@ -36,7 +36,9 @@
   </delete>
   
   
-  
+  <select id="queryName" resultMap="BaseResultMap">
+  		SELECT b.* FROM userrole AS a JOIN role AS b ON a.`rid` = b.`rid` WHERE a.`rid` = #{rid}
+  </select>
   
   
   

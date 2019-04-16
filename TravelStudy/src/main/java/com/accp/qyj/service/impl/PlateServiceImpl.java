@@ -1,6 +1,7 @@
 package com.accp.qyj.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -115,5 +116,10 @@ public class PlateServiceImpl implements PlateService{
 		return m.queryPlate(rid);
 	}
 
+	@Override
+	public Map<String, Plate> queryPlateByUserId(Integer uid){
+		System.out.println("进来了");
+		return m.queryPlateByUserId(uid);
+	}
 
 }

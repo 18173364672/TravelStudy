@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<title>研学旅行后台管理系统</title>
+	<title>研学旅行</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" th:href="@{/css/font.css}">
@@ -17,7 +17,7 @@
 <body>
     <!-- 顶部开始 -->
     <div class="container">
-        <div class="logo"><a href="./index.html">研学旅行后台管理系统</a></div>
+        <div class="logo"><a href="./index.html">研学旅行</a></div>
         <div class="open-nav"><i class="iconfont">&#xe699;</i></div>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
@@ -257,7 +257,7 @@
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a th:href="manage-user.html">
+                            <a th:href="@{/user/queryuser}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 用户管理
                             </a>

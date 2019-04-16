@@ -31,4 +31,6 @@ public interface RoleMapper {
     List<Role> queryAll(@Param("name")String name);
     
     int deleteAll(Integer[] rid);
+    
+    List<Role> queryName(@Param("rid") Integer rid);
 }
