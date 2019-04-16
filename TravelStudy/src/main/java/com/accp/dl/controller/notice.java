@@ -86,7 +86,6 @@ public class notice {
 	 */
 	@RequestMapping("/employee")
 	public String employee() {
-
 		return "member-employee-kiss-employee";
 	}
 	
@@ -178,14 +177,77 @@ public class notice {
 		return "redirect:member";
 	}
 	
-	
+	/**
+	 * 按员工发送信息
+	 * @param title
+	 * @param content
+	 * @param uid
+	 * @param spare1
+	 * @return
+	 */
 	@RequestMapping("toAdd")
 	@ResponseBody
 	public String toAdd(String title ,String content,Integer uid,String spare1[]) {
+//		System.out.println(spare1);
 		for (int i = 0; i < spare1.length; i++) {
+//			System.out.println(title);
+//			System.out.println(content);
+//			System.out.println(spare1[i]);
 			notices.toAdd(title, content, 1, spare1[i]);
 		}
 		return "redirect:member";
 	}
+	
+	/**
+	 * 跳转已发送信息员工信息
+	 * @return
+	 */
+	@RequestMapping("/Myemployee")
+	public String Myemployee() {
+		
+		
+		return "DanFaBu";
+	}
+	
+	/**
+	 * 详情
+	 * @return
+	 */
+	@RequestMapping("/xiangQing")
+	public String xiangQing() {
+		
+		return "FaBu";
+	}
+	
+	
+	
+//	@RequestMapping("/mymember")
+//	@ResponseBody
+//	public PageInfo<Employee> mymember(Model model,Integer currentPage,String employeename,Integer pageSize) {
+//		if (currentPage == null) {
+//			currentPage=1;
+//		}
+//		if (employeename==null) {
+//			employeename ="";
+//		}
+//		PageInfo<Employee> pageList = employee.selecQueryFeYue(currentPage,employeename, 5);
+//		
+////		System.out.println(pageList.getList().get(0).getSpare1());
+////		
+////		model.addAttribute("pageList",pageList);
+////		model.addAttribute("employeename",employeename);
+//		
+//		return pageList;
+//	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

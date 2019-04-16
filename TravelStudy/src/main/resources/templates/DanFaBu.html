@@ -15,6 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" th:href="@{/css/index.css}">
+    <script type="text/javascript" th:src="@{/js/vue.js}"></script>
 	<style>
 		.btn-group-lg>.btn, .btn-lg {
 		   font-size: 12px;
@@ -29,358 +30,228 @@
 	
 	
 	<script type="text/javascript" th:inline="javascript">
-        var checkedList = [] // 选中列表
-
-
-        // 节点单击事件
-        function domClick(e){
-            // 选中子元素所有input框
-            var subItem = e.parentNode.nextElementSibling
-            var inputList = subItem.querySelectorAll(".to__item")
-            for(var i = 0; i < inputList.length; i++){
-                var item = inputList[i]
-                item.querySelector("input").checked = !e.querySelector("input").checked
-                var subName = item.querySelector(".to__name").innerHTML
-            }
-            
-            // 选中当前input框
-            e.querySelector("input").checked = !e.querySelector("input").checked
-            select(e)
-        }
-
-        // 冒泡事件
-        function checkboxClick(e){
-            e.checked = !e.checked
-        }
-
-        // checkedbox选中事件
-        function select(){
-            // 筛选在右侧区域需要遍历的内容
-            checkedList = []
-            var cList = document.getElementsByName("cName")
-            for( var i = 0; i < cList.length; i++){
-                var classArr = (cList[i].parentNode.parentNode.className).split(' ')
-                var className = classArr[classArr.length - 1]
-                var level = parseInt(className.replace(/\w+-/g,'')) // 
-
-                // 设置显示的级别
-                var levelArr = document.querySelectorAll("[class^='to__item level-']")
-                var max = 1
-
-                for (var a = 0; a < levelArr.length; a++) {
-                    var item = levelArr[a];
-                    var arr = item.className.split('-')
-                    if(parseInt(arr[1]) > max){
-                        max = parseInt(arr[1])
-                    }
-                }
-                if(level == max && cList[i].checked == true){
-                    checkedList.push(cList[i].value)
-                }
-            }
-
-            // 右侧区域添加选中内容
-            var dom = document.getElementById("rightCont")
-            dom.innerHTML = ""
-            for (var i = 0; i < checkedList.length; i++) {
-                var item = checkedList[i];
-                var div = document.createElement("div")
-                div.className = "to__item"
-                div.innerHTML = '<span>' + item + '</span><span class="to__close" onclick="cancel(this)"><i>+</i></span>'
-                dom.appendChild(div)
-            }
-        }
-
-        // 取消选中事件
-        function cancel(dom){
-            var cList = document.getElementsByName("cName")
-            for (var i = 0; i < cList.length; i++) {
-                var item = cList[i];
-                if(item.value == dom.previousElementSibling.innerHTML)
-                {
-                    item.checked = false
-                    select();
-                    break;
-                }
-            }
-        }
-
-        // 下拉框点击事件
-        function dropClick(dom){
-            // 切换样式状态
-            if(dom.className.indexOf("to__roate") > -1){
-                dom.className = ""
-            }
-            else{
-                dom.className = "to__roate"
-            }
-            
-            // 显示隐藏内容
-            var domShow = dom.parentNode.parentNode.nextElementSibling
-            if(domShow.className.indexOf("to__show") > -1){
-                domShow.className = "to__subItem"
-            }
-            else{
-                domShow.className = "to__subItem to__show"
-            }
-        }
-
-        window.onload = function(){
-        	
-        	
-        	
-        /* 	var array = new Array();
-            <c:forEach items="${List}" var="address">
-            	array.push("${spare1}");
-            </c:forEach> */
-        	
-        	/*  $.ajax({
-        		url:[[@{/notice/selectQuery}]],
-        		type:"post",
-        		data:[],
-        		dataType:"text",
-        		success:function(result){
-        			console.log(result);
-        			data1 = [];
-        			for(var i = 0 ; i<result.length ; i++){
-        				data1[i].child[i].name.push(result[i].employeename);
-        				alert(data1[i].child[i].name);
-        			}
-        		}
-        	 }); */
-        			/*
-        			// 模拟数据
-                    data = [
-                        {
-                            name : "研学旅行系统",
-                            child: [
-                                {
-	                                    name : "部门",
-	                                    child : [
-	                                        {
-	                                            name : "小明",
-	                                            child : []
-	                                        },
-	                                        {
-	                                            name : "小红",
-	                                            child : []
-	                                        }
-	                                    ]
-                                	
-                                }
-                                
-                                 ,
-                                {
-                                    name : "客户管理",
-                                    child : [
-                                        {
-                                            name : "小白",
-                                            child : []
-                                        },
-                                        {
-                                            name : "小黑",
-                                            child : []
-                                        }
-                                    ]
-                                },
-                                {
-                                    name : "其他部",
-                                    child : []
-                                }
-                                //是否循环 
-                            ]
-                        	//是否循环
-                        }
-                    ]
-        			
-        		}
-        	}); 
-        	*/
-        	
-             // 模拟数据
-            var data = [
-                {
-                    name : "研学旅行系统",
-                    child: [
-                        {
-                            name : "员工部",
-                            child : [
-                                {
-                                    name : "小明",
-                                    child : []
-                                },
-                                {
-                                    name : "小红",
-                                    child : []
-                                }
-                            ]
-                        },
-                        {
-                            name : "客户管理",
-                            child : [
-                                {
-                                    name : "小白",
-                                    child : []
-                                },
-                                {
-                                    name : "小黑",
-                                    child : []
-                                }
-                            ]
-                        },
-                        {
-                            name : "其他部",
-                            child : []
-                        }
-                        //是否循环
-                    ]
-                	//是否循环
-                }
-            ]
-            
-            
-            
-            
-            
-            
-            var endHtml = 0
-            var html = ""
-            var level = 1
-
-            // 遍历树形结构
-            function getData(data, dom){
-                if(Object.prototype.toString.call(data) === '[object Array]'){
-                    for(var i = 0; i < data.length; i++){
-
-                        // 添加标题
-                        var item = document.createElement("div")
-                        var arrow = '<span class="to__dropdownList" ><i onclick="dropClick(this)"><svg t="1550632829702" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1783" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%"><defs><style type="text/css"></style></defs><path d="M959.52557 254.29773 511.674589 702.334953 63.824631 254.29773Z" p-id="1784"></path></svg></i></span>'
-
-                        // 设置显示级别
-                        if(level == 3){
-                            arrow = ""
-                        }
-                        item.innerHTML = '<div class="to__item level-' + level + '">' + arrow + '<span onclick="domClick(this)"><input type="checkbox" name="cName" value="' +data[i].name+ '" onclick="checkboxClick(this)" /><div class="to__name">' +data[i].name+ '</div></span></div>'
-                        dom.appendChild(item)
-                        
-                        // 添加子元素
-                        var subItem = document.createElement("div")
-                        subItem.className = "to__subItem"
-                        item.appendChild(subItem)
-
-                        if(data[i].child.length > 0){
-                            level++
-                            getData(data[i].child,subItem)
-                        }
-                        else{
-                            if(i == data.length - 1){
-                                level--
-                            }
-                        }
-                    }
-                }
-            }
-
-            // 赋值
-            var baseDom = document.createElement("div")
-             getData(data,baseDom)
-             document.getElementById("leftCont").innerHTML =  baseDom.innerHTML
-            
-        }
         
-        
-        
-        
-        
-        
-        
-       //定义id选择器
-		function Id(id){
-		return document.getElementById(id);
-		}
-		//入口函数，两个参数分别为<input type='file'/>的id，还有一个就是图片的id，然后会自动根据文件id得到图片，然后把图片放到指定id的图片标签中
-		function changeToop(fileid,imgid){
-		    var file = Id(fileid);
-		    if(file.value==''){
-		        //设置默认图片
-		    Id("myimg").src='blob:http://127.0.0.1:8080/e3d38dbf-2ad7-4844-b4f7-ca88bb8cfa95';
-		    }else{
-		        preImg(fileid,imgid);
-		    }
-		}
-		//获取input[file]图片的url Important
-		function getFileUrl(fileId) { 
-		    var url; 
-		    var file = Id(fileId);
-		    var agent = navigator.userAgent;
-		    if (agent.indexOf("MSIE")>=1) {
-		    url = file.value; 
-		    } else if(agent.indexOf("Firefox")>0) { 
-		    url = window.URL.createObjectURL(file.files.item(0)); 
-		    } else if(agent.indexOf("Chrome")>0) {
-		    url = window.URL.createObjectURL(file.files.item(0)); 
-		    } 
-		    return url; 
-		} 
-		//读取图片后预览
-		function preImg(fileId,imgId) {
-		var imgPre =Id(imgId);
-		imgPre.src = getFileUrl(fileId); 
-		}
     </script>
 	
 	
 </head>
 <body>
+<!-- 顶部开始 -->
+<!--     <div class="container"> -->
+<!--         <div class="logo"><a href="./index.html">研学旅行后台系统</a></div> -->
+<!--         <div class="open-nav"><i class="iconfont">&#xe699;</i></div> -->
+<!--         <ul class="layui-nav right" lay-filter=""> -->
+<!--           <li class="layui-nav-item"> -->
+<!--             <a href="javascript:;">admin</a> -->
+<!--             <dl class="layui-nav-child"> 二级菜单 -->
+<!--               <dd><a href="">个人信息</a></dd> -->
+<!--               <dd><a href="">切换帐号</a></dd> -->
+<!--               <dd><a href="./login.html">退出</a></dd> -->
+<!--             </dl> -->
+<!--           </li> -->
+<!--           <li class="layui-nav-item"><a href="/">前台首页</a></li> -->
+<!--         </ul> -->
+<!--     </div> -->
+    <!-- 顶部结束 -->
    	<div class="wrapper">
+   	
         <!-- 右侧主体开始 -->
         <div class="page-content">
-				<div class="layui-form-item" style="display: inline-block;">
-					<label class="layui-form-label xbs768">请输入标题:</label>
-					<div class="layui-input-inline">
-						<input type="text" name="username" placeholder="请输入标题" autocomplete="off" class="layui-input">
-					</div>
-				</div>
-				<div style="text-align: center; margin-top: 120px;">
-					<textarea placeholder="公告内容" class="layui-textarea"></textarea>
-				</div>
-				<div style="margin-top: -220px; float: left;">
-					<div id="preview" style="float:left">
-						<img id="imghead" width="100px" height="100px" class="logo-size" src='' />
-					</div>
-					<input id="filgo" style="margin-left: 70px; margin-top: 30px;" type="file" name="logo" onchange="changeToop('filgo','imghead');" value="上传图片">
-				</div>
-				<div style="margin-top: -280px; float: right; margin-right: 100px;">
-					<button type="submit" class="btn btn-default">发布</button>
-				</div>
-
-				<div style="border: 1px solid; margin-top: 10px;">
-					<div class="to__block">
-						<div class="to__left">
-							<div class="to__arrow"><span>←</span><span>→</span></div>
-							<div class="to__title">选择要发送的人</div>
-							<div class="to__content" id="leftCont"></div>
-						</div>
-						<div class="to__right">
-							<div class="to__title">已选择</div>
-							<div class="to__content" id="rightCont"></div>
+			<div class="content">
+					<div class="layui-form-pane" style="text-align: center;">
+						<div class="layui-form-item" style="display: inline-block;">
+							<div class="layui-input-inline">
+								<input type="text" name="employeename" placeholder="请输入标题名"
+									autocomplete="off" class="layui-input">
+							</div>
+							<div class="layui-input-inline" style="width: 80px">
+								<button class="layui-btn"  v-on:click="queryPage(1)">
+									<i class="layui-icon">&#xe615;</i>
+								</button>
+							</div>
 						</div>
 					</div>
-				</div>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th><input type="checkbox" id="checkall" value=""></th>
+							<th>ID</th>
+							<th>标题</th>
+							<th>发送的部门</th>
+							<th>接收信息</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr v-for="(item,index) in page.list">
+							<td><input type="checkbox" value="1" :iid="item.id" name="s1" class="checkbox"></td>
+							<td class="buMenid">{{item.id}}</td>
+							<td>{{item.employeename}}</td>
+							<td v-if="item.spare1==='1'">校友部</td>
+							<td v-if="item.spare1==='2'">教练部</td>
+							<td v-if="item.spare1==='3'">助手部</td>
+							<td v-if="item.spare1==='4'">员工部</td>
+							<td v-if="item.spare1==='5'">领队部</td>
+							<td v-if="item.spare1==='6'">其他部</td>
+							<td class="td-status" :uid="item.id" id="LookId">
+								<a title="查看" href="javascript:;" onclick="member_edit('标题','xiangQing','4','500','400')"
+	                            class="ml-5" style="text-decoration:none">
+	                                <i class="layui-icon">&#xe642;</i>
+	                            </a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
 
+				<button v-on:click="queryPage(page.prePage)" class="layui-btn layui-btn-warm">上一页</button>
+				<button v-on:click="queryPage(page.nextPage)" class="layui-btn layui-btn-danger">下一页</button>
+					
+					
+					
+				<!-- 右侧内容框架，更改从这里开始 -->
+					
+				<!-- 右侧内容框架，更改从这里结束 -->
 			</div>
+		</div>
         <!-- 右侧主体结束 -->
     </div>
     <!-- 背景切换结束 -->
-    <script>
-   /*  //百度统计可去掉
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })(); */
+    <script th:inline="javascript">
+    
+    
+    /*用户-启用*/
+    function member_start(obj,id){
+        layer.confirm('确认要启用吗？',function(index){
+            //发异步把用户状态进行更改
+            $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="layui-icon">&#xe601;</i></a>');
+            $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span>');
+            $(obj).remove();
+            layer.msg('已启用!',{icon: 6,time:1000});
+        });
+    }
+    // 用户-编辑
+    function member_edit (title,url,id,w,h) {
+        x_admin_show(title,url,w,h); 
+    }
+    
+    
+    
+    
+    
+	var vue = new Vue({
+    	
+    	el:'.wrapper',
+    	data:{
+    		
+    		page:''
+    		
+    	},methods:{
+    		queryPage(ind){
+    		page(ind);
+    	}
+    		
+    	}
+    	
+    });
+    
+    
+    function page(curPage){
+    	var employeename = $("[name = employeename]").val();
+		  $.ajax({
+			  url:[[@{/notice/employeeQuery}]],
+			  type:"post",
+			  data:{
+				  'currentPage':curPage,
+				  'employeename':employeename
+			  },
+			  dataType:"json",
+			  success:function(data){
+				  vue.page = data;
+			  }
+			  
+		  });
+    	
+    }
+    
+    
+	$(function(){
+		  $("#checkall").click(function(){
+		  	if(this.checked==true){
+		  		   $("[name='s1']").each(function(){
+		  		   	this.checked=true;
+		  		   	
+		  		   });
+			  	}else{
+			  		$("[name='s1']").each(function(){
+		  		   	this.checked=false;
+		  		   	
+		  		   });
+			  	}
+	  	
+	  		});
+		  
+		  page(1);
+		   
+		  $("#LookId").click(function(){
+			  var LookIds = $(this).attr("uid");
+			  
+		  });
+		  
+		  
+		  
+	});  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		/*   var buid = [];
+		   
+		  $("#fasuo").click(function(){
+			  var title = $("[name=username]").val();
+			  var content = $("[name=sign]").val();
+			 $.each($(".checkbox"),function(){
+				 if(this.checked){
+					 var spare1 = $(this).attr("iid");
+// 					 console.log(spare1);
+					 buid = spare1;
+// 					 for(var i=0;i<buid.length;i++){
+// 						 console.log(buid[i]);
+						 
+// 					 }
+					 $.ajax({
+						 url:[[@{/notice/toAdd}]],
+						 type:"post",
+						 data:{
+							  'spare1':buid,
+							  'title':title,
+							  'content':content
+						  },
+						  dataType:"json",
+						  success:function(result){
+							  var index = parent.layer.getFrameIndex(window.name);
+							  parent.layer.close(index);
+						  },error:function(date){
+							  var index = parent.layer.getFrameIndex(window.name);
+							  parent.layer.close(index);
+						  }
+					 });
+				 }
+				 
+			 });
+			  
+		  }); */
     </script>
 </body>
 </html>

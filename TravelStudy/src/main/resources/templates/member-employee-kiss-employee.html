@@ -167,7 +167,6 @@
     
     function page(curPage){
     	var employeename = $("[name = employeename]").val();
-    	/* console.log(vue.page); */
 		  $.ajax({
 			  url:[[@{/notice/employeeQuery}]],
 			  type:"post",
@@ -179,7 +178,6 @@
 			  success:function(data){
 				  vue.page = data;
 			  }
-			  
 			  
 		  });
     	
@@ -202,17 +200,9 @@
 	  	
 	  		});
 		  
-		  
 		  page(1);
-		  
-		  
-		  
-		  
-		  /*var size=0;
-		   var chang=0;
-		   */
 		   
-		   var buid = [];
+		  var buid = [];
 		   
 		  $("#fasuo").click(function(){
 			  var title = $("[name=username]").val();
@@ -220,10 +210,12 @@
 			 $.each($(".checkbox"),function(){
 				 if(this.checked){
 					 var spare1 = $(this).attr("iid");
-					 
-					 for(var i=0;buid.length;i++){
-						 buid[i] = spare1;
-					 }
+// 					 console.log(spare1);
+					 buid = spare1;
+// 					 for(var i=0;i<buid.length;i++){
+// 						 console.log(buid[i]);
+						 
+// 					 }
 					 $.ajax({
 						 url:[[@{/notice/toAdd}]],
 						 type:"post",
@@ -234,6 +226,9 @@
 						  },
 						  dataType:"json",
 						  success:function(result){
+							  var index = parent.layer.getFrameIndex(window.name);
+							  parent.layer.close(index);
+						  },error:function(date){
 							  var index = parent.layer.getFrameIndex(window.name);
 							  parent.layer.close(index);
 						  }

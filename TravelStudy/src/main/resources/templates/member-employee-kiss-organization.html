@@ -64,7 +64,7 @@
 	                <div class="layui-form-item">
 	                    <label for="L_sign" class="layui-form-label">
 	                    </label>
-	                    <button class="layui-btn" key="set-mine" lay-filter="save" >
+	                    <button class="layui-btn s" key="set-mine" lay-filter="save"  >
 	                        	发送
 	                    </button>
 	                </div>
@@ -86,6 +86,10 @@
     })(); */
     
  $(function(){
+	 	$(".s").click(function(){
+			var index = parent.layer.getFrameIndex(window.name);
+			parent.layer.close(index);
+		});
     	
     	$(".layui-btn").click(function(){
     		var title = $("[name=title]").val();
@@ -95,7 +99,6 @@
         	/* alert(buid); */
         	var form = $("form")[0];
         	var formData=new FormData(form);
-        	
         	$.ajax({
         		url:[[@{/notice/addBuMen}]],
         		type:"post",
@@ -105,16 +108,13 @@
 				processData:false,
 				success:function(result){
 					console.log(result); 
-// 					layer.close(layer.index);
-// 					window.parent.location.reload();
-					var index = parent.layer.getFrameIndex(window.name);
-					parent.layer.close(index);
 				},error:function(date){
-					var index = parent.layer.getFrameIndex(window.name);
-					parent.layer.close(index);
+					console.log(date); 
 				}
         		
         	});
+        	
+
         	
     	});
     	
