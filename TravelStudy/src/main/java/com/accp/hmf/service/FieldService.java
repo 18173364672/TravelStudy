@@ -1,8 +1,13 @@
 package com.accp.hmf.service;
 
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.accp.domain.Field;
 import com.accp.domain.Fieldtype;
+import com.accp.domain.FieldtypeExample;
 import com.github.pagehelper.PageInfo;
 
 public interface FieldService {
@@ -30,6 +35,12 @@ public interface FieldService {
 	 
 	 //查询场地名
 	 String fqueryname(Integer id);
+	 
+	 //查询场地
+	 List<Field> fquery(@Param("name") String name);
+	 
+	 //查询场地类型
+	 List<Fieldtype> selectByExample(FieldtypeExample example);
 	
 	
 }

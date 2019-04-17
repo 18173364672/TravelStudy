@@ -10,6 +10,7 @@ import com.accp.dao.FieldMapper;
 import com.accp.dao.FieldtypeMapper;
 import com.accp.domain.Field;
 import com.accp.domain.Fieldtype;
+import com.accp.domain.FieldtypeExample;
 import com.accp.hmf.service.FieldService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -87,6 +88,20 @@ public class FieldServiceimpl implements FieldService{
 	public String fqueryname(Integer id) {
 		// TODO Auto-generated method stub
 		return fm.fqueryname(id);
+	}
+
+
+	@Override
+	public List<Field> fquery(String name) {
+		// TODO Auto-generated method stub
+		return fm.fquery(name);
+	}
+
+
+	@Override
+	public List<Fieldtype> selectByExample(FieldtypeExample example) {
+		// TODO Auto-generated method stub
+		return ftm.selectByExample(null);
 	}
 
 	

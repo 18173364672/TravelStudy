@@ -2,6 +2,8 @@ package com.accp.hmf.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.accp.domain.Employee;
 import com.accp.domain.Organization;
 import com.accp.domain.OrganizationExample;
@@ -45,6 +47,9 @@ public interface EmployeeService {
     
     //查询员工姓名
     String emqueryname(Integer id);
+    
+    //查询教练
+    List<Employee> queryjl(@Param("job") String job);
  
     
     

@@ -121,6 +121,12 @@ public class EmployeeServiceimpl implements EmployeeService{
 		return em.emqueryname(id);
 	}
 
+	@Override
+	public List<Employee> queryjl(String job) {
+		// TODO Auto-generated method stub
+		return em.queryjl(job);
+	}
+
 	
 	
 	

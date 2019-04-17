@@ -37,4 +37,6 @@ public interface EmployeeMapper {
     List<Employee> emquerybm(Integer id);
     
     String emqueryname(Integer id);
+    
+    List<Employee> queryjl(@Param("job") String job);
 }

@@ -36,6 +36,10 @@
     
   </select>
   
+  <select id="queryjl" resultMap="BaseResultMap">
+    select * from employee where job like CONCAT('%',#{job},'%')
+  </select>
+  
   <select id="empquery" resultMap="BaseResultMap">
      select * from employee
      <where>
