@@ -287,7 +287,9 @@
   </insert>
   
   
-  
+  <select id="selecQueryFeYue" resultType="com.accp.domain.Notice">
+  		SELECT * FROM `notice` WHERE title LIKE CONCAT('%',#{title},'%')
+  </select>
   
   
   

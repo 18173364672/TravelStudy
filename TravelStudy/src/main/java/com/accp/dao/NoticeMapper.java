@@ -52,6 +52,12 @@ public interface NoticeMapper {
     int toAdd(String title,String content,Integer uid,String spare1);
     
     
+    /**
+     * 分页带条件查询
+     * @param employeename
+     * @return
+     */
+    List<Notice> selecQueryFeYue(String title);
     
     
     

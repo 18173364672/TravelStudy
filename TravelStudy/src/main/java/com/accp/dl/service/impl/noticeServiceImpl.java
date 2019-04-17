@@ -1,5 +1,6 @@
 package com.accp.dl.service.impl;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -7,6 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.accp.dao.NoticeMapper;
 import com.accp.dl.service.noticeService;
 import com.accp.domain.Notice;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 @Service
 @Transactional			//加了事物处理就会数据加不进去
@@ -45,7 +49,21 @@ public class noticeServiceImpl implements noticeService{
 	public int toAdd(String title, String content, Integer uid, String spare1) {
 		return notices.toAdd(title, content, uid, spare1);
 	}
-	
+
+	/**
+	 * 分页查询
+	 * @param currentPage
+	 * @param pageSize
+	 * @return
+	 */
+	@Override
+	public PageInfo<Notice> selecQueryFeYue(Integer currentPage, String title, Integer pageSize) {
+		Page<Notice> pageInfo = PageHelper.startPage(currentPage,pageSize,true);
+		
+		notices.selecQueryFeYue(title);
+		
+		return pageInfo.toPageInfo();
+	}
 
 	
 }

@@ -1,16 +1,10 @@
 package com.accp.dl.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletResponse;
 
-import org.apache.xml.resolver.apps.resolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,8 +21,6 @@ import com.accp.domain.Employee;
 import com.accp.domain.Notice;
 import com.accp.domain.Noticepicture;
 import com.accp.domain.Organization;
-import com.alibaba.fastjson.JSON;
-import com.fasterxml.jackson.databind.Module;
 import com.github.pagehelper.PageInfo;
 
 @Controller
@@ -163,6 +155,7 @@ public class notice {
 				String suffix = name.substring(name.lastIndexOf("."),name.length());
 				File chang = new File(url+uuid+suffix);
 				file.transferTo(chang);
+				System.out.println(chang);
 				String urls = chang.toString();
 				noticepicture.addinsert(urls);	//新增图片
 				
@@ -188,11 +181,7 @@ public class notice {
 	@RequestMapping("toAdd")
 	@ResponseBody
 	public String toAdd(String title ,String content,Integer uid,String spare1[]) {
-//		System.out.println(spare1);
 		for (int i = 0; i < spare1.length; i++) {
-//			System.out.println(title);
-//			System.out.println(content);
-//			System.out.println(spare1[i]);
 			notices.toAdd(title, content, 1, spare1[i]);
 		}
 		return "redirect:member";
@@ -205,40 +194,49 @@ public class notice {
 	@RequestMapping("/Myemployee")
 	public String Myemployee() {
 		
-		
 		return "DanFaBu";
 	}
+	
+	/**
+	 * 消息分页查询
+	 * @param model
+	 * @param currentPage
+	 * @param title
+	 * @param pageSize
+	 * @return
+	 */
+	@RequestMapping("/noticeQuery")
+	@ResponseBody
+	public PageInfo<Notice> noticeQuery(Model model,Integer currentPage,String title,Integer pageSize) {
+		if (currentPage == null) {
+			currentPage=1;
+		}
+		if (title==null) {
+			title ="";
+		}
+		PageInfo<Notice> pageList = notices.selecQueryFeYue(currentPage,title, 5);
+		
+		
+		return pageList;
+	}
+	
+	
+	
+	
+	
 	
 	/**
 	 * 详情
 	 * @return
 	 */
 	@RequestMapping("/xiangQing")
-	public String xiangQing() {
+	public String xiangQing(Integer LookIds) {
+		
+		System.out.println(LookIds+"这是有没有!!!");
 		
 		return "FaBu";
 	}
 	
-	
-	
-//	@RequestMapping("/mymember")
-//	@ResponseBody
-//	public PageInfo<Employee> mymember(Model model,Integer currentPage,String employeename,Integer pageSize) {
-//		if (currentPage == null) {
-//			currentPage=1;
-//		}
-//		if (employeename==null) {
-//			employeename ="";
-//		}
-//		PageInfo<Employee> pageList = employee.selecQueryFeYue(currentPage,employeename, 5);
-//		
-////		System.out.println(pageList.getList().get(0).getSpare1());
-////		
-////		model.addAttribute("pageList",pageList);
-////		model.addAttribute("employeename",employeename);
-//		
-//		return pageList;
-//	}
 	
 	
 	

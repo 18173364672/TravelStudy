@@ -61,7 +61,7 @@
 					<div class="layui-form-pane" style="text-align: center;">
 						<div class="layui-form-item" style="display: inline-block;">
 							<div class="layui-input-inline">
-								<input type="text" name="employeename" placeholder="请输入标题名"
+								<input type="text" name="title" placeholder="请输入标题名"
 									autocomplete="off" class="layui-input">
 							</div>
 							<div class="layui-input-inline" style="width: 80px">
@@ -77,7 +77,7 @@
 							<th><input type="checkbox" id="checkall" value=""></th>
 							<th>ID</th>
 							<th>标题</th>
-							<th>发送的部门</th>
+							<th>内容</th>
 							<th>接收信息</th>
 						</tr>
 					</thead>
@@ -85,17 +85,11 @@
 						<tr v-for="(item,index) in page.list">
 							<td><input type="checkbox" value="1" :iid="item.id" name="s1" class="checkbox"></td>
 							<td class="buMenid">{{item.id}}</td>
-							<td>{{item.employeename}}</td>
-							<td v-if="item.spare1==='1'">校友部</td>
-							<td v-if="item.spare1==='2'">教练部</td>
-							<td v-if="item.spare1==='3'">助手部</td>
-							<td v-if="item.spare1==='4'">员工部</td>
-							<td v-if="item.spare1==='5'">领队部</td>
-							<td v-if="item.spare1==='6'">其他部</td>
-							<td class="td-status" :uid="item.id" id="LookId">
-								<a title="查看" href="javascript:;" onclick="member_edit('标题','xiangQing','4','500','400')"
-	                            class="ml-5" style="text-decoration:none">
-	                                <i class="layui-icon">&#xe642;</i>
+							<td>{{item.title}}</td>
+							<td>{{item.content}}</td>
+							<td class="td-status">
+								<a title="查看" href="javascript:;" :data="item.id" class="ml-5"  style="text-decoration:none">
+	                                <i class="layui-icon" on:click="Look(item.id)">&#xe642;</i>
 	                            </a>
 							</td>
 						</tr>
@@ -118,6 +112,9 @@
     <script th:inline="javascript">
     
     
+    
+    
+    
     /*用户-启用*/
     function member_start(obj,id){
         layer.confirm('确认要启用吗？',function(index){
@@ -126,10 +123,26 @@
             $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span>');
             $(obj).remove();
             layer.msg('已启用!',{icon: 6,time:1000});
+            
+            
+            
+            
         });
     }
-    // 用户-编辑
+//     用户-编辑
     function member_edit (title,url,id,w,h) {
+    	$.ajax({
+			  url:[[@{/notice/xiangQing}]],
+			  type:"post",
+			  data:{
+				  'LookIds':id
+			  },
+			  dataType:"json",
+			  success:function(result){
+				  
+			  }
+			  
+		  });
         x_admin_show(title,url,w,h); 
     }
     
@@ -155,13 +168,13 @@
     
     
     function page(curPage){
-    	var employeename = $("[name = employeename]").val();
+    	var title = $("[name = title]").val();
 		  $.ajax({
-			  url:[[@{/notice/employeeQuery}]],
+			  url:[[@{/notice/noticeQuery}]],
 			  type:"post",
 			  data:{
 				  'currentPage':curPage,
-				  'employeename':employeename
+				  'title':title
 			  },
 			  dataType:"json",
 			  success:function(data){
@@ -191,12 +204,20 @@
 		  
 		  page(1);
 		   
-		  $("#LookId").click(function(){
-			  var LookIds = $(this).attr("uid");
-			  
-		  });
 		  
+		  function Look(can){
+			  	var can1 = $(this).attr("data");
+			  	Look(can1);
+		    	var url= "xiangQing?LookIds="+can1;
+		    	x_admin_show("查看",url,500,400); 
+		  }
 		  
+// 		  $("#Look").click(function(){
+// 		    	alert("进来了");
+// 		    	var can = $(this).attr("data");
+// 		    	var url= "xiangQing?LookIds="+can;
+// 		    	x_admin_show("查看",url,500,400); 
+// 		    });
 		  
 	});  
 		  
