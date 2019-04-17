@@ -21,28 +21,45 @@
           <div class="content">
             <!-- 右侧内容框架，更改从这里开始 -->
            
-              
+              <form th:action="@{/field/fieldedit}">
+         
                 <div class="layui-form-item">
                     <label for="L_username" class="layui-form-label">
                         <span class="x-red">*</span>场地类型
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="L_username" name="name" required="" lay-verify="nikename"
-                        autocomplete="off" class="layui-input">
+                        
+                        <input type="hidden" id="L_username" name="id"  lay-verify="nikename"
+                        autocomplete="off" class="layui-input" th:value="${field.id}">
+                        
+                        <input type="text" id="L_username" name="name"  lay-verify="nikename"
+                        autocomplete="off" class="layui-input" th:value="${field.name}">
                     </div>
-                     <button class="layui-btn" onclick="tj()"><i class="layui-icon">&#xe608;</i>添加</button>
+                    
                 </div>
                 
               
-                
-                  
-                
-                
-                <div class="cc">
-                
-                
-                
+                 <div class="layui-form-item">
+                    <label for="L_username" class="layui-form-label">
+                        <span class="x-red">*</span>可容纳人数
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_username" name="num" lay-verify="nikename"
+                        autocomplete="off" class="layui-input" th:value="${field.num}">
+                    </div>
+                    
                 </div>
+                  
+                    <div class="layui-form-item">
+                    <label for="L_repass" class="layui-form-label">
+                    </label>
+                    <button  class="layui-btn" lay-filter="add" onclick="submit_()" lay-submit="">
+                     修改
+                    </button>
+                </div>
+                
+                     </form>
+            
                 
                 
                 
@@ -56,13 +73,7 @@
            
             <!-- 右侧内容框架，更改从这里结束 -->
           </div>
-              <div class="layui-form-item">
-                    <label for="L_repass" class="layui-form-label">
-                    </label>
-                    <button  class="layui-btn" lay-filter="add" onclick="submit_()">
-                     修改
-                    </button>
-                </div>
+            
        
         </div>
         <!-- 右侧主体结束 -->
@@ -73,42 +84,9 @@
 <script type="text/javascript" th:inline="javascript">
 
    function submit_(){
-	   var modules=[];
-		  $("[name='cdm']").each(function() {
-			
-				var model={};
-				model.name=$(this).val();
-			    model.num=$(this).parent().parent().next().children("div").children("input").val();
-				
-				modules.push(model);
-		
-		})
-		
-		var organization={};
-		  
-//		  organization.name=$("[name='name']").val();
-//		  organization.context=$("[name='context']").val();
-		  organization.olist=modules;
-		  
-		  var organizationStr=JSON.stringify(organization);
-		  console.log(organizationStr);
-	   
-		  
-//			  $.ajax({
-//				  url:urlpath,
-//				  data:organizationStr,
-//				  type:"post",
-//				  processData:false,
-//				  contentType:"application/json",
-//				  datatype:"text",
-//				  success:function(result){
-//					 
-//					  console.log(result);
-//				  }
-//			  })
-//	   
-//	  var index=parent.layer.getFrameIndex(window.name);
-//	  parent.layer.close(index)
+
+	  var index=parent.layer.getFrameIndex(window.name);
+	  parent.layer.close(index)
 
       
 

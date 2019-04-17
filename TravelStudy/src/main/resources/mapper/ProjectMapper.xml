@@ -15,6 +15,17 @@
     <result column="Spare4" property="spare4" jdbcType="VARCHAR" />
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
+  
+    <select id="pquery" resultMap="BaseResultMap">
+     select * from project
+     <where>
+       <if test="projectname!=null">
+        projectname like CONCAT('%',#{projectname},'%')
+       </if>
+       
+     </where>
+  </select>
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

@@ -14,6 +14,14 @@
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
   
+    <select id="fqueryname" resultType="string">
+       select name from field where id=#{id}
+    </select>
+  
+    <select id="fqueryd" resultMap="BaseResultMap">
+      select * from field where id=#{id}
+    </select>
+  
     <select id="fquery" resultMap="BaseResultMap">
      select * from field
      <where>

@@ -143,14 +143,14 @@
                     </a>
                     <ul class="sub-menu" >
                           <li>
-                            <a href="member-employee.html">
+                           <a th:href="@{/employee/toemployeequerypage}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 员工信息
                             </a>
                         </li>
                         
                          <li >
-                            <a href="member-organization.html">
+                            <a th:href="@{/organization/toorganization}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 组织机构
                             </a>
@@ -203,7 +203,7 @@
                         </li>
                         
               <li class="current">
-                            <a href="member-project-field.htmli">
+                            <a th:href="@{/field/tofieldquerypage}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 项目场地
                             </a>
@@ -423,11 +423,11 @@
                             </a>
                             <div style="display: none">{{l.id}}</div>
                              
-                            <a title="编辑" href="javascript:;" onclick="member_edit('场地修改','member-project-fieldedit.html','4','','510')"
+                            <a title="编辑" href="javascript:;" onclick="member_edit('场地修改','/field/tofieldedit','4','','510',this)"
                             class="ml-5" style="text-decoration:none">
                                 <i class="layui-icon">&#xe642;</i>
                             </a>
-                            
+                            <div style="display: none">{{l.id}}</div>
                             <a title="删除" href="javascript:;" onclick="member_del(this)" 
                             style="text-decoration:none">
                                 <i class="layui-icon">&#xe640;</i>
@@ -441,11 +441,11 @@
                                 <i class="layui-icon">&#xe62f;</i>
                             </a>
                               <div style="display: none">{{l.id}}</div>
-                            <a title="编辑" href="javascript:;" onclick="member_edit('场地修改','member-project-fieldedit.html','4','','510')"
+                            <a title="编辑" href="javascript:;" onclick="member_edit('场地修改','/field/tofieldedit','4','','510',this)"
                             class="ml-5" style="text-decoration:none">
                                 <i class="layui-icon">&#xe642;</i>
                             </a>
-                            
+                            <div style="display: none">{{l.id}}</div>
                             <a title="删除" href="javascript:;" onclick="member_del(this)" 
                             style="text-decoration:none">
                                 <i class="layui-icon">&#xe640;</i>
@@ -554,9 +554,7 @@
         /*用户-启用*/
         
         // 用户-编辑
-        function member_edit (title,url,id,w,h) {
-            x_admin_show(title,url,w,h); 
-        }
+       
         /*密码-修改*/
         function member_password(title,url,id,w,h){
             x_admin_show(title,url,w,h);  
@@ -568,6 +566,14 @@
 </body>
 <script type="text/javascript" th:src="@{/js/vue.js}"></script>
 <script type="text/javascript" th:inline="javascript">
+
+function member_edit (title,url,id,w,h,obj) {
+	var id=$(obj).next().text();
+	
+	var url1="?id="+id;
+	
+    x_admin_show(title,url+url1,w,h); 
+}
 
 function delAll () {
     layer.confirm('确认要删除吗？',function(index){

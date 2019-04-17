@@ -35,4 +35,6 @@ public interface EmployeeMapper {
     public Employee emqueryd(Integer id);
     
     List<Employee> emquerybm(Integer id);
+    
+    String emqueryname(Integer id);
 }

@@ -1,5 +1,7 @@
 package com.accp.domain;
 
+import java.util.List;
+
 public class Project {
     private Integer id;
 
@@ -24,6 +26,26 @@ public class Project {
     private String spare4;
 
     private String spare5;
+    
+    public List<Employee> getEmlist() {
+		return emlist;
+	}
+
+	public void setEmlist(List<Employee> emlist) {
+		this.emlist = emlist;
+	}
+
+	public List<Field> getFlist() {
+		return flist;
+	}
+
+	public void setFlist(List<Field> flist) {
+		this.flist = flist;
+	}
+
+	private List<Employee> emlist;
+    
+    private List<Field> flist;
 
     public Integer getId() {
         return id;

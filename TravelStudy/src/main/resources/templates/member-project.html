@@ -1,19 +1,19 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>后台登录-X-admin1.1</title>
+    <title>研学旅行</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="static/css/font.css">
-	<link rel="stylesheet" href="static/css/xadmin.css">
+    <link rel="stylesheet" th:href="@{/css/font.css}">
+	<link rel="stylesheet" th:href="@{/css/xadmin.css}">
     <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
     
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
-    <script src="static/lib/layui/layui.js" charset="utf-8"></script>
+    <script th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
    
-    <script type="text/javascript" src="static/js/xadmin.js"></script>
+    <script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
 <!--    <script type="text/javascript" src="static/js/jquery-1.8.3.js" ></script>-->
 </head>
   <script>
@@ -144,14 +144,14 @@
                     </a>
                     <ul class="sub-menu" >
                           <li>
-                            <a href="member-employee.html">
+                              <a th:href="@{/employee/toemployeequerypage}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 员工信息
                             </a>
                         </li>
                         
                          <li >
-                            <a href="member-organization.html">
+                            <a th:href="@{/organization/toorganization}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 组织机构
                             </a>
@@ -174,7 +174,7 @@
                     </a>
                     <ul class="sub-menu opened">
                              <li class="current">
-                            <a href="member-project.html">
+                            <a th:href="@{/project/toprojectquerypage}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 项目信息
                             </a>
@@ -202,6 +202,13 @@
                                 项目排名
                             </a>
                         </li>
+                        
+                                                              <li>
+                                <a th:href="@{/field/tofieldquerypage}">
+                                <i class="iconfont">&#xe6a7;</i>
+                                项目场地
+                            </a>
+                        </li> 
                         
     
                     </ul>
@@ -335,15 +342,15 @@
               
                     
                     <div class="layui-input-inline">
-                      <input type="text" name="username"  placeholder="请输入项目名" autocomplete="off" class="layui-input">
+                      <input type="text" name="username"  placeholder="请输入项目名" autocomplete="off" class="layui-input" v-model="name">
                     </div>
                     <div class="layui-input-inline" style="width:80px">
-                        <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+                        
                     </div>
                   </div>
                 </div> 
             </form>
-            <xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button><button class="layui-btn" onclick="member_add('添加新项目','member-project-add.html','600','500')"><i class="layui-icon">&#xe608;</i>添加新项目</button><span class="x-right" style="line-height:40px">共有数据：88 条</span></xblock>
+            <xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button><button class="layui-btn" onclick="member_add('添加新项目','member-project-add.html','600','500')"><i class="layui-icon">&#xe608;</i>添加新项目</button><span class="x-right" style="line-height:40px">共有数据：{{pageInfo.total}} 条</span></xblock>
             <table class="layui-table">
                 <thead>
                     <tr>
@@ -381,37 +388,41 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr v-for="l in pageInfo.list">
                         <td>
-                            <input type="checkbox" value="1" name="s1">
+                            <input type="checkbox"  name="s1">
                         </td>
                         <td>
-                            1
+                            {{l.id}}
                         </td>
                         <td>
                             <u style="cursor:pointer" onclick="member_show('张三','member-show.html','10001','360','400')">
-                               一箭ss
+                               {{l.projectname}}
                             </u>
                         </td>
                         <td >
-                            活动人员射箭，环数最高者给予相应奖励。
+                            {{l.context}}
                         </td>
                     
                         
                          <td >
-                           800
+                           {{l.price}}
                         </td>
                         
                           <td >
-                           射击
+                           {{l.type}}
                         </td>
                         
-                                             <td >
-                        张三，李四，王五
+                                             <td>
+                        <span v-for="l1 in l.emlist">
+                          {{l1.employeename}},
+                        </span>
                         </td>
  
                                              <td >
-                       1号，2号，3号
+                    <span v-for="l2 in l.flist">
+                          {{l2.name}},
+                        </span>
                         </td>
                         <td class="td-manage">
                            
@@ -426,51 +437,7 @@
                             </a>
                         </td>
                     </tr>
-                        <tr>
-                        <td>
-                            <input type="checkbox" value="1" name="s1">
-                        </td>
-                        <td>
-                            1
-                        </td>
-                        <td>
-                            <u style="cursor:pointer" onclick="member_show('项目编辑','member-project-edit.html','10001','360','400')">
-                               拳击手
-                            </u>
-                        </td>
-                        <td >
-                            活动人员进行拳击比赛，分数最高者给予相应奖励。
-                        </td>
-                      
-                        
-                        <td >
-                           1200
-                        </td>
-                                        <td >
-                           拳击
-                        </td>
-                        
-                                                          <td >
-                           吴六，赵本山，罐头
-                        </td>
-
-                                                          <td >
-                           1号，2号，3号
-                        </td>
-                        <td class="td-manage">
-                           
-                            <a title="编辑" href="javascript:;" onclick="member_edit('项目编辑','member-project-edit.html','4','','510')"
-                            class="ml-5" style="text-decoration:none">
-                                <i class="layui-icon">&#xe642;</i>
-                            </a>
-                            
-                            <a title="删除" href="javascript:;" onclick="member_del(this,'1')" 
-                            style="text-decoration:none">
-                                <i class="layui-icon">&#xe640;</i>
-                            </a>
-                        </td>
-                    </tr>
-                    
+                
            
                     
            
@@ -478,8 +445,8 @@
                 </tbody>
             </table>
                 <xblock>
-                	 <button class="layui-btn layui-btn-warm">上一页</button>
-                        <button class="layui-btn layui-btn-danger">下一页</button>
+                	 <button class="layui-btn layui-btn-warm" v-on:click="prePage()">上一页</button>
+                        <button class="layui-btn layui-btn-danger" v-on:click="nextPage()">下一页</button>
                 </xblock>
             	
             <!-- 右侧内容框架，更改从这里结束 -->
@@ -610,16 +577,80 @@
             });
         }
         </script>
-        <script>
-        //百度统计可去掉
-        var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-          var s = document.getElementsByTagName("script")[0]; 
-          s.parentNode.insertBefore(hm, s);
-        })();
-        </script>
+       
 </body>
+<script type="text/javascript" th:src="@{/js/vue.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+      
+      
+      
+var v=new Vue({
+	  el:".content",
+	  data:{
+		  pageInfo:"pageInfo",
+		  name:""
+	  },
+	  methods:{
+		  getGoodsHref:function(val){
+			    return 'queryd?id='+val
+			},
+			deleteHref:function(val){
+			    return 'delete?id='+val
+			},prePage:function(){
+	    		if(this.pageInfo.prePage==0){
+	    			alert("到顶了");
+	    			return;
+	    		}
+	    		getmethod(this.pageInfo.prePage);
+	    	},
+	    	nextPage:function(){
+	    		if(this.pageInfo.prePage==this.pageInfo.pages){
+	    			alert("到底了");
+	    		}
+	    		getmethod(this.pageInfo.nextPage);
+	    		
+	    	}
 
+	  },
+	  watch:{
+		  name:function(){
+			console.log(v.name);
+			getmethod(1,v.name)
+		},
+	  }
+});
+       
+var urlpath = [[@{/project/projectquerypage}]];
+
+$.ajax({
+		 url:urlpath,
+		 data:{},
+		 type:"post",
+		 datatype:"json",
+		 success:function(data){
+			 v.pageInfo=data;
+			 console.log(data);
+		 }
+	});
+        
+        
+function getmethod(page,name){
+	   $.ajax({
+		  	 url:urlpath,
+		  	 data:{
+		  		currentPage:page,
+		  		
+		  		projectname:name
+		  	 },
+		  	 datatype:"json",
+		  	 success:function(data){
+		  		v.pageInfo=data;
+		  		
+		  	 }
+		   })
+}
+
+
+
+</script>
 </html>

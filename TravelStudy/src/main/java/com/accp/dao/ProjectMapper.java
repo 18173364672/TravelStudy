@@ -27,4 +27,6 @@ public interface ProjectMapper {
     int updateByPrimaryKeySelective(Project record);
 
     int updateByPrimaryKey(Project record);
+    
+    List<Project> pquery(@Param("projectname") String projectname);
 }

@@ -30,4 +30,6 @@ public interface FieldtypeMapper {
     int updateByPrimaryKey(Fieldtype record);
     
     Fieldtype queryfname(Integer id);
+    
+    
 }

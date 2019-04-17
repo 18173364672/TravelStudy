@@ -29,4 +29,8 @@ public interface FieldMapper {
     int updateByPrimaryKey(Field record);
     
     List<Field> fquery(@Param("name") String name);
+    
+    Field fqueryd(Integer id);
+    
+    String fqueryname(Integer id);
 }

@@ -115,6 +115,12 @@ public class EmployeeServiceimpl implements EmployeeService{
 		return rm.querypay(id);
 	}
 
+	@Override
+	public String emqueryname(Integer id) {
+		// TODO Auto-generated method stub
+		return em.emqueryname(id);
+	}
+
 	
 	
 	

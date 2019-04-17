@@ -75,6 +75,20 @@ public class FieldServiceimpl implements FieldService{
 		return fm.deleteByPrimaryKey(id);
 	}
 
+
+	@Override
+	public Field fqueryd(Integer id) {
+		// TODO Auto-generated method stub
+		return fm.fqueryd(id);
+	}
+
+
+	@Override
+	public String fqueryname(Integer id) {
+		// TODO Auto-generated method stub
+		return fm.fqueryname(id);
+	}
+
 	
 
 }
