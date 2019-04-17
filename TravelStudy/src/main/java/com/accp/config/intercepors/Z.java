@@ -35,7 +35,6 @@ public class Z  implements HandlerInterceptor  {
 			}
 		}
 		String uri =request.getRequestURI();
-		System.out.println(uri);
 //		uri =uri.replaceAll(request.getContextPath()+"/", "");
 		Object obj =map.get(uri);
 		if(obj!=null) {

@@ -1,12 +1,14 @@
-package com.accp.dao;
+package com.accp.qyj.service;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 
 import com.accp.domain.Userrole;
 import com.accp.domain.UserroleExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
-public interface UserroleMapper {
-    int countByExample(UserroleExample example);
+public interface UserroleService {
+	int countByExample(UserroleExample example);
 
     int deleteByExample(UserroleExample example);
 

@@ -118,7 +118,6 @@ public class PlateServiceImpl implements PlateService{
 
 	@Override
 	public Map<String, Plate> queryPlateByUserId(Integer uid){
-		System.out.println("进来了");
 		return m.queryPlateByUserId(uid);
 	}
 

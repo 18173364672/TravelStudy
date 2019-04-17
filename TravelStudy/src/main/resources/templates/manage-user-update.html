@@ -20,7 +20,7 @@
         <div class="page-content">
           <div class="content">
             <!-- 右侧内容框架，更改从这里开始 -->
-            <form class="layui-form" th:action="@{/employee/employeeedit}" method="post">
+            <form class="layui-form" th:action="@{/user/employeeedit}" method="post">
                 <div class="layui-form-item">
                     <label for="L_email" class="layui-form-label">
                         <span class="x-red">*</span>邮箱
@@ -30,7 +30,7 @@
                         autocomplete="off" class="layui-input" th:value="${employee.id}">
                         
                         <input type="text" id="L_email" name="email" required="" lay-verify="email"
-                        autocomplete="off" class="layui-input" th:value="${employee.email}">
+                        autocomplete="off" readonly="readonly" class="layui-input" th:value="${employee.email}">
                     </div>
                     <div class="layui-form-mid layui-word-aux">
                         <span class="x-red">*</span>将会成为您唯一的登入名
@@ -41,7 +41,7 @@
                         <span class="x-red">*</span>员工姓名
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="L_username" name="employeename" required="" lay-verify="nikename"
+                        <input type="text" id="L_username" readonly="readonly" name="employeename" required="" lay-verify="nikename"
                         autocomplete="off" class="layui-input" th:value="${employee.employeename}">
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                         <span class="x-red">*</span>地址
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="L_address" name="address" required="" lay-verify="nikename"
+                        <input type="text" id="L_address" readonly="readonly" name="address" required="" lay-verify="nikename"
                         autocomplete="off" class="layui-input" th:value="${employee.address}">
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                         <span class="x-red">*</span>手机号码
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="L_phone" name="phone" required="" lay-verify="nikename"
+                        <input type="text" id="L_phone"  readonly="readonly" name="phone" required="" lay-verify="nikename"
                         autocomplete="off" class="layui-input" th:value="${employee.phone}">
                     </div>
                 </div>
@@ -77,6 +77,19 @@
                         </div>
                     </div>
                 </div>
+                
+                
+             	<div class="layui-form-item">
+                    <label for="L_username" class="layui-form-label">
+                        <span class="x-red">*</span>选择角色
+                    </label>
+                    <div class="layui-inline">
+                    <select name="rid" lay-filter="test"> 
+            			<option th:each="l,state : ${list1}" th:text="${l.name}" th:value="${l.rid}"></option>
+            		</select>
+                    </div>
+                </div>
+                
                 
                 <div class="layui-form-item">
                     <label for="L_repass" class="layui-form-label">
