@@ -12,6 +12,11 @@
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
   
+  <delete id="deletes">
+  delete from projectimg where projectid=#{id}
+   
+  </delete>
+  
   <select id="queryimg" resultMap="BaseResultMap">
     select * from projectimg where projectid=#{id} 
   </select>

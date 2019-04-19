@@ -49,11 +49,9 @@
 </head>
 <body>
         <div class="container">
-          <img th:src="@{/images/45d7225a273cb36b6a04fa92bac22aec.jpg}" width="100px"/>
+          <img th:each="item,index : ${list}" th:src="@{'http://localhost:8080/'+${item.img}}" width="100px"/>
           
-          <img src="static/images/45d7225a273cb36b6a04fa92bac22aec.jpg" width="100px"/>
           
-          <img src="static/images/45d7225a273cb36b6a04fa92bac22aec.jpg" width="100px"/>
         </div>
 </body>
 
@@ -88,10 +86,7 @@ var v=new Vue({
 
 	  },
 	  watch:{
-		  name:function(){
-			console.log(v.name);
-			getmethod(1,v.name)
-		}
+		 
 		  
 	  }
 

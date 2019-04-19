@@ -17,4 +17,11 @@ public interface ProjectService {
 	 int insertSelective(Projectimg record);
 	 
 	 List<Projectimg> queryimg(Integer id);
+	 
+	 int deleteByPrimaryKey(Integer id);
+	 
+	 int deletes(Integer id);
+	 
+	 Project queryd(Integer id);
+	 
 }
