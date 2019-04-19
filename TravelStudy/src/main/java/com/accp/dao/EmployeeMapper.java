@@ -48,4 +48,8 @@ public interface EmployeeMapper {
      * @return
      */
     Employee selectById(Integer id);
+    
+     String emqueryname(Integer id);
+    
+    List<Employee> queryjl(@Param("job") String job);
 }

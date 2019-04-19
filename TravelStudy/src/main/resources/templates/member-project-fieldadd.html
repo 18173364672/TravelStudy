@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<title>研学旅行管理系统</title>
@@ -24,35 +24,19 @@
               
                 <div class="layui-form-item">
                     <label for="L_username" class="layui-form-label">
-                        <span class="x-red">*</span>部门名称
+                        <span class="x-red">*</span>场地类型
                     </label>
                     <div class="layui-input-inline">
                         <input type="text" id="L_username" name="name" required="" lay-verify="nikename"
                         autocomplete="off" class="layui-input">
                     </div>
+                     <button class="layui-btn" onclick="tj()"><i class="layui-icon">&#xe608;</i>添加</button>
                 </div>
                 
-                 <div class="layui-form-item">
-                    <label for="L_username" class="layui-form-label">
-                        <span class="x-red">*</span>工作方向
-                    </label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="L_address" name="context" required="" lay-verify="nikename"
-                        autocomplete="off" class="layui-input">
-                    </div>
-                </div>
+              
                 
                   
-                 <div class="layui-form-item">
-                    <label for="L_username" class="layui-form-label">
-                        <span class="x-red">*</span>职位
-                    </label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="L_address" name="zw"  lay-verify="nikename"
-                        autocomplete="off" class="layui-input">
-                    </div>
-                    <button class="layui-btn" onclick="tj()"><i class="layui-icon">&#xe608;</i>添加</button>
-                </div>
+                
                 
                 <div class="cc">
                 
@@ -90,59 +74,62 @@
 
    function submit_(){
 	   var modules=[];
-		  $("[name='zw']").each(function() {
+		  $("[name='cdm']").each(function() {
 			
 				var model={};
-				model.namess=$(this).val();
-				
+				model.name=$(this).val();
+			    model.num=$(this).parent().parent().next().children("div").children("input").val();
 				
 				modules.push(model);
 		
 		})
 		
-		var organization={};
+		var fieldtype={};
 		  
-		  organization.name=$("[name='name']").val();
-		  organization.context=$("[name='context']").val();
-		  organization.olist=modules;
+		  fieldtype.name=$("[name='name']").val();
+//		  organization.context=$("[name='context']").val();
+		  fieldtype.flist=modules;
 		  
-		  var organizationStr=JSON.stringify(organization);
-		  console.log(organizationStr);
-	   
-		   var urlpath = [[@{/organization/organizationadd}]];
+		  var fieldtypeStr=JSON.stringify(fieldtype);
+		  console.log(fieldtypeStr);
+		  var urlpath = [[@{/field/fieldadd}]];
+		  
 			  $.ajax({
 				  url:urlpath,
-				  data:organizationStr,
+				  data:fieldtypeStr,
 				  type:"post",
 				  processData:false,
 				  contentType:"application/json",
 				  datatype:"text",
-				  success:function(data){
-					  
-					  var cid=$("[name='name']").val();
-					  cid=data.id;
-					  console.log(cid);
+				  success:function(){
+					 alert("新增成功");
 					  
 				  }
 			  })
 	   
 	  var index=parent.layer.getFrameIndex(window.name);
 	  parent.layer.close(index)
+
+      
+
 	  
 }
-
+   var index=0;
    function tj(){
      	
-
-     	
-     	
-   	  document.querySelector(".cc").innerHTML+="<div class='layui-form-item'><label class='layui-form-label'><span class='x-red'>*</span>职位</label><div class='layui-input-inline'><input type='text' name='zw' class='layui-input'></div><button class='layui-btn layui-btn-danger' onclick='del(this)'><i class='layui-icon'>&#xe640;</i>删除</button></div>";
-   	
+      var lxm=$("[name='name']").val();
+      index++;
+      var cd="号场地";
+   	  document.querySelector(".cc").innerHTML+="<div><div class='layui-form-item'><label class='layui-form-label'><span class='x-red'>*</span>场地名称</label><div class='layui-input-inline'><input type='text' name='cdm' class='layui-input' value='"+lxm+""+index+""+cd+"'></div><button class='layui-btn layui-btn-danger' onclick='del(this)'><i class='layui-icon'>&#xe640;</i>删除</button></div><div class='layui-form-item'><label class='layui-form-label'><span class='x-red'>*</span>可容纳人数</label><div class='layui-input-inline'><input type='text' name='num' class='layui-input' value='0'></div></div></div>";
+   	  
    	
    }
   
   function del(object){
-  	 $(object).parent().remove();
+  	 index=0;
+  	 $(object).parent().parent().remove();
+  	 
+  	
   }
   
    

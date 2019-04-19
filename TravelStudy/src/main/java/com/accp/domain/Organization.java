@@ -20,9 +20,6 @@ public class Organization {
     private String spare4;
 
     private String spare5;
-    
-    private List<Organization> mlist;
-
     public List<Organization> getMlist() {
 		return mlist;
 	}
@@ -31,7 +28,18 @@ public class Organization {
 		this.mlist = mlist;
 	}
 
-	public Integer getId() {
+	public List<Organizationzw> getOlist() {
+		return olist;
+	}
+
+	public void setOlist(List<Organizationzw> olist) {
+		this.olist = olist;
+	}
+
+	private List<Organization> mlist;
+    private List<Organizationzw> olist;
+
+    public Integer getId() {
         return id;
     }
 

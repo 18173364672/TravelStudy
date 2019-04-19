@@ -3,8 +3,6 @@ package com.accp.domain;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Employee {
@@ -21,9 +19,9 @@ public class Employee {
     private String phone;
 
     private String address;
-    
+   
 
-   @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date createtime;
 
     private String job;
@@ -33,8 +31,7 @@ public class Employee {
     private Integer state;
 
     private String uimg;
-   
-    //部门id
+
     private String spare1;
 
     private String spare2;
@@ -45,27 +42,18 @@ public class Employee {
 
     private String spare5;
     
-    //部门名称
     private String oname;
     
-    private List<Employee> mlist;
+    private String repass;
     
-    private String oldpass;
+    private Double sumpay;
     
-    public String getOldpass() {
-		return oldpass;
+    public Double getSumpay() {
+		return sumpay;
 	}
 
-	public void setOldpass(String oldpass) {
-		this.oldpass = oldpass;
-	}
-
-	public String getNewpass() {
-		return newpass;
-	}
-
-	public void setNewpass(String newpass) {
-		this.newpass = newpass;
+	public void setSumpay(Double sumpay) {
+		this.sumpay = sumpay;
 	}
 
 	public String getRepass() {
@@ -78,24 +66,12 @@ public class Employee {
 
 	private String newpass;
     
-    private String repass;
-    
-    private Double sumpay;
-
-    public Double getSumpay() {
-		return sumpay;
+    public String getNewpass() {
+		return newpass;
 	}
 
-	public void setSumpay(Double sumpay) {
-		this.sumpay = sumpay;
-	}
-
-	public List<Employee> getMlist() {
-		return mlist;
-	}
-
-	public void setMlist(List<Employee> mlist) {
-		this.mlist = mlist;
+	public void setNewpass(String newpass) {
+		this.newpass = newpass;
 	}
 
 	public String getOname() {
@@ -106,7 +82,27 @@ public class Employee {
 		this.oname = oname;
 	}
 
-	public Integer getId() {
+	public String getOldpass() {
+		return oldpass;
+	}
+
+	public void setOldpass(String oldpass) {
+		this.oldpass = oldpass;
+	}
+
+	public List<Employee> getMlist() {
+		return mlist;
+	}
+
+	public void setMlist(List<Employee> mlist) {
+		this.mlist = mlist;
+	}
+
+	private String oldpass;
+    
+    private List<Employee> mlist;
+
+    public Integer getId() {
         return id;
     }
 

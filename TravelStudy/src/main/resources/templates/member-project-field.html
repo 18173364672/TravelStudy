@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>研学旅行</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" th:href="@{/css/font.css}">
 	<link rel="stylesheet" th:href="@{/css/xadmin.css}">
     <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
@@ -14,7 +14,6 @@
     <script th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
    
     <script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
-<!--    <script type="text/javascript" src="static/js/jquery-1.8.3.js" ></script>-->
 </head>
   <script>
   	   
@@ -57,7 +56,7 @@
 <body>
     <!-- 顶部开始 -->
     <div class="container">
-        <div class="logo"><a href="./index.html">研学旅行管理系统</a></div>
+        <div class="logo"><a href="./index.html">研学旅行</a></div>
         <div class="open-nav"><i class="iconfont">&#xe699;</i></div>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
@@ -142,15 +141,15 @@
                        员工管理
                         <i class="iconfont nav_right">&#xe697;</i>
                     </a>
-                    <ul class="sub-menu opened" >
+                    <ul class="sub-menu" >
                           <li>
-                              <a th:href="@{/employee/toemployeequerypage}">
+                           <a th:href="@{/employee/toemployeequerypage}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 员工信息
                             </a>
                         </li>
                         
-                         <li class="current">
+                         <li >
                             <a th:href="@{/organization/toorganization}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 组织机构
@@ -172,8 +171,8 @@
                         项目管理
                         <i class="iconfont nav_right">&#xe697;</i>
                     </a>
-                    <ul class="sub-menu">
-                             <li>
+                    <ul class="sub-menu opened">
+                             <li >
                             <a href="member-project.html">
                                 <i class="iconfont">&#xe6a7;</i>
                                 项目信息
@@ -202,12 +201,15 @@
                                 项目排名
                             </a>
                         </li>
-                          <li >
-                         <a th:href="@{/field/tofieldquerypage}">
+                        
+              <li class="current">
+                            <a th:href="@{/field/tofieldquerypage}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 项目场地
                             </a>
                         </li>
+                        
+                        
     
                     </ul>
                 </li>
@@ -332,23 +334,25 @@
         <!-- 左侧菜单结束 -->
         <!-- 右侧主体开始 -->
         <div class="page-content">
+       
           <div class="content">
             <!-- 右侧内容框架，更改从这里开始 -->
-            
-            <div id="s">
-            <form class="layui-form xbs" action="" >
+          
+            <form class="layui-form xbs">
                 <div class="layui-form-pane" style="text-align: center;">
                   <div class="layui-form-item" style="display: inline-block;">
               
                     
                     <div class="layui-input-inline">
-                      <input type="text" name="username"  placeholder="请输入部门名" autocomplete="off" class="layui-input" v-model="name">
+                      <input type="text" name="username"  placeholder="请输入场地类型" autocomplete="off" class="layui-input" v-model="name">
                     </div>
-                   
+                    <div class="layui-input-inline" style="width:80px">
+                        
+                    </div>
                   </div>
                 </div> 
             </form>
-            <xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button><button class="layui-btn" onclick="member_add('添加部门','/organization/toorganizationadd','600','500')"><i class="layui-icon">&#xe608;</i>添加</button><span class="x-right" style="line-height:40px">共有数据：{{pageInfo.total}}条</span></xblock>
+            <xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button><button class="layui-btn" onclick="member_add('添加新场地','/field/tofieldadd','600','500')"><i class="layui-icon">&#xe608;</i>添加新场地</button><span class="x-right" style="line-height:40px">共有数据：{{pageInfo.total}} 条</span></xblock>
             <table class="layui-table">
                 <thead>
                     <tr>
@@ -359,70 +363,101 @@
                             ID
                         </th>
                         <th>
-                            部门名称
+                            场地类型
                         </th>
                         <th>
-                            工作方向
+                            场地名称
                         </th>
-                        <th>
-                            在职人数
+             
+                                     <th>
+                           可容纳最大人数
                         </th>
-         
-                      
+                          <th>
+                          是否占用
+                        </th> 
+        
+              
                         <th>
                             操作
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-              
-                    
-                
-                 
-                    
-                    
-                  
-                    
-                          <tr v-for="l in pageInfo.list">
+                    <tr v-for="l in pageInfo.list">
                         <td>
-                            <input type="checkbox"  name="s1">
+                            <input type="checkbox" name="s1">
                         </td>
                         <td>
                             {{l.id}}
                         </td>
                         <td>
-                            <u style="cursor:pointer" onclick="member_show('部门员工信息','/organization/organizationquery','10001','980','600',this)">
-                                {{l.name}}
-                            </u>
-                            <div style="display: none">{{l.id}}</div>
+                           
+                              {{l.ftname}}
+                          
                         </td>
                         <td >
-                            {{l.context}}
+                          {{l.name}}
                         </td>
-                        <td v-if="l.count!=null">
-                           {{l.count}}
+                    
+                        
+                         <td >
+                           {{l.num}}
                         </td>
                         
-                        <td v-else>
-                          0
-                        </td>
-  
-      
-                        <td class="td-manage">
-                           
-                            <a title="编辑" href="javascript:;" onclick="member_edit('部门编辑','/organization/toorganizationedit','4','','510',this)"
+                         
+                                        <td class="td-status" v-if="l.occupy==0">
+                                <span class="layui-btn layui-btn-normal layui-btn-mini">
+                                未占用
+                            </span>
+                        </td> 
+                        
+                                                         <td class="td-status" v-else>
+                                <span class="layui-btn layui-btn-disabled layui-btn-mini">
+                                已占用
+                            </span>
+                        </td> 
+                        <td class="td-manage" v-if="l.occupy==0">
+                             
+                               <a style="text-decoration:none" onclick="member_stop(this)" href="javascript:;" title="停用">
+                                <i class="layui-icon">&#xe601;</i>
+                            </a>
+                            <div style="display: none">{{l.id}}</div>
+                             
+                            <a title="编辑" href="javascript:;" onclick="member_edit('场地修改','/field/tofieldedit','4','','510',this)"
                             class="ml-5" style="text-decoration:none">
                                 <i class="layui-icon">&#xe642;</i>
                             </a>
                             <div style="display: none">{{l.id}}</div>
-                            
                             <a title="删除" href="javascript:;" onclick="member_del(this)" 
                             style="text-decoration:none">
                                 <i class="layui-icon">&#xe640;</i>
                             </a>
                             <div style="display: none">{{l.id}}</div>
                         </td>
+                        
+                            <td class="td-manage" v-else>
+                             
+                              <a style="text-decoration:none" onclick="member_start(this)" href="javascript:;" title="停用">
+                                <i class="layui-icon">&#xe62f;</i>
+                            </a>
+                              <div style="display: none">{{l.id}}</div>
+                            <a title="编辑" href="javascript:;" onclick="member_edit('场地修改','/field/tofieldedit','4','','510',this)"
+                            class="ml-5" style="text-decoration:none">
+                                <i class="layui-icon">&#xe642;</i>
+                            </a>
+                            <div style="display: none">{{l.id}}</div>
+                            <a title="删除" href="javascript:;" onclick="member_del(this)" 
+                            style="text-decoration:none">
+                                <i class="layui-icon">&#xe640;</i>
+                            </a>
+                            <div style="display: none">{{l.id}}</div>
+                        </td>
+                     
                     </tr>
+                   
+           
+                    
+           
                     
                 </tbody>
             </table>
@@ -430,10 +465,15 @@
                 	 <button class="layui-btn layui-btn-warm" v-on:click="prePage()">上一页</button>
                         <button class="layui-btn layui-btn-danger" v-on:click="nextPage()">下一页</button>
                 </xblock>
-            	</div>
+            	
             <!-- 右侧内容框架，更改从这里结束 -->
+            </div>
+            
           </div>
-        </div>
+          
+      
+          </div>
+        
         <!-- 右侧主体结束 -->
     </div>
     <!-- 中部结束 -->
@@ -446,10 +486,10 @@
     <div class="bg-changer">
         <div class="swiper-container changer-list">
             <div class="swiper-wrapper">
-                 <div class="swiper-slide"><img class="item" th:src="@{/images/a.jpg}" alt=""></div>
-                <div class="swiper-slide"><img class="item" th:src="@{/images/b.jpg}" alt=""></div>
-                <div class="swiper-slide"><img class="item" th:src="@{/images/c.jpg}" alt=""></div>
-                <div class="swiper-slide"><img class="item" th:src="@{/images/d.jpg}" alt=""></div>
+                 <div class="swiper-slide"><img class="item" src="static/images/a.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="static/images/b.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="static/images/c.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" src="static/images/d.jpg" alt=""></div>
                 <div class="swiper-slide"><img class="item" src="static/images/e.jpg" alt=""></div>
                 <div class="swiper-slide"><img class="item" src="static/images/f.jpg" alt=""></div>
                 <div class="swiper-slide"><img class="item" src="static/images/g.jpg" alt=""></div>
@@ -493,126 +533,73 @@
               start.max = datas; //结束日选好后，重置开始日的最大日期
             }
           };
-          
-          document.getElementById('LAY_demorange_s').onclick = function(){
-            start.elem = this;
-            laydate(start);
-          }
-          document.getElementById('LAY_demorange_e').onclick = function(){
-            end.elem = this
-            laydate(end);
-          }
+       
           
         });
 
+        //批量删除提交
+      
          /*用户-添加*/
         function member_add(title,url,w,h){
             x_admin_show(title,url,w,h);
         }
-       
+        /*用户-查看*/
+        function member_show(title,url,id,w,h){
+            x_admin_show(title,url,w,h);
+        }
 
          /*用户-停用*/
-        function member_stop(obj,id){
-            layer.confirm('确认要停用吗？',function(index){
-                //发异步把用户状态进行更改
-                $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this,id)" href="javascript:;" title="启用"><i class="layui-icon">&#xe62f;</i></a>');
-                $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-disabled layui-btn-mini">已停用</span>');
-                $(obj).remove();
-                layer.msg('已停用!',{icon: 5,time:1000});
-            });
-        }
+       
 
         /*用户-启用*/
-        function member_start(obj,id){
-            layer.confirm('确认要启用吗？',function(index){
-                //发异步把用户状态进行更改
-                $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="layui-icon">&#xe601;</i></a>');
-                $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span>');
-                $(obj).remove();
-                layer.msg('已启用!',{icon: 6,time:1000});
-            });
-        }
+        
         // 用户-编辑
        
         /*密码-修改*/
         function member_password(title,url,id,w,h){
             x_admin_show(title,url,w,h);  
         }
-     
+        /*用户-删除*/
+       
         </script>
-     
+    
 </body>
 <script type="text/javascript" th:src="@{/js/vue.js}"></script>
 <script type="text/javascript" th:inline="javascript">
 
-/*部门员工-查看*/
-function member_show(title,url,id,w,h,obj){
-	var ids=$(obj).next().text();
+function member_edit (title,url,id,w,h,obj) {
+	var id=$(obj).next().text();
 	
-	var url1="?id="+ids;
+	var url1="?id="+id;
 	
-    x_admin_show(title,url+url1,w,h);
+    x_admin_show(title,url+url1,w,h); 
 }
 
-/*单个-删除*/
-function member_del(obj){
-  var ids=$(obj).next().text();
-	
-	
-	
-    layer.confirm('确认要删除吗？',function(index){
-        //发异步删除数据
-        
-        
-        var urlpath = [[@{/organization/organizationdeletes}]];
-
-        $.ajax({
-      		 url:urlpath,
-      		 data:{
-      			 id:ids
-      			
-      		 },
-      		 datatype:"json",
-      		 success:function(){
-      			 $(obj).parents("tr").remove();
-      			 layer.msg('已删除！',{icon:1,time:1000});
-      		 }
-      	})
-      
-      
-    });
-}
-
-
-//批量删除提交
- function delAll () {
-	
-	 var modules=[];
-	  $("[name='s1']").each(function() {
-		if(this.checked){
-			var model={};
-			model.id=parseInt($(this).parent().next().text());
-			
-			
-			modules.push(model);
-		}
-	})
-	
-	var organization={};
-	 
-	  organization.mlist=modules;
-	  
-	  var organizationStr=JSON.stringify(organization);
-	  console.log(organizationStr);
-	
-	
+function delAll () {
     layer.confirm('确认要删除吗？',function(index){
         //捉到所有被选中的，发异步进行删除
-        layer.msg('删除成功', {icon: 1});
-        var urlpath = [[@{/organization/organizationdelete}]];
+         var modules=[];
+		  $("[name='s1']").each(function() {
+			if(this.checked){
+				var model={};
+				model.id=parseInt($(this).parent().next().text());
+				
+				
+				modules.push(model);
+			}
+		})
+		
+		var field={};
+		 
+		  field.mlist=modules;
+		  
+		  var fieldStr=JSON.stringify(field);
+		  console.log(fieldStr);
+        
+		  var urlpath = [[@{/field/fielddeletes}]];
 		  $.ajax({
 			  url:urlpath,
-			  data:organizationStr,
+			  data:fieldStr,
 			  type:"post",
 			  processData:false,
 			  contentType:"application/json",
@@ -623,21 +610,100 @@ function member_del(obj){
 			  }
 		  })
         
-        
+		  layer.msg('删除成功', {icon: 1});
     });
  }
-     
-function member_edit (title,url,id,w,h,obj) {
-	var ids=$(obj).next().text();
-	
-	var url1="?id="+ids;
 
-    x_admin_show(title,url+url1,w,h); 
+function member_del(obj){
+	var id=$(obj).next().text();
+	
+    layer.confirm('确认要删除吗？',function(index){
+        //发异步删除数据
+        $(obj).parents("tr").remove();
+        layer.msg('已删除!',{icon:1,time:1000});
+        var urlpath = [[@{/field/fielddelete}]];
+
+        $.ajax({
+      		 url:urlpath,
+      		 data:{
+      			 id:id
+      			 
+      		 },
+      		 datatype:"json",
+      		 success:function(){
+      			 
+      			
+      			 window.location.reload();
+      		 }
+      	})
+    });
 }
-     
-     
+
+function member_start(obj){
+	var id=$(obj).next().text();
+	var occupy=0;
+	
+
+    layer.confirm('确认要取消占用吗？',function(index){
+        //发异步把用户状态进行更改
+        $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="layui-icon">&#xe601;</i></a>');
+        $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-normal layui-btn-mini">未占用</span>');
+        $(obj).remove();
+        layer.msg('已取消!',{icon: 6,time:1000});
+        
+        var urlpath = [[@{/field/updatestate}]];
+
+        $.ajax({
+      		 url:urlpath,
+      		 data:{
+      			 id:id,
+      			 occupy:occupy
+      		 },
+      		 datatype:"json",
+      		 success:function(res){
+      			 
+      			 console.log(res);
+      			 window.location.reload();
+      		 }
+      	})
+    });
+}
+
+
+function member_stop(obj){
+	var id=$(obj).next().text();
+	var occupy=1;
+	
+	
+    layer.confirm('确认要占用吗？',function(index){
+        //发异步把用户状态进行更改
+        $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this,id)" href="javascript:;" title="启用"><i class="layui-icon">&#xe62f;</i></a>');
+        $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-disabled layui-btn-mini">已占用</span>');
+        $(obj).remove();
+        layer.msg('已占用!',{icon: 5,time:1000});
+        
+        var urlpath = [[@{/field/updatestate}]];
+
+        $.ajax({
+      		 url:urlpath,
+      		 data:{
+      			 id:id,
+      			 occupy:occupy
+      		 },
+      		 datatype:"json",
+      		 success:function(res){
+      			 
+      			 console.log(res);
+      			 window.location.reload();
+      		 }
+      	})
+        
+    });
+}
+
+
 var v=new Vue({
-	  el:"#s",
+	  el:".content",
 	  data:{
 		  pageInfo:"pageInfo",
 		  name:""
@@ -668,24 +734,27 @@ var v=new Vue({
 		  name:function(){
 			console.log(v.name);
 			getmethod(1,v.name)
-		}
-		  
+		},
 	  }
-
-	  
 });
 
-var urlpath = [[@{/organization/organizationquerypage}]];
 
-$.ajax({
-		 url:urlpath,
-		 data:{},
-		 datatype:"json",
-		 success:function(data){
-			 v.pageInfo=data;
-			 
-		 }
-	})
+	
+	var urlpath = [[@{/field/fieldquerypage}]];
+
+	  $.ajax({
+			 url:urlpath,
+			 data:{},
+			 type:"post",
+			 datatype:"json",
+			 success:function(data){
+				 v.pageInfo=data;
+				 console.log(data);
+			 }
+		});
+
+
+		
 	
 	
 	
@@ -707,7 +776,5 @@ $.ajax({
 
 
 
-
 </script>
-
 </html>

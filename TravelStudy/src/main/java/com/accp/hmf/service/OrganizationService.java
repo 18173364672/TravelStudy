@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.accp.domain.Employee;
 import com.accp.domain.Organization;
+import com.accp.domain.Organizationzw;
 import com.github.pagehelper.PageInfo;
 
 public interface OrganizationService {
@@ -25,4 +26,13 @@ public interface OrganizationService {
 	
 	 //查询在职员工
 	 List<Employee> emquerybm(Integer id);
+	 
+	 //添加职位
+	 public int insertSelective(Organizationzw organizationzw);
+	 
+	 //查询职位
+	 List<Organizationzw> queryzw(Integer id);
+	 
+	 //删除职位
+	 int deletezw(Integer id);
 }
