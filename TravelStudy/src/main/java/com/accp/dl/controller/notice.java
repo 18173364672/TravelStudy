@@ -220,8 +220,6 @@ public class notice {
 			title ="";
 		}
 		PageInfo<Notice> pageList = notices.selecQueryFeYue(currentPage,title, 5);
-		
-		
 		return pageList;
 	}
 	
