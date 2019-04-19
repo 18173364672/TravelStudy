@@ -1,5 +1,6 @@
 package com.accp.dao;
 
+import com.accp.domain.MydAndName;
 import com.accp.domain.Userprojectdiscuss;
 import com.accp.domain.UserprojectdiscussExample;
 import java.util.List;
@@ -27,4 +28,8 @@ public interface UserprojectdiscussMapper {
     int updateByPrimaryKeySelective(Userprojectdiscuss record);
 
     int updateByPrimaryKey(Userprojectdiscuss record);
+    
+    List<MydAndName> selectByMyd();
+    
+    List<MydAndName> selectByCp();
 }

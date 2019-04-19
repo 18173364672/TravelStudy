@@ -1,23 +1,23 @@
 <!doctype html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>后台登录-X-admin1.1</title>
+    <title>研学旅行后台管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="static/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="static/css/font.css">
-    <link rel="stylesheet" href="static/css/xadmin.css">
+    <link rel="stylesheet" th:href="@{/css/font.css}">
+    <link rel="stylesheet" th:href="@{/css/xadmin.css}">
     <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
-    <script type="text/javascript" src="static/js/echarts.js"></script>
-    <script src="static/lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="static/js/xadmin.js"></script>
+    <script type="text/javascript" th:src="@{/js/echarts.js}"></script>
+    <script th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
+    <script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
 </head>
 <body>
     <!-- 顶部开始 -->
     <div class="container">
-        <div class="logo"><a href="./index.html">X-ADMIN V1.1</a></div>
+        <div class="logo"><a href="./index.html">研学旅行后台管理系统</a></div>
         <div class="open-nav"><i class="iconfont">&#xe699;</i></div>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
@@ -207,44 +207,44 @@
                         <i class="iconfont nav_right">&#xe697;</i>
                     </a>
                     <ul class="sub-menu opened">
-                        <li>
-                            <a href="./echarts1.html">
+                        <li >
+                            <a href="toRqProject">
                                 <i class="iconfont">&#xe6a7;</i>
                                 项目人气
                             </a>
                         </li>
                         <li class="current">
-                            <a href="./echarts2.html">
+                            <a href="toMonthSr">
                                 <i class="iconfont">&#xe6a7;</i>
                                 每月收入
                             </a>
                         </li>
                         <li>
-                            <a href="./echarts3.html">
+                            <a href="toRqTeacher">
                                 <i class="iconfont">&#xe6a7;</i>
-                                人气教官
+                                 项目满意度对比
                             </a>
                         </li>
                         <li>
-                            <a href="./echarts4.html">
+                            <a href="toRqActivity">
                                 <i class="iconfont">&#xe6a7;</i>
                                 人气活动
                             </a>
                         </li>
                         <li>
-                            <a href="./echarts5.html">
+                            <a href="toMothKh">
                                 <i class="iconfont">&#xe6a7;</i>
-                                每月客户
+                                每月订单量
                             </a>
                         </li>
                         <li>
-                            <a href="./echarts6.html">
+                            <a href="toYgKq">
                                 <i class="iconfont">&#xe6a7;</i>
-                                员工考勤数据
+                                项目差评数
                             </a>
                         </li>
                         <li>
-                            <a href="./echarts7.html">
+                            <a href="toQuestion">
                                 <i class="iconfont">&#xe6a7;</i>
                                 问卷调查
                             </a>
@@ -293,64 +293,21 @@
             <blockquote class="layui-elem-quote">
                 每月收入
             </blockquote>
+            <div class="">
+                	<label class="layui-form-label">年份:</label>
+                	<select class="layui-select" id="select" onchange="show()" style="width: 150px;">
+                		<option th:each="itme,state : ${years}" th:text="${itme.years}">
+                			
+                		</option>
+                	</select>
+                	
+            </div>
             <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
             <div id="main" style="width: 100%;height:400px;"></div>
             <blockquote class="layui-elem-quote">
-                <table class="layui-table" >
-  					<thead>
-  						<th>月份</th>
-  						<th>收入</th>
-  					</thead>
-  					<tbody>
-  						<td>一月</td>
-  						<td>7352</td>
-  					</tbody>
-  					<tbody>
-  						<td>二月</td>
-  						<td>7352</td>
-  					</tbody>
-  					<tbody>
-  						<td>三月</td>
-  						<td>7352</td>
-  					</tbody>
-  					<tbody>
-  						<td>四月</td>
-  						<td>7352</td>
-  					</tbody>
-  					<tbody>
-  						<td>五月</td>
-  						<td>7352</td>
-  					</tbody>
-  					<tbody>
-  						<td>六月</td>
-  						<td>7352</td>
-  					</tbody>
-  					<tbody>
-  						<td>七月</td>
-  						<td>7352</td>
-  					</tbody>
-  					<tbody>
-  						<td>八月</td>
-  						<td>7352</td>
-  					</tbody>
-  					<tbody>
-  						<td>九月</td>
-  						<td>7352</td>
-  					</tbody>
-  					<tbody>
-  						<td>十月</td>
-  						<td>7352</td>
-  					</tbody>
-  					<tbody>
-  						<td>十一月</td>
-  						<td>7352</td>
-  					</tbody>
-  					<tbody>
-  						<td>十二月</td>
-  						<td>7352</td>
-  					</tbody>
-				</table>
+
             </blockquote>
+            
             <!-- 右侧内容框架，更改从这里结束 -->
           </div>
         </div>
@@ -366,17 +323,17 @@
     <div class="bg-changer">
         <div class="swiper-container changer-list">
             <div class="swiper-wrapper">
-                <div class="swiper-slide"><img class="item" src="static/images/a.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/b.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/c.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/d.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/e.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/f.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/g.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/h.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/i.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/j.jpg" alt=""></div>
-                <div class="swiper-slide"><img class="item" src="static/images/k.jpg" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/a.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/b.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/c.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/d.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/e.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/f.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/g.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/h.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/i.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/j.jpg}" alt=""></div>
+                <div class="swiper-slide"><img class="item" th:src="@{/images/k.jpg}" alt=""></div>
                 <div class="swiper-slide"><span class="reset">初始化</span></div>
             </div>
         </div>
@@ -386,56 +343,94 @@
     <!-- 背景切换结束 -->
         
         <script src="http://cdn.bootcss.com/echarts/3.3.2/echarts.min.js" charset="utf-8"></script>
-        <script type="text/javascript" src="./js/echarts-for-x-admin.js"></script>
-
+        <script type="text/javascript" th:src="@{/js/echarts-for-x-admin.js}"></script>
+		<script type="text/javascript" th:src="@{/js/vue.js}" ></script>
         <script type="text/javascript">
         var dom = document.getElementById("main");
-var myChart = echarts.init(dom);
-var app = {};
-option = null;
-app.title = '坐标轴刻度与标签对齐';
+        
+   	 var vue = new Vue({
+   		 
+   		 el:".bg-out",
+   		 data : {
+   			 data : []
+   		 }
+   		 
+   	 });
+   	 show();
+   	function show(){
+   		var id = $("#select").val();
+   		 $.ajax({
+			url:"http://localhost:8080/toAjaxQueryMonthSr",
+			data:{
+				years:id
+			},
+			type:"post",
+			dataType:"json",
+			success:function(data){
+				vue.data=data;
+				begin();
+			}
+			
+		});
+   		
+   	}
+   	function begin(){
+   		setTimeout(function(){       
+   			var myChart = echarts.init(dom);
+   			var app = {};
+   			option = null;
+   			app.title = '坐标轴刻度与标签对齐';
 
-option = {
-    color: ['#3398DB'],
-    tooltip : {
-        trigger: 'axis',
-        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-        }
-    },
-    grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-    },
-    xAxis : [
-        {
-            type : 'category',
-            data : ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
-            axisTick: {
-                alignWithLabel: true
-            }
-        }
-    ],
-    yAxis : [
-        {
-            type : 'value'
-        }
-    ],
-    series : [
-        {
-            name:'直接访问',
-            type:'bar',
-            barWidth: '60%',
-            data:[100, 521, 200, 334, 390, 330, 220,100,300,400,600,750]
-        }
-    ]
-};
-;
-if (option && typeof option === "object") {
-    myChart.setOption(option, true);
-}
+   			option = {
+   			    color: ['#3398DB'],
+   			    tooltip : {
+   			        trigger: 'axis',
+   			        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+   			            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+   			        }
+   			    },
+   			    grid: {
+   			        left: '3%',
+   			        right: '4%',
+   			        bottom: '3%',
+   			        containLabel: true
+   			    },
+   			    xAxis : [
+   			        {
+   			            type : 'category',
+   			            data : ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+   			            axisTick: {
+   			                alignWithLabel: true
+   			            }
+   			        }
+   			    ],
+   			    yAxis : [
+   			        {
+   			            type : 'value'
+   			        }
+   			    ],
+   			    series : [
+   			        {
+   			            name:'收入',
+   			            type:'bar',
+   			            barWidth: '60%',
+   			            data:vue.data/*[100, 521, 200, 334, 390, 330, 220,100,300,400,600,750]*/
+   			        }
+   			    ]
+   			    
+   			};
+   			;
+   			if (option && typeof option === "object") {
+   			    myChart.setOption(option, true);
+   			}
+   			},100)
+   		
+   	}
+   	
+        $(function(){
+
+        });
+        
         </script>
 </body>
 </html>

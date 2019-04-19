@@ -16,6 +16,12 @@
     <result column="Spare4" property="spare4" jdbcType="VARCHAR" />
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
+  
+  <resultMap id="BaseResultMap2" type="com.accp.domain.ActivityTwo" >
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="value" property="value" jdbcType="INTEGER" />
+  </resultMap>
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -335,4 +341,9 @@
       Spare5 = #{spare5,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByNameAndCount" resultMap="BaseResultMap2" parameterType="com.accp.domain.ActivityTwo">
+ 	 SELECT A_name AS `name`,`count` AS `value` FROM `activity`
+  </select>
+
 </mapper>
