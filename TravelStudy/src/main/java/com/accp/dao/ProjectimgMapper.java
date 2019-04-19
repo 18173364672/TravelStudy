@@ -27,4 +27,6 @@ public interface ProjectimgMapper {
     int updateByPrimaryKeySelective(Projectimg record);
 
     int updateByPrimaryKey(Projectimg record);
+    
+    List<Projectimg> queryimg(Integer id);
 }

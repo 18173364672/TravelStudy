@@ -10,10 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.accp.dao.EmployeeMapper;
 import com.accp.dao.FieldMapper;
 import com.accp.dao.ProjectMapper;
+import com.accp.dao.ProjectimgMapper;
 import com.accp.domain.Employee;
 import com.accp.domain.Field;
 import com.accp.domain.Project;
-
+import com.accp.domain.Projectimg;
 import com.accp.hmf.service.ProjectService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -28,16 +29,20 @@ public class ProjectServiceimpl implements ProjectService{
      EmployeeMapper em;
      @Autowired
      FieldMapper fm;
+     @Autowired
+     ProjectimgMapper ptm;
 	
 	@Override
 	public PageInfo<Project> querypage(Integer currentPage, Integer pageSize, String projectname) {
 		// TODO Auto-generated method stub
 		Page<Project> p = PageHelper.startPage(currentPage, pageSize,true);
 		List<Project> list=pm.pquery(projectname);
-		 List<Employee> elist=new ArrayList<Employee>();
-		 List<Field> flist=new ArrayList<Field>();
+		 
+		 
 		for (Project project : list) {
 		      String []eid=project.getIds().split(",");
+		      List<Employee> elist=new ArrayList<Employee>();
+		      List<Field> flist=new ArrayList<Field>();
 		      for (String eids : eid) {
 				 Employee employee=em.emqueryd(Integer.parseInt(eids));
 				
@@ -67,6 +72,18 @@ public class ProjectServiceimpl implements ProjectService{
 	public int insertSelective(Project record) {
 		// TODO Auto-generated method stub
 		return pm.insertSelective(record);
+	}
+
+	@Override
+	public int insertSelective(Projectimg record) {
+		// TODO Auto-generated method stub
+		return ptm.insertSelective(record);
+	}
+
+	@Override
+	public List<Projectimg> queryimg(Integer id) {
+		// TODO Auto-generated method stub
+		return ptm.queryimg(id);
 	}
 
 }

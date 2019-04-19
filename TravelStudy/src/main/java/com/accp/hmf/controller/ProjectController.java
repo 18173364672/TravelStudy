@@ -17,6 +17,7 @@ import com.accp.domain.Employee;
 import com.accp.domain.Field;
 import com.accp.domain.Fieldtype;
 import com.accp.domain.Project;
+import com.accp.domain.Projectimg;
 import com.accp.hmf.service.EmployeeService;
 import com.accp.hmf.service.FieldService;
 import com.accp.hmf.service.ProjectService;
@@ -31,6 +32,21 @@ public class ProjectController {
 	FieldService fs;
 	@Autowired
 	EmployeeService em;
+	
+	
+	@RequestMapping("/toprojectimg")
+	public String toprojectimg() {
+		return "member-project-img";
+	}
+	
+	@RequestMapping("/projectimg")
+	@ResponseBody
+	public List<Projectimg> projectimg(Integer id) {
+		List<Projectimg> list=ps.queryimg(id);
+		
+		
+		return list;
+	}
 	
 	
 	@RequestMapping("/projectadd")
@@ -76,6 +92,10 @@ public class ProjectController {
 					   String name=f.getOriginalFilename();
 					   String filename=name.substring(name.lastIndexOf("."), name.length());
 					  File img=new File(url+name);
+					  Projectimg projectimg=new Projectimg();
+					  projectimg.setImg(name);
+					  projectimg.setProjectid(pid);
+					  ps.insertSelective(projectimg);
 					f.transferTo(img);
 					
 				}
@@ -125,7 +145,7 @@ public class ProjectController {
 			   currentPage = 1;
 		   }
    	 
-   	 PageInfo<Project> pageInfo=ps.querypage(currentPage, 1, projectname);
+   	 PageInfo<Project> pageInfo=ps.querypage(currentPage, 3, projectname);
    	    return pageInfo;
     }
 	
