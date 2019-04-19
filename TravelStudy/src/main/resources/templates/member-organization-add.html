@@ -117,9 +117,12 @@
 				  processData:false,
 				  contentType:"application/json",
 				  datatype:"text",
-				  success:function(result){
-					 
-					  console.log(result);
+				  success:function(data){
+					  
+					  var cid=$("[name='name']").val();
+					  cid=data.id;
+					  console.log(cid);
+					  
 				  }
 			  })
 	   

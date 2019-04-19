@@ -104,6 +104,13 @@ public class FieldServiceimpl implements FieldService{
 		return ftm.selectByExample(null);
 	}
 
+
+	@Override
+	public List<Field> fquerycd(Integer tid) {
+		// TODO Auto-generated method stub
+		return fm.fquerycd(tid);
+	}
+
 	
 
 }

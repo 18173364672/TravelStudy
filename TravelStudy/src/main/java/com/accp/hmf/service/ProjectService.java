@@ -8,4 +8,6 @@ public interface ProjectService {
    
 	
 	 public PageInfo<Project> querypage(Integer currentPage,Integer pageSize,String projectname);
+
+	 int insertSelective(Project record);
 }

@@ -42,5 +42,7 @@ public interface FieldService {
 	 //查询场地类型
 	 List<Fieldtype> selectByExample(FieldtypeExample example);
 	
+	 //查询类型下多个场地
+	 List<Field> fquerycd(Integer tid);
 	
 }

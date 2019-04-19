@@ -91,7 +91,8 @@ public class OrganizationController {
 	
 	//部门新增
 	@RequestMapping("/organizationadd")
-	public String organizationadd(@RequestBody Organization organization) {
+	@ResponseBody
+	public Organization organizationadd(@RequestBody Organization organization) {
 		os.insertSelective(organization);
 		for (Organizationzw oz : organization.getOlist()) {
 			Organizationzw oz1=new Organizationzw();
@@ -102,7 +103,7 @@ public class OrganizationController {
 		}
 		
 		
-		return "redirect:/organization/organizationquerypage";
+		return organization;
 	}
 	
 	//跳转到部门新增页面

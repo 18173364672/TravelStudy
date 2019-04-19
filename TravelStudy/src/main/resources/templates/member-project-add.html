@@ -116,7 +116,7 @@
             
               
             
-            <form class="layui-form">
+            <form class="layui-form" enctype="multipart/form-data">
               
              
               
@@ -126,7 +126,9 @@
                         <span class="x-red">*</span>项目名称
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="L_username" name="username"  lay-verify="nikename"
+                     <input type="hidden" id="L_username" name="pid"  lay-verify="nikename"
+                        autocomplete="off" class="layui-input">
+                        <input type="text" id="L_username" name="projectname"  lay-verify="nikename"
                         autocomplete="off" class="layui-input">
                     </div>
                 </div>
@@ -136,8 +138,18 @@
                         <span class="x-red">*</span>项目介绍
                     </label>
                     <div class="layui-input-block">
-                        <textarea placeholder="请输入项目介绍" id="L_sign" name="sign" autocomplete="off"
+                        <textarea placeholder="请输入项目介绍" id="L_sign" name="context" autocomplete="off"
                         class="layui-textarea" style="height: 80px;"></textarea>
+                    </div>
+                </div>
+                
+                <div class="layui-form-item layui-form-text">
+                    <label for="L_sign" class="layui-form-label">
+                        <span class="x-red">*</span>价格（/人）
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_username" name="price"  lay-verify="nikename"
+                        autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 
@@ -146,7 +158,7 @@
                         <span class="x-red">*</span>图片选择
                     </label>
                     <div class="layui-input-block">
-                       <input type="file" id="exampleInputFile" multiple="multiple">
+                       <input type="file" id="exampleInputFile" multiple="multiple" name="file">
                     </div>
                 </div>
                 
@@ -164,8 +176,8 @@
                     </label>
                     <div class="layui-inline">
             
-                    <select lay-filter="test">
-                  
+                    <select lay-filter="test" name="type">
+                        <option>请选择</option>
                     	<option th:each="l,state : ${list}" th:text="${l.name}" th:value="${l.id}"></option>
                     	
                     </select>
@@ -188,21 +200,15 @@
                   
                     <div id="yc1"><xblock><i class="iconfont nav_right" id="tb1">&#xe6a7;</i>请选择场地</xblock></div>
                 
-                  <ul id="cd" style="display: none;">
-                  <li> <div>
-                  			<p><input type="checkbox">射击1号场地&nbsp;&nbsp;<input type="checkbox">射击2号场地
-                  			&nbsp;&nbsp;<input type="checkbox">射击3号场地
-                  			
-                  			</p>
+                  
+                 <div id="cd" style="display: none">
+                  		
                   			
                   		
                   	</div>
                   
                   	
-                  </li>
-                  	
-                  	
-                  </ul>
+                  
                   
           
                 
@@ -229,7 +235,15 @@
 </body>
  <script th:src="@{/layui-v2.4.5/layui/layui.js}"></script>
 <script type="text/javascript" th:inline="javascript">
-var urlpath = [[@{/project/queryjl}]];
+    var urlpath = [[@{/project/queryjl}]];
+    
+    var urlpath1=[[@{/project/querycd}]];
+    
+    var urlpath2=[[@{/project/fileupload}]];
+    
+    var urlpath3=[[@{/project/projectadd}]];
+    
+  
 
 $(function(){
 	
@@ -264,7 +278,35 @@ $(function(){
 				
 			 }
 				})
+				
+				
 
+				$.ajax({
+			 url:urlpath1,
+			 data:{
+				 tid:data.value
+			 },
+			 async: false,
+			 datatype:"json",
+			 
+			 success:function(res){
+				 console.log(res);
+				 if(res!=null){
+					 $("#cd").html("");
+					for(var i=0;i<res.length;i++){
+ 						 $("#cd").append("<input type='checkbox' value='"+res[i].id+"' name='cid'>"+res[i].name);
+					
+					}
+					
+					
+					 form.render();
+				 }
+             
+				
+			 }
+				})
+				
+				
  
 				});  
 			});
@@ -284,13 +326,47 @@ $(function(){
 		
 		})
 		
-		var organization={};
+		 var modules1=[];
+		  $("[name='cid']").each(function() {
+			if(this.checked){
+				var model={};
+				model.id=$(this).val();
+				
+				
+				modules1.push(model);
+			}
+				
+		
+		})
+		
+		var project={};
+		  
+		  project.projectname=$("[name='projectname']").val();
+		  project.price=$("[name='price']").val();
+		  project.context=$("[name='context']").val();
+		  project.type=$("[name='type']").val();
+		  project.emlist=modules;
+		  project.flist= modules1;
+		  
+		  var  projectStr=JSON.stringify( project);
+		  console.log(projectStr);
+		  
+		  $.ajax({
+			  url:urlpath3,
+			  data:projectStr,
+			  type:"post",
+			  processData:false,
+			  contentType:"application/json",
+			  datatype:"text",
+			  success:function(data){
+				  
+				
+			    imgadd(data);
+			  }
+		  })
 		  
 		  
-		  organization.olist=modules;
-		  
-		  var organizationStr=JSON.stringify(organization);
-		  console.log(organizationStr);
+	
 		 
 		 
 	 })
@@ -299,6 +375,27 @@ $(function(){
 	 
 })
 
+
+  function imgadd(data){
+	$("[name='pid']").val(data);
+  	  var form=$("form")[0];
+	  var formdata=new FormData(form);
+	  console.log(formdata);
+	  
+	  $.ajax({
+		  url:urlpath2,
+		  data:formdata,
+		  type:"post",
+		  async : false,
+		  contentType:false,
+		  processData:false,
+		  sucess:function(result){
+			  console.log(result);
+		  }
+		  
+		  
+	  })
+    }
 
 </script>
 

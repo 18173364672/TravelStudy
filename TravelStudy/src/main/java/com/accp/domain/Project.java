@@ -2,6 +2,8 @@ package com.accp.domain;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Project {
     private Integer id;
 
@@ -26,6 +28,11 @@ public class Project {
     private String spare4;
 
     private String spare5;
+    
+    private MultipartFile [] file;
+    
+
+   
     
     public List<Employee> getEmlist() {
 		return emlist;
@@ -142,4 +149,12 @@ public class Project {
     public void setSpare5(String spare5) {
         this.spare5 = spare5;
     }
+
+	public MultipartFile [] getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile [] file) {
+		this.file = file;
+	}
 }

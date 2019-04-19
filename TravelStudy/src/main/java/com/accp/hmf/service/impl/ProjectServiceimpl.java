@@ -63,4 +63,10 @@ public class ProjectServiceimpl implements ProjectService{
 		return p.toPageInfo();
 	}
 
+	@Override
+	public int insertSelective(Project record) {
+		// TODO Auto-generated method stub
+		return pm.insertSelective(record);
+	}
+
 }

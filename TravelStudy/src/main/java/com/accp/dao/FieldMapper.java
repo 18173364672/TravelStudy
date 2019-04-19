@@ -33,4 +33,6 @@ public interface FieldMapper {
     Field fqueryd(Integer id);
     
     String fqueryname(Integer id);
+    
+    List<Field> fquerycd(Integer tid);
 }

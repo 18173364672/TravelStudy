@@ -13,7 +13,11 @@
     <result column="Spare4" property="spare4" jdbcType="VARCHAR" />
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
-  
+    
+    <select id="fquerycd" resultMap="BaseResultMap">
+      select * from field where tid=#{tid}
+    </select>
+    
     <select id="fqueryname" resultType="string">
        select name from field where id=#{id}
     </select>
