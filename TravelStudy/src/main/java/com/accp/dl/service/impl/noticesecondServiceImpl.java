@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.accp.dao.NoticesecondMapper;
 import com.accp.dl.service.noticesecondService;
+import com.accp.domain.Noticesecond;
 
 
 @Service
@@ -18,6 +19,11 @@ public class noticesecondServiceImpl implements noticesecondService{
 	@Override
 	public int addNoticesecound(Integer rid, Integer iid, Integer nid) {
 		return noticesecond.addNoticesecound(rid, iid, nid);
+	}
+
+	@Override
+	public Noticesecond selectById(Integer nid) {
+		return noticesecond.selectById(nid);
 	}
 
 }

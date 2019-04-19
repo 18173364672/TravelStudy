@@ -4,7 +4,8 @@ import java.io.File;
 import java.util.List;
 import java.util.UUID;
 
-
+import org.apache.poi.hssf.record.PageBreakRecord.Break;
+import org.apache.poi.sl.usermodel.TextParagraph.BulletStyle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +21,9 @@ import com.accp.dl.service.impl.orgainizationServiceImpl;
 import com.accp.domain.Employee;
 import com.accp.domain.Notice;
 import com.accp.domain.Noticepicture;
+import com.accp.domain.Noticesecond;
 import com.accp.domain.Organization;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators.StringIdGenerator;
 import com.github.pagehelper.PageInfo;
 
 @Controller
@@ -155,7 +158,7 @@ public class notice {
 				String suffix = name.substring(name.lastIndexOf("."),name.length());
 				File chang = new File(url+uuid+suffix);
 				file.transferTo(chang);
-				System.out.println(chang);
+//				System.out.println(chang);
 				String urls = chang.toString();
 				noticepicture.addinsert(urls);	//新增图片
 				
@@ -230,10 +233,34 @@ public class notice {
 	 * @return
 	 */
 	@RequestMapping("/xiangQing")
-	public String xiangQing(Integer LookIds) {
-		
-		System.out.println(LookIds+"这是有没有!!!");
-		
+	public String xiangQing(Integer LookIds,Model model) {
+//		System.out.println(LookIds+"这是有没有!!!");
+		if (LookIds!=null) {
+			Notice dueix = notices.selectById(LookIds);
+			if (dueix.getSpare1()==null) {
+//				System.out.println(dueix.getUid());
+//				String rid = dueix.getSpare1();
+				Noticesecond cdueix = noticesecond.selectById(LookIds);
+//				cdueix.getRid();
+//				System.out.println(cdueix.getRid());
+				Organization odueix2 =  orgainzation.selectById(cdueix.getRid());
+				model.addAttribute("rid",odueix2);
+				return "gGao";
+			}
+			int eid = Integer.parseInt(dueix.getSpare1());
+			Employee edueix = employee.selectById(eid);
+//			Noticesecond cdueix = noticesecond.selectById(dueix.getUid());
+			int oid = Integer.parseInt(edueix.getSpare1());
+			Organization odueix =  orgainzation.selectById(oid);
+			
+//			System.out.println(dueix.getTitle()+"标题!!!");
+//			System.out.println(edueix.getEmployeename()+"名称!!!");
+//			System.out.println(odueix.getName()+"部门!!!");
+			
+			model.addAttribute("dueix",dueix);		//公告内容
+			model.addAttribute("edueix",edueix);	//员工姓名
+			model.addAttribute("odueix",odueix);	//部门名称
+		}
 		return "FaBu";
 	}
 	

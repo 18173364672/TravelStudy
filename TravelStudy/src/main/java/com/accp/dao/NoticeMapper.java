@@ -59,6 +59,14 @@ public interface NoticeMapper {
      */
     List<Notice> selecQueryFeYue(String title);
     
+    /**
+     * 根据id查询数据
+     * @param id
+     * @return
+     */
+    Notice selectById(Integer id);
+    
+    
     
     
 }

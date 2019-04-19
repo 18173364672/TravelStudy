@@ -19,5 +19,17 @@ public interface employeeService {
 	 * @return
 	 */
 	public PageInfo<Employee> selecQueryFeYue(Integer currentPage,String employeename,Integer pageSize);
+	
+	
+    /**
+     * 根据id查询数据
+     * @param id
+     * @return
+     */
+    Employee selectById(Integer id);
+	
+	
+	
+	
     
 }

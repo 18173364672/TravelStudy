@@ -37,5 +37,14 @@ public interface NoticesecondMapper {
      */
     int addNoticesecound(Integer rid,Integer iid,Integer nid);
     
+    /**
+     * 根据公告id查询数据
+     * @param nid
+     * @return
+     */
+    Noticesecond selectById(Integer nid);
+    
+    
+    
     
 }

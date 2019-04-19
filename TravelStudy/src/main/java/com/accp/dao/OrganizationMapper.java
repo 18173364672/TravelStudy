@@ -28,8 +28,12 @@ public interface OrganizationMapper {
 
     int updateByPrimaryKey(Organization record);
     
-    
-    
+    /**
+     * 根据员工的部门id查询数据
+     * @param id
+     * @return
+     */
+    Organization selectById(Integer id);
     
     
     

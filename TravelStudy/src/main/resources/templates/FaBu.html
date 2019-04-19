@@ -16,16 +16,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" th:href="@{/css/index.css}">
     <script type="text/javascript" th:src="@{/js/vue.js}"></script>
-	<style>
-		
-	</style>
-	
-	<script type="text/javascript">
-		  	
-     		
-	</script>
-	
-	
+    
 </head>
 <body>
     <!-- 中部开始 -->
@@ -34,7 +25,7 @@
 				<div class="content">
 					<!-- 右侧内容框架，更改从这里开始 -->
 						<div class="layui-form-item" style="font-size: 24px;">
-							<p style="text-align: center;color: red;">哈哈哈哈哈哈</p>
+							<p style="text-align: center;color: red;" th:text="${dueix.title}"></p>
 						</div>
 						<div class="layui-form-item" style="font-size: 18px;">
 							<p style="text-align: center;">
@@ -44,20 +35,19 @@
 							<p style="color: #002752;">
 								&nbsp;&nbsp;&nbsp;&nbsp;
 								&nbsp;&nbsp;&nbsp;&nbsp;
-								dasdasdasdasddasdasdasdasd
-								dasdasdasdasddasdasdasdasd
-								dasdasdasdasddasdasdasdasd
-								dasdasdasdasddasdasdasdasd
+								<span th:text="${dueix.content}">
+									
+								</span>
 							</p>
 						</div>
 						<div class="layui-form-item" style="font-size: 15px;float: right;">
-							<p>发送人:<span style="color: #002752;">dasdasdasdasd</span></p>
+							<p>发送人:<span style="color: #002752;">1</span></p>
 						</div>
 						<div class="layui-form-item" style="font-size: 18px;">
-							<p>员工姓名:<span style="color: red;">哈哈哈哈哈哈</span></p>
+							<p>员工姓名:<span style="color: red;" th:text="${edueix.employeename}"></span></p>
 						</div>
 						<div class="layui-form-item" style="font-size: 18px;">
-							<p>所属部门:<span style="color: #002752;">dasdasdasdasd</span></p>
+							<p>所属部门:<span style="color: #002752;" th:text="${odueix.name}"></span></p>
 						</div>
 					<!-- 右侧内容框架，更改从这里结束 -->
 				</div>
@@ -66,11 +56,11 @@
 		</div>
     <!-- 背景切换开始 -->
     <!-- 背景切换结束 -->
-    <script>
-		
-    	
-    	
-    	
+    <script th:inline="javascript">
+    	$(function(){
+    		alert(rid);
+    	});
+    
     </script>
 </body>
 </html>

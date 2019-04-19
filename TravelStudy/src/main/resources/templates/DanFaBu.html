@@ -88,8 +88,8 @@
 							<td>{{item.title}}</td>
 							<td>{{item.content}}</td>
 							<td class="td-status">
-								<a title="查看" href="javascript:;" :data="item.id" class="ml-5"  style="text-decoration:none">
-	                                <i class="layui-icon" on:click="Look(item.id)">&#xe642;</i>
+								<a title="查看" href="javascript:;"  :data="item.id" onclick="show(this)" class="ml-5"  style="text-decoration:none">
+	                                <i class="layui-icon" >&#xe642;</i>
 	                            </a>
 							</td>
 						</tr>
@@ -123,29 +123,16 @@
             $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span>');
             $(obj).remove();
             layer.msg('已启用!',{icon: 6,time:1000});
-            
-            
-            
-            
         });
     }
 //     用户-编辑
-    function member_edit (title,url,id,w,h) {
-    	$.ajax({
-			  url:[[@{/notice/xiangQing}]],
-			  type:"post",
-			  data:{
-				  'LookIds':id
-			  },
-			  dataType:"json",
-			  success:function(result){
-				  
-			  }
-			  
-		  });
-        x_admin_show(title,url,w,h); 
-    }
+//     function member_edit (title,url,id,w,h) {
+       
+//     }
     
+    function show(th){
+    	 x_admin_show("标题","xiangQing?LookIds="+$(th).attr("data"),"500","400"); 
+    }
     
     
     
@@ -160,13 +147,28 @@
     	},methods:{
     		queryPage(ind){
     		page(ind);
+    		
+    	},
+    	Look(can){
+    		//alert(can);
+    		/* $.ajax({
+    			url:[[@{/notice/xiangQing}]],
+	  			  type:"post",
+	  			  data:{
+	  				  'LookIds':can
+	  			  },
+	  			  dataType:"json",
+	  			  success:function(result){
+	  				  alert(result);
+	  			  }
+    		}); */
+    		
     	}
     		
     	}
     	
     });
-    
-    
+	
     function page(curPage){
     	var title = $("[name = title]").val();
 		  $.ajax({
@@ -184,6 +186,15 @@
 		  });
     	
     }
+    
+  /*   function Look(can){
+    	alert(can);
+    	
+	  
+    	 var url= "xiangQing?LookIds="+can;
+    	x_admin_show("查看",url,500,400);  
+  }
+  */
     
     
 	$(function(){
@@ -205,12 +216,7 @@
 		  page(1);
 		   
 		  
-		  function Look(can){
-			  	var can1 = $(this).attr("data");
-			  	Look(can1);
-		    	var url= "xiangQing?LookIds="+can1;
-		    	x_admin_show("查看",url,500,400); 
-		  }
+		
 		  
 // 		  $("#Look").click(function(){
 // 		    	alert("进来了");

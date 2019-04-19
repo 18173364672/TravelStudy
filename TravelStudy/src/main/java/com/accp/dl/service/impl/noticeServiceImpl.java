@@ -65,5 +65,10 @@ public class noticeServiceImpl implements noticeService{
 		return pageInfo.toPageInfo();
 	}
 
+	@Override
+	public Notice selectById(Integer id) {
+		return notices.selectById(id);
+	}
+
 	
 }

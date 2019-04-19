@@ -45,6 +45,12 @@ public class employeeServiceImpl implements employeeService{
 		return pageInfo.toPageInfo();
 	}
 
+
+	@Override
+	public Employee selectById(Integer id) {
+		return employ.selectById(id);
+	}
+
 	
 	
 	

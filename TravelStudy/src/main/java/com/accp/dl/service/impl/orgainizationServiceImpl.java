@@ -25,4 +25,10 @@ public class orgainizationServiceImpl implements orgainizationService{
 		return organization.selectByExample(null);
 	}
 
+
+	@Override
+	public Organization selectById(Integer id) {
+		return organization.selectById(id);
+	}
+
 }

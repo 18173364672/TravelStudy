@@ -278,6 +278,9 @@
   		INSERT INTO `noticesecond` (`Rid`,`iid`,`nid`)VALUES(#{rid},#{iid},#{nid});
   </insert>
   
+  <select id="selectById" resultType="com.accp.domain.Noticesecond">
+  		SELECT * FROM noticesecond WHERE nid = #{nid}
+  </select>
   
   
 </mapper>

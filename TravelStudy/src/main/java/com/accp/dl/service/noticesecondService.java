@@ -1,5 +1,7 @@
 package com.accp.dl.service;
 
+import com.accp.domain.Noticesecond;
+
 public interface noticesecondService {
 
 	
@@ -11,6 +13,14 @@ public interface noticesecondService {
      * @return
      */
     int addNoticesecound(Integer rid,Integer iid,Integer nid);
+    
+    
+    /**
+     * 根据公告id查询数据
+     * @param nid
+     * @return
+     */
+    Noticesecond selectById(Integer nid);
 	
 	
 }

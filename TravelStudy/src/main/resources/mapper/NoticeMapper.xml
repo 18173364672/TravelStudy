@@ -291,7 +291,9 @@
   		SELECT * FROM `notice` WHERE title LIKE CONCAT('%',#{title},'%')
   </select>
   
-  
+  <select id="selectById" resultType="com.accp.domain.Notice">
+  		SELECT * FROM `notice` WHERE id = #{id}
+  </select>
   
   
 </mapper>

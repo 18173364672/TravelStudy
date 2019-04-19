@@ -272,4 +272,10 @@
       Spare5 = #{spare5,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectById" resultType="com.accp.domain.Organization">
+  		SELECT * FROM organization WHERE id = #{id}
+  </select>
+  
+  
 </mapper>

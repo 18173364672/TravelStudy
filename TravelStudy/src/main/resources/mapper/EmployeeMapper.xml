@@ -402,5 +402,9 @@
   		SELECT * FROM `employee` es INNER JOIN `organization` re ON es.`Spare1`=re.id WHERE es.`Employeename` LIKE CONCAT('%',#{employeename},'%')
   </select>
   
+  <select id="selectById" resultType="com.accp.domain.Employee">
+  		SELECT * FROM employee WHERE id=#{id}
+  </select>
+  
   
 </mapper>

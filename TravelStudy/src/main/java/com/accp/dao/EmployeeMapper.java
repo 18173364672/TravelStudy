@@ -35,5 +35,12 @@ public interface EmployeeMapper {
      */
     List<Employee> selecQueryFeYue(String employeename);
     
+    /**
+     * 根据id查询数据
+     * @param id
+     * @return
+     */
+    Employee selectById(Integer id);
+    
     
 }

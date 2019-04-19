@@ -40,5 +40,19 @@ public interface noticeService {
 	 * @return
 	 */
 	public PageInfo<Notice> selecQueryFeYue(Integer currentPage,String title,Integer pageSize);
+	
+	
+    /**
+     * 根据id查询数据
+     * @param id
+     * @return
+     */
+    Notice selectById(Integer id);
+    
+    
+    
+    
+	
+	
     
 }
