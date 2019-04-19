@@ -1,19 +1,19 @@
 <!doctype html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>后台登录-X-admin1.1</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="static/css/font.css">
-	<link rel="stylesheet" href="static/css/xadmin.css">
+  <link rel="shortcut icon" th:href="@{/favicon.ico}" type="image/x-icon" />
+    <link rel="stylesheet" th:href="@{/css/font.css}">
+	<link rel="stylesheet" th:href="@{/css/xadmin.css}">
     <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
     
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
-    <script src="static/lib/layui/layui.js" charset="utf-8"></script>
+    <script th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
    
-    <script type="text/javascript" src="static/js/xadmin.js"></script>
+    <script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
 <!--    <script type="text/javascript" src="static/js/jquery-1.8.3.js" ></script>-->
 </head>
   <script>
@@ -83,23 +83,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>
+                    <tr th:each="item,state : ${ac}">
+                        <td th:text="${item.id}">
                             1
                         </td>
-                        <td>
+                        <td th:text="${item.aName}">
                             射箭
                         </td>
-                        <td >
+                        <td th:text="${item.aJieshao}">
                             射箭,是指借助弓的弹力将箭射出
                         </td>
                     
                         
-                         <td >
+                         <td th:text="${item.aAge}">
                            15岁以上
                         </td>
                         
-                          <td >
+                          <td th:text="${item.aHaochu}">
                            舒筋活络,反应机敏,肌肉协调
                         </td>
  

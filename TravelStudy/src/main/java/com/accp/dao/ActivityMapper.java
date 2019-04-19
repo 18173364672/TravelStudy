@@ -31,4 +31,6 @@ public interface ActivityMapper {
     int updateByPrimaryKey(Activity record);
     
     List<ActivityTwo> selectByNameAndCount();
+   
+    List<Activity> selectByName(@Param("name") String name);
 }

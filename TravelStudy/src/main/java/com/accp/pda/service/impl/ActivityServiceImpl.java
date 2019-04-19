@@ -24,4 +24,29 @@ public class ActivityServiceImpl implements ActivityService{
 		return mapper.selectByExample(example);
 	}
 
+	@Override
+	public Activity selectByPrimaryKey(Integer id) {
+		// TODO Auto-generated method stub
+		return mapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public int updateByPrimaryKey(Activity record) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKey(record);
+	}
+
+	@Override
+	public int deleteByPrimaryKey(Integer id) {
+		// TODO Auto-generated method stub
+		return mapper.deleteByPrimaryKey(id);
+	}
+
+	@Override
+	public List<Activity> selectByName(String name) {
+		// TODO Auto-generated method stub
+		return mapper.selectByName(name);
+	}
+
+
 }
