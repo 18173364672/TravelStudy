@@ -272,4 +272,32 @@
       Spare5 = #{spare5,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <insert id="add">
+  		INSERT INTO `notice` (`uid`,`title`,`content`)values(#{uid},#{title},#{content});
+  </insert>
+  
+  <select id="selectOrderBy" resultType="com.accp.domain.Notice">
+  		SELECT * FROM `notice` ORDER BY id DESC LIMIT 0,1
+  </select>
+  
+  
+  <insert id="toAdd">
+  		INSERT INTO `notice` (`uid`,`title`,`content`,`Spare1`)VALUES(#{uid},#{title},#{content},#{spare1});
+  </insert>
+  
+  
+  <select id="selecQueryFeYue" resultType="com.accp.domain.Notice">
+  		SELECT * FROM `notice` WHERE title LIKE CONCAT('%',#{title},'%')
+  </select>
+  
+  <select id="selectById" resultType="com.accp.domain.Notice">
+  		SELECT * FROM `notice` WHERE id = #{id}
+  </select>
+  
+  <select id="queryAll" resultType="com.accp.domain.Notice">
+  		SELECT * FROM notice ORDER BY id DESC LIMIT 0,1
+  </select>
+  
+  
 </mapper>

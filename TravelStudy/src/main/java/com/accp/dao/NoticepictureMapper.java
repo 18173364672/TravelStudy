@@ -27,4 +27,20 @@ public interface NoticepictureMapper {
     int updateByPrimaryKeySelective(Noticepicture record);
 
     int updateByPrimaryKey(Noticepicture record);
+    
+    /**
+     * 添加一张新图片
+     * @param url
+     * @return
+     */
+    int addinsert(String url);
+    
+    /**
+     * 查询最后一张图片
+     * @return
+     */
+    Noticepicture selectOrderBy();
+    
+    
+    
 }

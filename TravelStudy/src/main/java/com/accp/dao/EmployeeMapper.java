@@ -35,4 +35,17 @@ public interface EmployeeMapper {
     public Employee emqueryd(Integer id);
     
     List<Employee> emquerybm(Integer id);
+    /**
+     * 分页带条件查询
+     * @param employeename
+     * @return
+     */
+    List<Employee> selecQueryFeYue(String employeename);
+    
+    /**
+     * 根据id查询数据
+     * @param id
+     * @return
+     */
+    Employee selectById(Integer id);
 }

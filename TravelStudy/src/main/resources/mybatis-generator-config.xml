@@ -2,7 +2,7 @@
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
 	<classPathEntry
-		location="D:\path\to\local\repo\mysql\mysql-connector-java\5.1.6\mysql-connector-java-5.1.6.jar" />
+		location="D:\javajar\mysql-connector-java-5.1.6-bin.jar" />
 	<context id="context1">
 		<!-- 注释 -->
 		<commentGenerator>
@@ -12,7 +12,7 @@
 		</commentGenerator>
 		<jdbcConnection
 			connectionURL="jdbc:mysql://localhost:3306/travelstudy?serverTimezone=UTC"
-			driverClass="com.mysql.jdbc.Driver" password="123456" userId="root" />
+			driverClass="com.mysql.jdbc.Driver" password="1234" userId="root" />
 		<!-- pojo生成位置 -->
 		<javaModelGenerator
 			targetPackage="com.accp.domain" targetProject="src/main/java" />

@@ -272,4 +272,19 @@
       Spare5 = #{spare5,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  
+  <insert id="addNoticesecound">
+  		INSERT INTO `noticesecond` (`Rid`,`iid`,`nid`)VALUES(#{rid},#{iid},#{nid});
+  </insert>
+  
+  <select id="selectById" resultType="com.accp.domain.Noticesecond">
+  		SELECT * FROM noticesecond WHERE nid = #{nid}
+  </select>
+  
+  <insert id="toAdd">
+  		INSERT INTO `noticesecond` (`nid`)VALUES(#{nid});
+  </insert>
+  
+  
 </mapper>

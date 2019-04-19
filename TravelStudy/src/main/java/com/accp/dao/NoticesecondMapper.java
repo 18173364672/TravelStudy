@@ -27,4 +27,31 @@ public interface NoticesecondMapper {
     int updateByPrimaryKeySelective(Noticesecond record);
 
     int updateByPrimaryKey(Noticesecond record);
+    
+    /**
+     * 新增部门发送公告
+     * @param rid
+     * @param iid
+     * @param nid
+     * @return
+     */
+    int addNoticesecound(Integer rid,Integer iid,Integer nid);
+    
+    /**
+     * 根据公告id查询数据
+     * @param nid
+     * @return
+     */
+    Noticesecond selectById(Integer nid);
+    
+    /**
+     * 只新增公告表外键
+     * @param nid
+     * @return
+     */
+    int toAdd(Integer nid);
+    
+    
+    
+    
 }
