@@ -70,5 +70,10 @@ public class noticeServiceImpl implements noticeService{
 		return notices.selectById(id);
 	}
 
+	@Override
+	public Notice queryAll() {
+		return notices.queryAll();
+	}
+
 	
 }

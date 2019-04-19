@@ -111,8 +111,12 @@
 				contentType:false,
 				processData:false,
 				success:function(result){
+					 var index = parent.layer.getFrameIndex(window.name);
+					 parent.layer.close(index);
 					console.log(result); 
 				},error:function(date){
+					 var index = parent.layer.getFrameIndex(window.name);
+					 parent.layer.close(index);
 					console.log(date); 
 				}
         		

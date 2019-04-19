@@ -67,6 +67,11 @@ public interface NoticeMapper {
     Notice selectById(Integer id);
     
     
-    
+    /**
+     * 查询最后一条数据
+     * @param id
+     * @return
+     */
+    Notice queryAll();
     
 }

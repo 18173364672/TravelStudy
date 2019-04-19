@@ -22,5 +22,13 @@ public interface noticesecondService {
      */
     Noticesecond selectById(Integer nid);
 	
+    
+    /**
+     * 只新增公告表外键
+     * @param nid
+     * @return
+     */
+    int toAdd(Integer nid);
+    
 	
 }

@@ -26,4 +26,9 @@ public class noticesecondServiceImpl implements noticesecondService{
 		return noticesecond.selectById(nid);
 	}
 
+	@Override
+	public int toAdd(Integer nid) {
+		return noticesecond.toAdd(nid);
+	}
+
 }

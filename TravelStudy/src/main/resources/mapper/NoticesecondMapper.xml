@@ -282,5 +282,9 @@
   		SELECT * FROM noticesecond WHERE nid = #{nid}
   </select>
   
+  <insert id="toAdd">
+  		INSERT INTO `noticesecond` (`nid`)VALUES(#{nid});
+  </insert>
+  
   
 </mapper>

@@ -134,6 +134,8 @@ public class notice {
 	@ResponseBody
 	public String addnotice(String title ,String content,Integer uid) {
 		notices.add(title, content, 1);
+		Notice dueix = notices.queryAll();
+		noticesecond.toAdd(dueix.getId());
 		return "kkkk";
 	}
 	

@@ -295,5 +295,9 @@
   		SELECT * FROM `notice` WHERE id = #{id}
   </select>
   
+  <select id="queryAll" resultType="com.accp.domain.Notice">
+  		SELECT * FROM notice ORDER BY id DESC LIMIT 0,1
+  </select>
+  
   
 </mapper>
