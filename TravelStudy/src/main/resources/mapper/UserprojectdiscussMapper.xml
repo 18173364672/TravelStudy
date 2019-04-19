@@ -14,6 +14,11 @@
     <result column="Spare4" property="spare4" jdbcType="VARCHAR" />
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
+  
+    <resultMap id="BaseResultMap2" type="com.accp.domain.MydAndName" >
+    <result column="value" property="value" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+  </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -303,4 +308,20 @@
       Spare5 = #{spare5,jdbcType=VARCHAR}
     where Id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectByMyd" resultMap="BaseResultMap2" parameterType="com.accp.domain.MydAndName">
+SELECT COUNT(Satisfied) AS `value`,p.`Projectname` AS `name` FROM `userprojectdiscuss` u
+INNER JOIN project p 
+ON u.projectid = p.`Id`
+WHERE u.Satisfied = 1
+GROUP BY p.`Projectname`
+  </select>
+  
+    <select id="selectByCp" resultMap="BaseResultMap2" parameterType="com.accp.domain.MydAndName">
+	SELECT COUNT(Satisfied) AS `value`,p.`Projectname` AS `name` FROM `userprojectdiscuss` u
+	INNER JOIN project p 
+	ON u.projectid = p.`Id`
+	WHERE u.Satisfied = 3
+	GROUP BY p.`Projectname`
+  </select>
 </mapper>

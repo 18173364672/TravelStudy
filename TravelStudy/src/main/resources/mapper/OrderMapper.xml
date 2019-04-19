@@ -15,6 +15,18 @@
     <result column="Spare4" property="spare4" jdbcType="VARCHAR" />
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
+  <resultMap id="BaseResultMap2" type="com.accp.domain.MonthSr" >
+    <result column="sumprice" property="sumprice" javaType="INTEGER"/>
+    <result column="months" property="months" jdbcType="VARCHAR" />
+    <result column="years" property="years" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="BaseResultMap3" type="com.accp.domain.MonthOrder" >
+    <result column="sum" property="sum" javaType="INTEGER"/>
+    <result column="months" property="months" jdbcType="VARCHAR" />
+    <result column="years" property="years" jdbcType="VARCHAR" />
+  </resultMap>
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -319,4 +331,29 @@
       Spare5 = #{spare5,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="SelectMonthSr" resultMap="BaseResultMap2" parameterType="com.accp.domain.MonthSr">
+  	<!-- 
+  	select id,sum(price) as sumPrice,DATE_FORMAT(`time`,'%Y%m') months from `order`
+	where tid = 5 
+	GROUP BY months
+	 -->
+select sum(price) as `sumprice`,DATE_FORMAT(`time`, '%m') months,DATE_FORMAT(`time`, '%y') years from `order`
+where tid = 5 and YEAR(`time`)=#{years,jdbcType=VARCHAR}
+group by months
+  </select>
+  
+    <select id="SelectMonthOr" resultMap="BaseResultMap3" parameterType="com.accp.domain.MonthOrder">
+		SELECT COUNT(*) AS `sum`,DATE_FORMAT(`time`,'%m') months,DATE_FORMAT(`time`, '%Y') years FROM `order` 
+		WHERE tid = 5 AND YEAR(`time`) = #{years,jdbcType=VARCHAR}
+		GROUP BY months
+  </select>
+  
+  <select id="SelectOrYears" resultMap="BaseResultMap3" parameterType="com.accp.domain.MonthOrder">
+		SELECT DATE_FORMAT(`time`, '%Y') years FROM `order` 
+		WHERE tid = 5 
+		GROUP BY years
+		ORDER BY years desc
+  </select>
+  
 </mapper>

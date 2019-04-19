@@ -15,6 +15,21 @@
     <result column="Spare4" property="spare4" jdbcType="VARCHAR" />
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
+
+   <resultMap id="BaseResultMap2" type="com.accp.domain.ProjectByTimeAndName" >
+    <result column="Projectname" property="projectname" jdbcType="VARCHAR" />
+    <result column="RenQi" property="RenQi" jdbcType="INTEGER" />
+    <result column="CountPrice" property="countPrice" jdbcType="INTEGER" />
+    <result column="months" property="months" jdbcType="VARCHAR" />
+    <result column="years" property="years" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap type="com.accp.domain.QuestionTj" id="BaseResultMap3">
+  	<result column="projectname" property="projectname" jdbcType="VARCHAR" />
+    <result column="numcount" property="numcount" jdbcType="INTEGER" />
+    <result column="satisfied" property="satisfied" jdbcType="INTEGER" />
+  </resultMap>
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -318,4 +333,25 @@
       Spare5 = #{spare5,jdbcType=VARCHAR}
     where Id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="superSelectBytime" resultMap="BaseResultMap2"  parameterType="com.accp.domain.ProjectByTimeAndName">
+SELECT p.Projectname,COUNT(*) AS 'RenQi',SUM(dj) AS 'countPrice',DATE_FORMAT(`time`,'%Y%m') months,DATE_FORMAT(`time`, '%Y') years FROM `project` AS p
+INNER JOIN `orderdetail` AS odt
+ON p.id = odt.pid
+INNER JOIN `order` AS o
+ON odt.oid = o.id
+WHERE o.tid=5  AND YEAR(`time`)=#{years,jdbcType=VARCHAR}
+GROUP BY months,p.Projectname
+ORDER BY months
+  </select>
+  
+   <select id="selectByQuestionTj" resultMap="BaseResultMap3"  parameterType="com.accp.domain.QuestionTj">
+  	SELECT projectname,COUNT(*) AS numcount,satisfied FROM project p 
+	INNER JOIN userprojectdiscuss u
+	ON u.ProjectId = p.`Id`
+	WHERE p.`Projectname`= #{projectname,jdbcType=VARCHAR}
+	GROUP BY Satisfied
+  </select>
+  
+
 </mapper>

@@ -82,7 +82,8 @@
                                客户资源管理
                             </a>
                         </li>
-                         <li>
+                        
+                        <li>
                             <a href="member-feedback.html">
                                 <i class="iconfont">&#xe6a7;</i>
                                   客户反馈
@@ -218,10 +219,10 @@
                                 每月收入
                             </a>
                         </li>
-                        <li>
+                        <li  >
                             <a href="toRqTeacher">
                                 <i class="iconfont">&#xe6a7;</i>
-                                人气教官
+                                  项目满意度对比
                             </a>
                         </li>
                         <li>
@@ -233,13 +234,13 @@
                         <li>
                             <a href="toMothKh">
                                 <i class="iconfont">&#xe6a7;</i>
-                                每月客户
+                                每月订单量
                             </a>
                         </li>
-                        <li  class="current">
+                        <li class="current">
                             <a href="toYgKq">
                                 <i class="iconfont">&#xe6a7;</i>
-                                员工考勤数据
+                               项目差评数
                             </a>
                         </li>
                         <li>
@@ -290,76 +291,23 @@
           <div class="content">
             <!-- 右侧内容框架，更改从这里开始 -->
             <blockquote class="layui-elem-quote">
-               每月员工出勤数据统计
+               	
             </blockquote>
             <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
             <div id="main" style="width: 100%;height:400px;"></div>
             <blockquote class="layui-elem-quote">
-                <table class="layui-table" >
+               <table class="layui-table" >
   					<thead>
-  						<th>月份</th>
-  						<th>出勤</th>
-  						<th>缺勤</th>
+  						<tr>
+  							<th>项目</th>
+  							<th>差评数</th>
+  						</tr>
   					</thead>
   					<tbody>
-  						<td>一月</td>
-  						<td>7352</td>
-  						<td>7352</td>
-  					</tbody>
-  					<tbody>
-  						<td>二月</td>
-  						<td>7352</td>
-  						<td>7352</td>
-  					</tbody>
-  					<tbody>
-  						<td>三月</td>
-  						<td>7352</td>
-  						<td>7352</td>
-  					</tbody>
-  					<tbody>
-  						<td>四月</td>
-  						<td>7352</td>
-  						<td>7352</td>
-  					</tbody>
-  					<tbody>
-  						<td>五月</td>
-  						<td>7352</td>
-  						<td>7352</td>
-  					</tbody>
-  					<tbody>
-  						<td>六月</td>
-  						<td>7352</td>
-  						<td>7352</td>
-  					</tbody>
-  					<tbody>
-  						<td>七月</td>
-  						<td>7352</td>
-  						<td>7352</td>
-  					</tbody>
-  					<tbody>
-  						<td>八月</td>
-  						<td>7352</td>
-  						<td>7352</td>
-  					</tbody>
-  					<tbody>
-  						<td>九月</td>
-  						<td>7352</td>
-  						<td>7352</td>
-  					</tbody>
-  					<tbody>
-  						<td>十月</td>
-  						<td>7352</td>
-  						<td>7352</td>
-  					</tbody>
-  					<tbody>
-  						<td>十一月</td>
-  						<td>7352</td>
-  						<td>7352</td>
-  					</tbody>
-  					<tbody>
-  						<td>十二月</td>
-  						<td>7352</td>
-  						<td>7352</td>
+  						<tr th:each="mydAndNamess : ${mydAndNames}">
+  							<td th:text="${mydAndNamess.name}"></td>
+  							<td th:text="${mydAndNamess.value}"></td>
+  						</tr>
   					</tbody>
 				</table>
             </blockquote>
@@ -398,32 +346,106 @@
     <!-- 背景切换结束 -->
         
         <script src="http://cdn.bootcss.com/echarts/3.3.2/echarts.min.js" charset="utf-8"></script>
-        <script type="text/javascript" src="./js/echarts-for-x-admin.js"></script>
-		<script type="text/javascript" src="js/echarts.js" ></script>
+        <script type="text/javascript" th:src="@{/js/echarts-for-x-admin.js}"></script>
+		<script type="text/javascript" th:src="@{/js/vue.js}" ></script>
         <script type="text/javascript">
-        	var dom = document.getElementById("main");
+        $(function(){
+        	var vue = new Vue({
+       		 
+       		 el:".bg-out",
+       		 data : {
+       			 data : [],
+       	        data2:[]
+       		 }
+       		 
+       	 });
+       	 
+       	 $.ajax({
+    			url:"http://localhost:8080/toYgKqAjax",
+    			data:{},
+    			type:"post",
+    			dataType:"json",
+    			success:function(data){
+    				for(var i=0;i<data.length;i++){
+    					vue.data[i]=data[i];
+    				}
+    			}
+    			
+    		});
+       	 
+       	 $.ajax({
+     			url:"http://localhost:8080/toYgKqAjax2",
+     			data:{},
+     			type:"post",
+     			dataType:"json",
+     			success:function(data){
+     				vue.data2=data;
+     			}
+     			
+     		});
+       
+        
+        setTimeout(function(){
+        	 // 基于准备好的dom，初始化echarts实例
+            var dom = document.getElementById("main");
+        
 var myChart = echarts.init(dom);
 var app = {};
 option = null;
+var weatherIcons = {
+    
+};
+
 option = {
-    xAxis: {
-        type: 'category',
-        data: ['一月', '二月', '三月', '四月', '五月', '六月', '七月','八月', '九月', '十月', '十一月', '十二月']
+    title: {
+        text: '项目差评数对比',
+        subtext: '虚构数据',
+        left: 'center'
     },
-    yAxis: {
-        type: 'value'
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
     },
-    series: [{
-        data: [820, 932, 901, 934, 1290, 1330, 1320,3000,4000,5000,6000,50],
-        type: 'line',
-        smooth: true
-    }]
+    legend: {
+        // orient: 'vertical',
+        // top: 'middle',
+        bottom: 10,
+        left: 'center',
+        data: vue.data2
+    },
+    series : [
+        {
+            type: 'pie',
+            radius : '65%',
+            center: ['50%', '50%'],
+            selectedMode: 'single',
+            data:vue.data
+            	/*[
+                {value:5352, name: '史珍香'},
+                {value:5352, name: '王大力'},
+                {value:2000, name: '张大炮'},
+                {value:6340, name: '离离原上草'},
+                {value:7352	, name: '春风吹又生'}
+            ]*/
+        ,
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }
+    ]
 };
 ;
 if (option && typeof option === "object") {
     myChart.setOption(option, true);
 }
-    	</script>
+        },100);
+
+        });
+    </script>
         
         
 </body>

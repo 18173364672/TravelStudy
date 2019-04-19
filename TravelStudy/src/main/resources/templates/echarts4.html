@@ -224,7 +224,7 @@
                         <li>
                             <a href="toRqTeacher">
                                 <i class="iconfont">&#xe6a7;</i>
-                                人气教官
+                                  项目满意度对比
                             </a>
                         </li>
                         <li  class="current">
@@ -236,13 +236,13 @@
                         <li>
                             <a href="toMothKh">
                                 <i class="iconfont">&#xe6a7;</i>
-                                每月客户
+                                每月订单量
                             </a>
                         </li>
                         <li>
                             <a href="toYgKq">
                                 <i class="iconfont">&#xe6a7;</i>
-                                员工考勤数据
+                                项目差评数
                             </a>
                         </li>
                         <li>
@@ -300,29 +300,18 @@
             <blockquote class="layui-elem-quote">
                <table class="layui-table" >
   					<thead>
-  						<th>活动名称</th>
-  						<th>活动人气</th>
+  						<tr>
+  							<th>活动名称</th>
+  							<th>活动热度</th>
+  						</tr>
   					</thead>
   					<tbody>
-  						<td>射击</td>
-  						<td>7352</td>
+  						<tr th:each="activity : ${ActivityTj}">
+  							<td th:text="${activity.name}"></td>
+  							<td th:text="${activity.value}"></td>
+  						</tr>
   					</tbody>
-  					<tbody>
-  						<td>骑马</td>
-  						<td>7352</td>
-  					</tbody>
-  					<tbody>
-  						<td>采矿</td>
-  						<td>7352</td>
-  					</tbody>
-  					<tbody>
-  						<td>采药</td>
-  						<td>7352</td>
-  					</tbody>
-  					<tbody>
-  						<td>种地</td>
-  						<td>7352</td>
-  					</tbody>
+  					
 				</table>
             </blockquote>
             <!-- 右侧内容框架，更改从这里结束 -->
@@ -360,62 +349,106 @@
     <!-- 背景切换结束 -->
         
         <script src="http://cdn.bootcss.com/echarts/3.3.2/echarts.min.js" charset="utf-8"></script>
-        <script type="text/javascript" src="./js/echarts-for-x-admin.js"></script>
-		<script type="text/javascript" src="js/echarts.js" ></script>
+        <script type="text/javascript" th:src="@{/js/echarts-for-x-admin.js}"></script>
+		<script type="text/javascript" th:src="@{/js/vue.js}" ></script>
         <script type="text/javascript">
-        // 基于准备好的dom，初始化echarts实例
-       var dom = document.getElementById("main");
-var myChart = echarts.init(dom);
-var app = {};
-option = null;
-var weatherIcons = {
-    
-};
+        
+        $(function(){
+ var vue = new Vue({
+        		 
+        		 el:".bg-out",
+        		 data : {
+        			 data : [],
+        	        data2:[]
+        		 }
+        		 
+        	 });
+        	 
+        	 $.ajax({
+     			url:"http://localhost:8080/toAjaxActivity",
+     			data:{},
+     			type:"post",
+     			dataType:"json",
+     			success:function(data){
+     				for(var i=0;i<data.length;i++){
+     					vue.data[i]=data[i];
+     				}
+     			}
+     			
+     		});
+        	 
+        	 $.ajax({
+      			url:"http://localhost:8080/toAjaxActivityTwo",
+      			data:{},
+      			type:"post",
+      			dataType:"json",
+      			success:function(data){
+      				vue.data2=data;
+      			}
+      			
+      		});
+        	
+        	
+        	setTimeout(function(){
+        		 // 基于准备好的dom，初始化echarts实例
+        	       var dom = document.getElementById("main");
+        	var myChart = echarts.init(dom);
+        	var app = {};
+        	option = null;
+        	var weatherIcons = {
+        	    
+        	};
 
-option = {
-    title: {
-        text: '年度最受欢迎活动项目',
-        subtext: '虚构数据',
-        left: 'center'
-    },
-    tooltip : {
-        trigger: 'item',
-        formatter: "{a} <br/>{b} : {c} ({d}%)"
-    },
-    legend: {
-        // orient: 'vertical',
-        // top: 'middle',
-        bottom: 10,
-        left: 'center',
-        data: ['射击', '骑马','采矿','采药','种地']
-    },
-    series : [
-        {
-            type: 'pie',
-            radius : '65%',
-            center: ['50%', '50%'],
-            selectedMode: 'single',
-            data:[
-                {value:5352, name: '采药'},
-                {value:5352, name: '采矿'},
-                {value:2000, name: '种地'},
-                {value:6340, name: '骑马'},
-                {value:7352	, name: '射击'}
-            ],
-            itemStyle: {
-                emphasis: {
-                    shadowBlur: 10,
-                    shadowOffsetX: 0,
-                    shadowColor: 'rgba(0, 0, 0, 0.5)'
-                }
-            }
-        }
-    ]
-};
-;
-if (option && typeof option === "object") {
-    myChart.setOption(option, true);
-}
+        	option = {
+        	    title: {
+        	        text: '年度最受欢迎活动项目',
+        	        subtext: '数据库数据',
+        	        left: 'center'
+        	    },
+        	    tooltip : {
+        	        trigger: 'item',
+        	        formatter: "{a} <br/>{b} : {c} ({d}%)"
+        	    },
+        	    legend: {
+        	        // orient: 'vertical',
+        	        // top: 'middle',
+        	        bottom: 10,
+        	        left: 'center',
+        	        data: vue.data2
+        	    },
+        	    series : [
+        	        {
+        	            type: 'pie',
+        	            radius : '65%',
+        	            center: ['50%', '50%'],
+        	            selectedMode: 'single',
+        	            data:vue.data
+        	            	/*[
+        	                {value:5352, name: '采药'},
+        	                {value:5352, name: '采矿'},
+        	                {value:2000, name: '种地'},
+        	                {value:6340, name: '骑马'},
+        	                {value:7352	, name: '射击'}
+        	            ]*/
+        	        ,
+        	            itemStyle: {
+        	                emphasis: {
+        	                    shadowBlur: 10,
+        	                    shadowOffsetX: 0,
+        	                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+        	                }
+        	            }
+        	        }
+        	    ]
+        	};
+        	;
+        	if (option && typeof option === "object") {
+        	    myChart.setOption(option, true);
+        	}
+        	},100);
+        });
+        
+       
     </script>
         
         

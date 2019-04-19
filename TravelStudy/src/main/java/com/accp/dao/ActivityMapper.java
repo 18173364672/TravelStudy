@@ -2,6 +2,8 @@ package com.accp.dao;
 
 import com.accp.domain.Activity;
 import com.accp.domain.ActivityExample;
+import com.accp.domain.ActivityTwo;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -27,4 +29,6 @@ public interface ActivityMapper {
     int updateByPrimaryKeySelective(Activity record);
 
     int updateByPrimaryKey(Activity record);
+    
+    List<ActivityTwo> selectByNameAndCount();
 }

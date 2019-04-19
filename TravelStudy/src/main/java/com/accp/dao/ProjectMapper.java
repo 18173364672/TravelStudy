@@ -1,7 +1,10 @@
 package com.accp.dao;
 
 import com.accp.domain.Project;
+import com.accp.domain.ProjectByTimeAndName;
 import com.accp.domain.ProjectExample;
+import com.accp.domain.QuestionTj;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -27,4 +30,8 @@ public interface ProjectMapper {
     int updateByPrimaryKeySelective(Project record);
 
     int updateByPrimaryKey(Project record);
+    
+    List<ProjectByTimeAndName> superSelectBytime(String years);
+    
+    List<QuestionTj>selectByQuestionTj(String projectname);
 }
