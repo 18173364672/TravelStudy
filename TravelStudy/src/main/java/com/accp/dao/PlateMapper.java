@@ -39,4 +39,6 @@ public interface PlateMapper {
     
     @MapKey("url")
 	public Map<String, Plate> queryPlateByUserId(@Param("uid") Integer uid);
+    
+    public List<Plate> queryLeftNav(@Param("uid") Integer uid);
 }

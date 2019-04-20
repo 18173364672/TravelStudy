@@ -1,5 +1,7 @@
 package com.accp.dao;
 
+import com.accp.domain.MonthOrder;
+import com.accp.domain.MonthSr;
 import com.accp.domain.Order;
 import com.accp.domain.OrderExample;
 import java.util.List;
@@ -27,4 +29,10 @@ public interface OrderMapper {
     int updateByPrimaryKeySelective(Order record);
 
     int updateByPrimaryKey(Order record);
+    
+    List<MonthSr> SelectMonthSr(String years);
+    
+    List<MonthOrder> SelectMonthOr(String years);
+    
+    List<MonthOrder> SelectOrYears();
 }

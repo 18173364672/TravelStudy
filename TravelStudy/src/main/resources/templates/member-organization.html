@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>研学旅行</title>
@@ -202,7 +202,12 @@
                                 项目排名
                             </a>
                         </li>
-                        
+                          <li >
+                         <a th:href="@{/field/tofieldquerypage}">
+                                <i class="iconfont">&#xe6a7;</i>
+                                项目场地
+                            </a>
+                        </li>
     
                     </ul>
                 </li>

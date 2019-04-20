@@ -16,6 +16,12 @@
     <result column="Spare4" property="spare4" jdbcType="VARCHAR" />
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
+  
+  <resultMap id="BaseResultMap2" type="com.accp.domain.ActivityTwo" >
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="value" property="value" jdbcType="INTEGER" />
+  </resultMap>
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -92,6 +98,11 @@
       order by ${orderByClause}
     </if>
   </select>
+  
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="com.accp.domain.ActivityExample" >
+  SELECT * FROM activity WHERE `A_name` = #{name}
+  </select>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -322,12 +333,10 @@
   <update id="updateByPrimaryKey" parameterType="com.accp.domain.Activity" >
     update activity
     set A_name = #{aName,jdbcType=VARCHAR},
-      A_zbf = #{aZbf,jdbcType=VARCHAR},
       A_price = #{aPrice,jdbcType=VARCHAR},
       A_jieshao = #{aJieshao,jdbcType=VARCHAR},
       A_age = #{aAge,jdbcType=VARCHAR},
       A_haochu = #{aHaochu,jdbcType=VARCHAR},
-      count = #{count,jdbcType=INTEGER},
       Spare1 = #{spare1,jdbcType=VARCHAR},
       Spare2 = #{spare2,jdbcType=VARCHAR},
       Spare3 = #{spare3,jdbcType=VARCHAR},
@@ -335,4 +344,9 @@
       Spare5 = #{spare5,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectByNameAndCount" resultMap="BaseResultMap2" parameterType="com.accp.domain.ActivityTwo">
+ 	 SELECT A_name AS `name`,`count` AS `value` FROM `activity`
+  </select>
+  
 </mapper>

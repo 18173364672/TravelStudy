@@ -1,501 +1,252 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>后台登录-X-admin1.1</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="static/css/font.css">
-	<link rel="stylesheet" href="static/css/xadmin.css">
-    <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
-    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
-    <script src="static/lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="static/js/xadmin.js"></script>
+<meta charset="UTF-8">
+<title>研学旅行后台系统</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" th:href="@{/css/font.css}">
+<link rel="stylesheet" th:href="@{/css/xadmin.css}">
+<link rel="stylesheet"
+	href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
+<script type="text/javascript"
+	src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
+<script th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
+<script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
+<script type="text/javascript" th:src="@{/js/vue.js}"></script>
 
 </head>
 
-<script>
-  	   
-		
-  	   
-  	   
-  	   
-	
-	$(function(){
-	  
-		  $("#checkall").click(function(){
-	  
-	  	 
-	  	if(this.checked==true){
-	  		   $("[name='s1']").each(function(){
-	  		   	this.checked=true;
-	  		   	
-	  		   })
-	  		   
-	  		   
-		  	}else{
-		  		$("[name='s1']").each(function(){
-	  		   	this.checked=false;
-	  		   	
-	  		   })
-		  	}
+<style>
+.xbs768 {
+	display: block;
+}
 
-        
-	  	
-	  })
-	
-	 
-		
+.layui-textarea {
+	position: relative;
+	min-height: 100px;
+	height: auto;
+	line-height: 20px;
+	padding: 6px 10px;
+	resize: vertical;
+	margin-left: 110px;
+	margin-top: -50px;
+	width: 800px;
+}
 
-		
-	})
-	
-  	
-  </script>
+.layui-input-block {
+	margin-left: 0px;
+	min-height: 36px;
+}
+</style>
+
+
+
 <body>
-    <!-- 中部开始 -->
-    <div class="wrapper">
-        <!-- 右侧主体开始 -->
-        <div class="page-content">
-          <div class="content">
-          	
-          	<form class="layui-form xbs" action="" >
-                <div class="layui-form-pane" style="text-align: center;">
-                  <div class="layui-form-item" style="display: inline-block;">
-                   
-                    <div class="layui-input-inline xbs768">
-                     
-                    </div>
-                    <div class="layui-input-inline xbs768">
-                     
-                    </div>
-                    <div class="layui-input-inline">
-                      <input type="text" name="username"  placeholder="请输入员工名" autocomplete="off" class="layui-input">
-                    </div>
-                    <div class="layui-input-inline" style="width:80px">
-                        <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
-                    </div>
-                  </div>
-                </div> 
-            </form>
-          	
-          	  <table class="layui-table">
-                <thead>
-                    <tr>
-                        <th>
-                            <input type="checkbox" id="checkall" value="">
-                        </th>
-                        <th>
-                            ID
-                        </th>
-                        <th>
-                            员工姓名
-                        </th>
-                        <th>
-                            性别
-                        </th>
-                        <th>
-                            手机
-                        </th>
-                        <th>
-                            邮箱
-                        </th>
-                        <th>
-                            地址
-                        </th>
-                        <th>
-                            加入时间
-                        </th>
-                        
-                        <th>
-                            所属部门
-                        </th>
-                                    <th>
-                            职位
-                        </th>
-                        
-                                     <th>
-                            工资（/月）
-                        </th> 
-                                     <th>
-                          在职状态
-                        </th> 
-            
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <input type="checkbox" value="1" name="s1">
-                        </td>
-                        <td>
-                            1
-                        </td>
-                        <td>
-                            <u style="cursor:pointer" onclick="member_show('张三','member-show.html','10001','360','400')">
-                                小明
-                            </u>
-                        </td>
-                        <td >
-                            男
-                        </td>
-                        <td >
-                            13000000000
-                        </td>
-                        <td >
-                            admin@mail.com
-                        </td>
-                        <td >
-                            北京市 海淀区
-                        </td>
-                        <td>
-                            2017-01-01 11:11:42
-                        </td>
-           <td>
-                           客服部
-                        </td>
-                        
-                         <td>
-                           经理
-                        </td>
-                        
-                        <td>
-                           8000.00
-                        </td>
-                                       
-                                        <td class="td-status">
-                                <span class="layui-btn layui-btn-normal layui-btn-mini">
-                                在职
-                            </span>
-                        </td> 
-                      
-                       
-                    </tr>
-                        <tr>
-                        <td>
-                            <input type="checkbox" value="1" name="s1">
-                        </td>
-                        <td>
-                            1
-                        </td>
-                        <td>
-                            <u style="cursor:pointer" onclick="member_show('张三','member-show.html','10001','360','400')">
-                                小明
-                            </u>
-                        </td>
-                        <td >
-                            男
-                        </td>
-                        <td >
-                            13000000000
-                        </td>
-                        <td >
-                            admin@mail.com
-                        </td>
-                        <td >
-                            北京市 海淀区
-                        </td>
-                        <td>
-                            2017-01-01 11:11:42
-                        </td>
-           <td>
-                           客服部
-                        </td>
-                        
-                                       <td>
-                           经理
-                        </td>
-                        
-                        <td>
-                           8000.00
-                        </td>
-                                       
-                                        <td class="td-status">
-                                <span class="layui-btn layui-btn-normal layui-btn-mini">
-                                在职
-                            </span>
-                        </td> 
-                      
-                       
-                    </tr>
-                    
-                           <tr>
-                        <td>
-                            <input type="checkbox" value="1" name="s1">
-                        </td>
-                        <td>
-                            1
-                        </td>
-                        <td>
-                            <u style="cursor:pointer" onclick="member_show('张三','member-show.html','10001','360','400')">
-                                小明
-                            </u>
-                        </td>
-                        <td >
-                            男
-                        </td>
-                        <td >
-                            13000000000
-                        </td>
-                        <td >
-                            admin@mail.com
-                        </td>
-                        <td >
-                            北京市 海淀区
-                        </td>
-                        <td>
-                            2017-01-01 11:11:42
-                        </td>
-           <td>
-                           客服部
-                        </td>
-                        
-                                       <td>
-                           经理
-                        </td>
-                        <td>
-                           8000.00
-                        </td>
-                                       
-                                        <td class="td-status">
-                                <span class="layui-btn layui-btn-normal layui-btn-mini">
-                                在职
-                            </span>
-                        </td> 
-                      
-                       
-                    </tr>
-                    
-                          <tr>
-                        <td>
-                            <input type="checkbox" value="1" name="s1">
-                        </td>
-                        <td>
-                            1
-                        </td>
-                        <td>
-                            <u style="cursor:pointer" onclick="member_show('张三','member-show.html','10001','360','400')">
-                                小明
-                            </u>
-                        </td>
-                        <td >
-                            男
-                        </td>
-                        <td >
-                            13000000000
-                        </td>
-                        <td >
-                            admin@mail.com
-                        </td>
-                        <td >
-                            北京市 海淀区
-                        </td>
-                        <td>
-                            2017-01-01 11:11:42
-                        </td>
-           <td>
-                           客服部
-                        </td>
-                                       <td>
-                           经理
-                        </td>
-                        <td>
-                           8000.00
-                        </td>
-                                       
-                                        <td class="td-status">
-                                <span class="layui-btn layui-btn-normal layui-btn-mini">
-                                在职
-                            </span>
-                        </td> 
-                      
-                        
-                    </tr>
-                    
-                        <tr>
-                        <td>
-                            <input type="checkbox" value="1" name="s1">
-                        </td>
-                        <td>
-                            1
-                        </td>
-                        <td>
-                            <u style="cursor:pointer" onclick="member_show('张三','member-show.html','10001','360','400')">
-                                小明
-                            </u>
-                        </td>
-                        <td >
-                            男
-                        </td>
-                        <td >
-                            13000000000
-                        </td>
-                        <td >
-                            admin@mail.com
-                        </td>
-                        <td >
-                            北京市 海淀区
-                        </td>
-                        <td>
-                            2017-01-01 11:11:42
-                        </td>
-           <td>
-                           客服部
-                        </td>
-                                      <td>
-                           经理
-                        </td> 
-                        <td>
-                           8000.00
-                        </td>
-                                       
-                                        <td class="td-status">
-                                <span class="layui-btn layui-btn-normal layui-btn-mini">
-                                在职
-                            </span>
-                        </td> 
-                      
-                       
-                    </tr>
-                    
-                    
-                      <tr>
-                        <td>
-                            <input type="checkbox" value="1" name="s1">
-                        </td>
-                        <td>
-                            1
-                        </td>
-                        <td>
-                            <u style="cursor:pointer" onclick="member_show('张三','member-show.html','10001','360','400')">
-                                小明
-                            </u>
-                        </td>
-                        <td >
-                            男
-                        </td>
-                        <td >
-                            13000000000
-                        </td>
-                        <td >
-                            admin@mail.com
-                        </td>
-                        <td >
-                            北京市 海淀区
-                        </td>
-                        <td>
-                            2017-01-01 11:11:42
-                        </td>
-           <td>
-                           客服部
-                        </td>
-                                   <td>
-                           经理
-                        </td>    
-                        <td>
-                           8000.00
-                        </td>
-                                       
-                                        <td class="td-status">
-                                <span class="layui-btn layui-btn-normal layui-btn-mini">
-                                在职
-                            </span>
-                        </td> 
-                      
-                      
-                    </tr>
-                    
-                          <tr>
-                        <td>
-                            <input type="checkbox" value="1" name="s1">
-                        </td>
-                        <td>
-                            1
-                        </td>
-                        <td>
-                            <u style="cursor:pointer" onclick="member_show('张三','member-show.html','10001','360','400')">
-                                小明
-                            </u>
-                        </td>
-                        <td >
-                            男
-                        </td>
-                        <td >
-                            13000000000
-                        </td>
-                        <td >
-                            admin@mail.com
-                        </td>
-                        <td >
-                            北京市 海淀区
-                        </td>
-                        <td>
-                            2017-01-01 11:11:42
-                        </td>
-           <td>
-                           客服部
-                        </td>
-                                      <td>
-                           经理
-                        </td> 
-                        <td>
-                           8000.00
-                        </td>
-                                       
-                                        <td class="td-status">
-                                <span class="layui-btn layui-btn-normal layui-btn-mini">
-                                在职
-                            </span>
-                        </td> 
-                      
-                       
-                    </tr>
-                    
-                </tbody>
-            </table>
-          	<xblock>
-                	 <button class="layui-btn layui-btn-warm">上一页</button>
-                        <button class="layui-btn layui-btn-danger">下一页</button>
-                </xblock>
-            <!-- 右侧内容框架，更改从这里开始 -->
-            <form class="layui-form">
+	<!-- 中部开始 -->
+	<div class="wrapper">
+		<!-- 右侧主体开始 -->
+		<div class="page-content">
+			<div class="content">
+					<div class="layui-form-pane" style="text-align: center;">
+						<div class="layui-form-item" style="display: inline-block;">
+							<div class="layui-input-inline">
+								<input type="text" name="employeename" placeholder="请输入员工名"
+									autocomplete="off" class="layui-input">
+							</div>
+							<div class="layui-input-inline" style="width: 80px">
+								<button class="layui-btn"  v-on:click="queryPage(1)">
+									<i class="layui-icon">&#xe615;</i>
+								</button>
+							</div>
+						</div>
+					</div>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th><input type="checkbox" id="checkall" value=""></th>
+							<th>ID</th>
+							<th>员工姓名</th>
+							<th>性别</th>
+							<th>手机</th>
+							<th>邮箱</th>
+							<th>地址</th>
+							<th>加入时间</th>
+
+							<th>所属部门</th>
+							<th>职位</th>
+
+							<th>工资（/月）</th>
+							<th>在职状态</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr v-for="(item,index) in page.list">
+							<td><input type="checkbox" value="1" :iid="item.id" name="s1" class="checkbox"></td>
+							<td class="buMenid">{{item.id}}</td>
+							<td>{{item.employeename}}</td>
+							<td>{{item.sex}}</td>
+							<td>{{item.phone}}</td>
+							<td>{{item.email}}</td>
+							<td>{{item.address}}</td>
+							<!--   th:text="${#dates.format(item.createtime,'yyyy-MM-dd HH:mm')}" -->
+							<td>{{item.createtime}}</td>
+							<td v-if="item.spare1==='1'">校友部</td>
+							<td v-if="item.spare1==='2'">教练部</td>
+							<td v-if="item.spare1==='3'">助手部</td>
+							<td v-if="item.spare1==='4'">员工部</td>
+							<td v-if="item.spare1==='5'">领队部</td>
+							<td v-if="item.spare1==='6'">其他部</td>
+							<td>{{item.job}}</td>
+							<td>{{item.pay}}</td>
+							<td class="td-status" v-if="item.state===1"><span
+								class="layui-btn layui-btn-normal layui-btn-mini"> 在职 </span></td>
+							<td class="td-status" v-if="item.state===2"><span
+								class="layui-btn layui-btn-normal layui-btn-mini"> 离职 </span></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<!--  <a th:href="employee?currentPage=${pageList.prePage }&employeename=${employeename}">上一页</a> 
+          	$event.currentTarget	 <a th:href="employee?currentPage=${pageList.nextPage }&employeename=${employeename}">下一页</a>
+          	 -->
+				<button v-on:click="queryPage(page.prePage)"
+					class="layui-btn layui-btn-warm">上一页</button>
+
+				<button v-on:click="queryPage(page.nextPage)" class="layui-btn layui-btn-danger">下一页</button>
+				<!-- 右侧内容框架，更改从这里开始 -->
+					<div class="layui-form-item layui-form-text">
+						<label for="L_sign" class="layui-form-label"> 公司通知 </label>
+						<div class="layui-form-item"
+							style="margin-top: 50px; margin-bottom: 20px;">
+							<label class="layui-form-label xbs768">请输入标题:</label>
+							<div class="layui-input-inline">
+								<input type="text" name="username" placeholder="请输入标题"
+									autocomplete="off" class="layui-input">
+							</div>
+						</div>
+						<br>
+						<div class="layui-input-block" style="margin-top: 50px;">
+							<label class="layui-form-label xbs768">请输入内容:</label>
+							<textarea placeholder="请输入发布内容" id="L_sign" name="sign"
+								autocomplete="off" class="layui-textarea" style="height: 80px;"></textarea>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label for="L_sign" class="layui-form-label"> </label>
+						<button class="layui-btn" id="fasuo" key="set-mine" lay-filter="save"
+							lay-submit>发送</button>
+					</div>
+				<!-- 右侧内容框架，更改从这里结束 -->
+			</div>
+		</div>
+		<!-- 右侧主体结束 -->
+	</div>
+	<!-- 中部结束 -->
+	<script th:inline="javascript">
+   
+    var vue = new Vue({
+    	
+    	el:'.wrapper',
+    	data:{
+    		
+    		page:''
+    		
+    	},methods:{
+    		queryPage(ind){
+    		page(ind);
+    	}
+    		
+    	}
+    	
+    });
     
-        
-                 
     
-                <div class="layui-form-item layui-form-text">
-                    <label for="L_sign" class="layui-form-label">
-                        公司通知
-                    </label>
-                    <div class="layui-input-block">
-                        <textarea placeholder="请输入发布内容" id="L_sign" name="sign" autocomplete="off"
-                        class="layui-textarea" style="height: 80px;"></textarea>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="L_sign" class="layui-form-label">
-                    </label>
-                    <button class="layui-btn" key="set-mine" lay-filter="save" lay-submit>
-                        发送
-                    </button>
-                </div>
-            </form>
-            <!-- 右侧内容框架，更改从这里结束 -->
-          </div>
-        </div>
-        <!-- 右侧主体结束 -->
-    </div>
-    <!-- 中部结束 -->
-    <script>
-    //百度统计可去掉
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })();
+    function page(curPage){
+    	var employeename = $("[name = employeename]").val();
+		  $.ajax({
+			  url:[[@{/notice/employeeQuery}]],
+			  type:"post",
+			  data:{
+				  'currentPage':curPage,
+				  'employeename':employeename
+			  },
+			  dataType:"json",
+			  success:function(data){
+				  vue.page = data;
+			  }
+			  
+		  });
+    	
+    }
+    
+    
+	$(function(){
+		  $("#checkall").click(function(){
+		  	if(this.checked==true){
+		  		   $("[name='s1']").each(function(){
+		  		   	this.checked=true;
+		  		   	
+		  		   });
+			  	}else{
+			  		$("[name='s1']").each(function(){
+		  		   	this.checked=false;
+		  		   	
+		  		   });
+			  	}
+	  	
+	  		});
+		  
+		  page(1);
+		   
+		  var buid = [];
+		   
+		  $("#fasuo").click(function(){
+			  var title = $("[name=username]").val();
+			  var content = $("[name=sign]").val();
+			 $.each($(".checkbox"),function(){
+				 if(this.checked){
+					 var spare1 = $(this).attr("iid");
+// 					 console.log(spare1);
+					 buid = spare1;
+// 					 for(var i=0;i<buid.length;i++){
+// 						 console.log(buid[i]);
+						 
+// 					 }
+					 $.ajax({
+						 url:[[@{/notice/toAdd}]],
+						 type:"post",
+						 data:{
+							  'spare1':buid,
+							  'title':title,
+							  'content':content
+						  },
+						  dataType:"json",
+						  success:function(result){
+							  var index = parent.layer.getFrameIndex(window.name);
+							  parent.layer.close(index);
+						  },error:function(date){
+							  var index = parent.layer.getFrameIndex(window.name);
+							  parent.layer.close(index);
+						  }
+					 });
+				 }
+				 
+			 });
+			  
+		  });
+		  
+		  
+		
+	});
+	
+    
+    
+    
+    
     </script>
 </body>
 </html>

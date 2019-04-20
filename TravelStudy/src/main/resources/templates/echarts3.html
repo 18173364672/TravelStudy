@@ -1,23 +1,23 @@
 <!doctype html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>后台登录-X-admin1.1</title>
+    <title>研学旅行后台管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="static/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="static/css/font.css">
-    <link rel="stylesheet" href="static/css/xadmin.css">
+    <link rel="stylesheet" th:href="@{/css/font.css}">
+    <link rel="stylesheet" th:href="@{/css/xadmin.css}">
     <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
-    <script type="text/javascript" src="static/js/echarts.js"></script>
+    <script type="text/javascript" th:src="@{/js/echarts.js}"></script>
     <script src="static/lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="static/js/xadmin.js"></script>
+    <script type="text/javascript" src="@{/js/xadmin.js}"></script>
 </head>
 <body>
     <!-- 顶部开始 -->
     <div class="container">
-        <div class="logo"><a href="./index.html">X-ADMIN V1.1</a></div>
+        <div class="logo"><a href="./index.html">研学旅行后台管理系统</a></div>
         <div class="open-nav"><i class="iconfont">&#xe699;</i></div>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
@@ -208,43 +208,43 @@
                     </a>
                     <ul class="sub-menu opened">
                         <li>
-                            <a href="./echarts1.html">
+                            <a href="toRqProject">
                                 <i class="iconfont">&#xe6a7;</i>
                                 项目人气
                             </a>
                         </li>
                         <li>
-                            <a href="./echarts2.html">
+                            <a href="toMonthSr">
                                 <i class="iconfont">&#xe6a7;</i>
                                 每月收入
                             </a>
                         </li>
-                        <li class="current">
-                            <a href="./echarts3.html">
+                        <li  class="current">
+                            <a href="toRqTeacher">
                                 <i class="iconfont">&#xe6a7;</i>
-                                人气教官
+                                  项目满意度对比
                             </a>
                         </li>
                         <li>
-                            <a href="./echarts4.html">
+                            <a href="toRqActivity">
                                 <i class="iconfont">&#xe6a7;</i>
                                 人气活动
                             </a>
                         </li>
                         <li>
-                            <a href="./echarts5.html">
+                            <a href="toMothKh">
                                 <i class="iconfont">&#xe6a7;</i>
-                                每月客户
+                                每月订单量
                             </a>
                         </li>
                         <li>
-                            <a href="./echarts6.html">
+                            <a href="toYgKq">
                                 <i class="iconfont">&#xe6a7;</i>
-                                员工考勤数据
+                                项目差评数
                             </a>
                         </li>
                         <li>
-                            <a href="./echarts7.html">
+                            <a href="toQuestion">
                                 <i class="iconfont">&#xe6a7;</i>
                                 问卷调查
                             </a>
@@ -298,28 +298,16 @@
             <blockquote class="layui-elem-quote">
                <table class="layui-table" >
   					<thead>
-  						<th>教官</th>
-  						<th>人气</th>
+  						<tr>
+  							<th>项目</th>
+  							<th>满意数</th>
+  						</tr>
   					</thead>
   					<tbody>
-  						<td>史珍香</td>
-  						<td>7352</td>
-  					</tbody>
-  					<tbody>
-  						<td>王大力</td>
-  						<td>7352</td>
-  					</tbody>
-  					<tbody>
-  						<td>张大炮</td>
-  						<td>7352</td>
-  					</tbody>
-  					<tbody>
-  						<td>离离原上草</td>
-  						<td>7352</td>
-  					</tbody>
-  					<tbody>
-  						<td>春风吹又生</td>
-  						<td>7352</td>
+  						<tr th:each="mydAndNamess : ${mydAndNames}">
+  							<td th:text="${mydAndNamess.name}"></td>
+  							<td th:text="${mydAndNamess.value}"></td>
+  						</tr>
   					</tbody>
 				</table>
             </blockquote>
@@ -358,11 +346,49 @@
     <!-- 背景切换结束 -->
         
         <script src="http://cdn.bootcss.com/echarts/3.3.2/echarts.min.js" charset="utf-8"></script>
-        <script type="text/javascript" src="./js/echarts-for-x-admin.js"></script>
-		<script type="text/javascript" src="js/echarts.js" ></script>
+        <script type="text/javascript" th:src="@{/js/echarts-for-x-admin.js}"></script>
+		<script type="text/javascript" th:src="@{/js/vue.js}" ></script>
         <script type="text/javascript">
-        // 基于准备好的dom，初始化echarts实例
-       var dom = document.getElementById("main");
+        $(function(){
+        	var vue = new Vue({
+       		 
+       		 el:".bg-out",
+       		 data : {
+       			 data : [],
+       	        data2:[]
+       		 }
+       		 
+       	 });
+       	 
+       	 $.ajax({
+    			url:"http://localhost:8080/toAjaxMyd",
+    			data:{},
+    			type:"post",
+    			dataType:"json",
+    			success:function(data){
+    				for(var i=0;i<data.length;i++){
+    					vue.data[i]=data[i];
+    				}
+    			}
+    			
+    		});
+       	 
+       	 $.ajax({
+     			url:"http://localhost:8080/toAjaxMyd2",
+     			data:{},
+     			type:"post",
+     			dataType:"json",
+     			success:function(data){
+     				vue.data2=data;
+     			}
+     			
+     		});
+       
+        
+        setTimeout(function(){
+        	 // 基于准备好的dom，初始化echarts实例
+            var dom = document.getElementById("main");
+        
 var myChart = echarts.init(dom);
 var app = {};
 option = null;
@@ -372,7 +398,7 @@ var weatherIcons = {
 
 option = {
     title: {
-        text: '本月人气最高教官',
+        text: '项目满意数对比',
         subtext: '虚构数据',
         left: 'center'
     },
@@ -385,7 +411,7 @@ option = {
         // top: 'middle',
         bottom: 10,
         left: 'center',
-        data: ['史珍香', '王大力','张大炮','离离原上草','春风吹又生']
+        data: vue.data2
     },
     series : [
         {
@@ -393,13 +419,15 @@ option = {
             radius : '65%',
             center: ['50%', '50%'],
             selectedMode: 'single',
-            data:[
+            data:vue.data
+            	/*[
                 {value:5352, name: '史珍香'},
                 {value:5352, name: '王大力'},
                 {value:2000, name: '张大炮'},
                 {value:6340, name: '离离原上草'},
                 {value:7352	, name: '春风吹又生'}
-            ],
+            ]*/
+        ,
             itemStyle: {
                 emphasis: {
                     shadowBlur: 10,
@@ -414,6 +442,9 @@ option = {
 if (option && typeof option === "object") {
     myChart.setOption(option, true);
 }
+        },100);
+
+        });
     </script>
         
         

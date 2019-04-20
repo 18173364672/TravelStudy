@@ -1,17 +1,24 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>后台登录-X-admin1.1</title>
+    <title>研学旅行后台系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="static/css/font.css">
-	<link rel="stylesheet" href="static/css/xadmin.css">
+    <link rel="stylesheet" th:href="@{/css/font.css}">
+	<link rel="stylesheet" th:href="@{/css/xadmin.css}">
     <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
-    <script src="static/lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="static/js/xadmin.js"></script>
+   	<script th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
+    <script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
+
+		<style>
+			.xbs768 {
+			    display: block; 
+			}
+			
+		</style>
 
 </head>
 <body>
@@ -21,43 +28,50 @@
         <div class="page-content">
           <div class="content">
             <!-- 右侧内容框架，更改从这里开始 -->
-            <form class="layui-form">
-    
-        
-                 
-    
-                <div class="layui-form-item layui-form-text">
-                    <label for="L_sign" class="layui-form-label">
-                        公司通知
-                    </label>
-                    <div class="layui-input-block">
-                        <textarea placeholder="请输入发布内容" id="L_sign" name="sign" autocomplete="off"
-                        class="layui-textarea" style="height: 80px;"></textarea>
-                    </div>
-                </div>
+            <form class="layui-form"  enctype="multipart/form-data">
+    				<div class="layui-form-item" style="display: inline-block;">
+						<label class="layui-form-label xbs768">请输入标题:</label>
+						<div class="layui-input-inline">
+							<input type="text" name="title" placeholder="请输入标题" autocomplete="off" class="layui-input">
+							<input type="hidden" name="uid" placeholder="请输入uid" autocomplete="off" class="layui-input">
+						</div>
+					</div>
+                	<div class="layui-form-item layui-form-text">
+                    	<label for="L_sign" class="layui-form-label">
+                       		 公司通知:
+                    	</label>
+	                    <div class="layui-input-block">
+	                        <textarea placeholder="请输入发布内容" id="L_sign" name="content" autocomplete="off"
+	                        class="layui-textarea" style="height: 80px;"></textarea>
+	                    </div>
+                	</div>
                 
-                <div class="layui-form-item">
-                    <label for="L_username" class="layui-form-label">
-                        <span class="x-red">*</span>请选择部门
-                    </label>
-                    <div class="layui-inline">
-                      <select style="position: absolute;top: 150px;">
-            	<option>请选择部门</option>
-            	<option>客服部</option>
-            	<option>教练部</option>
-            	<option>销售部</option>
-            </select>
-                    </div>
-                </div>
-                
-                
-                <div class="layui-form-item">
-                    <label for="L_sign" class="layui-form-label">
-                    </label>
-                    <button class="layui-btn" key="set-mine" lay-filter="save" lay-submit>
-                        发送
-                    </button>
-                </div>
+                	<div class="layui-form-item">
+	                    <label for="L_username" class="layui-form-label">
+	                        <span class="x-red">*</span>请选择部门:
+	                    </label>
+	                    <div class="layui-inline">
+	                      <select style="position: absolute;top: 150px;" name="rid">
+			            	<option th:each="item,state : ${list}" th:text="${item.name}" th:value="${item.id}"></option>
+			              </select>
+	                   </div>
+                	</div>
+                	
+	                <div style="margin-left: 80px;margin-bottom: 70px">
+						<div id="preview" style="float:left">
+							<img id="imghead" width="100px" height="100px" class="logo-size" src='' />
+						</div>
+						<input id="filgo" style="margin-left: 70px; margin-top: 30px;" type="file" name="file" onchange="changeToop('filgo','imghead');" value="上传图片">
+					</div>
+					
+					
+	                <div class="layui-form-item">
+	                    <label for="L_sign" class="layui-form-label">
+	                    </label>
+	                    <button class="layui-btn s" key="set-mine" lay-filter="save"  >
+	                        	发送
+	                    </button>
+	                </div>
             </form>
             <!-- 右侧内容框架，更改从这里结束 -->
           </div>
@@ -65,15 +79,113 @@
         <!-- 右侧主体结束 -->
     </div>
     <!-- 中部结束 -->
-    <script>
-    //百度统计可去掉
+    <script type="text/javascript"  th:inline="javascript">
+    /* //百度统计可去掉
     var _hmt = _hmt || [];
     (function() {
       var hm = document.createElement("script");
       hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
       var s = document.getElementsByTagName("script")[0]; 
       s.parentNode.insertBefore(hm, s);
-    })();
+    })(); */
+    
+ $(function(){
+	 	$(".s").click(function(){
+			var index = parent.layer.getFrameIndex(window.name);
+			parent.layer.close(index);
+		});
+    	
+    	$(".layui-btn").click(function(){
+    		var title = $("[name=title]").val();
+        	var content = $("[name=content]").val();
+        	var uid = $("[name=uid]").val();
+        	var buid = $("[name=rid]").val();
+        	/* alert(buid); */
+        	var form = $("form")[0];
+        	var formData=new FormData(form);
+        	$.ajax({
+        		url:[[@{/notice/addBuMen}]],
+        		type:"post",
+				data:formData,
+				dataType:"text",
+				contentType:false,
+				processData:false,
+				success:function(result){
+					 var index = parent.layer.getFrameIndex(window.name);
+					 parent.layer.close(index);
+					console.log(result); 
+				},error:function(date){
+					 var index = parent.layer.getFrameIndex(window.name);
+					 parent.layer.close(index);
+					console.log(date); 
+				}
+        		
+        	});
+        	
+
+        	
+    	});
+    	
+    });
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  //定义id选择器
+	function Id(id){
+	return document.getElementById(id);
+	}
+	//入口函数，两个参数分别为<input type='file'/>的id，还有一个就是图片的id，然后会自动根据文件id得到图片，然后把图片放到指定id的图片标签中
+	function changeToop(fileid,imgid){
+	    var file = Id(fileid);
+	    if(file.value==''){
+	        //设置默认图片
+	    Id("myimg").src='blob:http://127.0.0.1:8080/e3d38dbf-2ad7-4844-b4f7-ca88bb8cfa95';
+	    }else{
+	        preImg(fileid,imgid);
+	    }
+	}
+	//获取input[file]图片的url Important
+	function getFileUrl(fileId) { 
+	    var url; 
+	    var file = Id(fileId);
+	    var agent = navigator.userAgent;
+	    if (agent.indexOf("MSIE")>=1) {
+	    url = file.value; 
+	    } else if(agent.indexOf("Firefox")>0) { 
+	    url = window.URL.createObjectURL(file.files.item(0)); 
+	    } else if(agent.indexOf("Chrome")>0) {
+	    url = window.URL.createObjectURL(file.files.item(0)); 
+	    } 
+	    return url; 
+	} 
+	//读取图片后预览
+	function preImg(fileId,imgId) {
+	var imgPre =Id(imgId);
+	imgPre.src = getFileUrl(fileId); 
+	}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     </script>
 </body>
 </html>

@@ -131,7 +131,7 @@
       #{spare3,jdbcType=VARCHAR}, #{spare4,jdbcType=VARCHAR}, #{spare5,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.accp.domain.Organization" >
+  <insert id="insertSelective" parameterType="com.accp.domain.Organization" useGeneratedKeys="true" keyProperty="id">
     insert into organization
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -290,4 +290,10 @@
       Spare5 = #{spare5,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectById" resultType="com.accp.domain.Organization">
+  		SELECT * FROM organization WHERE id = #{id}
+  </select>
+  
+  
 </mapper>

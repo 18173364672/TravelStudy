@@ -1,18 +1,18 @@
 <!doctype html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>后台登录-X-admin1.1</title>
+    <title>研学旅行后台管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="static/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="static/css/font.css">
-    <link rel="stylesheet" href="static/css/xadmin.css">
+    <link rel="stylesheet" th:href="@{/css/font.css}">
+    <link rel="stylesheet" th:href="@{/css/xadmin.css}">
     <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
-    <script type="text/javascript" src="static/js/echarts.js"></script>
-    <script src="static/lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="static/js/xadmin.js"></script>
+    <script type="text/javascript" th:src="@{/js/echarts.js}"></script>
+    <script th:src="@{/lib/layui/layui.js} " charset="utf-8"></script>
+    <script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
 </head>
 <style>
 	.layui-input, .layui-textarea {
@@ -61,7 +61,7 @@
 <body>
     <!-- 顶部开始 -->
     <div class="container">
-        <div class="logo"><a href="./index.html">X-ADMIN V1.1</a></div>
+        <div class="logo"><a href="./index.html">研学旅行后台管理系统</a></div>
         <div class="open-nav"><i class="iconfont">&#xe699;</i></div>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
@@ -251,43 +251,43 @@
                     </a>
                     <ul class="sub-menu opened">
                         <li>
-                            <a href="./echarts1.html">
+                            <a href="toRqProject">
                                 <i class="iconfont">&#xe6a7;</i>
                                 项目人气
                             </a>
                         </li>
                         <li>
-                            <a href="./echarts2.html">
+                            <a href="toMonthSr">
                                 <i class="iconfont">&#xe6a7;</i>
                                 每月收入
                             </a>
                         </li>
                         <li>
-                            <a href="./echarts3.html">
+                            <a href="toRqTeacher">
                                 <i class="iconfont">&#xe6a7;</i>
-                                人气教官
+                                 项目满意度对比
                             </a>
                         </li>
                         <li>
-                            <a href="./echarts4.html">
+                            <a href="toRqActivity">
                                 <i class="iconfont">&#xe6a7;</i>
                                 人气活动
                             </a>
                         </li>
                         <li>
-                            <a href="./echarts5.html">
+                            <a href="toMothKh">
                                 <i class="iconfont">&#xe6a7;</i>
-                                每月客户
+                                每月订单量
                             </a>
                         </li>
                         <li>
-                            <a href="./echarts6.html">
+                            <a href="toYgKq">
                                 <i class="iconfont">&#xe6a7;</i>
-                                员工考勤数据
+                                项目差评数
                             </a>
                         </li>
-                        <li class="current">
-                            <a href="./echarts7.html">
+                        <li  class="current">
+                            <a href="toQuestion">
                                 <i class="iconfont">&#xe6a7;</i>
                                 问卷调查
                             </a>
@@ -334,56 +334,21 @@
           <div class="content">
             <!-- 右侧内容框架，更改从这里开始 -->
             <blockquote class="layui-elem-quote">
-                调查问卷统计 ———— 射击
+           		 满意度调查
             </blockquote>
             <div class="">
-                <form class="layui-form" method="get" action="">
                 	<label class="layui-form-label">项目名称:</label>
-                	<select class="layui-select" style="width: 50px;">
-                		<option>请选择</option>
-                		<option>射击</option>
-                		<option>挖矿</option>
-                		<option>采药</option>
-                		<option>种地</option>
+                	<select class="layui-select" id="select" onchange="show()" style="width: 150px;">
+                		<option th:each="itme,state : ${projects}" th:text="${itme.projectname}">
+                			
+                		</option>
                 	</select>
-                	<input class="layui-btn" type="submit" value="查找" style="margin-left: 30px;"/>
-                </form>
+                	
             </div>
             <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
             <div id="main" style="width: 100%;height:400px;"></div>
             <blockquote class="layui-elem-quote">
-                <table class="layui-table" >
-  					<thead>
-  						<th></th>
-  						<th>选择人数</th>
-  						<th>百分比</th>
-  					</thead>
-  					<tbody>
-  						<td>很好玩，会推荐给朋友</td>
-  						<td>7352</td>
-  						<td>30%</td>
-  					</tbody>
-  					<tbody>
-  						<td>emmm，还行</td>
-  						<td>7352</td>
-  						<td>30%</td>
-  					</tbody>
-  					<tbody>
-  						<td>一般</td>
-  						<td>7352</td>
-  						<td>30%</td>
-  					</tbody>
-  					<tbody>
-  						<td>我觉得不行</td>
-  						<td>7352</td>
-  						<td>30%</td>
-  					</tbody>
-  					<tbody>
-  						<td>什么鬼，这就是***</td>
-  						<td>7352</td>
-  						<td>30%</td>
-  					</tbody>
-				</table>
+               
             </blockquote>
             <!-- 右侧内容框架，更改从这里结束 -->
           </div>
@@ -420,56 +385,93 @@
     <!-- 背景切换结束 -->
         
         <script src="http://cdn.bootcss.com/echarts/3.3.2/echarts.min.js" charset="utf-8"></script>
-        <script type="text/javascript" src="./js/echarts-for-x-admin.js"></script>
+        <script type="text/javascript" th:src="@{/js/echarts-for-x-admin.js}"></script>
+		<script type="text/javascript" th:src="@{/js/vue.js}" ></script>
+		<script type="text/javascript">
+ var vue = new Vue({
+       		 
+       		 el:".bg-out",
+       		 data : {
+       			 series : []
+       		 }
+       		 
+       	 });
+ 	show();
+	function show(){
+		var id = $("#select").val();
+		  $.ajax({
+ 			url:"http://localhost:8080/toAjaxQuestion",
+ 			data:{
+ 				projectName : id
+ 			},
+ 			type:"post",
+ 			dataType:"json",
+ 			success:function(data){
+ 				for(var i = 0;i<data.length;i++){
+ 					vue.series[i]={
+ 				            name:'选择人数',
+ 				            type:'bar',
+ 				            barWidth: '60%',
+ 				            data:data[i].numcount
+ 				        }
+ 					
+ 				}
+ 				
+ 				hi();
+ 				
+ 			}
+ 			
+ 		}); 
+	}
+	function hi(){
+		var dom = document.getElementById("main");
+		
+		setTimeout(function(){
+		var myChart = echarts.init(dom);
+		var app = {};
+		option = null;
+		app.title = '坐标轴刻度与标签对齐';
 
-        <script type="text/javascript">
-        var dom = document.getElementById("main");
-var myChart = echarts.init(dom);
-var app = {};
-option = null;
-app.title = '坐标轴刻度与标签对齐';
-
-option = {
-    color: ['#3398DB'],
-    tooltip : {
-        trigger: 'axis',
-        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-        }
-    },
-    grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-    },
-    xAxis : [
-        {
-            type : 'category',
-            data : ['很好玩，会推荐给朋友', 'emmm，还行', '一般', '我觉得不行', '什么鬼，这就是***'],
-            axisTick: {
-                alignWithLabel: true
-            }
-        }
-    ],
-    yAxis : [
-        {
-            type : 'value'
-        }
-    ],
-    series : [
-        {
-            name:'直接访问',
-            type:'bar',
-            barWidth: '60%',
-            data:[100, 521, 200, 334, 390]
-        }
-    ]
-};
-;
-if (option && typeof option === "object") {
-    myChart.setOption(option, true);
-}
+		option = {
+		    color: ['#3398DB'],
+		    tooltip : {
+		        trigger: 'axis',
+		        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+		            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+		        }
+		    },
+		    grid: {
+		        left: '3%',
+		        right: '4%',
+		        bottom: '3%',
+		        containLabel: true
+		    },
+		    xAxis : [
+		        {
+		            type : 'category',
+		            data : ['满意', '一般', '很差'],
+		            axisTick: {
+		                alignWithLabel: true
+		            }
+		        }
+		    ],
+		    yAxis : [
+		        {
+		            type : 'value'
+		        }
+		    ],
+		    series : vue.series
+		};
+		;
+		if (option && typeof option === "object") {
+		    myChart.setOption(option, true);
+		}
+		},100)
+	}
+		$(function(){
+			
+		});
+        
         </script>
 </body>
 </html>

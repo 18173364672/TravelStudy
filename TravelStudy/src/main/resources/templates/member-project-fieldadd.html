@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>研学旅行管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" th:href="@{/css/font.css}">
+	<link rel="stylesheet" th:href="@{/css/xadmin.css}">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
+    <script th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
+    <script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
+</head>
+<body>
+    <!-- 中部开始 -->
+    <div class="wrapper">
+        <!-- 右侧主体开始 -->
+        <div class="page-content">
+          <div class="content">
+            <!-- 右侧内容框架，更改从这里开始 -->
+           
+              
+                <div class="layui-form-item">
+                    <label for="L_username" class="layui-form-label">
+                        <span class="x-red">*</span>场地类型
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="L_username" name="name" required="" lay-verify="nikename"
+                        autocomplete="off" class="layui-input">
+                    </div>
+                     <button class="layui-btn" onclick="tj()"><i class="layui-icon">&#xe608;</i>添加</button>
+                </div>
+                
+              
+                
+                  
+                
+                
+                <div class="cc">
+                
+                
+                
+                </div>
+                
+                
+                
+               
+                
+                
+                
+               
+                
+               
+           
+            <!-- 右侧内容框架，更改从这里结束 -->
+          </div>
+              <div class="layui-form-item">
+                    <label for="L_repass" class="layui-form-label">
+                    </label>
+                    <button  class="layui-btn" lay-filter="add" onclick="submit_()">
+                        增加
+                    </button>
+                </div>
+       
+        </div>
+        <!-- 右侧主体结束 -->
+    </div>
+    <!-- 中部结束 -->
+    
+</body>
+<script type="text/javascript" th:inline="javascript">
+
+   function submit_(){
+	   var modules=[];
+		  $("[name='cdm']").each(function() {
+			
+				var model={};
+				model.name=$(this).val();
+			    model.num=$(this).parent().parent().next().children("div").children("input").val();
+				
+				modules.push(model);
+		
+		})
+		
+		var fieldtype={};
+		  
+		  fieldtype.name=$("[name='name']").val();
+//		  organization.context=$("[name='context']").val();
+		  fieldtype.flist=modules;
+		  
+		  var fieldtypeStr=JSON.stringify(fieldtype);
+		  console.log(fieldtypeStr);
+		  var urlpath = [[@{/field/fieldadd}]];
+		  
+			  $.ajax({
+				  url:urlpath,
+				  data:fieldtypeStr,
+				  type:"post",
+				  processData:false,
+				  contentType:"application/json",
+				  datatype:"text",
+				  success:function(){
+					 alert("新增成功");
+					  
+				  }
+			  })
+	   
+	  var index=parent.layer.getFrameIndex(window.name);
+	  parent.layer.close(index)
+
+      
+
+	  
+}
+   var index=0;
+   function tj(){
+     	
+      var lxm=$("[name='name']").val();
+      index++;
+      var cd="号场地";
+   	  document.querySelector(".cc").innerHTML+="<div><div class='layui-form-item'><label class='layui-form-label'><span class='x-red'>*</span>场地名称</label><div class='layui-input-inline'><input type='text' name='cdm' class='layui-input' value='"+lxm+""+index+""+cd+"'></div><button class='layui-btn layui-btn-danger' onclick='del(this)'><i class='layui-icon'>&#xe640;</i>删除</button></div><div class='layui-form-item'><label class='layui-form-label'><span class='x-red'>*</span>可容纳人数</label><div class='layui-input-inline'><input type='text' name='num' class='layui-input' value='0'></div></div></div>";
+   	  
+   	
+   }
+  
+  function del(object){
+  	 index=0;
+  	 $(object).parent().parent().remove();
+  	 
+  	
+  }
+  
+   
+</script>
+</html>

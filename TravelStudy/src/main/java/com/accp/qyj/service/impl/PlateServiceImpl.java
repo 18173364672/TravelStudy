@@ -121,4 +121,10 @@ public class PlateServiceImpl implements PlateService{
 		return m.queryPlateByUserId(uid);
 	}
 
+	@Override
+	public List<Plate> queryLeftNav(Integer uid) {
+		// TODO Auto-generated method stub
+		return m.queryLeftNav(uid);
+	}
+
 }

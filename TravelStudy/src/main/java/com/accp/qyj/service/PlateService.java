@@ -42,4 +42,6 @@ public interface PlateService {
     List<Plate> queryPlate(@Param("rid") Integer rid);
     
 	public Map<String, Plate> queryPlateByUserId(Integer uid);
+    
+    public List<Plate> queryLeftNav(@Param("uid") Integer uid);
 }

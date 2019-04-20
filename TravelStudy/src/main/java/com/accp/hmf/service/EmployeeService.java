@@ -43,4 +43,9 @@ public interface EmployeeService {
     //查询员工所有提成
     List<Royalty> querypay(Integer id);
     
+    //查询员工姓名
+    String emqueryname(Integer id);
+    
+    public List<Employee> queryjl(String job);
+    
 }
