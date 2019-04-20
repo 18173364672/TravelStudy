@@ -49,7 +49,8 @@
                     </label>
                     
                     <div class="layui-inline" style="margin-left:110px;margin-top:-27px;">
-				            <input type="checkbox" th:each="item,index : ${list}" th:title="${item.name}" th:value="${item.pid}"  name="pid" class="gcs-checkbox">
+				            <input type="checkbox" th:each="item,index : ${list}" th:if="${item.parentid == 0}" th:title="${item.name}" th:value="${item.pid}"  name="pid" class="gcs-checkbox"> <br>
+				            <input type="checkbox" th:each="item,index : ${list}" th:if="${item.parentid == item.pid}" th:title="${item.name}" th:value="${item.pid}"  name="pid" class="gcs-checkbox">
                     </div>
                 </div>
                 
