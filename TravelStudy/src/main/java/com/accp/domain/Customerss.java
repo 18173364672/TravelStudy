@@ -2,6 +2,8 @@ package com.accp.domain;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Customerss {
     private Integer id;
 
@@ -16,11 +18,13 @@ public class Customerss {
     private String phone;
 
     private String address;
-
+   
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date createtime;
 
     private Double consumption;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date finaltime;
 
     private Integer consume;
@@ -42,8 +46,18 @@ public class Customerss {
     private String spare4;
 
     private String spare5;
+    
+    private String groupname;
 
-    public Integer getId() {
+    public String getGroupname() {
+		return groupname;
+	}
+
+	public void setGroupname(String groupname) {
+		this.groupname = groupname;
+	}
+
+	public Integer getId() {
         return id;
     }
 

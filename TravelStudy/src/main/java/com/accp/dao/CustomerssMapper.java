@@ -27,4 +27,6 @@ public interface CustomerssMapper {
     int updateByPrimaryKeySelective(Customerss record);
 
     int updateByPrimaryKey(Customerss record);
+    
+    List<Customerss> cupquery(@Param("createtime")String createtime,@Param("username")String username);
 }

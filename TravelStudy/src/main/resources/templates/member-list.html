@@ -1,20 +1,20 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 	<head>
 		<meta charset="UTF-8">
-		<title>后台登录-X-admin1.1</title>
+		<title>研学旅行</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 		<link rel="stylesheet" th:href="@{/css/font.css}">
-		<link rel="stylesheet" href="@{/css/xadmin.css}">
+		<link rel="stylesheet" th:href="@{/css/xadmin.css}">
 		<link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
 
 		<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 		<script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
-		<script src="@{/lib/layui/layui.js}" charset="utf-8"></script>
+		<script th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
 
-		<script type="text/javascript" src="@{/js/xadmin.js}"></script>
+		<script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
 		<!--    <script type="text/javascript" src="static/js/jquery-1.8.3.js" ></script>-->
 	</head>
 	<script>
@@ -345,7 +345,7 @@
 							</div>
 						</div>
 					</form>
-					<xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button><button class="layui-btn" onclick="member_add('添加用户','member-add.html','600','500')"><i class="layui-icon">&#xe608;</i>添加</button><span class="x-right" style="line-height:40px">共有数据：88 条</span></xblock>
+					<xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button><button class="layui-btn" onclick="member_add('添加用户','member-add.html','600','500')"><i class="layui-icon">&#xe608;</i>添加</button>&nbsp;&nbsp;&nbsp;&nbsp;<a href=""><button class="layui-btn layui-btn-normal">导出客户信息</button></a><span class="x-right" style="line-height:40px">共有数据：{{pageInfo.total}} 条</span></xblock>
 					<table class="layui-table">
 						<thead>
 							<tr>
@@ -367,6 +367,10 @@
 								</th>
 								
 								<th>
+									身份证
+								</th>
+								
+								<th>
 									手机
 								</th>
 								<th>
@@ -375,17 +379,26 @@
 								<th>
 									地址
 								</th>
-								<th>
-									加入时间
-								</th>
+								
 								
 								<th>
 									团体组
 								</th>
-								
+								<th>
+									客户类型
+								</th>
                                <th>
 									累计消费（/元）
 								</th>
+								
+								<th>
+									消费次数（/次）
+								</th>
+								
+								<th>
+									加入时间
+								</th>
+								
                                <th>
 									最后一次登陆时间
 								</th>
@@ -396,49 +409,65 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
+							<tr v-for="l in pageInfo.list">
 								<td>
-									<input type="checkbox" value="1" name="s1">
+									<input type="checkbox"  name="s1">
 								</td>
 								<td>
-									1
+									{{l.id}}
 								</td>
 								<td>
 									<u style="cursor:pointer" onclick="member_show('张三','member-show.html','10001','1400','800')">
-                                小明
+                               {{l.username}}
                             </u>
 								</td>
 								<td>
-									男
+									{{l.sex}}
 								</td>
 								
 								<td>
 									
-									18
-								</td>
-								<td>
-									13000000000
-								</td>
-								<td>
-									admin@mail.com
-								</td>
-								<td>
-									北京市 海淀区
-								</td>
-								<td>
-									2017-01-01 11:11:42
+									{{l.spare2}}
 								</td>
 								
 								<td>
-									北大青鸟
+									
+									{{l.idcard}}
 								</td>
 								
 								<td>
-									500
+									{{l.phone}}
+								</td>
+								<td>
+									{{l.email}}
+								</td>
+								<td>
+									{{l.address}}
+								</td>
+								
+								
+								<td>
+									{{l.groupname}}
 								</td>
 								
 								<td>
-									2017-04-01 11:11:42
+									{{l.spare1}}
+								</td>
+								
+								<td>
+									{{l.consumption}}
+								</td>
+								
+								<td>
+									{{l.consume}}
+								</td>
+								
+								<td>
+									{{l.createtime}}
+								</td>
+								
+								<td>
+									{{l.finaltime}}
 								</td>
 
 								<td class="td-manage">
@@ -455,64 +484,7 @@
 								</td>
 							</tr>
 		
-			<tr>
-								<td>
-									<input type="checkbox" value="1" name="s1">
-								</td>
-								<td>
-									1
-								</td>
-								<td>
-									<u style="cursor:pointer" onclick="member_show('张三','member-show.html','10001','360','400')">
-                                小明
-                            </u>
-								</td>
-								<td>
-									男
-								</td>
-								
-								<td>
-									
-									20
-								</td>
-								<td>
-									13000000000
-								</td>
-								<td>
-									admin@mail.com
-								</td>
-								<td>
-									北京市 海淀区
-								</td>
-								<td>
-									2017-01-01 11:11:42
-								</td>
-								<td>
-								
-									北大青鸟
-								
-								</td>
-								<td>
-									5000
-								</td>
-								
-								<td>
-									2017-04-01 11:11:42
-								</td>
-
-								<td class="td-manage">
-
-									<a title="编辑" href="javascript:;" onclick="member_edit('编辑','member-edit.html','4','','510')" class="ml-5" style="text-decoration:none">
-										<i class="layui-icon">&#xe642;</i>
-									</a>
-									<a style="text-decoration:none" onclick="member_password('修改密码','member-password.html','10001','600','400')" href="javascript:;" title="修改密码">
-										<i class="layui-icon">&#xe631;</i>
-									</a>
-									<a title="删除" href="javascript:;" onclick="member_del(this,'1')" style="text-decoration:none">
-										<i class="layui-icon">&#xe640;</i>
-									</a>
-								</td>
-							</tr>
+		
 	
 	
 		
@@ -520,8 +492,8 @@
 						</tbody>
 					</table>
 					<xblock>
-						<button class="layui-btn layui-btn-warm">上一页</button>
-						<button class="layui-btn layui-btn-danger">下一页</button>
+						<button class="layui-btn layui-btn-warm" v-on:click="prePage()">上一页</button>
+						<button class="layui-btn layui-btn-danger" v-on:click="nextPage()">下一页</button>
 					</xblock>
 
 					<!-- 右侧内容框架，更改从这里结束 -->
@@ -660,16 +632,82 @@
 				});
 			}
 		</script>
-		<script>
-			//百度统计可去掉
-			var _hmt = _hmt || [];
-			(function() {
-				var hm = document.createElement("script");
-				hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-				var s = document.getElementsByTagName("script")[0];
-				s.parentNode.insertBefore(hm, s);
-			})();
-		</script>
+		
 	</body>
+<script type="text/javascript" th:src="@{/js/vue.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+    
+var v=new Vue({
+	  el:".content",
+	  data:{
+		  pageInfo:"pageInfo",
+		  name:""
+	  },
+	  methods:{
+		  getGoodsHref:function(val){
+			    return 'queryd?id='+val
+			},
+			deleteHref:function(val){
+			    return 'delete?id='+val
+			},prePage:function(){
+	    		if(this.pageInfo.prePage==0){
+	    			alert("到顶了");
+	    			return;
+	    		}
+	    		getmethod(this.pageInfo.prePage);
+	    	},
+	    	nextPage:function(){
+	    		if(this.pageInfo.prePage==this.pageInfo.pages){
+	    			alert("到底了");
+	    		}
+	    		getmethod(this.pageInfo.nextPage);
+	    		
+	    	}
 
+	  },
+	  watch:{
+		  name:function(){
+			console.log(v.name);
+			getmethod(1,v.name)
+		},
+		createtime:function(){
+			
+		}
+		  
+	  }
+
+	  
+});
+    
+var urlpath = [[@{/customer/customerquerypage}]];
+
+$.ajax({
+		 url:urlpath,
+		 data:{},
+		 datatype:"json",
+		 success:function(data){
+			 v.pageInfo=data;
+			 console.log(v.list);
+		 }
+	})
+
+
+	 function getmethod(page,name){
+	   $.ajax({
+		  	 url:urlpath,
+		  	 data:{
+		  		currentPage:page,
+		  		
+		  		employeename:name
+		  	 },
+		  	 datatype:"json",
+		  	 success:function(data){
+		  		v.pageInfo=data;
+		  		
+		  	 }
+		   })
+   }
+
+
+</script>
 </html>
