@@ -23,6 +23,22 @@
     <result column="Spare4" property="spare4" jdbcType="VARCHAR" />
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
+  
+   <select id="cupquery" resultMap="BaseResultMap">
+     select * from customerss
+     <where>
+        state=1
+       
+       <if test="username!=null">
+        and username like CONCAT('%',#{username},'%')
+       </if>
+       
+       <if test="createtime!=null">
+        and createtime like CONCAT('%',#{createtime},'%')
+       </if>
+     </where>
+  </select>
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

@@ -42,7 +42,7 @@ public class WebMvcConfigruation extends WebMvcConfigurationSupport {
 	protected void addResourceHandlers(ResourceHandlerRegistry registry) {
 		// registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
 		registry.addResourceHandler("/**").addResourceLocations("classpath:/static/")
-				.addResourceLocations("file:/Volumes/applesdcard/");//过滤上传文件夹
+		.addResourceLocations("file:/E:/file/");
 	}
 
 	/**

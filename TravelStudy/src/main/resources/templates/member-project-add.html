@@ -217,7 +217,7 @@
                 <div class="layui-form-item">
                     <label for="L_repass" class="layui-form-label">
                     </label>
-                    <button  class="layui-btn" name="zj">
+                    <button  class="layui-btn" th:onclick="zj()">
                         增加
                     </button>
                 </div>
@@ -311,69 +311,128 @@ $(function(){
 				});  
 			});
 	 
-	 $("[name='zj']").click(function(){
+// 	 $("[name='zj']").click(function(){
 		 
-		 var modules=[];
-		  $("[name='eid']").each(function() {
-			if(this.checked){
-				var model={};
-				model.id=$(this).val();
+// 		 var modules=[];
+// 		  $("[name='eid']").each(function() {
+// 			if(this.checked){
+// 				var model={};
+// 				model.id=$(this).val();
 				
 				
-				modules.push(model);
-			}
-				
-		
-		})
-		
-		 var modules1=[];
-		  $("[name='cid']").each(function() {
-			if(this.checked){
-				var model={};
-				model.id=$(this).val();
-				
-				
-				modules1.push(model);
-			}
+// 				modules.push(model);
+// 			}
 				
 		
-		})
+// 		})
 		
-		var project={};
+// 		 var modules1=[];
+// 		  $("[name='cid']").each(function() {
+// 			if(this.checked){
+// 				var model={};
+// 				model.id=$(this).val();
+				
+				
+// 				modules1.push(model);
+// 			}
+				
+		
+// 		})
+		
+// 		var project={};
 		  
-		  project.projectname=$("[name='projectname']").val();
-		  project.price=$("[name='price']").val();
-		  project.context=$("[name='context']").val();
-		  project.type=$("[name='type']").val();
-		  project.emlist=modules;
-		  project.flist= modules1;
+// 		  project.projectname=$("[name='projectname']").val();
+// 		  project.price=$("[name='price']").val();
+// 		  project.context=$("[name='context']").val();
+// 		  project.type=$("[name='type']").val();
+// 		  project.emlist=modules;
+// 		  project.flist= modules1;
 		  
-		  var  projectStr=JSON.stringify( project);
-		  console.log(projectStr);
+// 		  var  projectStr=JSON.stringify( project);
+// 		  console.log(projectStr);
 		  
-		  $.ajax({
-			  url:urlpath3,
-			  data:projectStr,
-			  type:"post",
-			  processData:false,
-			  contentType:"application/json",
-			  datatype:"text",
-			  success:function(data){
+// 		  $.ajax({
+// 			  url:urlpath3,
+// 			  data:projectStr,
+// 			  type:"post",
+// 			  async : false,
+// 			  processData:false,
+// 			  contentType:"application/json",
+// 			  datatype:"text",
+// 			  success:function(data){
 				  
 				
-			    imgadd(data);
-			  }
-		  })
+// 			    imgadd(data);
+// 			  }
+// 		  })
 		  
 		  
-	
+	     
 		 
 		 
-	 })
+// 	 })
 	 
 	 
 	 
 })
+
+   function zj(){
+	 var modules=[];
+	  $("[name='eid']").each(function() {
+		if(this.checked){
+			var model={};
+			model.id=$(this).val();
+			
+			
+			modules.push(model);
+		}
+			
+	
+	})
+	
+	 var modules1=[];
+	  $("[name='cid']").each(function() {
+		if(this.checked){
+			var model={};
+			model.id=$(this).val();
+			
+			
+			modules1.push(model);
+		}
+			
+	
+	})
+	
+	var project={};
+	  
+	  project.projectname=$("[name='projectname']").val();
+	  project.price=$("[name='price']").val();
+	  project.context=$("[name='context']").val();
+	  project.type=$("[name='type']").val();
+	  project.emlist=modules;
+	  project.flist= modules1;
+	  
+	  var  projectStr=JSON.stringify( project);
+	  console.log(projectStr);
+	  
+	  $.ajax({
+		  url:urlpath3,
+		  data:projectStr,
+		  type:"post",
+		  async : false,
+		  processData:false,
+		  contentType:"application/json",
+		  datatype:"text",
+		  success:function(data){
+			  
+			
+		    imgadd(data);
+		  }
+	  })
+	  
+	 var index=parent.layer.getFrameIndex(window.name);
+	  parent.layer.close(index);
+}
 
 
   function imgadd(data){
@@ -390,7 +449,9 @@ $(function(){
 		  contentType:false,
 		  processData:false,
 		  sucess:function(result){
+			 alert("新增成功");
 			  console.log(result);
+			  
 		  }
 		  
 		  

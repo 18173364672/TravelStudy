@@ -31,7 +31,15 @@
   </resultMap>
   
   
-      <select id="pquery" resultMap="BaseResultMap">
+  
+     
+     <select id="queryd" resultMap="BaseResultMap">
+      select * from project where id=#{id}
+     
+     </select>
+     
+    <select id="pquery" resultMap="BaseResultMap">
+
      select * from project
      <where>
        <if test="projectname!=null">

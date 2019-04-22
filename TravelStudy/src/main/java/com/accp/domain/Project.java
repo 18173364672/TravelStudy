@@ -30,11 +30,19 @@ public class Project {
     private String spare5;
     
     private MultipartFile [] file;
+ 
+    private List<Project> mlist;
     
+    
+	public List<Project> getMlist() {
+		return mlist;
+	}
 
-   
-    
-    public List<Employee> getEmlist() {
+	public void setMlist(List<Project> mlist) {
+		this.mlist = mlist;
+	}
+
+	public List<Employee> getEmlist() {
 		return emlist;
 	}
 

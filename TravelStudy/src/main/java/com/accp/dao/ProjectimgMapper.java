@@ -29,4 +29,6 @@ public interface ProjectimgMapper {
     int updateByPrimaryKey(Projectimg record);
     
     List<Projectimg> queryimg(Integer id);
+    
+    int deletes(Integer id);
 }

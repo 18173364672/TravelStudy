@@ -57,7 +57,7 @@
 <body>
     <!-- 顶部开始 -->
     <div class="container">
-        <div class="logo"><a href="./index.html">X-ADMIN V1.1</a></div>
+        <div class="logo"><a href="./index.html">研学旅行</a></div>
         <div class="open-nav"><i class="iconfont">&#xe699;</i></div>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
@@ -68,7 +68,7 @@
               <dd><a href="./login.html">退出</a></dd>
             </dl>
           </li>
-          <li class="layui-nav-item"><a href="/">前台首页</a></li>
+         
         </ul>
     </div>
     <!-- 顶部结束 -->
@@ -93,7 +93,7 @@
                     </a>
                     <ul class="sub-menu ">
                         <li >
-                            <a href="member-list.html">
+                            <a th:href="@{/customer/tocustomerquerypage}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 客户列表
                             </a>
@@ -396,9 +396,10 @@
                             {{l.id}}
                         </td>
                         <td>
-                            <u style="cursor:pointer" onclick="member_show('项目图片','/project/toprojectimg','10001','500','500')">
+                            <u style="cursor:pointer" onclick="member_show('项目图片','/project/toprojectimg','10001','500','500',this)">
                                {{l.projectname}}
                             </u>
+                            <div style="display: none">{{l.id}}</div>
                         </td>
                         <td >
                             {{l.context}}
@@ -426,15 +427,17 @@
                         </td>
                         <td class="td-manage">
                            
-                            <a title="编辑" href="javascript:;" onclick="member_edit('项目编辑','member-project-edit.html','4','','510')"
+                            <a title="编辑" href="javascript:;" onclick="member_edit('项目编辑','/project/toprojectedit','4','','510',this)"
                             class="ml-5" style="text-decoration:none">
                                 <i class="layui-icon">&#xe642;</i>
                             </a>
+                            <div style="display: none">{{l.id}}</div>
                             
-                            <a title="删除" href="javascript:;" onclick="member_del(this,'1')" 
+                            <a title="删除" href="javascript:;" onclick="member_del(this)" 
                             style="text-decoration:none">
                                 <i class="layui-icon">&#xe640;</i>
                             </a>
+                            <div style="display: none">{{l.id}}</div>
                         </td>
                     </tr>
                 
@@ -524,20 +527,13 @@
         });
 
         //批量删除提交
-         function delAll () {
-            layer.confirm('确认要删除吗？',function(index){
-                //捉到所有被选中的，发异步进行删除
-                layer.msg('删除成功', {icon: 1});
-            });
-         }
+        
          /*用户-添加*/
         function member_add(title,url,w,h){
             x_admin_show(title,url,w,h);
         }
         /*用户-查看*/
-        function member_show(title,url,id,w,h){
-            x_admin_show(title,url,w,h);
-        }
+       
 
          /*用户-停用*/
         function member_stop(obj,id){
@@ -561,27 +557,109 @@
             });
         }
         // 用户-编辑
-        function member_edit (title,url,id,w,h) {
-            x_admin_show(title,url,w,h); 
-        }
+       
         /*密码-修改*/
         function member_password(title,url,id,w,h){
             x_admin_show(title,url,w,h);  
         }
         /*用户-删除*/
-        function member_del(obj,id){
-            layer.confirm('确认要删除吗？',function(index){
-                //发异步删除数据
-                $(obj).parents("tr").remove();
-                layer.msg('已删除!',{icon:1,time:1000});
-            });
-        }
+       
         </script>
        
 </body>
 <script type="text/javascript" th:src="@{/js/vue.js}"></script>
 <script type="text/javascript" th:inline="javascript">
-      
+
+function member_edit (title,url,id,w,h,obj) {
+	var id=$(obj).next().text();
+	var url1="?id="+id
+	
+	
+    x_admin_show(title,url+url1,w,h); 
+}
+
+
+function member_del(obj){
+	var id=$(obj).next().text();
+	
+	 var urlpath2 = [[@{/project/projectdeletes}]];
+	
+    layer.confirm('确认要删除吗？',function(index){
+        //发异步删除数据
+        $.ajax({
+		 url:urlpath2,
+		 data:{
+			 id:id
+			 
+		 },
+		 type:"post",
+		 datatype:"json",
+		 success:function(data){
+			 window.location.reload();
+		 }
+	});
+        
+        
+        $(obj).parents("tr").remove();
+        layer.msg('已删除!',{icon:1,time:1000});
+    });
+}
+
+
+function delAll () {
+	
+    var modules=[];
+	  $("[name='s1']").each(function() {
+		if(this.checked){
+			var model={};
+			model.id=parseInt($(this).parent().next().text());
+			
+			
+			modules.push(model);
+		}
+	})
+	
+	var project={};
+	 
+	  project.mlist=modules;
+	  
+	  var projectStr=JSON.stringify(project);
+	  console.log(projectStr);
+	
+    layer.confirm('确认要删除吗？',function(index){
+        //捉到所有被选中的，发异步进行删除
+     
+	 
+	    layer.msg('删除成功', {icon: 1});
+	  var urlpath1 = [[@{/project/projectdelete}]];
+	  $.ajax({
+		  url:urlpath1,
+		  data:projectStr,
+		  type:"post",
+		  processData:false,
+		  contentType:"application/json",
+		  datatype:"text",
+		  success:function(result){
+			  window.location.reload();
+			  console.log(result);
+		  }
+	  })
+	  
+        
+	
+    });
+    
+    
+    
+ }
+
+
+function member_show(title,url,id,w,h,obj){
+	var id=$(obj).next().text();
+	var url1="?id="+id
+	
+    x_admin_show(title,url+url1,w,h);
+}
       
       
 var v=new Vue({

@@ -27,4 +27,6 @@ public interface CustomergroupMapper {
     int updateByPrimaryKeySelective(Customergroup record);
 
     int updateByPrimaryKey(Customergroup record);
+    
+    Customergroup groupname(Integer id);
 }

@@ -34,19 +34,72 @@ public class ProjectController {
 	EmployeeService em;
 	
 	
+	@RequestMapping("/projectedit")
+	@ResponseBody
+	public int projectedit(@RequestBody Project project) {
+		ps.deleteByPrimaryKey(project.getId()); 
+		ps.deletes(project.getId());
+		List<Employee> emlist=project.getEmlist();
+		String ids="";
+		for (Employee employee : emlist) {
+			ids+=employee.getId()+",";
+		}
+		
+		String ids1="";
+		List<Field> flist=project.getFlist();
+		for (Field field : flist) {
+		   ids1+=field.getId()+",";
+		}
+	    Fieldtype type=fs.queryfname(Integer.parseInt(project.getType()));
+	    project.setType(type.getName());
+		project.setIds(ids);
+		project.setIds1(ids1);
+		ps.insertSelective(project);
+	
+		
+		
+		return project.getId();
+	}
+	
+	
+	@RequestMapping("/toprojectedit")
+	public String toprojectedit(Model model,Integer id) {
+		Project project=ps.queryd(id);
+		List<Fieldtype> list=fs.selectByExample(null);
+		model.addAttribute("list", list);
+		model.addAttribute("project", project);
+		return "member-project-edit";
+	}
+	
+    @RequestMapping("/projectdeletes")
+    public String projectdeletes(Integer id) {
+    	  ps.deleteByPrimaryKey(id);
+    	  ps.deletes(id);
+    	  return "redirect:/project/toprojectquerypage";
+    }
+	
+	@RequestMapping("/projectdelete")
+	public String projectdelete(@RequestBody Project project) {
+		
+		for (Project p : project.getMlist()) {
+			ps.deleteByPrimaryKey(p.getId());
+			ps.deletes(p.getId());
+		}
+	
+		
+		
+		
+		return "redirect:/project/toprojectquerypage";
+	}
+	
 	@RequestMapping("/toprojectimg")
-	public String toprojectimg() {
+	public String toprojectimg(Integer id , Model model) {
+		List<Projectimg> list=ps.queryimg(id);
+		model.addAttribute("list", list);
 		return "member-project-img";
 	}
 	
-	@RequestMapping("/projectimg")
-	@ResponseBody
-	public List<Projectimg> projectimg(Integer id) {
-		List<Projectimg> list=ps.queryimg(id);
-		
-		
-		return list;
-	}
+	
 	
 	
 	@RequestMapping("/projectadd")
