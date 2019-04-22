@@ -93,6 +93,8 @@ public class OrganizationController {
 	@RequestMapping("/organizationadd")
 	@ResponseBody
 	public Organization organizationadd(@RequestBody Organization organization) {
+		
+		organization.setCount(0);
 		os.insertSelective(organization);
 		for (Organizationzw oz : organization.getOlist()) {
 			Organizationzw oz1=new Organizationzw();

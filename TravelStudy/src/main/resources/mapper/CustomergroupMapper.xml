@@ -12,6 +12,15 @@
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
   
+  <select id="groupid" resultType="int">
+      select id from customergroup where groupname=#{groupname}
+  </select>
+  
+  <select id="cgquery" resultMap="BaseResultMap">
+     select * from customergroup
+  
+  </select>
+  
   <select id="groupname" resultMap="BaseResultMap">
     select * from customergroup where id=#{id}
   
