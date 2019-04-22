@@ -11,6 +11,11 @@
     <result column="Spare4" property="spare4" jdbcType="VARCHAR" />
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
+  
+   <select id="imgselect" resultMap="BaseResultMap">
+  SELECT * FROM `dynamicpicture`  WHERE Dyid=#{id} 
+  </select>
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

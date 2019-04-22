@@ -1,5 +1,7 @@
 package com.accp.domain;
 
+import java.util.List;
+
 public class Project {
     private Integer id;
 
@@ -24,8 +26,20 @@ public class Project {
     private String spare4;
 
     private String spare5;
+    
+    private List<Projectimg> proimglist;
+    
+    
 
-    public Integer getId() {
+    public List<Projectimg> getProimglist() {
+		return proimglist;
+	}
+
+	public void setProimglist(List<Projectimg> proimglist) {
+		this.proimglist = proimglist;
+	}
+
+	public Integer getId() {
         return id;
     }
 

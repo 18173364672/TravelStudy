@@ -27,4 +27,8 @@ public interface ProjectMapper {
     int updateByPrimaryKeySelective(Project record);
 
     int updateByPrimaryKey(Project record);
+    
+    List<Project>proselect(Integer pid);
+    
+    List<Project>proxmselect();
 }

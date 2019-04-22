@@ -20,8 +20,20 @@ public class Comment {
     private String spare4;
 
     private String spare5;
+    
+    private Customerss customersso;
+    
 
-    public Integer getId() {
+
+	public Customerss getCustomersso() {
+		return customersso;
+	}
+
+	public void setCustomersso(Customerss customersso) {
+		this.customersso = customersso;
+	}
+
+	public Integer getId() {
         return id;
     }
 

@@ -13,6 +13,22 @@
     <result column="Spare4" property="spare4" jdbcType="VARCHAR" />
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
+  
+    <resultMap id="user" type="com.accp.domain.Comment" extends="BaseResultMap">
+    <collection property="customersso" ofType="com.accp.domain.Customerss">
+    <result column="uname" property="username" />
+       <result column="uimg" property="uimg"/>
+                <result column="email" property="email"/>
+    </collection>
+  </resultMap>
+  
+  <select id="comselect" resultMap="user">
+   SELECT co.*,ss.`Uimg` AS uimg, ss.`Username` AS uname,ss.Email AS email FROM `comment` AS co
+INNER JOIN `customerss` AS ss
+ON ss.`Id`=co.uid
+WHERE co.dyid=#{id}
+  </select>
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

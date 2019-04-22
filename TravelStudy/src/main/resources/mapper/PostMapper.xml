@@ -24,6 +24,37 @@
        <result column="url" property="url"/>
     </collection>
   </resultMap>
+  
+      <resultMap id="user" type="com.accp.domain.Post" extends="BaseResultMap">
+    <collection property="Customerss" ofType="com.accp.domain.Customerss">
+    <result column="uname" property="username" />
+       <result column="uimg" property="uimg"/>
+       <result column="email" property="email"/>
+     
+    </collection>
+  </resultMap>
+  
+  <resultMap id="mmm" type="com.accp.domain.Post" extends="user">
+  
+    <collection property="dylist"  column="id"  ofType="com.accp.domain.Dynamicpicture" select="com.accp.dao.DynamicpictureMapper.imgselect">
+       <result column="url" property="url"/>
+    </collection>
+  </resultMap>
+  
+   <resultMap id="ccc" type="com.accp.domain.Post" extends="mmm">
+  
+    <collection property="coList" column="id"  ofType="com.accp.domain.Comment" select="com.accp.dao.CommentMapper.comselect">
+    
+    </collection>
+  </resultMap> 
+    
+      <select id="postxxselect" resultMap="ccc"> 
+  SELECT po.*,ss.`Uimg` AS uimg, ss.`Username` AS uname, ss.Email AS email FROM post AS po
+INNER JOIN `customerss` AS ss
+ON ss.`Id`=po.`uid` 
+WHERE po.id=#{id}
+  </select>
+    
     
    <select id="postselect" resultMap="postdy">
   SELECT po.*,dy.url FROM post AS po

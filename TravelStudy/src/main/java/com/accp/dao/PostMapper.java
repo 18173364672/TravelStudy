@@ -29,4 +29,6 @@ public interface PostMapper {
     int updateByPrimaryKey(Post record);
     
     List<Post> postselect(@Param("tid")Integer tid);
+    
+    Post postxxselect(@Param("id")Integer id);
 }

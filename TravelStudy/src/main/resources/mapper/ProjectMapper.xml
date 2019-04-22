@@ -15,6 +15,22 @@
     <result column="Spare4" property="spare4" jdbcType="VARCHAR" />
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
+  
+   <resultMap id="ooo" type="com.accp.domain.Project" extends="BaseResultMap">
+  
+    <collection property="proimglist"  column="id"  ofType="com.accp.domain.Projectimg" select="com.accp.dao.ProjectimgMapper.proimgselect">
+    </collection>
+  </resultMap>
+  
+  <select id="proxmselect" resultMap="ooo">
+  SELECT *FROM `project` 
+  </select>
+  
+  
+  <select id="proselect" resultMap="ooo">
+  SELECT *FROM `project` WHERE `id`=#{pid}
+  </select>
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
