@@ -3,6 +3,8 @@ package com.accp.hmf.controller;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,9 +15,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.accp.domain.Employee;
 import com.accp.domain.Organization;
 import com.accp.domain.Organizationzw;
+import com.accp.domain.Plate;
 import com.accp.domain.Royalty;
 import com.accp.hmf.service.EmployeeService;
 import com.accp.hmf.service.OrganizationService;
+import com.accp.qyj.service.PlateService;
 import com.github.pagehelper.PageInfo;
 
 @Controller
@@ -25,6 +29,9 @@ public class EmployeeController {
       EmployeeService es;
       @Autowired
       OrganizationService organizationService;
+      
+      @Autowired
+      PlateService plateservice;
       
       //查询工资
       @RequestMapping("/querypay")
@@ -182,8 +189,8 @@ public class EmployeeController {
       //员工新增
       @RequestMapping("/employeeadd")
       public String employeeadd(Employee employee) {
-    	  employee.setCreatetime(new Date());
-    	  employee.setState(1);
+    	 employee.setCreatetime(new Date());
+    	 employee.setState(1);
     	 es.insertSelective(employee);
     	 Organization organization=es.queryOrname(Integer.parseInt(employee.getSpare1()));
     	 int count=organization.getCount()+1;
@@ -214,8 +221,10 @@ public class EmployeeController {
       
       //跳转到员工查询
       @RequestMapping("/toemployeequerypage")
-      public String toemployeequerypage() {
-    	  
+      public String toemployeequerypage(Model model , HttpSession session) {
+    	  Employee es = (Employee)session.getAttribute("user");
+  		List<Plate> plate = plateservice.queryLeftNav(es.getId());
+  		model.addAttribute("plist", plate);
     	  return "member-employee";
       }
       

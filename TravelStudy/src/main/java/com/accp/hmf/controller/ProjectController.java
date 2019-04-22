@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,11 +18,13 @@ import org.springframework.web.multipart.MultipartFile;
 import com.accp.domain.Employee;
 import com.accp.domain.Field;
 import com.accp.domain.Fieldtype;
+import com.accp.domain.Plate;
 import com.accp.domain.Project;
 import com.accp.domain.Projectimg;
 import com.accp.hmf.service.EmployeeService;
 import com.accp.hmf.service.FieldService;
 import com.accp.hmf.service.ProjectService;
+import com.accp.qyj.service.PlateService;
 import com.github.pagehelper.PageInfo;
 
 @Controller
@@ -32,6 +36,8 @@ public class ProjectController {
 	FieldService fs;
 	@Autowired
 	EmployeeService em;
+	@Autowired
+    PlateService plateservice;
 	
 	
 	@RequestMapping("/projectedit")
@@ -204,8 +210,10 @@ public class ProjectController {
 	
 	
 	@RequestMapping("/toprojectquerypage")
-	public String toprojectquerypage() {
-		
+	public String toprojectquerypage(Model model , HttpSession session) {
+		Employee es = (Employee)session.getAttribute("user");
+		List<Plate> plate = plateservice.queryLeftNav(es.getId());
+		model.addAttribute("plist", plate);
 		return "member-project";
 	}
 	

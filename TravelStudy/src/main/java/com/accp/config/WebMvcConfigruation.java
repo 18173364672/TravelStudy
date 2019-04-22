@@ -84,7 +84,7 @@ public class WebMvcConfigruation extends WebMvcConfigurationSupport {
 	
 	@Override
 	protected void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(login).addPathPatterns("/**").excludePathPatterns("/user/tologin", "/user/login" ,"/user/index","/user/register","/js/**","/css/**","/fonts/**","/images/**","/lib/**","/layui-v2.4.5/**");
+//		registry.addInterceptor(login).addPathPatterns("/**").excludePathPatterns("/user/tologin", "/user/login" ,"/user/index","/user/register","/js/**","/css/**","/fonts/**","/images/**","/lib/**","/layui-v2.4.5/**");
 //		registry.addInterceptor(z).addPathPatterns("/**").excludePathPatterns("/user/tologin", "/user/login","/user/index" ,"/user/register","/js/**","/css/**","/fonts/**","/images/**","/lib/**","/layui-v2.4.5/**");
         super.addInterceptors(registry);
 	}

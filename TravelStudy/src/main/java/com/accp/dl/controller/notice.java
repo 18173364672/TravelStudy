@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.poi.hssf.record.PageBreakRecord.Break;
 import org.apache.poi.sl.usermodel.TextParagraph.BulletStyle;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,8 @@ import com.accp.domain.Notice;
 import com.accp.domain.Noticepicture;
 import com.accp.domain.Noticesecond;
 import com.accp.domain.Organization;
+import com.accp.domain.Plate;
+import com.accp.qyj.service.PlateService;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators.StringIdGenerator;
 import com.github.pagehelper.PageInfo;
 
@@ -47,6 +51,9 @@ public class notice {
 	@Autowired
 	employeeServiceImpl employee;
 	
+	@Autowired
+	PlateService plateservice;
+	
 	
 	/**
 	 * 开始的主页
@@ -62,7 +69,10 @@ public class notice {
 	 * @return
 	 */
 	@RequestMapping("/member")
-	public String member() {
+	public String member(Model model , HttpSession session) {
+		Employee es = (Employee)session.getAttribute("user");
+		List<Plate> plate = plateservice.queryLeftNav(es.getId());
+		model.addAttribute("plist", plate);
 		return "member-employee-kiss";
 	}
 	

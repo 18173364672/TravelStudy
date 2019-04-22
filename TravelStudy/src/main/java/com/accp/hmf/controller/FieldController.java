@@ -1,6 +1,10 @@
 package com.accp.hmf.controller;
 
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,9 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.accp.domain.Employee;
 import com.accp.domain.Field;
 import com.accp.domain.Fieldtype;
+import com.accp.domain.Plate;
 import com.accp.hmf.service.FieldService;
+import com.accp.qyj.service.PlateService;
 import com.github.pagehelper.PageInfo;
 
 @Controller
@@ -19,6 +26,8 @@ public class FieldController {
         
 	   @Autowired
 	   FieldService fs;
+		@Autowired
+	    PlateService plateservice;
 	   
 	   @RequestMapping("/fieldedit")
 	   public String fieldedit(Field field) {
@@ -83,7 +92,10 @@ public class FieldController {
 	   
 	   
 	     @RequestMapping("/tofieldquerypage")
-	     public String tofield() {
+	     public String tofield(Model model , HttpSession session) {
+	    	 Employee es = (Employee)session.getAttribute("user");
+	 		List<Plate> plate = plateservice.queryLeftNav(es.getId());
+	 		model.addAttribute("plist", plate);
 	    	 return "member-project-field";
 	     }
 	     

@@ -2,6 +2,8 @@ package com.accp.hmf.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.accp.domain.Employee;
 import com.accp.domain.Organization;
 import com.accp.domain.Organizationzw;
+import com.accp.domain.Plate;
 import com.accp.hmf.service.OrganizationService;
+import com.accp.qyj.service.PlateService;
 import com.github.pagehelper.PageInfo;
 
 @Controller
@@ -20,6 +24,9 @@ import com.github.pagehelper.PageInfo;
 public class OrganizationController {
 	@Autowired
 	OrganizationService os;
+	
+	@Autowired
+    PlateService plateservice;
 	
 	
 	//删除职位
@@ -93,6 +100,7 @@ public class OrganizationController {
 	@RequestMapping("/organizationadd")
 	@ResponseBody
 	public Organization organizationadd(@RequestBody Organization organization) {
+		organization.setCount(0);
 		os.insertSelective(organization);
 		for (Organizationzw oz : organization.getOlist()) {
 			Organizationzw oz1=new Organizationzw();
@@ -114,7 +122,10 @@ public class OrganizationController {
 	
 	//跳转到查询页面
 	@RequestMapping("/toorganization")
-	public String toorganization() {
+	public String toorganization(Model model , HttpSession session) {
+		Employee es = (Employee)session.getAttribute("user");
+		List<Plate> plate = plateservice.queryLeftNav(es.getId());
+		model.addAttribute("plist", plate);
 		return "member-organization";
 	}
 	
