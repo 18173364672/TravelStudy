@@ -171,8 +171,11 @@ public class UserController {
 	}
 	
 	@RequestMapping("/roleAdd")
-	public String roleAdd(Model model) {
+	public String roleAdd(Model model , HttpSession session) {
 		model.addAttribute("list", plateservice.selectByExample(null));
+		Employee es = (Employee)session.getAttribute("user");
+		List<Plate> plate = plateservice.queryLeftNav(es.getId());
+		model.addAttribute("plist", plate);
 		return "manage-role-add";
 	}
 	
@@ -201,10 +204,12 @@ public class UserController {
 	}
 	
 	@RequestMapping("/roletoupdate")
-	public String roletoupdate(Integer rid,Model model) {
+	public String roletoupdate(Integer rid,Model model , HttpSession session) {
 		model.addAttribute("role1",roleservice.selectByPrimaryKey(rid));
 		model.addAttribute("list1", roleplateservice.querybyid(rid));
-		model.addAttribute("list", plateservice.selectByExample(null));
+		Employee es = (Employee)session.getAttribute("user");
+		List<Plate> plate = plateservice.queryLeftNav(es.getId());
+		model.addAttribute("plist", plate);
 		return "manage-role-update";
 	}
 	

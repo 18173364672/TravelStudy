@@ -47,7 +47,18 @@
                         <span class="x-red">*</span>选择功能
                     </label>
                     <div class="layui-inline" style="margin-left:110px;margin-top:-27px;">
-				            <input type="checkbox" th:each="item,index : ${list}" th:title="${item.name}" th:value="${item.pid}" name="pid" class="gcs-checkbox">
+                   		<span  th:each="item,index : ${plist}">
+                   			<input type="checkbox" th:if="${item.parentid == 0}" th:title="${item.name+'（父级）'}" th:value="${item.pid}"  name="pid" class="gcs-checkbox">
+                   			<br>
+                   			<br>
+                   			<span th:each="item1 : ${item.plist}">
+                   				<input type="checkbox" th:if="${item1.parentid == item.pid}" th:title="${item1.name}" th:value="${item1.pid}"  name="pid" class="gcs-checkbox">
+                   			</span>
+                   			<br>
+                   			<br>
+                   			<br>
+                   			<br>
+                   		</span>
                     </div>
                 </div>
                 <div class="layui-form-item">

@@ -60,6 +60,7 @@
 	</select>
 	
 	
+	
   	<select id="queryLeftNav" resultMap="BaseResultMapQueryAll">
 		SELECT p.*,ur.`uid` FROM `plate` AS p
 		LEFT JOIN `roleplate` AS rp ON rp.`pid` = p.`pid`
