@@ -20,23 +20,17 @@
 		
 		layui.use('form', function(){
 			  var form = layui.form;
-			  //各种基于事件的操作，下面会有进一步介绍
 			  form.on('checkbox(number)', function(data){
-				  alert(data.value);
+				var parentid = data.value;
+				var len = $(".ez");
+				for(var i = 0 ; i < len.length ; i++){
+					if($(".ez:eq('"+i+"')").attr("data") == parentid){
+						$(".ez:eq('"+i+"')").attr("checked","checked");
+					}
+				}
+				form.render();
 			});
 		});
-		
-		
-		
-// 			var parentid = $(this).prev().val();
-// 			alert(parentid);
-// 			var ezid = $(".ez").data();
-// 			for(var i = 0 ; i < ezid.length ; i++){
-// 				alert(ezid);
-// 			}
-// 			if(parentid == ){
-			
-// 			}
 	});
 		
 	</script>
