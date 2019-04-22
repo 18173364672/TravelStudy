@@ -30,4 +30,16 @@ public class CustomergroupServiceimpl implements CustomergroupService{
 		return cgm.groupid(groupname);
 	}
 
+	@Override
+	public int updateByPrimaryKeySelective(Customergroup record) {
+		// TODO Auto-generated method stub
+		return cgm.updateByPrimaryKeySelective(record);
+	}
+
+	@Override
+	public int updateByPrimaryKey(Customergroup record) {
+		// TODO Auto-generated method stub
+		return cgm.updateByPrimaryKey(record);
+	}
+
 }

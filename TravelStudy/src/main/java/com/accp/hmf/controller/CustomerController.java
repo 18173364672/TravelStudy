@@ -1,9 +1,14 @@
 package com.accp.hmf.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.http.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,14 +29,56 @@ public class CustomerController {
     CustomerService cs;
     @Autowired
     CustomergroupService cgs;
+    @Autowired
+    HttpServletResponse response;
+    
+    @RequestMapping("/customeredit")
+    public String customeredit(Customerss customerss) {
+    	
+    
+    	response.setCharacterEncoding("UTF-8");
+    	response.setContentType("text/html; charset=utf-8");
+    	PrintWriter out;
+		try {
+			out = response.getWriter();
+			out.println("<script>");
+		    out.println("alert('修改成功！');");
+		    out.println("history.back();");
+		    out.println("var index=parent.layer.getFrameIndex(window.name);");
+		    out.println("parent.layer.close(index)");
+		    out.println("</script>");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	return "member-edit";
+    	
+    	
+   
+    }
+   
+    
+    @RequestMapping("/tocustomeredit")
+    public String tocustomeredit(Model model,Integer id) {
+    	
+    	List<Customergroup> list=cgs.selectByExample(null);
+    	model.addAttribute("list", list);
+    	
+    	Customerss customerss=cs.cuqueryd(id);
+    	
+    	model.addAttribute("customerss", customerss);
+    	return "member-edit";
+    }
     
     @RequestMapping("/customeradd")
     public String customeradd(Customerss customerss) {
     	
+    	
     	 SimpleDateFormat df = new SimpleDateFormat("yyyy");//设置日期格式
     	 Integer year=Integer.parseInt(df.format(new Date()));
     	 String idcard=customerss.getIdcard();
-    	 System.out.println(idcard);
+    	 
     	 Integer nl=Integer.parseInt(idcard.substring(6, 10));
     	 Integer nl1=year-nl;
     	 
@@ -43,17 +90,48 @@ public class CustomerController {
     	customerss.setConsumption(0.0);
     	customerss.setConsume(0);
     	customerss.setState(1);
-    	String groupname="";
+    	
     	if(customerss.getGroupname().equals("无")) {
     		customerss.setGroupid(0);
     	}else {
-    		groupname=customerss.getGroupname();
-    		int groupid= cgs.groupid(groupname);
-    		customerss.setGroupid(groupid);
+    		
+    		
+    		customerss.setGroupid(Integer.parseInt(customerss.getGroupname()));
     	}
     	
-    	cs.insertSelective(customerss);
-    	return "redirect:/customer/tocustomeradd";
+    	int count=cs.insertSelective(customerss);
+    	
+    	Customergroup customergroup=new Customergroup();
+    	customergroup.setFid(customerss.getId());
+    	customergroup.setId(Integer.parseInt(customerss.getGroupname()));
+    	System.out.println(customergroup.getFid());
+    	System.out.println(customergroup.getId());
+    	int count1=cgs.updateByPrimaryKeySelective(customergroup);
+    	
+    		
+    		response.setCharacterEncoding("UTF-8");
+        	response.setContentType("text/html; charset=utf-8");
+        	PrintWriter out;
+    		try {
+    			out = response.getWriter();
+    			out.println("<script>");
+    		    out.println("alert('新增成功！');");
+    		    out.println("var index=parent.layer.getFrameIndex(window.name);");
+    		    out.println("parent.layer.close(index)");
+    		    out.println("window.parent.location.reload();");
+    		   
+    		  
+    		    
+    		    out.println("</script>");
+    		} catch (IOException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+    		
+    		
+    
+    	
+    	return "member-add";
     }
     
     @RequestMapping("/tocustomeradd")

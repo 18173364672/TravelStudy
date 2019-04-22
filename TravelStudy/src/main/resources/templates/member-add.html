@@ -38,7 +38,7 @@
                         <span class="x-red">*</span>用户名
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="L_username" name="username" required="" lay-verify="nikename"
+                        <input type="text" id="L_username" name="username" required="" lay-verify="username"
                         autocomplete="off" class="layui-input">
                     </div>
                 </div>
@@ -80,8 +80,8 @@
                     </label>
                     <div class="layui-inline">
                         <div class="layui-input-inline">
-                            <input type="radio" name="sex" value="男" checked title="男">
-                            <input type="radio" name="sex" value="女" title="女">
+                            <input type="radio" name="sex" value="男" checked title="男">男
+                            <input type="radio" name="sex" value="女" title="女">女
                         </div>
                     </div>
                 </div>
@@ -139,7 +139,7 @@
                 <div class="layui-form-item">
                     <label for="L_repass" class="layui-form-label">
                     </label>
-                    <button  class="layui-btn" lay-filter="add" lay-submit="">
+                    <button  class="layui-btn" lay-filter="add" lay-submit="" onclick="submit_()">
                         增加
                     </button>
                 </div>
@@ -152,4 +152,47 @@
     <!-- 中部结束 -->
 
 </body>
+<script th:src="@{/layui-v2.4.5/layui/layui.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+
+function submit_(){
+	
+	   
+	 
+	  
+}
+
+
+layui.use('form', function(){
+	  var form = layui.form;
+	
+	  form.verify({
+		  username: function(value, item){ //value：表单的值、item：表单的DOM对象
+		    if(!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)){
+		      return '用户名不能有特殊字符';
+		    }
+		    if(/(^\_)|(\__)|(\_+$)/.test(value)){
+		      return '用户名首尾不能出现下划线\'_\'';
+		    }
+		    if(/^\d+\d+\d$/.test(value)){
+		      return '用户名不能全为数字';
+		    }
+		  }
+		  
+		  //我们既支持上述函数式的方式，也支持下述数组的形式
+		  //数组的两个值分别代表：[正则匹配、匹配不符时的提示文字]
+		  ,pass: [
+		    /^[\S]{6,12}$/
+		    ,'密码必须6到12位，且不能出现空格'
+		  ] ,repass: function(value){
+			  var Lpass = $('#L_pass').val();
+			  if(value != Lpass){
+			  return '两次输入的密码不一致!';
+			  }
+			  }
+		});
+	
+	});
+
+</script>
 </html>

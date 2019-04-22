@@ -29,4 +29,7 @@ public interface CustomerssMapper {
     int updateByPrimaryKey(Customerss record);
     
     List<Customerss> cupquery(@Param("createtime")String createtime,@Param("username")String username);
+     
+    Customerss cuqueryd(Integer id);
+
 }

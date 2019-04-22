@@ -477,10 +477,11 @@
 
 								<td class="td-manage">
 
-									<a title="编辑" href="javascript:;" onclick="member_edit('编辑','member-edit.html','4','','510')" class="ml-5" style="text-decoration:none">
+									<a title="编辑" href="javascript:;" onclick="member_edit('编辑','/customer/tocustomeredit','4','','510',this)" class="ml-5" style="text-decoration:none">
 										<i class="layui-icon">&#xe642;</i>
 									</a>
-									<a style="text-decoration:none" onclick="member_password('修改密码','member-password.html','10001','600','400')" href="javascript:;" title="修改密码">
+									<div style="display: none">{{l.id}}</div>
+									<a style="text-decoration:none" onclick="member_password('修改密码','/customer/tocustomeredit','10001','600','400')" href="javascript:;" title="修改密码">
 										<i class="layui-icon">&#xe631;</i>
 									</a>
 									<a title="删除" href="javascript:;" onclick="member_del(this,'1')" style="text-decoration:none">
@@ -617,10 +618,7 @@
 					});
 				});
 			}
-			// 用户-编辑
-			function member_edit(title, url, id, w, h) {
-				x_admin_show(title, url, w, h);
-			}
+			
 			/*密码-修改*/
 			function member_password(title, url, id, w, h) {
 				x_admin_show(title, url, w, h);
@@ -641,6 +639,16 @@
 	</body>
 <script type="text/javascript" th:src="@{/js/vue.js}"></script>
 <script type="text/javascript" th:inline="javascript">
+    
+//用户-编辑
+function member_edit(title, url, id, w, h,obj) {
+	var id=$(obj).next().text();
+	var url1="?id="+id;
+	
+	
+	x_admin_show(title, url+url1, w, h);
+}
+    
     
 var v=new Vue({
 	  el:".content",

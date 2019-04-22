@@ -12,4 +12,6 @@ public interface CustomerService {
 	 Customergroup groupname(Integer id);
 	
 	 int insertSelective(Customerss record);
+	 
+	 Customerss cuqueryd(Integer id);
 }

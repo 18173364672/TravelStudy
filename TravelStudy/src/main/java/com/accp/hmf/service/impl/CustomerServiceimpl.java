@@ -52,7 +52,13 @@ public class CustomerServiceimpl implements CustomerService{
 	@Override
 	public int insertSelective(Customerss record) {
 		// TODO Auto-generated method stub
-		return cm.insert(record);
+		return cm.insertSelective(record);
+	}
+
+	@Override
+	public Customerss cuqueryd(Integer id) {
+		// TODO Auto-generated method stub
+		return cm.cuqueryd(id);
 	}
 
 }

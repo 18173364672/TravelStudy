@@ -12,4 +12,8 @@ public interface CustomergroupService {
 	List<Customergroup> selectByExample(CustomergroupExample example);
 	
 	 int groupid(@Param("groupname") String groupname);
+	 
+	 int updateByPrimaryKeySelective(Customergroup record);
+	 
+	 int updateByPrimaryKey(Customergroup record);
 }
