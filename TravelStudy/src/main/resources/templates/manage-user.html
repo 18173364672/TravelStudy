@@ -144,9 +144,7 @@
                             {{l.id}}
                         </td>
                         <td>
-                            
                                 {{l.employeename}}
-                            </u>
                         </td>
                         <td >
                             {{l.sex}}
@@ -164,15 +162,15 @@
                             {{l.createtime}}
                         </td>
                         
-                        <td>
-                        系统管理员
+                        <td v-for="i in list">
+                        	<span v-if="i.rid == l.id">{{i.name}}</span>
                         </td>
                       
                         <td class="td-manage" v-if="l.state==1">
                         <div style="display:none;">
                         {{l.id}}
                         </div>
-                            <a title="编辑" href="javascript:;" onclick="member_edit('员工编辑','/user/usertoupdate','4','','510',this)"
+                            <a title="编辑" href="javascript:;" onclick="member_edit('员工编辑','/user/toemployeeedit','4','','510',this)"
                             class="ml-5" style="text-decoration:none">
                                 <i class="layui-icon">&#xe642;</i>
                             </a>
@@ -181,30 +179,6 @@
 <!--                             href="javascript:;" title="修改密码"> -->
 <!--                                 <i class="layui-icon">&#xe631;</i> -->
 <!--                             </a> -->
-                            <div style="display:none;">{{l.id}}</div>
-                            <a title="删除" href="javascript:;" onclick="member_del(this)" 
-                            style="text-decoration:none">
-                                <i class="layui-icon">&#xe640;</i>
-                            </a>
-                            <div style="display: none">{{l.id}}</div>
-                        </td>
-                        
-                          <td class="td-manage" v-else>
-                            <div style="display:none;">
-                        {{l.id}}
-                        </div>
-                            <a style="text-decoration:none" onclick="member_start(this)" href="javascript:;" title="停用">
-                                <i class="layui-icon">&#xe62f;</i>
-                            </a>
-                            <a title="编辑" href="javascript:;" onclick="member_edit('员工编辑','/employee/toemployeeedit','4','','510',this)"
-                            class="ml-5" style="text-decoration:none">
-                                <i class="layui-icon">&#xe642;</i>
-                            </a>
-                            <div style="display: none">{{l.id}}</div>
-                            <a style="text-decoration:none"  onclick="member_edit1('修改密码','/employee/employeeeditpass','4','','510',this)"
-                            href="javascript:;" title="修改密码">
-                                <i class="layui-icon">&#xe631;</i>
-                            </a>
                             <div style="display:none;">{{l.id}}</div>
                             <a title="删除" href="javascript:;" onclick="member_del(this)" 
                             style="text-decoration:none">
@@ -228,8 +202,13 @@
     </div>
     <!-- 中部结束 -->
     <!-- 底部开始 -->
+<<<<<<< HEAD
+    <div class="footer">
+        <div class="copyright">Copyright ©2019 研学旅行</div>  
+=======
     <div class="footer" th:include="foot :: footer">
         
+>>>>>>> refs/heads/master
     </div>
     <!-- 底部结束 -->
     <!-- 背景切换开始 -->
@@ -489,6 +468,7 @@ var v=new Vue({
 	  el:"#s",
 	  data:{
 		  pageInfo:"pageInfo",
+		  list:[],
 		  name:""
 	  },
 	  methods:{
@@ -527,17 +507,7 @@ var v=new Vue({
 	  
 });
    
-   var urlpath = [[@{/user/user}]];
-
-  $.ajax({
-		 url:urlpath,
-		 data:{},
-		 datatype:"json",
-		 success:function(data){
-			 v.pageInfo=data;
-			 console.log(v.list);
-		 }
-	})
+  
 	
 	
 	
@@ -552,13 +522,34 @@ var v=new Vue({
 		  	 datatype:"json",
 		  	 success:function(data){
 		  		v.pageInfo=data;
-		  		
 		  	 }
 		   })
    }
 	
 	
 	$(function(){
+		
+		 var urlpath = [[@{/user/user}]];
+		  $.ajax({
+				 url:urlpath,
+				 data:{},
+				 datatype:"json",
+				 success:function(data){
+					 v.pageInfo=data;
+				 }
+			})
+			
+			
+			var urlpath = [[@{/user/queryRole}]];
+		  $.ajax({
+				 url:urlpath,
+				 data:{},
+				 datatype:"json",
+				 success:function(data){
+					 v.list=data;
+				 }
+			})
+			
 		
 		$("[name='sea']").click(function(){
 			var createtime=$("[name='createtime']").val();
@@ -576,6 +567,8 @@ var v=new Vue({
 					 console.log(v.list);
 				 }
 			})
+			
+			
 			
 			
 		})

@@ -114,4 +114,10 @@ public class RoleServiceImpl implements RoleService{
 		return m.queryName(rid);
 	}
 
+	@Override
+	public List<Role> queryRoleName(Integer id) {
+		// TODO Auto-generated method stub
+		return m.queryRoleName(id);
+	}
+
 }

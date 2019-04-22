@@ -1,120 +1,63 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
-	<title>研学旅行</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" th:href="@{/css/font.css}">
-	<link rel="stylesheet" th:href="@{/css/xadmin.css}">
-    <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
-    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
-    <script th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
-    <script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
+<meta charset="UTF-8">
+<title>研学旅行</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" th:href="@{/css/font.css}">
+<link rel="stylesheet" th:href="@{/css/xadmin.css}">
+<link rel="stylesheet"
+	href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
+<script type="text/javascript"
+	src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
+<script th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
+<script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
 </head>
 
 
 <body>
-    <!-- 中部开始 -->
-    <div class="wrapper">
-        <!-- 右侧主体开始 -->
-        <div class="page-content">
-          <div class="content">
-            <!-- 右侧内容框架，更改从这里开始 -->
-            <form class="layui-form" th:action="@{/user/useradd}"  method="post">
-                <div class="layui-form-item">
-                    <label for="L_email" class="layui-form-label">
-                        <span class="x-red">*</span>邮箱
-                    </label>
-                    <div class="layui-input-inline">
-                         
-                        
-                        <input type="text" id="L_email" name="email" required="" lay-verify="email"
-                        autocomplete="off" class="layui-input">
-                    </div>
-                    <div class="layui-form-mid layui-word-aux">
-                        <span class="x-red">*</span>将会成为您唯一的登入名
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="L_username" class="layui-form-label">
-                        <span class="x-red">*</span>员工姓名
-                    </label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="L_username" name="employeename" required="" lay-verify="nikename"
-                        autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                
-                 <div class="layui-form-item">
-                    <label for="L_username" class="layui-form-label">
-                        <span class="x-red">*</span>地址
-                    </label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="L_address" name="address" required="" lay-verify="nikename"
-                        autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                
-                 <div class="layui-form-item">
-                    <label for="L_username" class="layui-form-label">
-                        <span class="x-red">*</span>手机号码
-                    </label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="L_phone" name="phone" required="" lay-verify="nikename"
-                        autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                
-                <div class="layui-form-item">
-                    <label for="L_username" class="layui-form-label">
-                        <span class="x-red">*</span>性别
-                    </label>
-                    <div class="layui-inline">
-                        <div class="layui-input-inline">
-                            <input type="radio" name="sex" value="男" checked >男
-                            <input type="radio" name="sex" value="女" >女
-                        </div>
-                    </div>
-                </div>
+	<!-- 中部开始 -->
+	<div class="wrapper">
+		<!-- 右侧主体开始 -->
+		<div class="page-content">
+			<div class="content">
+				<!-- 右侧内容框架，更改从这里开始 -->
+				<form class="layui-form" th:action="@{/user/useradd}" method="post">
+				
+				
+					<div class="layui-form-item">
+						<label for="L_username" class="layui-form-label"> <span
+							class="x-red">*</span>部门
+						</label>
+						<div class="layui-inline">
+							<select name="spare1" lay-filter="test">
 
-                <div class="layui-form-item">
-                    <label for="L_pass" class="layui-form-label">
-                        <span class="x-red">*</span>密码
-                    </label>
-                    <div class="layui-input-inline">
-                        <input type="password" id="L_pass" name="password" required="" lay-verify="pass"
-                        autocomplete="off" class="layui-input">
-                    </div>
-                    <div class="layui-form-mid layui-word-aux">
-                        6到16个字符
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="L_repass" class="layui-form-label">
-                        <span class="x-red">*</span>确认密码
-                    </label>
-                    <div class="layui-input-inline">
-                        <input type="password" id="L_repass" name="repass" required="" lay-verify="repass"
-                        autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="L_repass" class="layui-form-label">
-                    </label>
-                    <button  class="layui-btn" lay-filter="add" lay-submit="" onclick="submit_()">
-                        增加
-                    </button>
-                </div>
-            </form>
-            <!-- 右侧内容框架，更改从这里结束 -->
-          </div>
-        </div>
-        <!-- 右侧主体结束 -->
-    </div>
-    <!-- 中部结束 -->
-    <script>
+								<option th:each="l,state : ${list}" th:text="${l.name}"
+									th:value="${l.id}"></option>
+
+							</select>
+						</div>
+					</div>
+
+
+
+
+					<div class="layui-form-item">
+						<label for="L_repass" class="layui-form-label"> </label>
+						<button class="layui-btn" lay-filter="add" lay-submit=""
+							onclick="submit_()">增加</button>
+					</div>
+				</form>
+				<!-- 右侧内容框架，更改从这里结束 -->
+			</div>
+		</div>
+		<!-- 右侧主体结束 -->
+	</div>
+	<!-- 中部结束 -->
+	<script>
     //百度统计可去掉
     var _hmt = _hmt || [];
     (function() {
@@ -125,7 +68,7 @@
     })();
     </script>
 </body>
- <script th:src="@{/layui-v2.4.5/layui/layui.js}"></script>
+<script th:src="@{/layui-v2.4.5/layui/layui.js}"></script>
 <script type="text/javascript" th:src="@{/js/vue.js}"></script>
 <script type="text/javascript" th:inline="javascript">
       
