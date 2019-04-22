@@ -57,7 +57,7 @@
 <body>
     <!-- 顶部开始 -->
     <div class="container">
-        <div class="logo"><a href="./index.html">X-ADMIN V1.1</a></div>
+        <div class="logo"><a href="./index.html">研学旅行</a></div>
         <div class="open-nav"><i class="iconfont">&#xe699;</i></div>
         <ul class="layui-nav right" lay-filter="">
           <li class="layui-nav-item">
@@ -68,7 +68,7 @@
               <dd><a href="./login.html">退出</a></dd>
             </dl>
           </li>
-          <li class="layui-nav-item"><a href="/">前台首页</a></li>
+         
         </ul>
     </div>
     <!-- 顶部结束 -->
@@ -93,7 +93,7 @@
                     </a>
                     <ul class="sub-menu ">
                         <li >
-                            <a href="member-list.html">
+                            <a th:href="@{/customer/tocustomerquerypage}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 客户列表
                             </a>

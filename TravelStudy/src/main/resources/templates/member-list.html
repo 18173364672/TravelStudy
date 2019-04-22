@@ -90,7 +90,7 @@
                     </a>
                     <ul class="sub-menu opened">
                         <li class="current">
-                            <a href="member-list.html">
+                            <a th:href="@{/customer/tocustomerquerypage}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 客户列表
                             </a>
@@ -141,14 +141,14 @@
                     </a>
                     <ul class="sub-menu" >
                           <li>
-                            <a href="member-employee.html">
+                                     <a th:href="@{/employee/toemployeequerypage}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 员工信息
                             </a>
                         </li>
                         
-                         <li >
-                            <a href="member-organization.html">
+                         <li class="current">
+                            <a th:href="@{/organization/toorganization}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 组织机构
                             </a>
@@ -171,7 +171,7 @@
                     </a>
                     <ul class="sub-menu">
                              <li>
-                            <a href="member-project.html">
+                              <a th:href="@{/project/toprojectquerypage}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 项目信息
                             </a>
@@ -200,6 +200,13 @@
                             </a>
                         </li>
                         
+                         
+                                                              <li>
+                                <a th:href="@{/field/tofieldquerypage}">
+                                <i class="iconfont">&#xe6a7;</i>
+                                项目场地
+                            </a>
+                        </li> 
     
                     </ul>
                 </li>
@@ -326,25 +333,23 @@
 			<div class="page-content">
 				<div class="content">
 					<!-- 右侧内容框架，更改从这里开始 -->
-					<form class="layui-form xbs" action="">
+					
 						<div class="layui-form-pane" style="text-align: center;">
 							<div class="layui-form-item" style="display: inline-block;">
 								<label class="layui-form-label xbs768">日期范围</label>
 								<div class="layui-input-inline xbs768">
-									<input class="layui-input" placeholder="开始日" id="LAY_demorange_s">
+									<input class="layui-input" placeholder="开始日" id="LAY_demorange_s" name="createtime">
 								</div>
-								<div class="layui-input-inline xbs768">
-									<input class="layui-input" placeholder="截止日" id="LAY_demorange_e">
-								</div>
+								
 								<div class="layui-input-inline">
-									<input type="text" name="username" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+									<input type="text" name="username" placeholder="请输入用户名" autocomplete="off" class="layui-input" v-model="name">
 								</div>
 								<div class="layui-input-inline" style="width:80px">
-									<button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+									<button class="layui-btn" lay-submit="" lay-filter="sreach" name="sea"><i class="layui-icon">&#xe615;</i></button>
 								</div>
 							</div>
 						</div>
-					</form>
+	
 					<xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button><button class="layui-btn" onclick="member_add('添加用户','member-add.html','600','500')"><i class="layui-icon">&#xe608;</i>添加</button>&nbsp;&nbsp;&nbsp;&nbsp;<a href=""><button class="layui-btn layui-btn-normal">导出客户信息</button></a><span class="x-right" style="line-height:40px">共有数据：{{pageInfo.total}} 条</span></xblock>
 					<table class="layui-table">
 						<thead>
@@ -698,7 +703,7 @@ $.ajax({
 		  	 data:{
 		  		currentPage:page,
 		  		
-		  		employeename:name
+		  		username:name
 		  	 },
 		  	 datatype:"json",
 		  	 success:function(data){
@@ -707,6 +712,29 @@ $.ajax({
 		  	 }
 		   })
    }
+   
+$(function(){
+	
+	$("[name='sea']").click(function(){
+		var createtime=$("[name='createtime']").val();
+		var name=$("[name='username']").val();
+		
+		 $.ajax({
+			 url:urlpath,
+			 data:{
+				 createtime:createtime,
+				 username:name
+			 },
+			 datatype:"json",
+			 success:function(data){
+				 v.pageInfo=data;
+				 console.log(v.list);
+			 }
+		})
+		
+		
+	})
+})
 
 
 </script>
