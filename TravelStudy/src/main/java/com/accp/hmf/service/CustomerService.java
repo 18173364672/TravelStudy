@@ -14,4 +14,7 @@ public interface CustomerService {
 	 int insertSelective(Customerss record);
 	 
 	 Customerss cuqueryd(Integer id);
+	 
+	 int updateByPrimaryKeySelective(Customerss record);
+	 
 }

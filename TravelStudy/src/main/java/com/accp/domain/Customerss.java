@@ -1,6 +1,7 @@
 package com.accp.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -48,8 +49,18 @@ public class Customerss {
     private String spare5;
     
     private String groupname;
+    
+    private List<Customerss> mlist;
 
-    public String getGroupname() {
+    public List<Customerss> getMlist() {
+		return mlist;
+	}
+
+	public void setMlist(List<Customerss> mlist) {
+		this.mlist = mlist;
+	}
+
+	public String getGroupname() {
 		return groupname;
 	}
 

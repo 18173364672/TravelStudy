@@ -12,6 +12,7 @@ import org.apache.http.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -32,8 +33,49 @@ public class CustomerController {
     @Autowired
     HttpServletResponse response;
     
+    
+    @RequestMapping("/customerupstates")
+    public String customerupstates(Integer id) {
+    	Customerss customerss=new Customerss();
+    	customerss.setId(id);
+    	customerss.setState(0);
+    	cs.updateByPrimaryKeySelective(customerss);
+    	
+    	return "redirect:/customer/tocustomerquerypage";
+    }
+    
+    @RequestMapping("/customerupstate")
+    public String customerupstate(@RequestBody Customerss customerss) {
+    	for (Customerss c : customerss.getMlist()) {
+			c.setState(0);
+			cs.updateByPrimaryKeySelective(c);
+		}
+    	
+    	
+    	return "redirect:/customer/tocustomerquerypage";
+    }
+    
     @RequestMapping("/customeredit")
     public String customeredit(Customerss customerss) {
+    	
+    	 SimpleDateFormat df = new SimpleDateFormat("yyyy");//设置日期格式
+    	 Integer year=Integer.parseInt(df.format(new Date()));
+    	 String idcard=customerss.getIdcard();
+    	 
+    	 Integer nl=Integer.parseInt(idcard.substring(6, 10));
+    	 Integer nl1=year-nl;
+    	 
+    	 customerss.setSpare2(nl1.toString());
+    	 
+    		if(customerss.getGroupname().equals("无")) {
+        		customerss.setGroupid(0);
+        	}else {
+        		
+        		
+        		customerss.setGroupid(Integer.parseInt(customerss.getGroupname()));
+        	}
+    		
+    		cs.updateByPrimaryKeySelective(customerss);
     	
     
     	response.setCharacterEncoding("UTF-8");
@@ -46,6 +88,7 @@ public class CustomerController {
 		    out.println("history.back();");
 		    out.println("var index=parent.layer.getFrameIndex(window.name);");
 		    out.println("parent.layer.close(index)");
+		    out.println("window.parent.location.reload();");
 		    out.println("</script>");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

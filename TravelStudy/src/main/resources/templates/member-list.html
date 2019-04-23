@@ -480,11 +480,8 @@
 									<a title="编辑" href="javascript:;" onclick="member_edit('编辑','/customer/tocustomeredit','4','','510',this)" class="ml-5" style="text-decoration:none">
 										<i class="layui-icon">&#xe642;</i>
 									</a>
-									<div style="display: none">{{l.id}}</div>
-									<a style="text-decoration:none" onclick="member_password('修改密码','/customer/tocustomeredit','10001','600','400')" href="javascript:;" title="修改密码">
-										<i class="layui-icon">&#xe631;</i>
-									</a>
-									<a title="删除" href="javascript:;" onclick="member_del(this,'1')" style="text-decoration:none">
+									<div style="display: none">{{l.id}}</div>				
+									<a title="删除" href="javascript:;" onclick="member_del(this)" style="text-decoration:none">
 										<i class="layui-icon">&#xe640;</i>
 									</a>
 								</td>
@@ -574,14 +571,7 @@
 			});
 
 			//批量删除提交
-			function delAll() {
-				layer.confirm('确认要删除吗？', function(index) {
-					//捉到所有被选中的，发异步进行删除
-					layer.msg('删除成功', {
-						icon: 1
-					});
-				});
-			}
+			
 			/*用户-添加*/
 			function member_add(title, url, w, h) {
 				x_admin_show(title, url, w, h);
@@ -624,21 +614,75 @@
 				x_admin_show(title, url, w, h);
 			}
 			/*用户-删除*/
-			function member_del(obj, id) {
-				layer.confirm('确认要删除吗？', function(index) {
-					//发异步删除数据
-					$(obj).parents("tr").remove();
-					layer.msg('已删除!', {
-						icon: 1,
-						time: 1000
-					});
-				});
-			}
+			
 		</script>
 		
 	</body>
 <script type="text/javascript" th:src="@{/js/vue.js}"></script>
 <script type="text/javascript" th:inline="javascript">
+var urlpath2 = [[@{/customer/customerupstates}]];
+function member_del(obj) {
+	var id=$(obj).prev().text();
+	
+	
+	layer.confirm('将会取消活动推荐，确认取消吗？', function(index) {
+		//发异步删除数据
+		 $.ajax({
+      		 url:urlpath2,
+      		 data:{
+      			 id:id
+      			
+      		 },
+      		 datatype:"json",
+      		 success:function(){
+      			 $(obj).parents("tr").remove();
+      			 layer.msg('取消！',{icon:1,time:1000});
+      		 }
+      	})
+	});
+}
+
+
+
+var urlpath1 = [[@{/customer/customerupstate}]];
+
+function delAll() {
+	var modules=[];
+	  $("[name='s1']").each(function() {
+		if(this.checked){
+			var model={};
+			model.id=parseInt($(this).parent().next().text());
+			
+			
+			modules.push(model);
+		}
+	})
+	
+	var customerss={};
+	 
+	  customerss.mlist=modules;
+	  
+	  var customerssStr=JSON.stringify(customerss);
+	  console.log(customerssStr);
+	
+	
+	layer.confirm('将会取消活动推荐，确认取消吗？', function(index) {
+		//捉到所有被选中的，发异步进行删除
+		 
+		  $.ajax({
+			  url:urlpath1,
+			  data:customerssStr,
+			  type:"post",
+			  processData:false,
+			  contentType:"application/json",
+			  datatype:"text",
+			  success:function(result){
+				  window.location.reload();
+				  console.log(result);
+			  }
+		  })
+	});
+}
     
 //用户-编辑
 function member_edit(title, url, id, w, h,obj) {

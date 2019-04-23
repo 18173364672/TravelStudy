@@ -61,4 +61,10 @@ public class CustomerServiceimpl implements CustomerService{
 		return cm.cuqueryd(id);
 	}
 
+	@Override
+	public int updateByPrimaryKeySelective(Customerss record) {
+		// TODO Auto-generated method stub
+		return cm.updateByPrimaryKeySelective(record);
+	}
+
 }
