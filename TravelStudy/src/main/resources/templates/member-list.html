@@ -350,7 +350,28 @@
 							</div>
 						</div>
 	
-					<xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button><button class="layui-btn" onclick="member_add('添加用户','/customer/tocustomeradd','600','500')"><i class="layui-icon">&#xe608;</i>添加</button>&nbsp;&nbsp;&nbsp;&nbsp;<a href=""><button class="layui-btn layui-btn-normal">导出客户信息</button></a><span class="x-right" style="line-height:40px">共有数据：{{pageInfo.total}} 条</span></xblock>
+					<xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量取消</button><button class="layui-btn" onclick="member_add('添加用户','/customer/tocustomeradd','600','500')"><i class="layui-icon">&#xe608;</i>添加</button>&nbsp;&nbsp;&nbsp;&nbsp;
+<!-- 					<a th:href="@{/customer/dc}"> -->
+<!-- 					<button class="layui-btn layui-btn-normal">导出客户信息</button> -->
+<!-- 					</a> -->
+					<span class="x-right" style="line-height:40px">共有数据：{{pageInfo.total}} 条</span>
+					</xblock>
+					
+					    	<form class="layui-form" th:action="@{/customer/dc}">
+            <div class="layui-form-item">
+                   
+                   
+                      <select name="groupname"> 
+            	<option>全部</option>
+            	<option th:each="l,state : ${list}" th:text="${l.groupname}" th:value="${l.id}"></option>
+            	
+            </select>
+                    
+                </div>
+            
+           <xblock> <button class="layui-btn layui-btn-normal" lay-submit="" >导出客户信息</button></xblock>
+					</form>
+					
 					<table class="layui-table">
 						<thead>
 							<tr>
@@ -396,9 +417,7 @@
 									累计消费（/元）
 								</th>
 								
-								<th>
-									消费次数（/次）
-								</th>
+								
 								
 								<th>
 									加入时间
@@ -463,9 +482,7 @@
 									{{l.consumption}}
 								</td>
 								
-								<td>
-									{{l.consume}}
-								</td>
+								
 								
 								<td>
 									{{l.createtime}}

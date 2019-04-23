@@ -24,6 +24,15 @@
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
   
+  <select id="dcall" resultMap="BaseResultMap">
+    select * from customerss
+  </select>
+  
+  <select id="dcs" resultMap="BaseResultMap">
+    select * from customerss where groupid=#{id}
+
+  </select>
+  
   <select id="cuqueryd" resultMap="BaseResultMap">
   select * from customerss where id=#{id}
   

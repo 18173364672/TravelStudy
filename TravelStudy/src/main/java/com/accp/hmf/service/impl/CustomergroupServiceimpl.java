@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.accp.dao.CustomergroupMapper;
 import com.accp.domain.Customergroup;
 import com.accp.domain.CustomergroupExample;
+import com.accp.domain.Customerss;
 import com.accp.hmf.service.CustomergroupService;
 
 @Service
@@ -41,5 +42,13 @@ public class CustomergroupServiceimpl implements CustomergroupService{
 		// TODO Auto-generated method stub
 		return cgm.updateByPrimaryKey(record);
 	}
+
+	@Override
+	public Customergroup groupname(Integer id) {
+		// TODO Auto-generated method stub
+		return cgm.groupname(id);
+	}
+
+	
 
 }

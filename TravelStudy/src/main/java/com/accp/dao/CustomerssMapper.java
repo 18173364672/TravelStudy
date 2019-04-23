@@ -31,5 +31,9 @@ public interface CustomerssMapper {
     List<Customerss> cupquery(@Param("createtime")String createtime,@Param("username")String username);
      
     Customerss cuqueryd(Integer id);
+    
+    List<Customerss> dcs(Integer id);
+    
+    List<Customerss> dcall();
 
 }

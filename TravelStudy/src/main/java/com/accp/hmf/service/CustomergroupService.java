@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.accp.domain.Customergroup;
 import com.accp.domain.CustomergroupExample;
+import com.accp.domain.Customerss;
 
 public interface CustomergroupService {
    
@@ -16,4 +17,6 @@ public interface CustomergroupService {
 	 int updateByPrimaryKeySelective(Customergroup record);
 	 
 	 int updateByPrimaryKey(Customergroup record);
+	 
+	 Customergroup groupname(Integer id);
 }

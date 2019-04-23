@@ -67,4 +67,18 @@ public class CustomerServiceimpl implements CustomerService{
 		return cm.updateByPrimaryKeySelective(record);
 	}
 
+	@Override
+	public List<Customerss> dcs(Integer id) {
+		// TODO Auto-generated method stub
+		return cm.dcs(id);
+	}
+
+	@Override
+	public List<Customerss> dcall() {
+		// TODO Auto-generated method stub
+		return cm.dcall();
+	}
+
+
+
 }
