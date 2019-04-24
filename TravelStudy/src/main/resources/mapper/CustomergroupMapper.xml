@@ -12,6 +12,20 @@
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
   
+  <select id="cgquerypage" resultMap="BaseResultMap">
+    select * from customergroup 
+     
+       <where>
+       
+       
+       <if test="groupname!=null">
+        groupname like CONCAT('%',#{groupname},'%')
+       </if>
+       
+      
+     </where>
+  </select>
+  
   <select id="groupid" resultType="int">
       select id from customergroup where groupname=#{groupname}
   </select>
@@ -125,7 +139,7 @@
       #{spare1,jdbcType=VARCHAR}, #{spare2,jdbcType=VARCHAR}, #{spare3,jdbcType=VARCHAR}, 
       #{spare4,jdbcType=VARCHAR}, #{spare5,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.accp.domain.Customergroup" >
+  <insert id="insertSelective" parameterType="com.accp.domain.Customergroup" useGeneratedKeys="true" keyProperty="id">
     insert into customergroup
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

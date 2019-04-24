@@ -89,33 +89,9 @@
                         </div>
                     </div>
                 </div>
+           
                 
-                 <div class="layui-form-item">
-                    <label for="L_username" class="layui-form-label">
-                        <span class="x-red">*</span>客户类型
-                    </label>
-                    <div class="layui-inline">
-                      <select name="spare1" lay-filter="test"> 
-            	
-            	
-            	<option th:text="${customerss.spare1}"></option>
-            	
-            </select>
-                    </div>
-                </div>
                 
-                  <div class="layui-form-item">
-                    <label for="L_username" class="layui-form-label">
-                        <span class="x-red">*</span>客户组
-                    </label>
-                    <div class="layui-inline">
-                      <select style="position: absolute;top: 150px;" name="groupname">
-            	<option>无</option>
-            	<option th:each="l,state : ${list}" th:text="${l.groupname}" th:value="${l.id}"></option>
-            	
-            </select>
-                    </div>
-                </div>
                 
               
                 

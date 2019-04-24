@@ -31,4 +31,6 @@ public interface CustomergroupMapper {
     Customergroup groupname(Integer id);
     
     int groupid(@Param("groupname") String groupname);
+    
+    List<Customergroup> cgquerypage(@Param("groupname") String groupname);
 }

@@ -7,10 +7,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.accp.dao.CustomergroupMapper;
+import com.accp.dao.CustomerssMapper;
 import com.accp.domain.Customergroup;
 import com.accp.domain.CustomergroupExample;
 import com.accp.domain.Customerss;
 import com.accp.hmf.service.CustomergroupService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 @Service
 @Transactional
@@ -18,6 +22,8 @@ public class CustomergroupServiceimpl implements CustomergroupService{
     
 	@Autowired
 	CustomergroupMapper cgm;
+	@Autowired
+	CustomerssMapper cm;
 	
 	@Override
 	public List<Customergroup> selectByExample(CustomergroupExample example) {
@@ -47,6 +53,29 @@ public class CustomergroupServiceimpl implements CustomergroupService{
 	public Customergroup groupname(Integer id) {
 		// TODO Auto-generated method stub
 		return cgm.groupname(id);
+	}
+
+	@Override
+	public PageInfo<Customergroup> querypage(Integer currentPage, Integer pageSize,String groupname) {
+		// TODO Auto-generated method stub
+		Page<Customergroup> p = PageHelper.startPage(currentPage, pageSize,true);
+		List<Customergroup> list=cgm.cgquerypage(groupname);
+		for (Customergroup c : list) {
+			if(c.getFid()>0) {
+				Customerss customerss=cm.cuqueryd(c.getFid());
+				c.setFzr(customerss.getUsername());
+			}else {
+				c.setFzr("暂无");
+			}
+		}
+		
+		return p.toPageInfo();
+	}
+
+	@Override
+	public int insertSelective(Customergroup record) {
+		// TODO Auto-generated method stub
+		return cgm.insertSelective(record);
 	}
 
 	

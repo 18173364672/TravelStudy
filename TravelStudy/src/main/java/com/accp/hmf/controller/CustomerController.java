@@ -23,6 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.accp.domain.Customergroup;
 import com.accp.domain.Customerss;
@@ -42,6 +43,8 @@ public class CustomerController {
     @Autowired
     HttpServletResponse response;
     
+       
+  
     
        @RequestMapping("/dc")
 	   public ResponseEntity<byte[]> dc(String groupname) {
@@ -139,6 +142,23 @@ public class CustomerController {
 			   cell.setCellValue("编号");
 			   Cell cell1=row0.createCell(1);
 			   cell1.setCellValue("姓名");
+			   Cell cell2=row0.createCell(2);
+			   cell2.setCellValue("性别");
+			   Cell cell3=row0.createCell(3);
+			   cell3.setCellValue("年龄");
+			   Cell cell4=row0.createCell(4);
+			   cell4.setCellValue("身份证");
+			   Cell cell5=row0.createCell(5);
+			   cell5.setCellValue("手机");
+		
+			   Cell cell6=row0.createCell(6);
+			   cell6.setCellValue("邮箱");
+			   Cell cell7=row0.createCell(7);
+			   cell7.setCellValue("地址");
+			   Cell cell8=row0.createCell(8);
+			   cell8.setCellValue("团体组");
+			   Cell cell9=row0.createCell(9);
+			   cell9.setCellValue("客户类型");
 			   
 			   for(int i=0;i<list.size();i++) {
 				   org.apache.poi.ss.usermodel.Row row=sheet.createRow(i+1);
@@ -234,13 +254,7 @@ public class CustomerController {
     	 
     	 customerss.setSpare2(nl1.toString());
     	 
-    		if(customerss.getGroupname().equals("无")) {
-        		customerss.setGroupid(0);
-        	}else {
-        		
-        		
-        		customerss.setGroupid(Integer.parseInt(customerss.getGroupname()));
-        	}
+    		
     		
     		cs.updateByPrimaryKeySelective(customerss);
     	
