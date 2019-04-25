@@ -112,7 +112,7 @@ public class CustomergroupController {
 				    	 Customergroup customergroup2=new Customergroup();
 				    	 customergroup2.setId(customergroup.getId());
 				    	 customergroup2.setFid(customerss.getId());
-				    	 cgs.updateByPrimaryKey(customergroup2);
+				    	 cgs.updateByPrimaryKeySelective(customergroup2);
 					   
 				   }else {
 					   
