@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Param;
 
 import com.accp.domain.Order;
 import com.accp.domain.OrderExample;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageInfo;
 
 public interface OrderService {
     int countByExample(OrderExample example);
@@ -29,4 +31,8 @@ public interface OrderService {
     int updateByPrimaryKeySelective(Order record);
 
     int updateByPrimaryKey(Order record);
+    
+    List<Order> queryAll(@Param ("name") String name);
+    
+    PageInfo<Order> queryByPage(String name , Integer currentPage , Integer pageSize);
 }

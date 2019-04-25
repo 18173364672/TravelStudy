@@ -27,6 +27,27 @@
     <result column="years" property="years" jdbcType="VARCHAR" />
   </resultMap>
   
+  
+  <resultMap type="com.accp.domain.Order" id="BaseResultMapQueryAll" extends="BaseResultMap">
+  		<result column="ename" property="ename" jdbcType="VARCHAR" />
+  		<result column="cname" property="cname" jdbcType="VARCHAR" />
+  </resultMap> 
+  
+  <select id="queryAll" resultMap="BaseResultMapQueryAll">
+  	SELECT c.`Username` AS cname , e.`Employeename` AS ename , o.* FROM `order` AS o 
+	LEFT JOIN `customer` AS c ON o.`yid` = c.`Id`
+	LEFT JOIN `employee` AS e ON o.`sid` = e.`id`
+	<where>
+		<if test="name!=null">
+  			c.`Username` like CONCAT('%',#{name},'%') 
+  		</if>
+  		<if test="name!=null">
+  			or e.`Employeename` like CONCAT('%',#{name},'%') 
+  		</if>
+	</where>
+  </select>
+  
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

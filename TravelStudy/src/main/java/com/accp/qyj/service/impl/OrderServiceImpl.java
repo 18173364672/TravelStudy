@@ -10,6 +10,9 @@ import com.accp.dao.OrderMapper;
 import com.accp.domain.Order;
 import com.accp.domain.OrderExample;
 import com.accp.qyj.service.OrderService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 @Service
 @Transactional
@@ -82,6 +85,21 @@ public class OrderServiceImpl implements OrderService{
 	public int updateByPrimaryKey(Order record) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public List<Order> queryAll(String name) {
+		// TODO Auto-generated method stub
+		return m.queryAll(name);
+	}
+
+	@Override
+	public PageInfo<Order> queryByPage(String name, Integer currentPage, Integer pageSize) {
+		// TODO Auto-generated method stub
+		Page<Order> page = PageHelper.startPage(currentPage, 5, true);
+		m.queryAll(name);
+		
+		return page.toPageInfo();
 	}
 	
 }
