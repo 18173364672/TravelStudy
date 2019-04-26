@@ -1,10 +1,12 @@
 package com.accp.hmf.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
-
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +31,8 @@ public class EmployeeController {
       EmployeeService es;
       @Autowired
       OrganizationService organizationService;
+      @Autowired
+      HttpServletResponse response;
       
       @Autowired
       PlateService plateservice;
@@ -197,8 +201,26 @@ public class EmployeeController {
     	 organization.setCount(count);
     	 es.updateByPrimaryKey(organization);
     	  
+    		response.setCharacterEncoding("UTF-8");
+        	response.setContentType("text/html; charset=utf-8");
+        	PrintWriter out;
+    		try {
+    			out = response.getWriter();
+    			out.println("<script>");
+    		    out.println("alert('新增成功！');");
+    		    out.println("var index=parent.layer.getFrameIndex(window.name);");
+    		    out.println("parent.layer.close(index)");
+    		    out.println("window.parent.location.reload();");
+    		   
+    		  
+    		    
+    		    out.println("</script>");
+    		} catch (IOException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
     	  
-    	  return "redirect:/employee/toemployeeadd";
+    	  return "member-employee-add";
       }
       
       //跳转到员工新增页面

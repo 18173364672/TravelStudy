@@ -31,8 +31,13 @@ public class CustomerServiceimpl implements CustomerService{
 		Page<Customerss> p = PageHelper.startPage(currentPage, pageSize,true);
 		List<Customerss> list=cm.cupquery(createtime, username);
 		for (Customerss customerss : list) {
-			Customergroup customergroup=cgm.groupname(customerss.getGroupid());
-			customerss.setGroupname(customergroup.getGroupname());
+			if(customerss.getGroupid()>0) {
+				Customergroup customergroup=cgm.groupname(customerss.getGroupid());
+				customerss.setGroupname(customergroup.getGroupname());
+			}else {
+				customerss.setGroupname("无");
+			}
+	
 		}
 		
 		return p.toPageInfo();
@@ -43,5 +48,37 @@ public class CustomerServiceimpl implements CustomerService{
 		// TODO Auto-generated method stub
 		return cgm.groupname(id);
 	}
+
+	@Override
+	public int insertSelective(Customerss record) {
+		// TODO Auto-generated method stub
+		return cm.insertSelective(record);
+	}
+
+	@Override
+	public Customerss cuqueryd(Integer id) {
+		// TODO Auto-generated method stub
+		return cm.cuqueryd(id);
+	}
+
+	@Override
+	public int updateByPrimaryKeySelective(Customerss record) {
+		// TODO Auto-generated method stub
+		return cm.updateByPrimaryKeySelective(record);
+	}
+
+	@Override
+	public List<Customerss> dcs(Integer id) {
+		// TODO Auto-generated method stub
+		return cm.dcs(id);
+	}
+
+	@Override
+	public List<Customerss> dcall() {
+		// TODO Auto-generated method stub
+		return cm.dcall();
+	}
+
+
 
 }

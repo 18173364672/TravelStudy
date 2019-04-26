@@ -1,5 +1,7 @@
 package com.accp.hmf.service;
 
+import java.util.List;
+
 import com.accp.domain.Customergroup;
 import com.accp.domain.Customerss;
 import com.accp.domain.Employee;
@@ -11,4 +13,13 @@ public interface CustomerService {
 	 
 	 Customergroup groupname(Integer id);
 	
+	 int insertSelective(Customerss record);
+	 
+	 Customerss cuqueryd(Integer id);
+	 
+	 int updateByPrimaryKeySelective(Customerss record);
+	 
+	 List<Customerss> dcs(Integer id);
+	 
+	 List<Customerss> dcall();
 }

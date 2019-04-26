@@ -76,7 +76,28 @@
 							</div>
 						</div>
 	
-					<xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button><button class="layui-btn" onclick="member_add('添加用户','member-add.html','600','500')"><i class="layui-icon">&#xe608;</i>添加</button>&nbsp;&nbsp;&nbsp;&nbsp;<a href=""><button class="layui-btn layui-btn-normal">导出客户信息</button></a><span class="x-right" style="line-height:40px">共有数据：{{pageInfo.total}} 条</span></xblock>
+					<xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量取消</button><button class="layui-btn" onclick="member_add('添加用户','/customer/tocustomeradd','600','500')"><i class="layui-icon">&#xe608;</i>添加</button>&nbsp;&nbsp;&nbsp;&nbsp;
+<!-- 					<a th:href="@{/customer/dc}"> -->
+<!-- 					<button class="layui-btn layui-btn-normal">导出客户信息</button> -->
+<!-- 					</a> -->
+					<span class="x-right" style="line-height:40px">共有数据：{{pageInfo.total}} 条</span>
+					</xblock>
+					
+					    	<form class="layui-form" th:action="@{/customer/dc}">
+            <div class="layui-form-item">
+                   
+                   
+                      <select name="groupname"> 
+            	<option>全部</option>
+            	<option th:each="l,state : ${list}" th:text="${l.groupname}" th:value="${l.id}"></option>
+            	
+            </select>
+                    
+                </div>
+            
+           <xblock> <button class="layui-btn layui-btn-normal" lay-submit="" >导出客户信息</button></xblock>
+					</form>
+					
 					<table class="layui-table">
 						<thead>
 							<tr>
@@ -122,9 +143,7 @@
 									累计消费（/元）
 								</th>
 								
-								<th>
-									消费次数（/次）
-								</th>
+								
 								
 								<th>
 									加入时间
@@ -189,9 +208,7 @@
 									{{l.consumption}}
 								</td>
 								
-								<td>
-									{{l.consume}}
-								</td>
+								
 								
 								<td>
 									{{l.createtime}}
@@ -203,13 +220,11 @@
 
 								<td class="td-manage">
 
-									<a title="编辑" href="javascript:;" onclick="member_edit('编辑','member-edit.html','4','','510')" class="ml-5" style="text-decoration:none">
+									<a title="编辑" href="javascript:;" onclick="member_edit('编辑','/customer/tocustomeredit','4','','510',this)" class="ml-5" style="text-decoration:none">
 										<i class="layui-icon">&#xe642;</i>
 									</a>
-									<a style="text-decoration:none" onclick="member_password('修改密码','member-password.html','10001','600','400')" href="javascript:;" title="修改密码">
-										<i class="layui-icon">&#xe631;</i>
-									</a>
-									<a title="删除" href="javascript:;" onclick="member_del(this,'1')" style="text-decoration:none">
+									<div style="display: none">{{l.id}}</div>				
+									<a title="删除" href="javascript:;" onclick="member_del(this)" style="text-decoration:none">
 										<i class="layui-icon">&#xe640;</i>
 									</a>
 								</td>
@@ -299,14 +314,7 @@
 			});
 
 			//批量删除提交
-			function delAll() {
-				layer.confirm('确认要删除吗？', function(index) {
-					//捉到所有被选中的，发异步进行删除
-					layer.msg('删除成功', {
-						icon: 1
-					});
-				});
-			}
+			
 			/*用户-添加*/
 			function member_add(title, url, w, h) {
 				x_admin_show(title, url, w, h);
@@ -343,30 +351,91 @@
 					});
 				});
 			}
-			// 用户-编辑
-			function member_edit(title, url, id, w, h) {
-				x_admin_show(title, url, w, h);
-			}
+			
 			/*密码-修改*/
 			function member_password(title, url, id, w, h) {
 				x_admin_show(title, url, w, h);
 			}
 			/*用户-删除*/
-			function member_del(obj, id) {
-				layer.confirm('确认要删除吗？', function(index) {
-					//发异步删除数据
-					$(obj).parents("tr").remove();
-					layer.msg('已删除!', {
-						icon: 1,
-						time: 1000
-					});
-				});
-			}
+			
 		</script>
 		
 	</body>
 <script type="text/javascript" th:src="@{/js/vue.js}"></script>
 <script type="text/javascript" th:inline="javascript">
+var urlpath2 = [[@{/customer/customerupstates}]];
+function member_del(obj) {
+	var id=$(obj).prev().text();
+	
+	
+	layer.confirm('将会取消活动推荐，确认取消吗？', function(index) {
+		//发异步删除数据
+		 $.ajax({
+      		 url:urlpath2,
+      		 data:{
+      			 id:id
+      			
+      		 },
+      		 datatype:"json",
+      		 success:function(){
+      			 $(obj).parents("tr").remove();
+      			 layer.msg('取消！',{icon:1,time:1000});
+      		 }
+      	})
+	});
+}
+
+
+
+var urlpath1 = [[@{/customer/customerupstate}]];
+
+function delAll() {
+	var modules=[];
+	  $("[name='s1']").each(function() {
+		if(this.checked){
+			var model={};
+			model.id=parseInt($(this).parent().next().text());
+			
+			
+			modules.push(model);
+		}
+	})
+	
+	var customerss={};
+	 
+	  customerss.mlist=modules;
+	  
+	  var customerssStr=JSON.stringify(customerss);
+	  console.log(customerssStr);
+	
+	
+	layer.confirm('将会取消活动推荐，确认取消吗？', function(index) {
+		//捉到所有被选中的，发异步进行删除
+		 
+		  $.ajax({
+			  url:urlpath1,
+			  data:customerssStr,
+			  type:"post",
+			  processData:false,
+			  contentType:"application/json",
+			  datatype:"text",
+			  success:function(result){
+				  window.location.reload();
+				  console.log(result);
+			  }
+		  })
+	});
+}
+    
+//用户-编辑
+function member_edit(title, url, id, w, h,obj) {
+	var id=$(obj).next().text();
+	var url1="?id="+id;
+	
+	
+	x_admin_show(title, url+url1, w, h);
+}
+    
     
 var v=new Vue({
 	  el:".content",

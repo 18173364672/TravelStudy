@@ -16,8 +16,18 @@ public class Customergroup {
     private String spare4;
 
     private String spare5;
+    
+    private String fzr;
 
-    public Integer getId() {
+    public String getFzr() {
+		return fzr;
+	}
+
+	public void setFzr(String fzr) {
+		this.fzr = fzr;
+	}
+
+	public Integer getId() {
         return id;
     }
 
