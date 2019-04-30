@@ -79,6 +79,33 @@ public class CustomerServiceimpl implements CustomerService{
 		return cm.dcall();
 	}
 
+	@Override
+	public PageInfo<Customerss> querypages(Integer currentPage, Integer pageSize, String createtime, String username) {
+		// TODO Auto-generated method stub
+		Page<Customerss> p = PageHelper.startPage(currentPage, pageSize,true);
+		List<Customerss> list=cm.cupquerys(createtime, username);
+		for (Customerss customerss : list) {
+			if(customerss.getGroupid()>0) {
+				Customergroup customergroup=cgm.groupname(customerss.getGroupid());
+				customerss.setGroupname(customergroup.getGroupname());
+			}else {
+				customerss.setGroupname("无");
+			}
+	
+		}
+		
+		return p.toPageInfo();
+		
+		
+		
+	}
+
+	@Override
+	public int deleteByPrimaryKey(Integer id) {
+		// TODO Auto-generated method stub
+		return cm.deleteByPrimaryKey(id);
+	}
+
 
 
 }
