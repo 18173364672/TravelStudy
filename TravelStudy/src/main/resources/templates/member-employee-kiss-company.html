@@ -28,6 +28,7 @@
         <div class="page-content">
           <div class="content">
             <!-- 右侧内容框架，更改从这里开始 -->
+            <form class="layui-form"  enctype="multipart/form-data">
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label xbs768">请输入标题:</label>
                     <div class="layui-form-item" style="display: inline-block;">
@@ -35,6 +36,13 @@
 							<input type="text" name="title" placeholder="请输入标题" autocomplete="off" class="layui-input">
 							<input type="hidden" name="uid" placeholder="请输入uid" autocomplete="off" class="layui-input">
 						</div>
+<!-- 						 value="" -->
+					</div>
+					<div style="margin-left: 80px;margin-bottom: 70px">
+<!-- 						<div id="preview" style="float:left"> -->
+<!-- 							<img id="imghead" width="100px" height="100px" class="logo-size" src='' /> -->
+<!-- 						</div> -->
+						<input id="filgo" style="margin-left: 70px; margin-top: 30px;" type="file" name="file" onchange="changeToop('filgo','imghead');" value="上传图片">
 					</div>
 					<div style="text-align: center;">
 						<label class="layui-form-label xbs768">请输入内容:</label>
@@ -48,12 +56,15 @@
                         	发送
                     </button>
                 </div>
+                
+              </form>   
             <!-- 右侧内容框架，更改从这里结束 -->
           </div>
         </div>
         <!-- 右侧主体结束 -->
     </div>
     <!-- 中部结束 -->
+    
     <script th:inline="javascript">
     //百度统计可去掉
    /*  var _hmt = _hmt || [];
@@ -64,55 +75,179 @@
       s.parentNode.insertBefore(hm, s);
     })(); */
     
+    
+    
+    
+//     $(function(){
+    	
+//     	$(".layui-btn").click(function(){
+//     		var title = $("[name=title]").val();
+//         	var content = $("[name=content]").val();
+//         	var uid = $("[name=uid]").val();
+        	
+//         	$.ajax({
+//         		url:[[@{/notice/addnotice}]],
+//         		type:"post",
+// 				data:{
+// 					"title":title,
+// 					"content":content,
+// 					"uid":uid
+// 				},
+// 				dataType:"text",
+// 				success:function(result){
+// 					console.log(result);
+// 					window.parent.$("#layui-layer-shade1").remove();
+// 			    	window.parent.$("#layui-layer1").remove(); 
+// 				},error:function(date){
+// 					window.parent.$("#layui-layer-shade1").remove();
+// 			    	window.parent.$("#layui-layer1").remove(); 
+// 					console.log(date)
+// 				}
+				
+        		
+//         	});
+        	
+        	
+        	
+//     	});
+    	
+//     });
+    
+    
+    
+    	 
     $(function(){
     	
     	$(".layui-btn").click(function(){
     		var title = $("[name=title]").val();
         	var content = $("[name=content]").val();
         	var uid = $("[name=uid]").val();
+        	var form = $("form")[0];
+        	var formData=new FormData(form);
         	
         	$.ajax({
         		url:[[@{/notice/addnotice}]],
         		type:"post",
-				data:{
-					"title":title,
-					"content":content,
-					"uid":uid
-				},
+        		data:formData,
 				dataType:"text",
+				contentType:false,
+				processData:false,
 				success:function(result){
-					console.log(result);
+					var index = parent.layer.getFrameIndex(window.name);
+		   		    parent.layer.close(index);
 					window.parent.$("#layui-layer-shade1").remove();
 			    	window.parent.$("#layui-layer1").remove(); 
 				},error:function(date){
+					var index = parent.layer.getFrameIndex(window.name);
+		   		    parent.layer.close(index);
 					window.parent.$("#layui-layer-shade1").remove();
 			    	window.parent.$("#layui-layer1").remove(); 
-					console.log(date)
 				}
-				
-        		
         	});
-        	
-        	
-        	
+
     	});
     	
-    });
-    
-    
-    
-    /* function ii(){
     	
     	
-    	 window.parent.$("#layui-layer-shade1").remove();
-    	window.parent.$("#layui-layer1").remove(); 
     	
-    	//刷新父级页面
-    	window.parend.location.reload();
     	
-    } */
+//     	var socket;
+// 		if(typeof(WebSocket) == "undefined") {
+// 			alert("您的浏览器不支持WebSocket");
+// 			return;
+// 		}
+
+// 		$("#btnConnection").click(function() {
+// 			//实现化WebSocket对象，指定要连接的服务器地址与端口
+// 			socket = new WebSocket("ws://localhost:8080/WebSocketServer/ws/张三");
+// 			//打开事件
+// 			socket.onopen = function() {
+// 				alert("Socket 已打开");
+// 				//socket.send("这是来自客户端的消息" + location.href + new Date());
+// 			};
+// 			//获得消息事件
+// 			socket.onmessage = function(msg) {
+// 				alert(msg.data);
+// 			};
+// 			//关闭事件
+// 			socket.onclose = function() {
+// 				alert("Socket已关闭");
+// 			};
+// 			//发生了错误事件
+// 			socket.onerror = function() {
+// 				alert("发生了错误");
+// 			}
+// 		});
+
+// 		$("#btnSend").click(function() {
+// 			socket.send("这是来自客户端的消息" + location.href + new Date());
+// 		});
+
+// 		$("#btnClose").click(function() {
+// 			socket.close();
+// 		});
+    	
+    	});
     
-   
     </script>
+    
+    
+<!--     <script language="javascript" type="text/javascript"> -->
+<!--  	    var wsUri ="ws://echo.websocket.org/";  -->
+<!--  	    var output;   -->
+	    
+<!-- 	    function init() {  -->
+<!--  	        output = document.getElementById("output");  -->
+<!-- 	        testWebSocket();  -->
+<!--  	    }   -->
+	 
+<!--  	    function testWebSocket() {  -->
+<!--  	        websocket = new WebSocket(wsUri);  -->
+<!--  	        websocket.onopen = function(evt) {  -->
+<!-- 	            onOpen(evt)  -->
+<!-- 	        };  -->
+<!-- 	        websocket.onclose = function(evt) {  -->
+<!-- 	            onClose(evt)  -->
+<!-- 	        };  -->
+<!-- 	        websocket.onmessage = function(evt) {  -->
+<!--           onMessage(evt)  -->
+<!--         };  -->
+<!--  	        websocket.onerror = function(evt) {  -->
+<!--  	            onError(evt)  -->
+<!-- 	        };  -->
+<!-- 	    }   -->
+	 
+<!-- 	    function onOpen(evt) {  -->
+<!-- 	        writeToScreen("CONNECTED");  -->
+<!-- 	        doSend("WebSocket rocks");  -->
+<!-- 	    }   -->
+	 
+<!-- 	    function onClose(evt) {  -->
+<!--  	        writeToScreen("DISCONNECTED");  -->
+<!-- 	    }   -->
+	 
+<!-- 	    function onMessage(evt) {  -->
+<!--  	        writeToScreen('<span style="color: blue;">RESPONSE: '+ evt.data+'</span>');  -->
+<!--  	        websocket.close();  -->
+<!--  	    }   -->
+	 
+<!--  	    function onError(evt) {  -->
+<!--          writeToScreen('<span style="color: red;">ERROR:</span> '+ evt.data);  -->
+<!-- 	    }   -->
+	 
+<!--  	    function doSend(message) {  -->
+<!--  	        writeToScreen("SENT: " + message);   -->
+<!--  	        websocket.send(message);  -->
+<!--  	    }   -->
+	 
+<!--  	    function writeToScreen(message) {  -->
+<!--  	        var pre = document.createElement("p");  -->
+<!--  	        pre.style.wordWrap = "break-word";  -->
+<!--  	        pre.innerHTML = message;  -->
+<!--          output.appendChild(pre);  -->
+<!--  	    }   -->
+	 
+<!--  	    window.addEventListener("load", init, false);   -->
+<!--     </script> -->
 </body>
 </html>

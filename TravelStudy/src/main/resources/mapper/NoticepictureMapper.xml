@@ -249,7 +249,9 @@
   		SELECT * FROM `noticepicture` ORDER BY id DESC LIMIT 0,1
   </select>
   
-  
+  <select id="selectById" resultType="com.accp.domain.Noticepicture">
+  		SELECT * FROM `noticepicture` WHERE id = #{id}
+  </select>
   
   
   

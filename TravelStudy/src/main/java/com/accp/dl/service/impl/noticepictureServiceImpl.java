@@ -25,6 +25,11 @@ public class noticepictureServiceImpl implements noticepictureService{
 	public Noticepicture selectOrderBy() {
 		return noticepicture.selectOrderBy();
 	}
+
+	@Override
+	public Noticepicture selectById(Integer id) {
+		return noticepicture.selectById(id);
+	}
 	
 	
 }

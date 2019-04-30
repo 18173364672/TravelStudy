@@ -74,4 +74,13 @@ public interface NoticeMapper {
      */
     Notice queryAll();
     
+    
+    
+    /**
+     * 分页带条件查询
+     * @param employeename
+     * @return
+     */
+    List<Notice> Myquery(String title,String spare1);
+    
 }

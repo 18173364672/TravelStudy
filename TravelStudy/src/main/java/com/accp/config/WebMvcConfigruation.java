@@ -19,8 +19,8 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
-import com.accp.config.intercepors.LoginInterceptor;
-import com.accp.config.intercepors.Z;
+//import com.accp.config.intercepors.LoginInterceptor;
+//import com.accp.config.intercepors.Z;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
@@ -28,11 +28,11 @@ import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 @Configuration
 public class WebMvcConfigruation extends WebMvcConfigurationSupport {
 	
-	@Autowired
-	private Z z;
-	
-	@Autowired
-	private LoginInterceptor login;
+//	@Autowired
+//	private Z z;
+//	
+//	@Autowired
+//	private LoginInterceptor login;
 
 
 	/**
@@ -82,12 +82,12 @@ public class WebMvcConfigruation extends WebMvcConfigurationSupport {
 	 * 添加拦截器
 	 */
 	
-	@Override
-	protected void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(login).addPathPatterns("/**").excludePathPatterns("/user/tologin", "/user/login" ,"/user/index","/user/register","/js/**","/css/**","/fonts/**","/images/**","/lib/**","/layui-v2.4.5/**");
-		registry.addInterceptor(z).addPathPatterns("/**").excludePathPatterns("/user/tologin", "/user/login","/user/index" ,"/user/register","/js/**","/css/**","/fonts/**","/images/**","/lib/**","/layui-v2.4.5/**");
-        super.addInterceptors(registry);
-	}
+//	@Override
+//	protected void addInterceptors(InterceptorRegistry registry) {
+////		registry.addInterceptor(login).addPathPatterns("/**").excludePathPatterns("/user/tologin", "/user/login" ,"/user/index","/user/register","/js/**","/css/**","/fonts/**","/images/**","/lib/**","/layui-v2.4.5/**");
+////		registry.addInterceptor(z).addPathPatterns("/**").excludePathPatterns("/user/tologin", "/user/login","/user/index" ,"/user/register","/js/**","/css/**","/fonts/**","/images/**","/lib/**","/layui-v2.4.5/**");
+//        super.addInterceptors(registry);
+//	}
 
 	
 	

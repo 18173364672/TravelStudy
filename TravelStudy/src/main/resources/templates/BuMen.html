@@ -37,21 +37,6 @@
 </head>
 <body>
 <!-- 顶部开始 -->
-<!--     <div class="container"> -->
-<!--         <div class="logo"><a href="./index.html">研学旅行后台系统</a></div> -->
-<!--         <div class="open-nav"><i class="iconfont">&#xe699;</i></div> -->
-<!--         <ul class="layui-nav right" lay-filter=""> -->
-<!--           <li class="layui-nav-item"> -->
-<!--             <a href="javascript:;">admin</a> -->
-<!--             <dl class="layui-nav-child"> 二级菜单 -->
-<!--               <dd><a href="">个人信息</a></dd> -->
-<!--               <dd><a href="">切换帐号</a></dd> -->
-<!--               <dd><a href="./login.html">退出</a></dd> -->
-<!--             </dl> -->
-<!--           </li> -->
-<!--           <li class="layui-nav-item"><a href="/">前台首页</a></li> -->
-<!--         </ul> -->
-<!--     </div> -->
     <!-- 顶部结束 -->
    	<div class="wrapper">
    	
@@ -62,6 +47,8 @@
 						<div class="layui-form-item" style="display: inline-block;">
 							<div class="layui-input-inline">
 								<input type="text" name="title" placeholder="请输入标题名"
+									autocomplete="off" class="layui-input">
+								<input type="hidden" name="uid" placeholder="请输入uid" 
 									autocomplete="off" class="layui-input">
 							</div>
 							<div class="layui-input-inline" style="width: 80px">
@@ -87,32 +74,7 @@
 							<td class="buMenid">{{item.id}}</td>
 							<td>{{item.title}}</td>
 							<td>{{item.content}}</td>
-							<td class="td-status" v-if="item.spare1==='1'">
-								<a title="查看" href="javascript:;"  :data="item.id" onclick="show(this)" class="ml-5"  style="text-decoration:none">
-	                                <i class="layui-icon" >&#xe642;</i>
-	                            </a>
-							</td>
-							<td class="td-status" v-if="item.spare1==='2'">
-								<a title="查看" href="javascript:;"  :data="item.id" onclick="show(this)" class="ml-5"  style="text-decoration:none">
-	                                <i class="layui-icon" >&#xe642;</i>
-	                            </a>
-							</td>
-							<td class="td-status" v-if="item.spare1==='3'">
-								<a title="查看" href="javascript:;"  :data="item.id" onclick="show(this)" class="ml-5"  style="text-decoration:none">
-	                                <i class="layui-icon" >&#xe642;</i>
-	                            </a>
-							</td>
-							<td class="td-status" v-if="item.spare1==='4'">
-								<a title="查看" href="javascript:;"  :data="item.id" onclick="show(this)" class="ml-5"  style="text-decoration:none">
-	                                <i class="layui-icon" >&#xe642;</i>
-	                            </a>
-							</td>
-							<td class="td-status" v-if="item.spare1==='5'">
-								<a title="查看" href="javascript:;"  :data="item.id" onclick="show(this)" class="ml-5"  style="text-decoration:none">
-	                                <i class="layui-icon" >&#xe642;</i>
-	                            </a>
-							</td>
-							<td class="td-status" v-if="item.spare1==='6'">
+							<td class="td-status">
 								<a title="查看" href="javascript:;"  :data="item.id" onclick="show(this)" class="ml-5"  style="text-decoration:none">
 	                                <i class="layui-icon" >&#xe642;</i>
 	                            </a>
@@ -123,6 +85,7 @@
 
 				<button v-on:click="queryPage(page.prePage)" class="layui-btn layui-btn-warm">上一页</button>
 				<button v-on:click="queryPage(page.nextPage)" class="layui-btn layui-btn-danger">下一页</button>
+<!-- 				<button v-on:click="queryPage(page.nextPage)" class="layui-btn layui-btn-danger">下一页</button> -->
 					
 					
 					
@@ -156,7 +119,7 @@
 //     }
     
     function show(th){
-    	 x_admin_show("标题","xiangQing?LookIds="+$(th).attr("data"),"500","400"); 
+    	 x_admin_show("标题","GeRenxiangQing?LookIds="+$(th).attr("data"),"500","400"); 
     }
     
     
@@ -184,12 +147,14 @@
 	
     function page(curPage){
     	var title = $("[name = title]").val();
+    	var uid = $("[name=uid]").val();
 		  $.ajax({
-			  url:[[@{/notice/noticeQuery}]],
+			  url:[[@{/notice/MynoticeQuery}]],
 			  type:"post",
 			  data:{
 				  'currentPage':curPage,
-				  'title':title
+				  'title':title,
+				  'uid':uid
 			  },
 			  dataType:"json",
 			  success:function(data){

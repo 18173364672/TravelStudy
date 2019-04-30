@@ -41,6 +41,11 @@ public interface NoticepictureMapper {
      */
     Noticepicture selectOrderBy();
     
-    
+    /**
+     * 根据id查询数据
+     * @param id
+     * @return
+     */
+    Noticepicture selectById(Integer id);
     
 }

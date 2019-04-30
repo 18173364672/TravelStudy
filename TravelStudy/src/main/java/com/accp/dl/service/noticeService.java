@@ -58,6 +58,13 @@ public interface noticeService {
     Notice queryAll();
     
 	
+	/**
+	 * 分页查询
+	 * @param currentPage
+	 * @param pageSize
+	 * @return
+	 */
+	public PageInfo<Notice> Myquery(Integer currentPage,String title,Integer pageSize,String spare1);
 	
     
 }

@@ -75,5 +75,20 @@ public class noticeServiceImpl implements noticeService{
 		return notices.queryAll();
 	}
 
+	/**
+	 * 分页查询
+	 * @param currentPage
+	 * @param pageSize
+	 * @return
+	 */
+	@Override
+	public PageInfo<Notice> Myquery(Integer currentPage, String title, Integer pageSize,String spare1) {
+		Page<Notice> pageInfo = PageHelper.startPage(currentPage,pageSize,true);
+		
+		notices.Myquery(title,spare1);
+		
+		return pageInfo.toPageInfo();
+	}
+
 	
 }

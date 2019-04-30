@@ -1,8 +1,15 @@
 package com.accp.dl.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.UUID;
+
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.hssf.record.PageBreakRecord.Break;
 import org.apache.poi.sl.usermodel.TextParagraph.BulletStyle;
@@ -13,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.accp.dl.handler.webSocketHandler;
 import com.accp.dl.service.impl.employeeServiceImpl;
 import com.accp.dl.service.impl.noticeServiceImpl;
 import com.accp.dl.service.impl.noticepictureServiceImpl;
@@ -28,6 +36,7 @@ import com.github.pagehelper.PageInfo;
 
 @Controller
 @RequestMapping("/notice")
+//@MultipartConfig 
 public class notice {
 
 	
@@ -46,6 +55,19 @@ public class notice {
 	
 	@Autowired
 	employeeServiceImpl employee;
+	
+	
+	@Autowired
+	webSocketHandler webSocke;
+	
+//	/**
+//	 * 测试
+//	 * @return
+//	 */
+//	@RequestMapping("/Text")
+//	public String Text() {
+//		return "测试";
+//	}
 	
 	
 	/**
@@ -100,7 +122,6 @@ public class notice {
 			employeename ="";
 		}
 		PageInfo<Employee> pageList = employee.selecQueryFeYue(currentPage,employeename, 5);
-		
 //		System.out.println(pageList.getList().get(0).getSpare1());
 //		
 //		model.addAttribute("pageList",pageList);
@@ -109,7 +130,17 @@ public class notice {
 		return pageList;
 	}
 	
-	
+	/**
+	 * 员工查询
+	 * @return
+	 */
+	@RequestMapping("/MyBuMen")
+	@ResponseBody
+	public List<Organization> MyBuMen() {
+//		System.out.println("进来了");
+		List<Organization> list = orgainzation.selectByExample(null);
+		return list;
+	}
 	
 	
 	/**
@@ -132,11 +163,36 @@ public class notice {
 	 */
 	@RequestMapping("/addnotice")
 	@ResponseBody
-	public String addnotice(String title ,String content,Integer uid) {
+	public String addnotice(String title ,String content,Integer uid,MultipartFile file) {
 		notices.add(title, content, 1);
 		Notice dueix = notices.queryAll();
 		noticesecond.toAdd(dueix.getId());
-		return "kkkk";
+		Notice stu = notices.selectOrderBy();
+		int nid = stu.getId();
+		
+		String url = "D:\\Fileuploads\\";
+		File files = new File(url);
+		if (!files.exists()) {
+			files.mkdirs();
+		}
+		try {
+				String uuid = UUID.randomUUID().toString();
+				String name = file.getOriginalFilename();
+				String suffix = name.substring(name.lastIndexOf("."),name.length());
+				File chang = new File(url+uuid+suffix);
+				file.transferTo(chang);
+//				System.out.println(chang);
+				String urls = chang.toString();
+				noticepicture.addinsert(urls);	//新增图片文件
+				Noticepicture stus = noticepicture.selectOrderBy();
+				int iid = stus.getId();
+				
+				noticesecond.addNoticesecound(-1, iid, nid);
+				
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:member";
 	}
 	
 	/**
@@ -185,9 +241,40 @@ public class notice {
 	 */
 	@RequestMapping("toAdd")
 	@ResponseBody
-	public String toAdd(String title ,String content,Integer uid,String spare1[]) {
+	public String toAdd(String title ,String content,Integer uid,String spare1[],MultipartFile file) {
+		
 		for (int i = 0; i < spare1.length; i++) {
 			notices.toAdd(title, content, 1, spare1[i]);
+			
+			Notice stu = notices.selectOrderBy();
+			int nid = stu.getId();
+			String url = "D:\\Fileuploads\\";
+			File files = new File(url);
+			if (!files.exists()) {
+				files.mkdirs();
+			}
+			try {
+					String uuid = UUID.randomUUID().toString();
+					String name = file.getOriginalFilename();
+					String suffix = name.substring(name.lastIndexOf("."),name.length());
+					File chang = new File(url+uuid+suffix);
+					file.transferTo(chang);
+//					System.out.println(chang+"路径");
+					String urls = chang.toString();
+					noticepicture.addinsert(urls);	//新增图片文件
+					
+					Noticepicture stus = noticepicture.selectOrderBy();
+					int iid = stus.getId();
+					
+					noticesecond.addNoticesecound(0, iid, nid);
+					
+					Employee dueix = employee.selectById(Integer.parseInt(spare1[i]));
+					
+					webSocke.sendMsg("2",dueix.getId().toString());
+					
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		return "redirect:member";
 	}
@@ -224,10 +311,6 @@ public class notice {
 	}
 	
 	
-	
-	
-	
-	
 	/**
 	 * 详情
 	 * @return
@@ -237,16 +320,16 @@ public class notice {
 //		System.out.println(LookIds+"这是有没有!!!");
 		if (LookIds!=null) {
 			Notice dueix = notices.selectById(LookIds);
-			if (dueix.getSpare1()==null) {
-//				System.out.println(dueix.getUid());
-//				String rid = dueix.getSpare1();
-				Noticesecond cdueix = noticesecond.selectById(LookIds);
-//				cdueix.getRid();
-//				System.out.println(cdueix.getRid());
-				Organization odueix2 =  orgainzation.selectById(cdueix.getRid());
-				model.addAttribute("rid",odueix2);
-				return "gGao";
-			}
+//			if (dueix.getSpare1()==null) {
+////				System.out.println(dueix.getUid());
+////				String rid = dueix.getSpare1();
+////				Noticesecond cdueix = noticesecond.selectById(LookIds);
+////				cdueix.getRid();
+////				System.out.println(cdueix.getRid());
+////				Organization odueix2 =  orgainzation.selectById(cdueix.getRid());
+////				model.addAttribute("rid",odueix2);
+//				return "gGao";
+//			}
 			int eid = Integer.parseInt(dueix.getSpare1());
 			Employee edueix = employee.selectById(eid);
 //			Noticesecond cdueix = noticesecond.selectById(dueix.getUid());
@@ -265,11 +348,64 @@ public class notice {
 	}
 	
 	
+	/**
+	 * 部门或全公司公告
+	 * @return
+	 */
+	@RequestMapping("BuMen")
+	public String BuMen() {
+//		System.out.println("进来了!!");
+		return "BuMen";
+	}
 	
 	
+	/**
+	 * 个人消息分页查询
+	 * @param model
+	 * @param currentPage
+	 * @param title
+	 * @param pageSize
+	 * @return
+	 */
+	@RequestMapping("/MynoticeQuery")
+	@ResponseBody
+	public PageInfo<Notice> MynoticeQuery(Model model,Integer currentPage,String title,Integer pageSize,Integer uid) {
+			
+//		System.out.println("进来了!!");
+		
+		if (currentPage == null) {
+			currentPage=1;
+		}
+		if (title==null) {
+			title ="";
+		}
+//		String spare = uid.toString();
+		PageInfo<Notice> pageList = notices.Myquery(currentPage,title, 5,"2");
+		return pageList;
+	}
 	
-	
-	
+	/**
+	 * 详情
+	 * @return
+	 */
+	@RequestMapping("/GeRenxiangQing")
+	public String GeRenxiangQing(Integer LookIds,Model model) {
+		System.out.println(LookIds);
+		Notice dueix = notices.selectById(LookIds);
+		int eid = Integer.parseInt(dueix.getSpare1());
+		Employee edueix = employee.selectById(eid);
+		int oid = Integer.parseInt(edueix.getSpare1());
+		Organization odueix =  orgainzation.selectById(oid);
+		Noticesecond dueixWen = noticesecond.selectById(LookIds);
+		Noticepicture dueixTuPian = noticepicture.selectById(dueixWen.getIid());
+		
+		model.addAttribute("dueix",dueix);		//公告内容
+		model.addAttribute("edueix",edueix);	//员工姓名
+		model.addAttribute("odueix",odueix);	//部门名称
+		model.addAttribute("dueixTuPian",dueixTuPian);	//图片文件
+		
+		return "GeRen";
+	}
 	
 	
 	

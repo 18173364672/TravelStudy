@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>研学旅行后台系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" th:href="@{/css/font.css}">
+	<link rel="stylesheet" th:href="@{/css/xadmin.css}">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
+    <script th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
+    <script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <script type="text/javascript" th:src="@{/js/vue.js}"></script>
+    
+</head>
+<body>
+    <!-- 中部开始 -->
+    <div class="wrapper">
+			<div class="page-content">
+				<div class="content">
+					<!-- 右侧内容框架，更改从这里开始 -->
+						<div class="layui-form-item" style="font-size: 24px;">
+							<p style="text-align: center;color: red;" th:text="${dueix.title}"></p>
+						</div>
+						<div class="layui-form-item" style="font-size: 18px;">
+							<p style="text-align: center;">
+<!-- 							 border: 1px solid -->
+								内容
+							</p>
+							<p style="color: #002752;">
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								<span th:text="${dueix.content}">
+									
+								</span>
+							</p>
+						</div>
+						<div class="layui-form-item" style="font-size: 15px;float: right;">
+							<p>发送人:<span style="color: #002752;">1</span></p>
+						</div>
+						<div class="layui-form-item" style="font-size: 18px;">
+							<p>员工姓名:<span style="color: red;" th:text="${edueix.employeename}"></span></p>
+						</div>
+						<div class="layui-form-item" style="font-size: 18px;">
+							<p>所属部门:<span style="color: #002752;" th:text="${odueix.name}"></span></p>
+						</div>
+						<div class="layui-form-item" style="font-size: 18px;">
+							<p>
+								文件:
+<!-- 								<span style="color: #002752;" th:text="${dueixTuPian.url}"></span> -->
+<!-- 								<video controls th:src="${dueixTuPian.url}" width="720" height="480"> -->
+<!--         						</video>	 -->
+								<a th:href="${dueixTuPian.url}">查看文件</a>
+<!-- 								<form id="form1" runat="server"> -->
+<!-- 									<iframe th:src="${dueixTuPian.url}" width="70%"   height="120px" runat="server" id="iframe1"></iframe> -->
+<!-- 								</form> -->
+							</p>
+						</div>
+					<!-- 右侧内容框架，更改从这里结束 -->
+				</div>
+			</div>
+			<!-- 右侧主体结束 -->
+		</div>
+    <!-- 背景切换开始 -->
+    <!-- 背景切换结束 -->
+    <script th:inline="javascript">
+    	$(function(){
+//     		alert(rid);
+    	});
+    
+    </script>
+</body>
+</html>

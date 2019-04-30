@@ -299,5 +299,9 @@
   		SELECT * FROM notice ORDER BY id DESC LIMIT 0,1
   </select>
   
+   <select id="Myquery" resultType="com.accp.domain.Notice">
+  		SELECT * FROM `notice` WHERE title LIKE CONCAT('%',#{title},'%') AND spare1 = #{spare1}
+  </select>
+  
   
 </mapper>

@@ -50,6 +50,7 @@
 		<!-- 右侧主体开始 -->
 		<div class="page-content">
 			<div class="content">
+<!-- 				 <form class="layui-form"  enctype="multipart/form-data"> -->
 					<div class="layui-form-pane" style="text-align: center;">
 						<div class="layui-form-item" style="display: inline-block;">
 							<div class="layui-input-inline">
@@ -94,12 +95,21 @@
 							<td>{{item.address}}</td>
 							<!--   th:text="${#dates.format(item.createtime,'yyyy-MM-dd HH:mm')}" -->
 							<td>{{item.createtime}}</td>
-							<td v-if="item.spare1==='1'">校友部</td>
-							<td v-if="item.spare1==='2'">教练部</td>
-							<td v-if="item.spare1==='3'">助手部</td>
-							<td v-if="item.spare1==='4'">员工部</td>
-							<td v-if="item.spare1==='5'">领队部</td>
-							<td v-if="item.spare1==='6'">其他部</td>
+<!-- 							<td v-for="(items,index) in list"> -->
+<!-- 								<td>{{items.name}}</td> -->
+<!-- 								<td v-if="item.spare1==='items.id'">{{items.name}}</td> -->
+<!-- 								<td v-if="item.spare1==='2'">教练部</td> -->
+<!-- 								<td v-if="item.spare1==='3'">助手部</td> -->
+<!-- 								<td v-if="item.spare1==='4'">员工部</td> --> 
+<!-- 								<td v-if="item.spare1==='5'">领队部</td> --> 
+<!-- 								<td v-if="item.spare1==='6'">其他部</td> --> 
+<!-- 							</td> -->
+								<td v-if="item.spare1==='1'">校友部</td>
+								<td v-if="item.spare1==='2'">教练部</td>
+								<td v-if="item.spare1==='3'">助手部</td>
+								<td v-if="item.spare1==='4'">员工部</td>
+								<td v-if="item.spare1==='5'">领队部</td>
+								<td v-if="item.spare1==='6'">其他部</td>
 							<td>{{item.job}}</td>
 							<td>{{item.pay}}</td>
 							<td class="td-status" v-if="item.state===1"><span
@@ -129,6 +139,10 @@
 							</div>
 						</div>
 						<br>
+						<div style="margin-left: 80px;margin-bottom: 70px">
+							<input id="filgo" type="file" name="file" onchange="changeToop('filgo','imghead');" value="上传图片">
+						</div>
+						<br>
 						<div class="layui-input-block" style="margin-top: 50px;">
 							<label class="layui-form-label xbs768">请输入内容:</label>
 							<textarea placeholder="请输入发布内容" id="L_sign" name="sign"
@@ -140,6 +154,8 @@
 						<button class="layui-btn" id="fasuo" key="set-mine" lay-filter="save"
 							lay-submit>发送</button>
 					</div>
+<!-- 				</form> -->
+					
 				<!-- 右侧内容框架，更改从这里结束 -->
 			</div>
 		</div>
@@ -152,9 +168,8 @@
     	
     	el:'.wrapper',
     	data:{
-    		
-    		page:''
-    		
+    		page:'',
+    		dluy:''
     	},methods:{
     		queryPage(ind){
     		page(ind);
@@ -185,6 +200,22 @@
     
     
 	$(function(){
+		
+		
+		 $.ajax({
+			  url:[[@{/notice/MyBuMen}]],
+			  type:"post",
+			  dataType:"json",
+			  success:function(result){
+				  alert(result);
+				  vue.dluy = result;
+			  }
+		 });
+		
+		
+		
+		
+		
 		  $("#checkall").click(function(){
 		  	if(this.checked==true){
 		  		   $("[name='s1']").each(function(){
@@ -207,24 +238,25 @@
 		  $("#fasuo").click(function(){
 			  var title = $("[name=username]").val();
 			  var content = $("[name=sign]").val();
+// 			  var file = $("[name=file]").val();
+			  var file = document.getElementById("filgo").files.item(0);
+			  
 			 $.each($(".checkbox"),function(){
 				 if(this.checked){
 					 var spare1 = $(this).attr("iid");
-// 					 console.log(spare1);
 					 buid = spare1;
-// 					 for(var i=0;i<buid.length;i++){
-// 						 console.log(buid[i]);
-						 
-// 					 }
+				var formData=new FormData(document.getElementById("filgo"));
+				formData.append("title",title);
+				formData.append("content",content);
+				formData.append("spare1",buid);
+				formData.append("file",file);
+				
 					 $.ajax({
-						 url:[[@{/notice/toAdd}]],
-						 type:"post",
-						 data:{
-							  'spare1':buid,
-							  'title':title,
-							  'content':content
-						  },
-						  dataType:"json",
+						  url:[[@{/notice/toAdd}]],
+						  type:"post",
+						  data:formData,
+						  contentType:false,
+						  processData:false,
 						  success:function(result){
 							  var index = parent.layer.getFrameIndex(window.name);
 							  parent.layer.close(index);
