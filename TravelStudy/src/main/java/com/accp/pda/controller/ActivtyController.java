@@ -22,8 +22,12 @@ public class ActivtyController {
 	@Autowired
 	ActivityService service;
 	
+
 	@Autowired
 	PlateService plateservice;
+
+
+
 	
 	@RequestMapping("/query")
 	public String query(Model model , HttpSession session) {
@@ -82,4 +86,6 @@ public class ActivtyController {
 	public String queryPriject() {
 		return "manage-activity-show";
 	}
+	
+
 }
