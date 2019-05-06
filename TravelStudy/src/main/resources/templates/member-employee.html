@@ -1,8 +1,8 @@
 <!doctype html>
-<html lang="en" xmlns="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>后台登录-X-admin1.1</title>
+    <title>研学旅行</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" th:href="@{/css/font.css}">
@@ -575,7 +575,6 @@ var v=new Vue({
 });
    
    var urlpath = [[@{/employee/employeequerypage}]];
-   alert(urlpath);
 
   $.ajax({
 		 url:urlpath,
