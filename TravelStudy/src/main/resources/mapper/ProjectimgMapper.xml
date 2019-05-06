@@ -19,6 +19,11 @@
   
   <select id="queryimg" resultMap="BaseResultMap">
     select * from projectimg where projectid=#{id} 
+
+  
+  
+  <select id="proimgselect" resultMap="BaseResultMap">
+  SELECT *FROM `projectimg` WHERE `id`=#{id}
   </select>
   
   <sql id="Example_Where_Clause" >

@@ -24,6 +24,22 @@
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
   
+   <select id="cupquerys" resultMap="BaseResultMap">
+     select * from customerss
+     <where>
+        state=0
+       
+       <if test="username!=null">
+        and username like CONCAT('%',#{username},'%')
+       </if>
+       
+       <if test="createtime!=null">
+        and createtime like CONCAT('%',#{createtime},'%')
+       </if>
+     </where>
+  </select>
+  
+  
   <select id="dcall" resultMap="BaseResultMap">
     select * from customerss
   </select>
@@ -51,6 +67,9 @@
         and createtime like CONCAT('%',#{createtime},'%')
        </if>
      </where>
+  
+   <select id="dl" resultMap="BaseResultMap">
+  SELECT * FROM `customerss` WHERE `Username`=#{Username} and UserPassWord=#{UserPassWord}
   </select>
   
   <sql id="Example_Where_Clause" >

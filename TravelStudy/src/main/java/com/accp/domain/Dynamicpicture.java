@@ -16,6 +16,7 @@ public class Dynamicpicture {
     private String spare4;
 
     private String spare5;
+ 
 
     public Integer getId() {
         return id;

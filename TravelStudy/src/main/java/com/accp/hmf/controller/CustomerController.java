@@ -46,8 +46,48 @@ public class CustomerController {
     HttpServletResponse response;
     @Autowired
     PlateService plateservice;
+    
+    
+    
+    @RequestMapping("/customerdeletes")
+    public String customerdelete(Integer id) {
+ 		cs.deleteByPrimaryKey(id);
+ 	   
+ 	   
+ 		return "redirect:/customer/tomemberdel";
+    }
        
-  
+       
+       @RequestMapping("/customerdelete")
+       public String customerdelete(@RequestBody Customerss customerss) {
+    		for (Customerss c : customerss.getMlist()) {
+				cs.deleteByPrimaryKey(c.getId());
+			}
+    	   
+    	   
+    		return "redirect:/customer/tomemberdel";
+       }
+    
+       @RequestMapping("/tomemberdel")
+       public String tomemberdel() { 
+    	   return "member-del";
+       }
+       
+       @RequestMapping("/customerquerypages")
+       @ResponseBody
+       public  PageInfo<Customerss> customerquerypages(Integer currentPage, Integer pageSize, String createtime, String username) {
+       	 if(currentPage==null) {
+   			   currentPage = 1;
+   		   }
+   		   PageInfo<Customerss> pageInfo = cs.querypages(currentPage,3,createtime,username);
+//   			model.addAttribute("page",pageInfo);
+   			
+   			return pageInfo;
+       	
+       	
+       	
+       }
+       
     
        @RequestMapping("/dc")
 	   public ResponseEntity<byte[]> dc(String groupname) {
@@ -223,6 +263,19 @@ public class CustomerController {
 		  
 		  
 	   }
+	   
+	 
+	   @RequestMapping("/customerupstatess")
+	    public String customerupstatess(@RequestBody Customerss customerss) {
+	    	for (Customerss c : customerss.getMlist()) {
+				c.setState(1);
+				cs.updateByPrimaryKeySelective(c);
+			}
+	    	
+	    	
+	    	return "redirect:/customer/tomemberdel";
+	    }
+	   
     
     @RequestMapping("/customerupstates")
     public String customerupstates(Integer id) {

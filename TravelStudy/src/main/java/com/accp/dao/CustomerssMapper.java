@@ -2,6 +2,8 @@ package com.accp.dao;
 
 import com.accp.domain.Customerss;
 import com.accp.domain.CustomerssExample;
+
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -35,5 +37,8 @@ public interface CustomerssMapper {
     List<Customerss> dcs(Integer id);
     
     List<Customerss> dcall();
+    
+    List<Customerss> cupquerys(@Param("createtime")String createtime,@Param("username")String username);
 
+    Customerss dl(@Param("Username")String Username,@Param("UserPassWord")String UserPassWord);
 }

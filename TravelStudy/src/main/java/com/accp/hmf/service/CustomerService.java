@@ -22,4 +22,8 @@ public interface CustomerService {
 	 List<Customerss> dcs(Integer id);
 	 
 	 List<Customerss> dcall();
+	 
+	 int deleteByPrimaryKey(Integer id);
+	 
+	 public PageInfo<Customerss> querypages(Integer currentPage,Integer pageSize,String createtime,String username);
 }

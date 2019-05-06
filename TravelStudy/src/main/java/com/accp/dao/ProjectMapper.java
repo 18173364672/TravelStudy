@@ -38,4 +38,8 @@ public interface ProjectMapper {
     List<Project> pquery(@Param("projectname") String projectname);
     
     Project queryd(Integer id);
+    
+    List<Project>proselect(Integer pid);
+    
+    List<Project>proxmselect();
 }
