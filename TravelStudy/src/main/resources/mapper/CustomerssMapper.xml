@@ -67,6 +67,9 @@
         and createtime like CONCAT('%',#{createtime},'%')
        </if>
      </where>
+  
+   <select id="dl" resultMap="BaseResultMap">
+  SELECT * FROM `customerss` WHERE `Username`=#{Username} and UserPassWord=#{UserPassWord}
   </select>
   
   <sql id="Example_Where_Clause" >

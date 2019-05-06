@@ -31,4 +31,5 @@ public interface ProjectimgMapper {
     List<Projectimg> queryimg(Integer id);
     
     int deletes(Integer id);
+    List<Projectimg>proimgselect(Integer id);
 }

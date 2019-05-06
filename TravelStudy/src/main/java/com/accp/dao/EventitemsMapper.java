@@ -27,4 +27,6 @@ public interface EventitemsMapper {
     int updateByPrimaryKeySelective(Eventitems record);
 
     int updateByPrimaryKey(Eventitems record);
+    
+    List<Eventitems>eveselect(Integer id);
 }

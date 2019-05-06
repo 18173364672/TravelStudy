@@ -61,8 +61,20 @@ public class Project {
 	private List<Employee> emlist;
     
     private List<Field> flist;
+    
+    private List<Projectimg> proimglist;
+    
+    
 
-    public Integer getId() {
+    public List<Projectimg> getProimglist() {
+		return proimglist;
+	}
+
+	public void setProimglist(List<Projectimg> proimglist) {
+		this.proimglist = proimglist;
+	}
+
+	public Integer getId() {
         return id;
     }
 
