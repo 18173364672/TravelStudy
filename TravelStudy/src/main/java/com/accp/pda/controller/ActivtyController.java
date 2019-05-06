@@ -17,6 +17,8 @@ public class ActivtyController {
 	@Autowired
 	ActivityService service;
 	
+
+	
 	@RequestMapping("/query")
 	public String query(Model model) {
 		List<Activity> list = service.selectByExample(null);
@@ -71,4 +73,6 @@ public class ActivtyController {
 	public String queryPriject() {
 		return "manage-activity-show";
 	}
+	
+
 }
