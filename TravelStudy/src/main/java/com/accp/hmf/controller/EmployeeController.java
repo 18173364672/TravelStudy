@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.accp.domain.Employee;
 import com.accp.domain.Organization;
+import com.accp.domain.Organizationzw;
 import com.accp.domain.Royalty;
 import com.accp.hmf.service.EmployeeService;
+import com.accp.hmf.service.OrganizationService;
 import com.github.pagehelper.PageInfo;
 
 @Controller
@@ -21,6 +23,8 @@ import com.github.pagehelper.PageInfo;
 public class EmployeeController {
       @Autowired
       EmployeeService es;
+      @Autowired
+      OrganizationService organizationService;
       
       //查询工资
       @RequestMapping("/querypay")
@@ -75,7 +79,32 @@ public class EmployeeController {
       //员工修改
       @RequestMapping("/employeeedit")
       public String employeeedit(Employee employee) {
-    	    es.updateByPrimaryKey(employee);
+    	  
+            Employee em1=es.emqueryd(employee.getId());
+            if(employee.getSpare1().equals(em1.getSpare1())) {
+            	 es.updateByPrimaryKey(employee);
+            	
+            }else {
+               Organization organization=es.queryOrname(Integer.parseInt(em1.getSpare1()));
+          	  int count=organization.getCount()-1;
+          	  organization.setCount(count);
+          	 es.updateByPrimaryKey(organization);
+          	  
+          	Organization organization1=es.queryOrname(Integer.parseInt(employee.getSpare1()));
+        	  int count1=organization1.getCount()+1;
+        	  organization1.setCount(count1);
+        	  es.updateByPrimaryKey(organization1);
+        	  
+        	  
+        	  es.updateByPrimaryKey(employee);
+        	  
+            	
+            }
+            
+    	  
+    	   
+    	    
+    	    
     	
     	  return "redirect:/employee/toemployeeedit?id="+employee.getId();
       }
@@ -175,11 +204,11 @@ public class EmployeeController {
       
       @RequestMapping("/queryzw")
       @ResponseBody
-      public Organization querybm(Integer id) {
+      public List<Organizationzw> querybm(Integer id) {
     	 
-    	  Organization organization=es.queryOrname(id);
+    	 List<Organizationzw> list=organizationService.queryzw(id);
     	  
-    	  return organization;
+    	  return list;
       }
       
       

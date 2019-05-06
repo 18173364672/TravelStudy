@@ -34,4 +34,6 @@ public interface ProjectMapper {
     List<ProjectByTimeAndName> superSelectBytime(String years);
     
     List<QuestionTj>selectByQuestionTj(String projectname);
+    
+    List<Project> pquery(@Param("projectname") String projectname);
 }

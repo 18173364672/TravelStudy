@@ -56,273 +56,17 @@
   </script>
 <body>
     <!-- 顶部开始 -->
-    <div class="container">
-        <div class="logo"><a href="./index.html">研学旅行</a></div>
-        <div class="open-nav"><i class="iconfont">&#xe699;</i></div>
-        <ul class="layui-nav right" lay-filter="">
-          <li class="layui-nav-item">
-            <a href="javascript:;">admin</a>
-            <dl class="layui-nav-child"> <!-- 二级菜单 -->
-              <dd><a href="">个人信息</a></dd>
-              <dd><a href="">切换帐号</a></dd>
-              <dd><a href="./login.html">退出</a></dd>
-            </dl>
-          </li>
-         
-        </ul>
+    <div class="container" th:include="head :: header">
+    
     </div>
     <!-- 顶部结束 -->
     <!-- 中部开始 -->
     <div class="wrapper">
         <!-- 左侧菜单开始 -->
         <div class="left-nav">
-          <div id="side-nav">
-            <ul id="nav">
-                <li class="list" current>
-                    <a href="./index.html">
-                        <i class="iconfont">&#xe761;</i>
-                        欢迎页面
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                </li>
-                <li class="list">
-                    <a href="javascript:;">
-                        <i class="iconfont">&#xe70b;</i>
-                        客户管理
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu ">
-                        <li >
-                            <a href="member-list.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                客户列表
-                            </a>
-                        </li>
-                        <li>
-                            <a href="member-del.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                客户删除
-                            </a>
-                        </li>
-                        <li>
-                            <a href="member-level.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                活动推荐
-                            </a>
-                        </li>
-                        <li>
-                            <a href="member-kiss.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                               活动通知
-                            </a>
-                        </li>
-                        <li>
-                            <a href="member-view.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                               客户资源管理
-                            </a>
-                        </li>
-                        <li>
-                            <a href="member-feedback.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                  客户反馈
-                            </a>
-                        </li>   
-                                                                                            <li>
-                            <a href="member-usergroup.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                  客户组
-                            </a>
-                        </li>  
-                    </ul>
-                </li>
-                <li class="list" >
-                       <a href="javascript:;">
-                        <i class="iconfont">&#xe6b2;</i>
-                       员工管理
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu" >
-                          <li>
-                            <a th:href="@{/employee/toemployeequerypage}">
-                                <i class="iconfont">&#xe6a7;</i>
-                                员工信息
-                            </a>
-                        </li>
-                        
-                         <li >
-                            <a th:href="@{/organization/toorganization}">
-                                <i class="iconfont">&#xe6a7;</i>
-                                组织机构
-                            </a>
-                        </li> 
-                        
-                                 <li>
-                            <a href="member-employee-kiss.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                工作通知
-                            </a>
-                        </li> 
-                        </li>
-                    </ul>
-                </li>
-                <li class="list " >
-                    <a href="javascript:;">
-                        <i class="iconfont">&#xe705;</i>
-                        项目管理
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu">
-                             <li>
-                            <a href="member-project.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                项目信息
-                            </a>
-                        </li>
-                        
-          
-                        
-                       	<li>
-                            <a href="member-project-feedback.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                项目反馈
-                            </a>
-                        </li>
-      
-                                                   <li>
-                            <a href="member-project-comment.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                项目评论
-                            </a>
-                        </li>
-                        
-                                                      <li>
-                            <a href="member-project-ranking.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                项目排名
-                            </a>
-                        </li>
-                        
-    
-                    </ul>
-                </li>
-                
-                <li class="list" >
-                  <a href="javascript:;">
-                        <i class="layui-icon">&#xe62e;</i>
-                        活动管理
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a href="manage-activity.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                活动信息
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                
-                <li class="list" >
-                  <a href="javascript:;">
-                        <i class="layui-icon">&#xe600;</i>
-                        订单管理
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a href="manage-order.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                订单信息
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                
-                <li class="list" >
-                    <a href="javascript:;">
-                        <i class="layui-icon">&#xe62c;</i>
-                        系统统计
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a href="./echarts1.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                项目人气
-                            </a>
-                        </li>
-                        <li>
-                            <a href="./echarts2.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                每月收入
-                            </a>
-                        </li>
-                        <li>
-                            <a href="./echarts3.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                人气教官
-                            </a>
-                        </li>
-                        <li>
-                            <a href="./echarts4.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                人气活动
-                            </a>
-                        </li>
-                        <li>
-                            <a href="./echarts5.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                每月客户
-                            </a>
-                        </li>
-                        <li>
-                            <a href="./echarts6.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                员工考勤数据
-                            </a>
-                        </li>
-                        <li>
-                            <a href="./echarts7.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                问卷调查
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="list">
-                  <a href="javascript:;">
-                        <i class="layui-icon">&#xe614;</i>
-                        系统管理
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu opened">
-                        <li class="current">
-                            <a th:href="@{/user/queryuser}">
-                                <i class="iconfont">&#xe6a7;</i>
-                                用户管理
-                            </a>
-                        </li>
-                        
-               
-                        
-                                     <li>
-                            <a th:href="@{/user/plate}">
-                                <i class="iconfont">&#xe6a7;</i>
-                                模块管理
-                            </a>
-                        </li>
-                		<li>
-                            <a th:href="@{/user/role}">
-                                <i class="iconfont">&#xe6a7;</i>
-                                角色管理
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-            </ul>
-          </div>
+        	<div id="side-nav"  th:include="left :: left_nav">
+        	
+        	</div>
         </div>
         <!-- 左侧菜单结束 -->
         <!-- 右侧主体开始 -->
@@ -351,7 +95,7 @@
             
             
             
-            <xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button><button class="layui-btn" onclick="member_add('添加员工','/user/usertoadd','600','500')"><i class="layui-icon">&#xe608;</i>添加</button><span class="x-right" style="line-height:40px">共有数据：{{pageInfo.total}}条</span></xblock>
+            <xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button><span class="x-right" style="line-height:40px">共有数据：{{pageInfo.total}}条</span></xblock>
            
             <table class="layui-table">
                 <thead>
@@ -400,9 +144,7 @@
                             {{l.id}}
                         </td>
                         <td>
-                            
                                 {{l.employeename}}
-                            </u>
                         </td>
                         <td >
                             {{l.sex}}
@@ -420,15 +162,15 @@
                             {{l.createtime}}
                         </td>
                         
-                        <td>
-                        系统管理员
+                        <td v-for="i in list">
+                        	<span v-if="i.rid == l.id">{{i.name}}</span>
                         </td>
                       
                         <td class="td-manage" v-if="l.state==1">
                         <div style="display:none;">
                         {{l.id}}
                         </div>
-                            <a title="编辑" href="javascript:;" onclick="member_edit('员工编辑','/user/usertoupdate','4','','510',this)"
+                            <a title="编辑" href="javascript:;" onclick="member_edit('员工编辑','/user/toemployeeedit','4','','510',this)"
                             class="ml-5" style="text-decoration:none">
                                 <i class="layui-icon">&#xe642;</i>
                             </a>
@@ -437,30 +179,6 @@
 <!--                             href="javascript:;" title="修改密码"> -->
 <!--                                 <i class="layui-icon">&#xe631;</i> -->
 <!--                             </a> -->
-                            <div style="display:none;">{{l.id}}</div>
-                            <a title="删除" href="javascript:;" onclick="member_del(this)" 
-                            style="text-decoration:none">
-                                <i class="layui-icon">&#xe640;</i>
-                            </a>
-                            <div style="display: none">{{l.id}}</div>
-                        </td>
-                        
-                          <td class="td-manage" v-else>
-                            <div style="display:none;">
-                        {{l.id}}
-                        </div>
-                            <a style="text-decoration:none" onclick="member_start(this)" href="javascript:;" title="停用">
-                                <i class="layui-icon">&#xe62f;</i>
-                            </a>
-                            <a title="编辑" href="javascript:;" onclick="member_edit('员工编辑','/employee/toemployeeedit','4','','510',this)"
-                            class="ml-5" style="text-decoration:none">
-                                <i class="layui-icon">&#xe642;</i>
-                            </a>
-                            <div style="display: none">{{l.id}}</div>
-                            <a style="text-decoration:none"  onclick="member_edit1('修改密码','/employee/employeeeditpass','4','','510',this)"
-                            href="javascript:;" title="修改密码">
-                                <i class="layui-icon">&#xe631;</i>
-                            </a>
                             <div style="display:none;">{{l.id}}</div>
                             <a title="删除" href="javascript:;" onclick="member_del(this)" 
                             style="text-decoration:none">
@@ -484,8 +202,13 @@
     </div>
     <!-- 中部结束 -->
     <!-- 底部开始 -->
+<<<<<<< HEAD
     <div class="footer">
-        <div class="copyright">Copyright ©2019 研学旅行管理系统</div>  
+        <div class="copyright">Copyright ©2019 研学旅行</div>  
+=======
+    <div class="footer" th:include="foot :: footer">
+        
+>>>>>>> refs/heads/master
     </div>
     <!-- 底部结束 -->
     <!-- 背景切换开始 -->
@@ -745,6 +468,7 @@ var v=new Vue({
 	  el:"#s",
 	  data:{
 		  pageInfo:"pageInfo",
+		  list:[],
 		  name:""
 	  },
 	  methods:{
@@ -783,17 +507,7 @@ var v=new Vue({
 	  
 });
    
-   var urlpath = [[@{/user/user}]];
-
-  $.ajax({
-		 url:urlpath,
-		 data:{},
-		 datatype:"json",
-		 success:function(data){
-			 v.pageInfo=data;
-			 console.log(v.list);
-		 }
-	})
+  
 	
 	
 	
@@ -808,13 +522,34 @@ var v=new Vue({
 		  	 datatype:"json",
 		  	 success:function(data){
 		  		v.pageInfo=data;
-		  		
 		  	 }
 		   })
    }
 	
 	
 	$(function(){
+		
+		 var urlpath = [[@{/user/user}]];
+		  $.ajax({
+				 url:urlpath,
+				 data:{},
+				 datatype:"json",
+				 success:function(data){
+					 v.pageInfo=data;
+				 }
+			})
+			
+			
+			var urlpath = [[@{/user/queryRole}]];
+		  $.ajax({
+				 url:urlpath,
+				 data:{},
+				 datatype:"json",
+				 success:function(data){
+					 v.list=data;
+				 }
+			})
+			
 		
 		$("[name='sea']").click(function(){
 			var createtime=$("[name='createtime']").val();
@@ -832,6 +567,8 @@ var v=new Vue({
 					 console.log(v.list);
 				 }
 			})
+			
+			
 			
 			
 		})

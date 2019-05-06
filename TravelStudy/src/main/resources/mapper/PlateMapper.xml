@@ -14,6 +14,12 @@
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
   
+  
+  <resultMap type="com.accp.domain.Plate" id="BaseResultMapQueryAll" extends="BaseResultMap">
+  	<collection property="plist" column="{pid=pid,uid=uid}" ofType="com.accp.domain.Plate" select="queryLeftNav2"></collection>
+  </resultMap> 
+ 
+  
   <select id="queryAll" resultMap="BaseResultMap">
   	select * from Plate
   	<where>
@@ -42,12 +48,33 @@
   </delete>
   
   
+  
+  
+  
   	<select id="queryPlateByUserId" resultMap="BaseResultMap">
 		SELECT p.* FROM `plate` AS p
 		LEFT JOIN `roleplate` AS rp ON rp.`pid` = p.`pid`
 		LEFT JOIN `role` AS r ON rp.`rid` = r.rid
 		LEFT JOIN `userrole` AS ur ON ur.`rid` = r.`rid`
-		WHERE ur.`uid`=1
+		WHERE ur.`uid`=#{uid}
+	</select>
+	
+	
+	
+  	<select id="queryLeftNav" resultMap="BaseResultMapQueryAll">
+		SELECT p.*,ur.`uid` FROM `plate` AS p
+		LEFT JOIN `roleplate` AS rp ON rp.`pid` = p.`pid`
+		LEFT JOIN `role` AS r ON rp.`rid` = r.rid
+		LEFT JOIN `userrole` AS ur ON ur.`rid` = r.`rid`
+		WHERE ur.`uid`=#{uid} AND p.`parentid`=0
+	</select>
+	
+	
+	<select id="queryLeftNav2" resultMap="BaseResultMap">
+		SELECT p.* FROM `plate` AS p
+		LEFT JOIN `roleplate` AS rp ON rp.`pid` = p.`pid`
+		LEFT JOIN `role` AS r ON rp.`rid` = r.rid
+		LEFT JOIN `userrole` AS ur ON ur.`rid` = r.`rid` WHERE parentid = #{pid}   AND ur.`uid` = #{uid}
 	</select>
   
   

@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+</head>
+<body>
+    <!-- 中部开始 -->
+    	<div id="side-nav" th:fragment="left_nav">
+    		<ul id="nav">
+    			<li class="list">
+    				<a th:href="@{/user/index}">
+    					<i class="iconfont">&#xe761;</i>
+    					欢迎页面
+    				</a>
+    			</li>
+    			<li class="list" th:each="item : ${plist}">
+    				<a href="javascript:;">
+    					<i class="iconfont">&#xe70b;</i>
+    					<span  th:text="${item.name}"></span>
+    					<i class="iconfont nav_right">&#xe697;</i>
+    				</a>
+    				<ul class="sub-menu "  th:each="item1 : ${item.plist}">
+    					<li>
+    						<a th:href="@{${item1.url}}">
+    							<i class="iconfont">&#xe6a7;</i>
+    							<span   th:text="${item1.name}"></span>
+    						</a>
+    					</li>
+    				</ul>
+    			</li>
+    		</ul>
+    		</div>
+</body>
+</html>

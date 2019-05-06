@@ -54,7 +54,7 @@ public class RoleServiceImpl implements RoleService{
 	@Override
 	public List<Role> selectByExample(RoleExample example) {
 		// TODO Auto-generated method stub
-		return null;
+		return m.selectByExample(example);
 	}
 
 	@Override
@@ -112,6 +112,12 @@ public class RoleServiceImpl implements RoleService{
 	public List<Role> queryName(Integer rid) {
 		// TODO Auto-generated method stub
 		return m.queryName(rid);
+	}
+
+	@Override
+	public List<Role> queryRoleName(Integer id) {
+		// TODO Auto-generated method stub
+		return m.queryRoleName(id);
 	}
 
 }

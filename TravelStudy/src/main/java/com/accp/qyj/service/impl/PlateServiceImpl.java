@@ -118,8 +118,13 @@ public class PlateServiceImpl implements PlateService{
 
 	@Override
 	public Map<String, Plate> queryPlateByUserId(Integer uid){
-		System.out.println("进来了");
 		return m.queryPlateByUserId(uid);
+	}
+
+	@Override
+	public List<Plate> queryLeftNav(Integer uid) {
+		// TODO Auto-generated method stub
+		return m.queryLeftNav(uid);
 	}
 
 }

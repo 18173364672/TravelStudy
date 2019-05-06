@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.accp.dao.OrganizationzwMapper" >
+  <resultMap id="BaseResultMap" type="com.accp.domain.Organizationzw" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="namess" property="namess" jdbcType="VARCHAR" />
+    <result column="organizationid" property="organizationid" jdbcType="VARCHAR" />
+    <result column="Spare1" property="spare1" jdbcType="VARCHAR" />
+    <result column="Spare2" property="spare2" jdbcType="VARCHAR" />
+    <result column="Spare3" property="spare3" jdbcType="VARCHAR" />
+    <result column="Spare4" property="spare4" jdbcType="VARCHAR" />
+    <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
+  </resultMap>
+    
+    
+    <delete id="deletezw">
+      delete from organizationzw where id=#{id}
+    
+    </delete>
+    
+   <select id="queryzw" resultMap="BaseResultMap">
+     select * from organizationzw where organizationid=#{id}
+   
+   </select>
+  
+   <insert id="insertSelective" parameterType="com.accp.domain.Organizationzw" >
+    insert into organizationzw
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="namess != null" >
+        namess,
+      </if>
+      <if test="organizationid != null" >
+        organizationid,
+      </if>
+     
+      <if test="spare1 != null" >
+        Spare1,
+      </if>
+      <if test="spare2 != null" >
+        Spare2,
+      </if>
+      <if test="spare3 != null" >
+        Spare3,
+      </if>
+      <if test="spare4 != null" >
+        Spare4,
+      </if>
+      <if test="spare5 != null" >
+        Spare5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="namess != null" >
+        #{namess,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationid != null" >
+        #{organizationid,jdbcType=INTEGER},
+      </if>
+      <if test="spare1 != null" >
+        #{spare1,jdbcType=VARCHAR},
+      </if>
+      <if test="spare2 != null" >
+        #{spare2,jdbcType=VARCHAR},
+      </if>
+      <if test="spare3 != null" >
+        #{spare3,jdbcType=VARCHAR},
+      </if>
+      <if test="spare4 != null" >
+        #{spare4,jdbcType=VARCHAR},
+      </if>
+      <if test="spare5 != null" >
+        #{spare5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

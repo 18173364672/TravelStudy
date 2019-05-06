@@ -35,4 +35,6 @@ public interface OrderMapper {
     List<MonthOrder> SelectMonthOr(String years);
     
     List<MonthOrder> SelectOrYears();
+    
+    List<Order> queryAll(@Param ("name") String name);
 }

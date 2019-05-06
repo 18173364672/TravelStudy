@@ -269,8 +269,18 @@ public class notice {
 					noticesecond.addNoticesecound(0, iid, nid);
 					
 					Employee dueix = employee.selectById(Integer.parseInt(spare1[i]));
+					System.out.println("内容为:"+content);
 					
-					webSocke.sendMsg("2",dueix.getId().toString());
+					webSocke.sendMsg(content,dueix.getId().toString());  	//webSocke 调用了方法
+					
+//					String [] id = new String[spare1.length];
+//					
+//					Employee dueix = employee.selectById(Integer.parseInt(spare1[i]));
+//					System.out.println("内容为:"+content);
+//					for (int j = 0; j < id.length; j++) {
+//						id[j] = dueix.getId().toString();
+//						webSocke.sendMsg(content,id[j]);  	//webSocke 调用了方法
+//					}
 					
 			}catch (Exception e) {
 				e.printStackTrace();

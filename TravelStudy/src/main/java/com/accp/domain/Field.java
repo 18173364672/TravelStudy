@@ -1,5 +1,7 @@
 package com.accp.domain;
 
+import java.util.List;
+
 public class Field {
     private Integer id;
 
@@ -20,8 +22,28 @@ public class Field {
     private String spare4;
 
     private String spare5;
+    
+    private String ftname;
+    
+    private List<Field> mlist;
 
-    public Integer getId() {
+    public List<Field> getMlist() {
+		return mlist;
+	}
+
+	public void setMlist(List<Field> mlist) {
+		this.mlist = mlist;
+	}
+
+	public String getFtname() {
+		return ftname;
+	}
+
+	public void setFtname(String ftname) {
+		this.ftname = ftname;
+	}
+
+	public Integer getId() {
         return id;
     }
 

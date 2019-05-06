@@ -40,6 +40,9 @@
   		SELECT b.* FROM userrole AS a JOIN role AS b ON a.`rid` = b.`rid` WHERE a.`rid` = #{rid}
   </select>
   
+  <select id="queryRoleName" resultMap="BaseResultMap">
+  	SELECT c.`id` as rid,a.`name`  FROM role AS a JOIN userrole AS b ON a.`rid` = b.`rid` JOIN employee AS c ON b.`uid` = c.`id`
+  </select>
   
   
   <sql id="Example_Where_Clause" >

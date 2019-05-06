@@ -1,5 +1,7 @@
 package com.accp.domain;
 
+import java.util.List;
+
 public class Plate {
     private Integer pid;
 
@@ -20,6 +22,9 @@ public class Plate {
     private String spare4;
 
     private String spare5;
+    
+    
+    private List<Plate> plist;
 
     public Integer getPid() {
         return pid;
@@ -100,4 +105,12 @@ public class Plate {
     public void setSpare5(String spare5) {
         this.spare5 = spare5;
     }
+
+	public List<Plate> getPlist() {
+		return plist;
+	}
+
+	public void setPlist(List<Plate> plist) {
+		this.plist = plist;
+	}
 }

@@ -25,6 +25,12 @@ public class webSocketHandler extends TextWebSocketHandler{
 		session.sendMessage(new TextMessage("建立连接成功,可以进行通信!"));
 	}
 	
+	/**
+	 * 单发
+	 * @param msg
+	 * @param targetId
+	 * @return
+	 */
 	public String sendMsg(String msg,String targetId) {
 		WebSocketSession session = map.get(targetId);
 		try {
@@ -36,7 +42,20 @@ public class webSocketHandler extends TextWebSocketHandler{
 		}
 	}
 	
-	
+		/**
+		 * 群发
+		 */
+//	public String sendMsg(String msg,String[] id) {
+//		 // 此处使用循环多次发送
+//			WebSocketSession session=map.get(id);
+//			try {
+//				session.sendMessage(new TextMessage(msg));
+//				return "001";
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//				return "002";
+//			}
+//	}
 	
 	
 }

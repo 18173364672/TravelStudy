@@ -1,10 +1,12 @@
 package com.accp.qyj.controller;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.http.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +21,12 @@ import com.accp.domain.Organization;
 import com.accp.domain.Plate;
 import com.accp.domain.Role;
 import com.accp.domain.Roleplate;
+import com.accp.domain.Userrole;
 import com.accp.hmf.service.EmployeeService;
 import com.accp.qyj.service.PlateService;
 import com.accp.qyj.service.RoleService;
 import com.accp.qyj.service.RoleplateService;
+import com.accp.qyj.service.UserroleService;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
 
@@ -43,6 +47,9 @@ public class UserController {
 	@Autowired
     EmployeeService es;
 	
+	@Autowired
+	UserroleService userroleservice;
+	
 	
 	@RequestMapping("/tologin")
 	public String tologin() {
@@ -59,51 +66,32 @@ public class UserController {
 	}
 	
 	@RequestMapping("/index")
-	public String index() {
+	public String index(Model model , HttpSession session) {
+		Employee es = (Employee)session.getAttribute("user");
+		List<Plate> plate = plateservice.queryLeftNav(es.getId());
+		model.addAttribute("plist", plate);
 		return "index";
-	}
-	
-	
-	
-	@RequestMapping("/usertoadd")
-	public String usertoadd(Model model) {
-		List<Organization> list=es.selectByExample(null);
-  	  	model.addAttribute("list", list);
-		return "manage-user-add";
-	}
-	
-	@RequestMapping("/useradd")
-	public String useradd(Employee employee) {
-		employee.setCreatetime(new Date());
-  	  employee.setState(1);
-  	 es.insertSelective(employee);
-  	 Organization organization=es.queryOrname(Integer.parseInt(employee.getSpare1()));
-  	 int count=organization.getCount()+1;
-  	 organization.setCount(count);
-  	 es.updateByPrimaryKey(organization);
-		return "redirect:/user/queryuser";
 	}
 	
 	
 	@RequestMapping("/usertoupdate")
 	public String usertoupdate(Model model,Integer id) {
 		Employee employee=es.emqueryd(id);
-  	  	List<Organization> list=es.selectByExample(null);
-  	  	model.addAttribute("list", list);
   	  	model.addAttribute("employee", employee);
+  	  	model.addAttribute("roleList", roleservice.selectByExample(null));
 		return "manage-user-update";
 	}
 	
 	@RequestMapping("/userupdate")
-	public String userupdate(Employee employee) {
-		es.updateByPrimaryKey(employee);
+	public String userupdate(Role role) {
+		roleservice.updateByPrimaryKey(role);
 		return "redirect:/user/queryuser";
 	}
 	
 	
 	
 	@RequestMapping("/plate")
-	public String plate(Model model , String name , Integer currentPage , Integer pageSize) {
+	public String plate(Model model , String name , Integer currentPage , Integer pageSize , HttpSession session) {
 		if("null".equals(name)) {
 			name = null;
 		}
@@ -116,6 +104,9 @@ public class UserController {
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("name", name);
 		model.addAttribute("page", plateservice.queryByPage(currentPage, pageSize, name));
+		Employee es = (Employee)session.getAttribute("user");
+		List<Plate> plate = plateservice.queryLeftNav(es.getId());
+		model.addAttribute("plist", plate);
 		return "manage-plate";
 	}
 	
@@ -160,7 +151,7 @@ public class UserController {
 	
 	
 	@RequestMapping("/role")
-	public String role(Model model , String name , Integer currentPage , Integer pageSize) {
+	public String role(Model model , String name , Integer currentPage , Integer pageSize , HttpSession session) {
 		if("null".equals(name)) {
 			name = null;
 		}
@@ -173,12 +164,18 @@ public class UserController {
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("name", name);
 		model.addAttribute("page", roleservice.queryByPage(currentPage, pageSize, name));
+		Employee es = (Employee)session.getAttribute("user");
+		List<Plate> plate = plateservice.queryLeftNav(es.getId());
+		model.addAttribute("plist", plate);
 		return "manage-role";
 	}
 	
 	@RequestMapping("/roleAdd")
-	public String roleAdd(Model model) {
+	public String roleAdd(Model model , HttpSession session) {
 		model.addAttribute("list", plateservice.selectByExample(null));
+		Employee es = (Employee)session.getAttribute("user");
+		List<Plate> plate = plateservice.queryLeftNav(es.getId());
+		model.addAttribute("plist", plate);
 		return "manage-role-add";
 	}
 	
@@ -207,10 +204,12 @@ public class UserController {
 	}
 	
 	@RequestMapping("/roletoupdate")
-	public String roletoupdate(Integer rid,Model model) {
+	public String roletoupdate(Integer rid,Model model , HttpSession session) {
 		model.addAttribute("role1",roleservice.selectByPrimaryKey(rid));
 		model.addAttribute("list1", roleplateservice.querybyid(rid));
-		model.addAttribute("list", plateservice.selectByExample(null));
+		Employee es = (Employee)session.getAttribute("user");
+		List<Plate> plate = plateservice.queryLeftNav(es.getId());
+		model.addAttribute("plist", plate);
 		return "manage-role-update";
 	}
 	
@@ -237,7 +236,10 @@ public class UserController {
 	
 	
 	@RequestMapping("/queryuser")
-	public String queryuser() {
+	public String queryuser(HttpSession session , Model model) {
+		Employee es = (Employee)session.getAttribute("user");
+		List<Plate> plate = plateservice.queryLeftNav(es.getId());
+		model.addAttribute("plist", plate);
 		return "manage-user";
 	}
 	
@@ -245,21 +247,29 @@ public class UserController {
     @RequestMapping("/user")
     @ResponseBody
     public  PageInfo<Employee> querypage(Integer currentPage,String createtime,String employeename) {
-   
 		   if(currentPage==null) {
 			   currentPage = 1;
 		   }
 		   PageInfo<Employee> pageInfo = es.querypage(currentPage,5,createtime,employeename);
 //			model.addAttribute("page",pageInfo);
 			
-			return pageInfo;
+		   return pageInfo;
     }
     
-    //员工修改
+    @RequestMapping("/queryRole")
+    @ResponseBody
+    public List<Role> queryRole(Integer id){
+    	return roleservice.queryRoleName(id);
+    }
+    
+    //员工修改(修改角色)
     @RequestMapping("/employeeedit")
-    public String employeeedit(Employee employee) {
-  	    es.updateByPrimaryKey(employee);
-  	
+    public String employeeedit(Employee employee , Integer rid) {
+      userroleservice.delete(employee.getId());
+      Userrole us = new Userrole();
+      us.setUid(employee.getId());
+      us.setRid(rid);
+      userroleservice.insert(us);
   	  return "redirect:/user/queryuser";
     }
     
@@ -270,8 +280,8 @@ public class UserController {
   	  List<Organization> list=es.selectByExample(null);
   	  model.addAttribute("list", list);
   	  model.addAttribute("employee", employee);
-  	  return "member-employee-edit";
+  	model.addAttribute("list1", roleservice.selectByExample(null));
+  	  return "manage-user-update";
     }
-    
     
 }

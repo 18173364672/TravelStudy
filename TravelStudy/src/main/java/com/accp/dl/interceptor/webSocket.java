@@ -8,6 +8,7 @@ import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.server.HandshakeInterceptor;
 
+import com.accp.domain.Employee;
 import com.accp.domain.Notice;
 
 public class webSocket implements HandshakeInterceptor{
@@ -20,7 +21,7 @@ public class webSocket implements HandshakeInterceptor{
 //		 */
 		ServletServerHttpRequest servletRequest = (ServletServerHttpRequest)request;
 		//从http:request中获取session中的用户对象
-		Notice zsgc = (Notice)servletRequest.getServletRequest().getSession().getAttribute("");
+		Employee zsgc = (Employee)servletRequest.getServletRequest().getSession().getAttribute("");
 		if (zsgc!=null) {
 			attributes.put("id", zsgc.getId());
 			return true;

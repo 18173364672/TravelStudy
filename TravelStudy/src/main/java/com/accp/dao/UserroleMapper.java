@@ -27,4 +27,6 @@ public interface UserroleMapper {
     int updateByPrimaryKeySelective(Userrole record);
 
     int updateByPrimaryKey(Userrole record);
+    
+    int delete(@Param("id")Integer id);
 }

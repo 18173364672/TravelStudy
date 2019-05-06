@@ -1,5 +1,7 @@
 package com.accp.domain;
 
+import java.util.List;
+
 public class Fieldtype {
     private Integer id;
 
@@ -14,8 +16,18 @@ public class Fieldtype {
     private String spare4;
 
     private String spare5;
+    
+    private List<Field> flist;
 
-    public Integer getId() {
+    public List<Field> getFlist() {
+		return flist;
+	}
+
+	public void setFlist(List<Field> flist) {
+		this.flist = flist;
+	}
+
+	public Integer getId() {
         return id;
     }
 

@@ -20,7 +20,8 @@
         <div class="page-content">
           <div class="content">
             <!-- 右侧内容框架，更改从这里开始 -->
-            <form class="layui-form" th:action="@{/employee/employeeedit}" method="post">
+<<<<<<< HEAD
+            <form class="layui-form" th:action="@{/user/employeeedit}" method="post">
                 <div class="layui-form-item">
                     <label for="L_email" class="layui-form-label">
                         <span class="x-red">*</span>邮箱
@@ -30,28 +31,32 @@
                         autocomplete="off" class="layui-input" th:value="${employee.id}">
                         
                         <input type="text" id="L_email" name="email" required="" lay-verify="email"
-                        autocomplete="off" class="layui-input" th:value="${employee.email}">
+                        autocomplete="off" readonly="readonly" class="layui-input" th:value="${employee.email}">
                     </div>
                     <div class="layui-form-mid layui-word-aux">
                         <span class="x-red">*</span>将会成为您唯一的登入名
                     </div>
                 </div>
+=======
+            <form class="layui-form" th:action="@{/user/userupdate}" method="post">
+>>>>>>> refs/heads/master
                 <div class="layui-form-item">
                     <label for="L_username" class="layui-form-label">
                         <span class="x-red">*</span>员工姓名
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="L_username" name="employeename" required="" lay-verify="nikename"
+                        <input type="text" id="L_username" readonly="readonly" name="employeename" required="" lay-verify="nikename"
                         autocomplete="off" class="layui-input" th:value="${employee.employeename}">
                     </div>
                 </div>
                 
+<<<<<<< HEAD
                  <div class="layui-form-item">
                     <label for="L_username" class="layui-form-label">
                         <span class="x-red">*</span>地址
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="L_address" name="address" required="" lay-verify="nikename"
+                        <input type="text" id="L_address" readonly="readonly" name="address" required="" lay-verify="nikename"
                         autocomplete="off" class="layui-input" th:value="${employee.address}">
                     </div>
                 </div>
@@ -61,27 +66,44 @@
                         <span class="x-red">*</span>手机号码
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="L_phone" name="phone" required="" lay-verify="nikename"
+                        <input type="text" id="L_phone"  readonly="readonly" name="phone" required="" lay-verify="nikename"
                         autocomplete="off" class="layui-input" th:value="${employee.phone}">
                     </div>
                 </div>
                 
+=======
+>>>>>>> refs/heads/master
                 <div class="layui-form-item">
                     <label for="L_username" class="layui-form-label">
-                        <span class="x-red">*</span>性别
+                        <span class="x-red">*</span>请选择类型
                     </label>
                     <div class="layui-inline">
-                        <div class="layui-input-inline">
-                            <input type="radio" name="sex" value="男" checked >男
-                            <input type="radio" name="sex" value="女" >女
-                        </div>
+              <select>
+            	<option th:each="item : ${roleList}" th:text="${item.name}" th:value="${item.rid}"></option>
+            </select>
+                    </div>   
+                </div>
+                
+                
+<<<<<<< HEAD
+             	<div class="layui-form-item">
+                    <label for="L_username" class="layui-form-label">
+                        <span class="x-red">*</span>选择角色
+                    </label>
+                    <div class="layui-inline">
+                    <select name="rid" lay-filter="test"> 
+            			<option th:each="l,state : ${list1}" th:text="${l.name}" th:value="${l.rid}"></option>
+            		</select>
                     </div>
                 </div>
                 
+                
+=======
+>>>>>>> refs/heads/master
                 <div class="layui-form-item">
                     <label for="L_repass" class="layui-form-label">
                     </label>
-                    <button  class="layui-btn"  lay-submit="">
+                    <button  class="layui-btn"  lay-submit="" onclick="submit_()">
                         修改
                     </button>
                 </div>
@@ -96,7 +118,10 @@
 <script type="text/javascript" th:inline="javascript">
       
       
-      
+function submit_(){
+	var index = parent.layer.getFrameIndex(window.name);
+	parent.layer.close(index);
+}
 
       
   	var urlpath = [[@{/employee/queryzw}]];

@@ -2,6 +2,9 @@ package com.accp.domain;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+
 public class Order {
     private Integer id;
 
@@ -9,6 +12,7 @@ public class Order {
 
     private Integer sid;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date time;
 
     private Integer tid;
@@ -26,8 +30,28 @@ public class Order {
     private String spare4;
 
     private String spare5;
+    
+    private String ename;
+    
+    private String cname;
 
-    public Integer getId() {
+    public String getEname() {
+		return ename;
+	}
+
+	public void setEname(String ename) {
+		this.ename = ename;
+	}
+
+	public String getCname() {
+		return cname;
+	}
+
+	public void setCname(String cname) {
+		this.cname = cname;
+	}
+
+	public Integer getId() {
         return id;
     }
 
