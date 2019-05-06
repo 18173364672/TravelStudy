@@ -1,5 +1,7 @@
 package com.accp.domain;
 
+import java.util.List;
+
 public class Activity {
     private Integer id;
 
@@ -26,8 +28,21 @@ public class Activity {
     private String spare4;
 
     private String spare5;
+    
+	private List<Eventitems> elist;
 
-    public Integer getId() {
+
+
+
+    public List<Eventitems> getElist() {
+		return elist;
+	}
+
+	public void setElist(List<Eventitems> elist) {
+		this.elist = elist;
+	}
+
+	public Integer getId() {
         return id;
     }
 

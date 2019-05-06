@@ -77,27 +77,27 @@
                     </tr>
                 </thead>
                 <tbody>              
-					 <tr>
+					 <tr th:each="item,state : ${vo.list}">
                   
-                        <td>
-                            1
+                        <td th:text="${item.id}">
+                            
                         </td>
-                        <td>
+                        <td th:text="${item.projectname}">
                             <u style="cursor:pointer" onclick="member_show('张三','member-show.html','10001','360','400')">
-                               一箭穿心
+                               
                             </u>
                         </td>
-                        <td >
-                            活动人员射箭，环数最高者给予相应奖励。
+                        <td th:text="${item.context}">
+
                         </td>
                     
                         
-                         <td >
-                           800
+                         <td th:text="${item.price}">
+                        
                         </td>
                         
-                          <td >
-                           射击
+                          <td th:text="${item.type}">
+             
                         </td>
 
                         <td class="td-manage">
@@ -109,66 +109,7 @@
                         </td>
                     </tr>
                     
-                    <tr>
-                  
-                        <td>
-                            1
-                        </td>
-                        <td>
-                            <u style="cursor:pointer" onclick="member_show('张三','member-show.html','10001','360','400')">
-                               百步穿杨
-                            </u>
-                        </td>
-                        <td >
-                            活动人员射箭，环数最高者给予相应奖励。
-                        </td>
                     
-                        
-                         <td >
-                           800
-                        </td>
-                        
-                          <td >
-                           射击
-                        </td>
-                        <td class="td-manage">
- 
-                            <a title="删除" href="javascript:;" onclick="member_del(this,'1')" 
-                            style="text-decoration:none">
-                                <i class="layui-icon">&#xe640;</i>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                  
-                        <td>
-                            1
-                        </td>
-                        <td>
-                            <u style="cursor:pointer" onclick="member_show('张三','member-show.html','10001','360','400')">
-                               枪王排位
-                            </u>
-                        </td>
-                        <td >
-                            活动人员射箭，环数最高者给予相应奖励。
-                        </td>
-                    
-                        
-                         <td >
-                           800
-                        </td>
-                        
-                          <td >
-                           射击
-                        </td>
-                        <td class="td-manage">
- 
-                            <a title="删除" href="javascript:;" onclick="member_del(this,'1')" 
-                            style="text-decoration:none">
-                                <i class="layui-icon">&#xe640;</i>
-                            </a>
-                        </td>
-                    </tr>
                     
                 </tbody>
             </table>

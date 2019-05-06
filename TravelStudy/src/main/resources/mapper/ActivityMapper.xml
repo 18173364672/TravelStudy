@@ -131,7 +131,7 @@
       #{spare2,jdbcType=VARCHAR}, #{spare3,jdbcType=VARCHAR}, #{spare4,jdbcType=VARCHAR}, 
       #{spare5,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.accp.domain.Activity" >
+  <insert id="insertSelective" keyProperty="id" useGeneratedKeys="true" parameterType="com.accp.domain.Activity" >
     insert into activity
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -215,6 +215,16 @@
         #{spare5,jdbcType=VARCHAR},
       </if>
     </trim>
+  </insert>
+  
+  <insert id="insertevtime"> 
+  	INSERT INTO eventitems(`aid`,`pid`) VALUES
+  	<foreach collection="elist" item="li" separator=",">
+  		<if test="li.pid!=null and li.pid!=''">
+  		(#{id},#{li.pid})
+  		</if>
+  	</foreach>
+  	
   </insert>
   <select id="countByExample" parameterType="com.accp.domain.ActivityExample" resultType="java.lang.Integer" >
     select count(*) from activity

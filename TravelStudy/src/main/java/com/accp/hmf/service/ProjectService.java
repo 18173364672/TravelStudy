@@ -24,5 +24,7 @@ public interface ProjectService {
 	 int deletes(Integer id);
 	 //查询单个项目信息
 	 Project queryd(Integer id);
+	 //查询所有项目
+	 List<Project> selectPorject();
 	 
 }

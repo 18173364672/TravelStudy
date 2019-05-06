@@ -12,6 +12,7 @@ import com.accp.domain.Activity;
 import com.accp.domain.ActivityExample;
 import com.accp.domain.Project;
 import com.accp.pda.service.ActivityService;
+import com.accp.pda.vo.ActivtyVo;
 
 @Transactional
 @Service
@@ -57,6 +58,29 @@ public class ActivityServiceImpl implements ActivityService{
 	public List<Project> selectPorject() {
 		// TODO Auto-generated method stub
 		return projectMapper.selectByExample(null);
+	}
+
+	@Override
+	public ActivtyVo acvo(Integer id) {
+		// TODO Auto-generated method stub
+		Activity activity = mapper.selectByPrimaryKey(id);
+		List<Project> list = projectMapper.queryByActId(id);
+		ActivtyVo vo = new ActivtyVo();
+		vo.setAct(activity);
+		vo.setList(list);
+		return vo;
+	}
+
+	@Override
+	public int insertSelective(Activity record) {
+		// TODO Auto-generated method stub
+		return mapper.insertSelective(record);
+	}
+
+	@Override
+	public int insertevtime(Activity ac) {
+		// TODO Auto-generated method stub
+		return mapper.insertevtime(ac);
 	}
 
 

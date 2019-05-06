@@ -37,5 +37,9 @@ public interface ProjectMapper {
     
     List<Project> pquery(@Param("projectname") String projectname);
     
+    List<Project> queryByActId(@Param("id") Integer id);
+    
+    List<Project> selectPorject();
+    
     Project queryd(Integer id);
 }
