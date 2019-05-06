@@ -32,8 +32,8 @@ public class WebMvcConfigruation extends WebMvcConfigurationSupport {
 	@Override
 	protected void addResourceHandlers(ResourceHandlerRegistry registry) {
 		// registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
-		registry.addResourceHandler("/**").addResourceLocations("classpath:/static/")
-				.addResourceLocations("file:/Volumes/applesdcard/");
+		registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
+		registry.addResourceHandler("/**").addResourceLocations("file:D:\\fileupload/``===========================88");
 	}
 
 	/**
@@ -90,7 +90,7 @@ public class WebMvcConfigruation extends WebMvcConfigurationSupport {
 	@Override
 	protected void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**").allowedOrigins("*");
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub·
 		super.addCorsMappings(registry);
 	}
 

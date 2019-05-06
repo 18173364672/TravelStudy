@@ -16,7 +16,7 @@
     <result column="Spare4" property="spare4" jdbcType="VARCHAR" />
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
-  
+   
   
   <resultMap id="postdy" type="com.accp.domain.Post" extends="BaseResultMap">
   

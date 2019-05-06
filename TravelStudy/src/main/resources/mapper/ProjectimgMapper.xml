@@ -13,10 +13,10 @@
   </resultMap>
   
 
-  
+   
   
   <select id="proimgselect" resultMap="BaseResultMap">
-  SELECT *FROM `projectimg` WHERE `id`=#{id}
+  SELECT *FROM `projectimg` WHERE `projectId`=#{id}
   </select>
   
   <sql id="Example_Where_Clause" >

@@ -16,7 +16,7 @@ import com.alibaba.fastjson.JSON;
 @Controller
 @RestController
 @RequestMapping("/ActivityController") 
-public class ActivsityController {
+public class ActivsityController1 {
 
 	@Autowired
 	ActivityMapper ActivsityMapper;
@@ -28,8 +28,8 @@ public class ActivsityController {
 		System.out.println(o);
 		return o;
 	}
-	
-	
+ 
+	      
 	@RequestMapping("/activitylbselect")
 	public Activity activitylbselect(Integer id) {
 		Activity list=ActivsityMapper.activitylbselect(id);

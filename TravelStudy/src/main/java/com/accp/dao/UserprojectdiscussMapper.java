@@ -27,4 +27,6 @@ public interface UserprojectdiscussMapper {
     int updateByPrimaryKeySelective(Userprojectdiscuss record);
 
     int updateByPrimaryKey(Userprojectdiscuss record);
+    
+    List<Userprojectdiscuss>userproselecid(Integer id);
 }

@@ -27,4 +27,6 @@ public interface FieldMapper {
     int updateByPrimaryKeySelective(Field record);
 
     int updateByPrimaryKey(Field record);
+    
+    Field fieldselectids(Integer ids);
 }

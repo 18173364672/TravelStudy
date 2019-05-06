@@ -14,7 +14,7 @@
   
    <select id="imgselect" resultMap="BaseResultMap">
   SELECT * FROM `dynamicpicture`  WHERE Dyid=#{id} 
-  </select>
+  </select> 
   
   <sql id="Example_Where_Clause" >
     <where >

@@ -29,9 +29,35 @@ public class Project {
     
     private List<Projectimg> proimglist;
     
+    private Field fieldlist;
+    
+    private List<Userprojectdiscuss> userprolist;
+    
+    
+    
+    
+    
     
 
-    public List<Projectimg> getProimglist() {
+  
+
+	public List<Userprojectdiscuss> getUserprolist() {
+		return userprolist;
+	}
+
+	public void setUserprolist(List<Userprojectdiscuss> userprolist) {
+		this.userprolist = userprolist;
+	}
+
+	public Field getFieldlist() {
+		return fieldlist;
+	}
+
+	public void setFieldlist(Field fieldlist) {
+		this.fieldlist = fieldlist;
+	}
+
+	public List<Projectimg> getProimglist() {
 		return proimglist;
 	}
 

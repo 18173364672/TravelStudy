@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.accp.domain.Post;
 
-public interface PostService {
+public interface PostService1 {
 	 int insert(Post record);
 	 
 	 List<Post> postselect(@Param("tid")Integer tid);

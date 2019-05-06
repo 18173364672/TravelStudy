@@ -27,4 +27,6 @@ public interface UserprojectimgMapper {
     int updateByPrimaryKeySelective(Userprojectimg record);
 
     int updateByPrimaryKey(Userprojectimg record);
+    
+    List<Userprojectimg>userproimgselecid(Integer id);
 }

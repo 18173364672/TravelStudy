@@ -31,4 +31,6 @@ public interface ProjectMapper {
     List<Project>proselect(Integer pid);
     
     List<Project>proxmselect();
+    
+    Project proselectid(Integer id);
 }

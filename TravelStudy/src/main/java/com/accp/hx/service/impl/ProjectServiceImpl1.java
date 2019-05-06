@@ -9,11 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.accp.dao.ProjectMapper;
 import com.accp.domain.Project;
 import com.accp.domain.ProjectExample;
-import com.accp.hx.service.ProjectService;
+import com.accp.hx.service.ProjectService1;
 
 @Service
 @Transactional
-public class ProjectServiceImpl implements ProjectService{
+public class ProjectServiceImpl1 implements ProjectService1{
 
 	@Autowired
 	ProjectMapper ProjectMapper;
@@ -28,6 +28,12 @@ public class ProjectServiceImpl implements ProjectService{
 	public List<Project> proxmselect() {
 		// TODO Auto-generated method stub
 		return ProjectMapper.proxmselect();
+	}
+
+	@Override
+	public Project proselectid(Integer id) {
+		// TODO Auto-generated method stub
+		return ProjectMapper.proselectid(id);
 	}
 
 }

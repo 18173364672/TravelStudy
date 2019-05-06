@@ -12,13 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.accp.domain.Comment;
 import com.accp.domain.Dynamicpicture;
 
 import com.accp.domain.Post;
 import com.accp.domain.Project;
 import com.accp.domain.ProjectExample;
-import com.accp.hx.service.DynamicpictureService;
-import com.accp.hx.service.PostService;
+import com.accp.hx.service.CommentService1;
+import com.accp.hx.service.DynamicpictureService1;
+import com.accp.hx.service.PostService1;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -28,13 +30,22 @@ import com.github.pagehelper.PageInfo;
 @Controller
 @RestController
 @RequestMapping("/postcontroller") 
-public class PostController {
+public class PostController1 {
 
 	@Autowired
-	PostService PostService;
+	PostService1 PostService;
 	
 	@Autowired
-	DynamicpictureService DynamicpictureService;
+	DynamicpictureService1 DynamicpictureService;
+	
+	@Autowired
+	CommentService1 CommentService;
+	
+	@RequestMapping("/insertpl")
+	public String insertcomment(Comment record) {
+		CommentService.insert(record);
+		return "新增成功";
+	}
 	
 	@RequestMapping("/postxxselect")
 	public Post postxxselect(Integer id) {
