@@ -34,4 +34,6 @@ public interface ProjectMapper {
     List<ProjectByTimeAndName> superSelectBytime(String years);
     
     List<QuestionTj>selectByQuestionTj(String projectname);
+    
+    List<ProjectByTimeAndName> selectXmTable(@Param("years") String years,@Param("projectname") String name);
 }
