@@ -109,7 +109,6 @@ public class TjController {
 		Employee es = (Employee)session.getAttribute("user");
 		List<Plate> plate = plateservice.queryLeftNav(es.getId());
 		model.addAttribute("plist", plate);
-		System.out.println("正在加载每月收入...");
 		List<MonthOrder>monthOrders2 = osi.SelectOrYears();
 		model.addAttribute("years", monthOrders2);
 		return "echarts2";
@@ -136,6 +135,7 @@ public class TjController {
 		Employee es = (Employee)session.getAttribute("user");
 		List<Plate> plate = plateservice.queryLeftNav(es.getId());
 		model.addAttribute("plist", plate);
+		
 		List<MydAndName>mydAndNames = usi.selectByMyd();
 		
 		model.addAttribute("mydAndNames", mydAndNames);

@@ -6,8 +6,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -17,14 +19,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.accp.domain.Customergroup;
 import com.accp.domain.Customerss;
+import com.accp.domain.Employee;
+import com.accp.domain.Plate;
 import com.accp.hmf.service.CustomerService;
 import com.accp.hmf.service.CustomergroupService;
+import com.accp.qyj.service.PlateService;
 import com.github.pagehelper.PageInfo;
 
 @Controller
@@ -34,9 +40,10 @@ public class CustomergroupController {
 	CustomergroupService cgs;
 	@Autowired
 	CustomerService cs;
-	 @Autowired
-	    HttpServletResponse response;
-	
+	@Autowired
+    HttpServletResponse response;
+	@Autowired
+	PlateService plateservice;
 	
 	  @RequestMapping("/dr")
 		public String dr(MultipartFile file,String groupname) {
@@ -198,10 +205,10 @@ public class CustomergroupController {
 	}
 	
 	@RequestMapping("/tocustomergroupquery")
-	public String tocustomergroupquery() {
-		
-		
-		
+	public String tocustomergroupquery(Model model , HttpSession session) {
+		Employee es = (Employee)session.getAttribute("user");
+		List<Plate> plate = plateservice.queryLeftNav(es.getId());
+		model.addAttribute("plist", plate);
 		return "member-usergroup";	
 	}
 	

@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.ssi.ByteArrayServletOutputStream;
 import org.apache.http.HttpResponse;
@@ -28,9 +29,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.accp.domain.Customergroup;
 import com.accp.domain.Customerss;
 import com.accp.domain.Employee;
-
+import com.accp.domain.Plate;
 import com.accp.hmf.service.CustomerService;
 import com.accp.hmf.service.CustomergroupService;
+import com.accp.qyj.service.PlateService;
 import com.github.pagehelper.PageInfo;
 
 @Controller
@@ -42,7 +44,8 @@ public class CustomerController {
     CustomergroupService cgs;
     @Autowired
     HttpServletResponse response;
-    
+    @Autowired
+    PlateService plateservice;
        
   
     
@@ -513,10 +516,13 @@ public class CustomerController {
     
     
     @RequestMapping("/tocustomerquerypage")
-    public String tocustomerquerypage(Model model) {
+    public String tocustomerquerypage(Model model , HttpSession session) {
     	
     	List<Customergroup> list=cgs.selectByExample(null);
     	model.addAttribute("list", list);
+    	Employee es = (Employee)session.getAttribute("user");
+		List<Plate> plate = plateservice.queryLeftNav(es.getId());
+		model.addAttribute("plist", plate);
     	
     	return "member-list";
     }
