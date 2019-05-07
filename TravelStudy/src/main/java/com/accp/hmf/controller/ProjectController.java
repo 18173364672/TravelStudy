@@ -34,6 +34,13 @@ public class ProjectController {
 	EmployeeService em;
 	
 	
+	//项目评论页面
+	@RequestMapping("/toprojectcomment")
+	public String toprojectcomment() {
+		
+		return "member-project-comment";
+	}
+	
 	@RequestMapping("/projectedit")
 	@ResponseBody
 	public int projectedit(@RequestBody Project project) {
