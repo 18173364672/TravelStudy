@@ -24,6 +24,16 @@
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
   
+    <delete id="delbygroupid">
+      delete from customerss where groupid=#{id}
+    
+    </delete>
+  
+   <select id="cuqueryusername" resultMap="BaseResultMap">
+       select * from customerss where username=#{username}
+   
+   </select>
+  
    <select id="cupquerys" resultMap="BaseResultMap">
      select * from customerss
      <where>
@@ -67,7 +77,7 @@
         and createtime like CONCAT('%',#{createtime},'%')
        </if>
      </where>
-  
+  </select>
    <select id="dl" resultMap="BaseResultMap">
   SELECT * FROM `customerss` WHERE `Username`=#{Username} and UserPassWord=#{UserPassWord}
   </select>

@@ -1,5 +1,7 @@
 package com.accp.domain;
 
+import java.util.List;
+
 public class Customergroup {
     private Integer id;
 
@@ -18,8 +20,18 @@ public class Customergroup {
     private String spare5;
     
     private String fzr;
+    
+    private List<Customergroup> mlist;
 
-    public String getFzr() {
+    public List<Customergroup> getMlist() {
+		return mlist;
+	}
+
+	public void setMlist(List<Customergroup> mlist) {
+		this.mlist = mlist;
+	}
+
+	public String getFzr() {
 		return fzr;
 	}
 

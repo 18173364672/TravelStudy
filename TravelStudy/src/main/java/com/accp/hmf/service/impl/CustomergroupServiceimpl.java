@@ -78,6 +78,12 @@ public class CustomergroupServiceimpl implements CustomergroupService{
 		return cgm.insertSelective(record);
 	}
 
+	@Override
+	public int deleteByPrimaryKey(Integer id) {
+		// TODO Auto-generated method stub
+		return cgm.deleteByPrimaryKey(id);
+	}
+
 	
 
 }

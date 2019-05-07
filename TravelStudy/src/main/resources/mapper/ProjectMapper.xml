@@ -29,7 +29,7 @@
        </if>
        
      </where>
-  
+       </select>
    <resultMap id="ooo" type="com.accp.domain.Project" extends="BaseResultMap">
   
     <collection property="proimglist"  column="id"  ofType="com.accp.domain.Projectimg" select="com.accp.dao.ProjectimgMapper.proimgselect">

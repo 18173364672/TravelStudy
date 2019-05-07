@@ -44,6 +44,26 @@ public class CustomerController {
     HttpServletResponse response;
     
     
+    //客户反馈页面
+    @RequestMapping("/tocustomerfeedback")
+    public String tocustomerfeedback() {
+    	
+    	return "member-feedback";
+    }
+    
+    //活动通知页面
+    @RequestMapping("/tocustomerhdtz")
+    public String tocustomerhdtz() {
+    	
+    	return "member-kiss";
+    }
+    
+    //活动推荐页面
+    @RequestMapping("/tocustomerhdtj")
+    public String tocustomerhdtj() {
+    	
+    	return "member-level";
+    }
     
     @RequestMapping("/customerdeletes")
     public String customerdelete(Integer id) {

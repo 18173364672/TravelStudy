@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,6 +18,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -35,9 +38,101 @@ public class CustomergroupController {
 	@Autowired
 	CustomerService cs;
 	 @Autowired
-	    HttpServletResponse response;
+	 HttpServletResponse response;
 	
+	 
+	 @RequestMapping("/customergroupdeleteall")
+	 @ResponseBody
+	 public int customergroupdeleteall(@RequestBody Customergroup customergroup) {
+		 List<Customergroup> list=customergroup.getMlist();
+		 for (Customergroup customergroup2 : list) {
+			 cgs.deleteByPrimaryKey(customergroup2.getId());
+			 cs.delbygroupid(customergroup2.getId());
+		}
+		 return 0;
+	 }
+	 
+	 //客户组更新
+	 @RequestMapping("/groupupdate")
+	 public String groupupdate(Customergroup customergroup) {
+		 
 	
+		 String username=customergroup.getFzr();
+		 Customerss customerss1=cs.cuqueryusername(username);
+		 if(customerss1!=null) {
+			 Customerss customerss=cs.cuqueryd(customergroup.getFid());
+			 customerss.setSpare1("普通客户");
+			 cs.updateByPrimaryKeySelective(customerss);
+			 customerss1.setSpare1("负责人");
+			 cs.updateByPrimaryKeySelective(customerss1);
+			 customergroup.setFid(customerss1.getId());
+			 cgs.updateByPrimaryKeySelective(customergroup);
+			 
+			 response.setCharacterEncoding("UTF-8");
+		     	response.setContentType("text/html; charset=utf-8");
+		     	PrintWriter out;
+		 		try {
+		 			out = response.getWriter();
+		 			out.println("<script>");
+		 		    out.println("alert('修改成功！');");
+		 		    out.println("var index=parent.layer.getFrameIndex(window.name);");
+		 		    out.println("parent.layer.close(index)");
+		 		    out.println("window.parent.location.reload();");
+		 		   
+		 		  
+		 		    
+		 		    out.println("</script>");
+		 		} catch (IOException e) {
+		 			// TODO Auto-generated catch block
+		 			e.printStackTrace();
+		 		}
+		 		 return "member-user-update";
+			 
+		 }else {
+			 response.setCharacterEncoding("UTF-8");
+		     	response.setContentType("text/html; charset=utf-8");
+		     	PrintWriter out;
+		 		try {
+		 			out = response.getWriter();
+		 			out.println("<script>");
+		 		    out.println("alert('没有此人，修改失败！');");
+		 		    out.println("var index=parent.layer.getFrameIndex(window.name);");
+		 		    out.println("parent.layer.close(index)");
+		 		    out.println("window.parent.location.reload();");
+		 		   
+		 		  
+		 		    
+		 		    out.println("</script>");
+		 		} catch (IOException e) {
+		 			// TODO Auto-generated catch block
+		 			e.printStackTrace();
+		 		}
+		 		 return "member-user-update";
+			 
+			 
+		 }
+		 
+		
+		
+	 }
+	 
+	 //客户组更新页面
+	 @RequestMapping("/togroupupdate")
+	 public String togroupupdate(Model model,Integer id) {
+		 Customergroup customergroup=cgs.groupname(id);
+		 Customerss customerss=cs.cuqueryd(customergroup.getFid());
+		 customergroup.setFzr(customerss.getUsername());
+		 model.addAttribute("customergroup", customergroup);
+		 
+		 return "member-user-update";
+	 }
+	
+	 @RequestMapping("/tousergroupquery")
+	 public String tousergroupquery() {
+		 
+		 return "member-usergroup-query";
+	 }
+	 
 	  @RequestMapping("/dr")
 		public String dr(MultipartFile file,String groupname) {
 		  Customergroup customergroup=new Customergroup();

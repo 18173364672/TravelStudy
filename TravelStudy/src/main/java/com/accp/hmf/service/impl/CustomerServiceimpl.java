@@ -106,6 +106,18 @@ public class CustomerServiceimpl implements CustomerService{
 		return cm.deleteByPrimaryKey(id);
 	}
 
+	@Override
+	public Customerss cuqueryusername(String username) {
+		// TODO Auto-generated method stub
+		return cm.cuqueryusername(username);
+	}
+
+	@Override
+	public int delbygroupid(Integer id) {
+		// TODO Auto-generated method stub
+		return cm.delbygroupid(id);
+	}
+
 
 
 }

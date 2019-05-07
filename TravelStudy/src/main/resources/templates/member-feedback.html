@@ -5,13 +5,13 @@
     <title>后台登录-X-admin1.1</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="static/css/font.css">
-	<link rel="stylesheet" href="static/css/xadmin.css">
+    <link rel="stylesheet" th:href="@{/css/font.css}">
+	<link rel="stylesheet" th:href="@{/css/xadmin.css}">
     <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
-    <script src="static/lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="static/js/xadmin.js"></script>
+    <script th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
+    <script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
     
 </head>
 
@@ -81,44 +81,40 @@
                         <i class="iconfont nav_right">&#xe697;</i>
                     </a>
                     <ul class="sub-menu opened">
-                        <li >
-                            <a href="member-list.html">
+                      <li >
+                            <a th:href="@{/customer/tocustomerquerypage}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 客户列表
                             </a>
                         </li>
                         <li>
-                            <a href="member-del.html">
+                            <a th:href="@{/customer/tomemberdel}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 客户删除
                             </a>
                         </li>
-                        <li>
-                            <a href="member-level.html">
+                        <li >
+                            <a th:href="@{/customer/tocustomerhdtj}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 活动推荐
                             </a>
                         </li>
-                        <li>
-                            <a href="member-kiss.html">
+                        <li >
+                            <a th:href="@{/customer/tocustomerhdtz}">
                                 <i class="iconfont">&#xe6a7;</i>
                                活动通知
                             </a>
                         </li>
-                        <li>
-                            <a href="member-view.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                               客户资源管理
-                            </a>
-                        </li>
+                        
+                       
                         <li class="current">
-                            <a href="member-feedback.html">
+                            <a th:href="@{/customer/tocustomerfeedback}">
                                 <i class="iconfont">&#xe6a7;</i>
                                   客户反馈
                             </a>
                         </li>   
-                                                                                            <li>
-                            <a href="member-usergroup.html">
+                                                                    <li>
+                            <a th:href="@{/customergroup/tocustomergroupquery}">
                                 <i class="iconfont">&#xe6a7;</i>
                                   客户组
                             </a>
