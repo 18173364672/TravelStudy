@@ -164,7 +164,7 @@ public class notice {
 	@RequestMapping("/addnotice")
 	@ResponseBody
 	public String addnotice(String title ,String content,Integer uid,MultipartFile file) {
-		notices.add(title, content, 1);
+		notices.add(title, content, 1);			//缺少登录的id
 		Notice dueix = notices.queryAll();
 		noticesecond.toAdd(dueix.getId());
 		Notice stu = notices.selectOrderBy();
@@ -189,6 +189,21 @@ public class notice {
 				
 				noticesecond.addNoticesecound(-1, iid, nid);
 				
+				
+				List<Employee> list = employee.selectByExample(null);
+				System.out.println("内容为:"+content);
+				
+				String [] id = new String[list.size()];
+				
+				for (int j = 0; j < id.length; j++) {
+					id[j] = dueix.getId().toString();
+					webSocke.sendMsg(content,id[j]);  	//webSocke 调用了方法
+				}
+//				for (Employee ds : list) {
+//					webSocke.sendMsg(content,ds.getId().toString());  	//webSocke 调用了方法
+//				}
+//				
+				
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -196,13 +211,13 @@ public class notice {
 	}
 	
 	/**
-	 * 群发公司所有部门
+	 * 群发公司部门
 	 * @return
 	 */
 	@RequestMapping("/addBuMen")
 	@ResponseBody
 	public String addBuMen(String title ,String content,Integer uid,Integer rid,MultipartFile file) {
-		notices.add(title, content, 1);
+		notices.add(title, content, 1);			//缺少登录的id
 		Notice stu = notices.selectOrderBy();
 		int nid = stu.getId();
 		String url = "D:\\Fileupload\\";
@@ -225,6 +240,12 @@ public class notice {
 				
 				noticesecond.addNoticesecound(rid, iid, nid);
 				
+				
+//				Employee dueix = employee.selectById(Integer.parseInt(spare1[i]));
+//				System.out.println("内容为:"+content);
+//				
+//				webSocke.sendMsg(content,dueix.getId().toString());  	//webSocke 调用了方法
+				
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -244,7 +265,7 @@ public class notice {
 	public String toAdd(String title ,String content,Integer uid,String spare1[],MultipartFile file) {
 		
 		for (int i = 0; i < spare1.length; i++) {
-			notices.toAdd(title, content, 1, spare1[i]);
+			notices.toAdd(title, content, 1, spare1[i]);			//缺少登录的id
 			
 			Notice stu = notices.selectOrderBy();
 			int nid = stu.getId();
@@ -268,19 +289,19 @@ public class notice {
 					
 					noticesecond.addNoticesecound(0, iid, nid);
 					
-					Employee dueix = employee.selectById(Integer.parseInt(spare1[i]));
-					System.out.println("内容为:"+content);
-					
-					webSocke.sendMsg(content,dueix.getId().toString());  	//webSocke 调用了方法
-					
-//					String [] id = new String[spare1.length];
-//					
 //					Employee dueix = employee.selectById(Integer.parseInt(spare1[i]));
 //					System.out.println("内容为:"+content);
-//					for (int j = 0; j < id.length; j++) {
-//						id[j] = dueix.getId().toString();
-//						webSocke.sendMsg(content,id[j]);  	//webSocke 调用了方法
-//					}
+//					
+//					webSocke.sendMsg(content,dueix.getId().toString());  	//webSocke 调用了方法
+					
+					String [] id = new String[spare1.length];
+					
+					Employee dueix = employee.selectById(Integer.parseInt(spare1[i]));
+					System.out.println("内容为:"+content);
+					for (int j = 0; j < id.length; j++) {
+						id[j] = dueix.getId().toString();
+						webSocke.sendMsg(content,id[j]);  	//webSocke 调用了方法
+					}
 					
 			}catch (Exception e) {
 				e.printStackTrace();

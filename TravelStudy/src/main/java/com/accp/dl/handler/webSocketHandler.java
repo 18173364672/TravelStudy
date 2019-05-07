@@ -45,17 +45,21 @@ public class webSocketHandler extends TextWebSocketHandler{
 		/**
 		 * 群发
 		 */
-//	public String sendMsg(String msg,String[] id) {
-//		 // 此处使用循环多次发送
-//			WebSocketSession session=map.get(id);
-//			try {
-//				session.sendMessage(new TextMessage(msg));
-//				return "001";
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//				return "002";
-//			}
-//	}
+	public String sendMsg(String msg,String[] id) {
+		 // 此处使用循环多次发送
+			
+			for (int i = 0; i < id.length; i++) {
+				WebSocketSession session=map.get(id[i]);
+				try {
+					session.sendMessage(new TextMessage(msg));
+					return "001";
+				} catch (Exception e) {
+					e.printStackTrace();
+					return "002";
+				}
+			}
+			return null;
+	}
 	
 	
 }

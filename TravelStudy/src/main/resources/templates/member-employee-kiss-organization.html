@@ -12,6 +12,8 @@
     <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
    	<script th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
     <script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
+    <script type="text/javascript" th:src="@{/js/reconnecting-websocket.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/init-socket.js}"></script>
 
 		<style>
 			.xbs768 {
@@ -34,6 +36,7 @@
 						<div class="layui-input-inline">
 							<input type="text" name="title" placeholder="请输入标题" autocomplete="off" class="layui-input">
 							<input type="hidden" name="uid" placeholder="请输入uid" autocomplete="off" class="layui-input">
+<!-- 							 value="${session.uid}" -->
 						</div>
 					</div>
                 	<div class="layui-form-item layui-form-text">
@@ -137,6 +140,7 @@
 
     	ws.onmessage = function(result){
     		console.log(result.data);
+    		alert(result.data);
     	}
     	
     	
