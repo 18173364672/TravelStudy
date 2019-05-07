@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.accp.domain.Activity;
 import com.accp.domain.ActivityExample;
+import com.accp.domain.Project;
 
 public interface ActivityService {
 	
@@ -16,5 +17,7 @@ public interface ActivityService {
     int deleteByPrimaryKey(Integer id);
     
     List<Activity> selectByName(String name);
+    
+    List<Project> selectPorject();
 
 }

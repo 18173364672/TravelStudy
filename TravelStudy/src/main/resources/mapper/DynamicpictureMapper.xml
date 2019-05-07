@@ -11,6 +11,11 @@
     <result column="Spare4" property="spare4" jdbcType="VARCHAR" />
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
+  
+   <select id="imgselect" resultMap="BaseResultMap">
+  SELECT * FROM `dynamicpicture`  WHERE Dyid=#{id} 
+  </select>
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -102,7 +107,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.accp.domain.Dynamicpicture" >
+  <insert id="insert"  parameterType="com.accp.domain.Dynamicpicture" >
     insert into dynamicpicture (Id, Dyid, Url, 
       Spare1, Spare2, Spare3, 
       Spare4, Spare5)

@@ -30,11 +30,19 @@ public class Project {
     private String spare5;
     
     private MultipartFile [] file;
+ 
+    private List<Project> mlist;
     
+    
+	public List<Project> getMlist() {
+		return mlist;
+	}
 
-   
-    
-    public List<Employee> getEmlist() {
+	public void setMlist(List<Project> mlist) {
+		this.mlist = mlist;
+	}
+
+	public List<Employee> getEmlist() {
 		return emlist;
 	}
 
@@ -53,8 +61,20 @@ public class Project {
 	private List<Employee> emlist;
     
     private List<Field> flist;
+    
+    private List<Projectimg> proimglist;
+    
+    
 
-    public Integer getId() {
+    public List<Projectimg> getProimglist() {
+		return proimglist;
+	}
+
+	public void setProimglist(List<Projectimg> proimglist) {
+		this.proimglist = proimglist;
+	}
+
+	public Integer getId() {
         return id;
     }
 

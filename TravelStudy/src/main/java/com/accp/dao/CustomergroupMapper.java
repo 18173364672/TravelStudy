@@ -27,4 +27,10 @@ public interface CustomergroupMapper {
     int updateByPrimaryKeySelective(Customergroup record);
 
     int updateByPrimaryKey(Customergroup record);
+    
+    Customergroup groupname(Integer id);
+    
+    int groupid(@Param("groupname") String groupname);
+    
+    List<Customergroup> cgquerypage(@Param("groupname") String groupname);
 }

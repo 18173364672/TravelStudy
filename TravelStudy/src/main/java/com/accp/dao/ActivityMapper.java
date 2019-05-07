@@ -33,4 +33,6 @@ public interface ActivityMapper {
     List<ActivityTwo> selectByNameAndCount();
    
     List<Activity> selectByName(@Param("name") String name);
+    
+    Activity activitylbselect(Integer id);
 }

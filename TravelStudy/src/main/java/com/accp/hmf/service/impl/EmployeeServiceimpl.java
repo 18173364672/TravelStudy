@@ -48,7 +48,12 @@ public class EmployeeServiceimpl implements EmployeeService{
 	    		 employee.setSumpay(employee.getPay()+sumpay);
 	    	}
 			Organization organization=om.queryOrname(Integer.parseInt(employee.getSpare1()));
-			employee.setOname(organization.getName());
+			try {
+				employee.setOname(organization.getName());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		return p.toPageInfo();

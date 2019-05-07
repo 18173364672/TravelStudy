@@ -27,4 +27,6 @@ public interface DynamicpictureMapper {
     int updateByPrimaryKeySelective(Dynamicpicture record);
 
     int updateByPrimaryKey(Dynamicpicture record);
+    
+    List<Dynamicpicture> imgselect(Integer id);
 }

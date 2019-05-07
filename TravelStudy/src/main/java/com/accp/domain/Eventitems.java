@@ -1,5 +1,7 @@
 package com.accp.domain;
 
+import java.util.List;
+
 public class Eventitems {
     private Integer id;
 
@@ -18,8 +20,18 @@ public class Eventitems {
     private String spare4;
 
     private String spare5;
+    
+    private List<Project> prolist;
+    
+    public List<Project> getProlist() {
+		return prolist;
+	}
 
-    public Integer getId() {
+	public void setProlist(List<Project> prolist) {
+		this.prolist = prolist;
+	}
+
+	public Integer getId() {
         return id;
     }
 

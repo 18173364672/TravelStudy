@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.cxf.binding.soap.Soap11;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,16 +15,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.accp.domain.ActivityTwo;
+import com.accp.domain.Employee;
 import com.accp.domain.MonthOrder;
 import com.accp.domain.MonthOrderTwo;
 import com.accp.domain.MonthSr;
 import com.accp.domain.MonthSrTwo;
 import com.accp.domain.MydAndName;
+import com.accp.domain.Plate;
 import com.accp.domain.Project;
 import com.accp.domain.ProjectByTimeAndName;
 import com.accp.domain.ProjectNameAndRenqi;
 import com.accp.domain.QuestionTj;
 import com.accp.domain.QuestionTwo;
+import com.accp.qyj.service.PlateService;
 import com.accp.zjq.service.ActivityService;
 import com.accp.zjq.service.OrderService;
 import com.accp.zjq.service.ProjectService;
@@ -44,9 +49,15 @@ public class TjController {
 	
 	@Autowired
 	UserprojectdiscussService usi;
+	
+	@Autowired
+	PlateService plateservice;
 
 	@RequestMapping("/toRqProject")
-	public String toRqProject(Model model) {
+	public String toRqProject(Model model, HttpSession session) {
+		Employee es = (Employee)session.getAttribute("user");
+		List<Plate> plate = plateservice.queryLeftNav(es.getId());
+		model.addAttribute("plist", plate);
 		System.out.println("加载项目人气页面中...");
 		List<MonthOrder>monthOrders2 = osi.SelectOrYears();
 		model.addAttribute("years", monthOrders2);
@@ -94,8 +105,10 @@ public class TjController {
 	}
 
 	@RequestMapping("toMonthSr")
-	public String toMonthSr(Model model) {
-		System.out.println("正在加载每月收入...");
+	public String toMonthSr(Model model , HttpSession session) {
+		Employee es = (Employee)session.getAttribute("user");
+		List<Plate> plate = plateservice.queryLeftNav(es.getId());
+		model.addAttribute("plist", plate);
 		List<MonthOrder>monthOrders2 = osi.SelectOrYears();
 		model.addAttribute("years", monthOrders2);
 		return "echarts2";
@@ -118,7 +131,11 @@ public class TjController {
 	}
 
 	@RequestMapping("toRqTeacher")
-	public String toRqTeacher(Model model) {
+	public String toRqTeacher(Model model , HttpSession session) {
+		Employee es = (Employee)session.getAttribute("user");
+		List<Plate> plate = plateservice.queryLeftNav(es.getId());
+		model.addAttribute("plist", plate);
+		
 		List<MydAndName>mydAndNames = usi.selectByMyd();
 		
 		model.addAttribute("mydAndNames", mydAndNames);
@@ -150,7 +167,10 @@ public class TjController {
 	}
 
 	@RequestMapping("toRqActivity")
-	public String toRqActivity(Model model) {
+	public String toRqActivity(Model model , HttpSession session) {
+		Employee es = (Employee)session.getAttribute("user");
+		List<Plate> plate = plateservice.queryLeftNav(es.getId());
+		model.addAttribute("plist", plate);
 		System.out.println("正在加载活动人气相关....");
 		List<ActivityTwo>activityTwos = asi.selectByNameAndCount();
 		for (ActivityTwo activityTwo : activityTwos) {
@@ -189,7 +209,10 @@ public class TjController {
 	 * @return
 	 */
 	@RequestMapping("toMothKh")
-	public String toMothKh(Model model) {
+	public String toMothKh(Model model , HttpSession session) {
+		Employee es = (Employee)session.getAttribute("user");
+		List<Plate> plate = plateservice.queryLeftNav(es.getId());
+		model.addAttribute("plist", plate);
 		System.out.println("正在加载每月订单数...");
 		System.out.println("查询到以下数据:");
 		List<MonthOrder>monthOrders = osi.SelectMonthOr("2019");
@@ -225,7 +248,10 @@ public class TjController {
 	}
 
 	@RequestMapping("toYgKq")
-	public String toYgKq(Model model) {
+	public String toYgKq(Model model, HttpSession session) {
+		Employee es = (Employee)session.getAttribute("user");
+		List<Plate> plate = plateservice.queryLeftNav(es.getId());
+		model.addAttribute("plist", plate);
 		List<MydAndName>mydAndNames = usi.selectByCp();
 		model.addAttribute("mydAndNames", mydAndNames);
 		return "echarts6";
@@ -255,7 +281,10 @@ public class TjController {
 	}
 
 	@RequestMapping("toQuestion")
-	public String toQuestion(Model model) {
+	public String toQuestion(Model model, HttpSession session) {
+		Employee es = (Employee)session.getAttribute("user");
+		List<Plate> plate = plateservice.queryLeftNav(es.getId());
+		model.addAttribute("plist", plate);
 		System.out.println("正在加载满意度调查统计...");
 		System.out.println("正在查询项目数据...");
 		List<Project>projects = psi.queryAllProject();

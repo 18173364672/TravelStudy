@@ -86,4 +86,22 @@ public class ProjectServiceimpl implements ProjectService{
 		return ptm.queryimg(id);
 	}
 
+	@Override
+	public int deleteByPrimaryKey(Integer id) {
+		// TODO Auto-generated method stub
+		return pm.deleteByPrimaryKey(id);
+	}
+
+	@Override
+	public int deletes(Integer id) {
+		// TODO Auto-generated method stub
+		return ptm.deletes(id);
+	}
+
+	@Override
+	public Project queryd(Integer id) {
+		// TODO Auto-generated method stub
+		return pm.queryd(id);
+	}
+
 }

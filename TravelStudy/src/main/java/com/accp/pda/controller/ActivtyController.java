@@ -2,6 +2,8 @@ package com.accp.pda.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.accp.domain.Activity;
+import com.accp.domain.Employee;
+import com.accp.domain.Plate;
 import com.accp.pda.service.ActivityService;
+import com.accp.qyj.service.PlateService;
 
 @Controller
 public class ActivtyController {
@@ -17,8 +22,18 @@ public class ActivtyController {
 	@Autowired
 	ActivityService service;
 	
+
+	@Autowired
+	PlateService plateservice;
+
+
+
+	
 	@RequestMapping("/query")
-	public String query(Model model) {
+	public String query(Model model , HttpSession session) {
+		Employee es = (Employee)session.getAttribute("user");
+		List<Plate> plate = plateservice.queryLeftNav(es.getId());
+		model.addAttribute("plist", plate);
 		List<Activity> list = service.selectByExample(null);
 		model.addAttribute("list", list);
 		return "manage-activity";
@@ -71,4 +86,6 @@ public class ActivtyController {
 	public String queryPriject() {
 		return "manage-activity-show";
 	}
+	
+
 }

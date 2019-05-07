@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,11 +18,13 @@ import org.springframework.web.multipart.MultipartFile;
 import com.accp.domain.Employee;
 import com.accp.domain.Field;
 import com.accp.domain.Fieldtype;
+import com.accp.domain.Plate;
 import com.accp.domain.Project;
 import com.accp.domain.Projectimg;
 import com.accp.hmf.service.EmployeeService;
 import com.accp.hmf.service.FieldService;
 import com.accp.hmf.service.ProjectService;
+import com.accp.qyj.service.PlateService;
 import com.github.pagehelper.PageInfo;
 
 @Controller
@@ -32,21 +36,76 @@ public class ProjectController {
 	FieldService fs;
 	@Autowired
 	EmployeeService em;
+	@Autowired
+    PlateService plateservice;
 	
+	
+	@RequestMapping("/projectedit")
+	@ResponseBody
+	public int projectedit(@RequestBody Project project) {
+		ps.deleteByPrimaryKey(project.getId()); 
+		ps.deletes(project.getId());
+		List<Employee> emlist=project.getEmlist();
+		String ids="";
+		for (Employee employee : emlist) {
+			ids+=employee.getId()+",";
+		}
+		
+		String ids1="";
+		List<Field> flist=project.getFlist();
+		for (Field field : flist) {
+		   ids1+=field.getId()+",";
+		}
+	    Fieldtype type=fs.queryfname(Integer.parseInt(project.getType()));
+	    project.setType(type.getName());
+		project.setIds(ids);
+		project.setIds1(ids1);
+		ps.insertSelective(project);
+	
+		
+		
+		return project.getId();
+	}
+	
+	
+	@RequestMapping("/toprojectedit")
+	public String toprojectedit(Model model,Integer id) {
+		Project project=ps.queryd(id);
+		List<Fieldtype> list=fs.selectByExample(null);
+		model.addAttribute("list", list);
+		model.addAttribute("project", project);
+		return "member-project-edit";
+	}
+	
+    @RequestMapping("/projectdeletes")
+    public String projectdeletes(Integer id) {
+    	  ps.deleteByPrimaryKey(id);
+    	  ps.deletes(id);
+    	  return "redirect:/project/toprojectquerypage";
+    }
+	
+	@RequestMapping("/projectdelete")
+	public String projectdelete(@RequestBody Project project) {
+		
+		for (Project p : project.getMlist()) {
+			ps.deleteByPrimaryKey(p.getId());
+			ps.deletes(p.getId());
+		}
+	
+		
+		
+		
+		return "redirect:/project/toprojectquerypage";
+	}
 	
 	@RequestMapping("/toprojectimg")
-	public String toprojectimg() {
+	public String toprojectimg(Integer id , Model model) {
+		List<Projectimg> list=ps.queryimg(id);
+		model.addAttribute("list", list);
 		return "member-project-img";
 	}
 	
-	@RequestMapping("/projectimg")
-	@ResponseBody
-	public List<Projectimg> projectimg(Integer id) {
-		List<Projectimg> list=ps.queryimg(id);
-		
-		
-		return list;
-	}
+	
 	
 	
 	@RequestMapping("/projectadd")
@@ -151,8 +210,10 @@ public class ProjectController {
 	
 	
 	@RequestMapping("/toprojectquerypage")
-	public String toprojectquerypage() {
-		
+	public String toprojectquerypage(Model model , HttpSession session) {
+		Employee es = (Employee)session.getAttribute("user");
+		List<Plate> plate = plateservice.queryLeftNav(es.getId());
+		model.addAttribute("plist", plate);
 		return "member-project";
 	}
 	

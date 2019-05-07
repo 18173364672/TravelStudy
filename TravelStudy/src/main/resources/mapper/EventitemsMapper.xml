@@ -12,7 +12,19 @@
     <result column="Spare4" property="spare4" jdbcType="VARCHAR" />
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
-  <sql id="Example_Where_Clause" >
+  
+    <resultMap id="kkk" type="com.accp.domain.Eventitems" extends="BaseResultMap">
+  
+    <collection property="prolist"  column="pid"  ofType="com.accp.domain.Project" select="com.accp.dao.ProjectMapper.proselect">
+    </collection>
+  </resultMap> 
+  
+  
+  <select id="eveselect" resultMap="kkk">
+  SELECT * FROM `eventitems` WHERE aid=#{id}
+  </select>
+  
+  <sql id="Example_Where_Clause">
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
         <if test="criteria.valid" >

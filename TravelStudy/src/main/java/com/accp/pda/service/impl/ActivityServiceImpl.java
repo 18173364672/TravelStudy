@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.accp.dao.ActivityMapper;
+import com.accp.dao.ProjectMapper;
 import com.accp.domain.Activity;
 import com.accp.domain.ActivityExample;
+import com.accp.domain.Project;
 import com.accp.pda.service.ActivityService;
 
 @Transactional
@@ -17,6 +19,9 @@ public class ActivityServiceImpl implements ActivityService{
 
 	@Autowired
 	ActivityMapper mapper;
+	
+	@Autowired
+	ProjectMapper projectMapper;
 	
 	@Override
 	public List<Activity> selectByExample(ActivityExample example) {
@@ -46,6 +51,12 @@ public class ActivityServiceImpl implements ActivityService{
 	public List<Activity> selectByName(String name) {
 		// TODO Auto-generated method stub
 		return mapper.selectByName(name);
+	}
+
+	@Override
+	public List<Project> selectPorject() {
+		// TODO Auto-generated method stub
+		return projectMapper.selectByExample(null);
 	}
 
 

@@ -1,6 +1,9 @@
 package com.accp.domain;
 
 import java.util.Date;
+import java.util.List;
+
+import org.apache.catalina.User;
 
 public class Post {
     private Integer id;
@@ -28,8 +31,40 @@ public class Post {
     private String spare4;
 
     private String spare5;
+    
+    private List<Dynamicpicture> dylist;
+    
+    private List<Comment> coList;
+    
+    private Customerss Customerss;
+    
+    
+ 
+    public List<Comment> getCoList() {
+		return coList;
+	}
 
-    public Integer getId() {
+	public void setCoList(List<Comment> coList) {
+		this.coList = coList;
+	}
+
+	public Customerss getCustomerss() {
+		return Customerss;
+	}
+
+	public void setCustomerss(Customerss customerss) {
+		Customerss = customerss;
+	}
+
+	public List<Dynamicpicture> getDylist() {
+		return dylist;
+	}
+
+	public void setDylist(List<Dynamicpicture> dylist) {
+		this.dylist = dylist;
+	}
+
+	public Integer getId() {
         return id;
     }
 
@@ -132,4 +167,25 @@ public class Post {
     public void setSpare5(String spare5) {
         this.spare5 = spare5;
     }
+
+	public Post( Integer uid, String title, Date dytime, String dycontent, Integer pointsum, Integer tid) {
+		super();
+	
+		this.uid = uid;
+		this.title = title;
+		this.dytime = dytime;
+		this.dycontent = dycontent;
+		this.pointsum = pointsum;
+		this.tid = tid;
+
+
+	}
+	
+	public Post() {
+		// TODO Auto-generated constructor stub
+	}
+    
+    
+    
+    
 }

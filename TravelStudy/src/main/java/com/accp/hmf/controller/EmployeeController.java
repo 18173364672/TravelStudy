@@ -1,8 +1,12 @@
 package com.accp.hmf.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,9 +17,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.accp.domain.Employee;
 import com.accp.domain.Organization;
 import com.accp.domain.Organizationzw;
+import com.accp.domain.Plate;
 import com.accp.domain.Royalty;
 import com.accp.hmf.service.EmployeeService;
 import com.accp.hmf.service.OrganizationService;
+import com.accp.qyj.service.PlateService;
 import com.github.pagehelper.PageInfo;
 
 @Controller
@@ -25,6 +31,11 @@ public class EmployeeController {
       EmployeeService es;
       @Autowired
       OrganizationService organizationService;
+      @Autowired
+      HttpServletResponse response;
+      
+      @Autowired
+      PlateService plateservice;
       
       //查询工资
       @RequestMapping("/querypay")
@@ -182,16 +193,34 @@ public class EmployeeController {
       //员工新增
       @RequestMapping("/employeeadd")
       public String employeeadd(Employee employee) {
-    	  employee.setCreatetime(new Date());
-    	  employee.setState(1);
+    	 employee.setCreatetime(new Date());
+    	 employee.setState(1);
     	 es.insertSelective(employee);
     	 Organization organization=es.queryOrname(Integer.parseInt(employee.getSpare1()));
     	 int count=organization.getCount()+1;
     	 organization.setCount(count);
     	 es.updateByPrimaryKey(organization);
     	  
+    		response.setCharacterEncoding("UTF-8");
+        	response.setContentType("text/html; charset=utf-8");
+        	PrintWriter out;
+    		try {
+    			out = response.getWriter();
+    			out.println("<script>");
+    		    out.println("alert('新增成功！');");
+    		    out.println("var index=parent.layer.getFrameIndex(window.name);");
+    		    out.println("parent.layer.close(index)");
+    		    out.println("window.parent.location.reload();");
+    		   
+    		  
+    		    
+    		    out.println("</script>");
+    		} catch (IOException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
     	  
-    	  return "redirect:/employee/toemployeeadd";
+    	  return "member-employee-add";
       }
       
       //跳转到员工新增页面
@@ -214,8 +243,10 @@ public class EmployeeController {
       
       //跳转到员工查询
       @RequestMapping("/toemployeequerypage")
-      public String toemployeequerypage() {
-    	  
+      public String toemployeequerypage(Model model , HttpSession session) {
+    	  Employee es = (Employee)session.getAttribute("user");
+  		List<Plate> plate = plateservice.queryLeftNav(es.getId());
+  		model.addAttribute("plist", plate);
     	  return "member-employee";
       }
       

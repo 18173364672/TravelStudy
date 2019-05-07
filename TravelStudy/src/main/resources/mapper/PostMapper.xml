@@ -16,6 +16,58 @@
     <result column="Spare4" property="spare4" jdbcType="VARCHAR" />
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
+  
+  
+  <resultMap id="postdy" type="com.accp.domain.Post" extends="BaseResultMap">
+  
+    <collection property="dylist"  column="id"  ofType="com.accp.domain.Dynamicpicture">
+       <result column="url" property="url"/>
+    </collection>
+  </resultMap>
+  
+      <resultMap id="user" type="com.accp.domain.Post" extends="BaseResultMap">
+    <collection property="Customerss" ofType="com.accp.domain.Customerss">
+    <result column="uname" property="username" />
+       <result column="uimg" property="uimg"/>
+       <result column="email" property="email"/>
+     
+    </collection>
+  </resultMap>
+  
+  <resultMap id="mmm" type="com.accp.domain.Post" extends="user">
+  
+    <collection property="dylist"  column="id"  ofType="com.accp.domain.Dynamicpicture" select="com.accp.dao.DynamicpictureMapper.imgselect">
+       <result column="url" property="url"/>
+    </collection>
+  </resultMap>
+  
+   <resultMap id="ccc" type="com.accp.domain.Post" extends="mmm">
+  
+    <collection property="coList" column="id"  ofType="com.accp.domain.Comment" select="com.accp.dao.CommentMapper.comselect">
+    
+    </collection>
+  </resultMap> 
+    
+      <select id="postxxselect" resultMap="ccc"> 
+  SELECT po.*,ss.`Uimg` AS uimg, ss.`Username` AS uname, ss.Email AS email FROM post AS po
+INNER JOIN `customerss` AS ss
+ON ss.`Id`=po.`uid` 
+WHERE po.id=#{id}
+  </select>
+    
+    
+   <select id="postselect" resultMap="postdy">
+  SELECT po.*,dy.url FROM post AS po
+INNER JOIN dynamicpicture AS dy
+ON po.id=dy.dyid
+<where>
+  <if test="tid!=null">
+    po.`tid`=#{tid}
+    </if>
+</where>
+  </select>
+  
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -108,7 +160,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.accp.domain.Post" >
+  <insert id="insert" keyProperty="id" useGeneratedKeys="true" parameterType="com.accp.domain.Post" >
     insert into post (id, uid, Title, 
       Dytime, Dycontent, pointsum, 
       tid, yxx, Spare1, Spare2, 

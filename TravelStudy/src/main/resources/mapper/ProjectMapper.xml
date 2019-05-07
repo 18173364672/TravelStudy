@@ -31,7 +31,15 @@
   </resultMap>
   
   
-      <select id="pquery" resultMap="BaseResultMap">
+  
+     
+     <select id="queryd" resultMap="BaseResultMap">
+      select * from project where id=#{id}
+     
+     </select>
+     
+    <select id="pquery" resultMap="BaseResultMap">
+
      select * from project
      <where>
        <if test="projectname!=null">
@@ -39,6 +47,20 @@
        </if>
        
      </where>
+  
+   <resultMap id="ooo" type="com.accp.domain.Project" extends="BaseResultMap">
+  
+    <collection property="proimglist"  column="id"  ofType="com.accp.domain.Projectimg" select="com.accp.dao.ProjectimgMapper.proimgselect">
+    </collection>
+  </resultMap>
+  
+  <select id="proxmselect" resultMap="ooo">
+  SELECT *FROM `project` 
+  </select>
+  
+  
+  <select id="proselect" resultMap="ooo">
+  SELECT *FROM `project` WHERE `id`=#{pid}
   </select>
   
   

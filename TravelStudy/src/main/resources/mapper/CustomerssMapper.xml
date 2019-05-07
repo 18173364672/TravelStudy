@@ -23,6 +23,55 @@
     <result column="Spare4" property="spare4" jdbcType="VARCHAR" />
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
+  
+   <select id="cupquerys" resultMap="BaseResultMap">
+     select * from customerss
+     <where>
+        state=0
+       
+       <if test="username!=null">
+        and username like CONCAT('%',#{username},'%')
+       </if>
+       
+       <if test="createtime!=null">
+        and createtime like CONCAT('%',#{createtime},'%')
+       </if>
+     </where>
+  </select>
+  
+  
+  <select id="dcall" resultMap="BaseResultMap">
+    select * from customerss
+  </select>
+  
+  <select id="dcs" resultMap="BaseResultMap">
+    select * from customerss where groupid=#{id}
+
+  </select>
+  
+  <select id="cuqueryd" resultMap="BaseResultMap">
+  select * from customerss where id=#{id}
+  
+  </select>
+  
+   <select id="cupquery" resultMap="BaseResultMap">
+     select * from customerss
+     <where>
+        state=1
+       
+       <if test="username!=null">
+        and username like CONCAT('%',#{username},'%')
+       </if>
+       
+       <if test="createtime!=null">
+        and createtime like CONCAT('%',#{createtime},'%')
+       </if>
+     </where>
+  
+   <select id="dl" resultMap="BaseResultMap">
+  SELECT * FROM `customerss` WHERE `Username`=#{Username} and UserPassWord=#{UserPassWord}
+  </select>
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -132,7 +181,7 @@
       #{spare1,jdbcType=VARCHAR}, #{spare2,jdbcType=VARCHAR}, #{spare3,jdbcType=VARCHAR}, 
       #{spare4,jdbcType=VARCHAR}, #{spare5,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.accp.domain.Customerss" >
+  <insert id="insertSelective" parameterType="com.accp.domain.Customerss" useGeneratedKeys="true" keyProperty="id">
     insert into customerss
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

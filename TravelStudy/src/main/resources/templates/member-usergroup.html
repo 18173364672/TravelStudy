@@ -1,20 +1,20 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 	<head>
 		<meta charset="UTF-8">
-		<title>后台登录-X-admin1.1</title>
+		<title>研学旅行</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-		<link rel="stylesheet" href="static/css/font.css">
-		<link rel="stylesheet" href="static/css/xadmin.css">
+		<link rel="stylesheet" th:href="@{/css/font.css}">
+		<link rel="stylesheet" th:href="@{/css/xadmin.css}">
 		<link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
 
 		<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 		<script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
-		<script src="static/lib/layui/layui.js" charset="utf-8"></script>
+		<script th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
 
-		<script type="text/javascript" src="static/js/xadmin.js"></script>
+		<script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
 		<!--    <script type="text/javascript" src="static/js/jquery-1.8.3.js" ></script>-->
 	</head>
 	<script>
@@ -42,285 +42,18 @@
 
 	<body>
 		<!-- 顶部开始 -->
-		<div class="container">
-			<div class="logo">
-				<a href="./index.html">X-ADMIN V1.1</a>
-			</div>
-			<div class="open-nav"><i class="iconfont">&#xe699;</i></div>
-			<ul class="layui-nav right" lay-filter="">
-				<li class="layui-nav-item">
-					<a href="javascript:;">admin</a>
-					<dl class="layui-nav-child">
-						<!-- 二级菜单 -->
-						<dd>
-							<a href="">个人信息</a>
-						</dd>
-						<dd>
-							<a href="">切换帐号</a>
-						</dd>
-						<dd>
-							<a href="./login.html">退出</a>
-						</dd>
-					</dl>
-				</li>
-				<li class="layui-nav-item">
-					<a href="/">前台首页</a>
-				</li>
-			</ul>
-		</div>
-		<!-- 顶部结束 -->
-		<!-- 中部开始 -->
-		<div class="wrapper">
-			<!-- 左侧菜单开始 -->
-			<div class="left-nav">
-				<div id="side-nav">
-					<ul id="nav">
-                <li class="list" current>
-                    <a href="./index.html">
-                        <i class="iconfont">&#xe761;</i>
-                        欢迎页面
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                </li>
-                <li class="list">
-                    <a href="javascript:;">
-                        <i class="iconfont">&#xe70b;</i>
-                        客户管理
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu opened">
-                        <li >
-                            <a href="member-list.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                客户列表
-                            </a>
-                        </li>
-                        <li>
-                            <a href="member-del.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                客户删除
-                            </a>
-                        </li>
-                        <li>
-                            <a href="member-level.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                活动推荐
-                            </a>
-                        </li>
-                        <li>
-                            <a href="member-kiss.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                               活动通知
-                            </a>
-                        </li>
-                        <li>
-                            <a href="member-view.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                               客户资源管理
-                            </a>
-                        </li>
-                        <li>
-                            <a href="member-feedback.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                  客户反馈
-                            </a>
-                        </li>   
-                                                                        <li class="current">
-                            <a href="member-usergroup.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                  客户组
-                            </a>
-                        </li>  
-                    </ul>
-                </li>
-                <li class="list" >
-                       <a href="javascript:;">
-                        <i class="iconfont">&#xe6b2;</i>
-                       员工管理
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu" >
-                          <li>
-                            <a href="member-employee.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                员工信息
-                            </a>
-                        </li>
-                        
-                         <li >
-                            <a href="member-organization.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                组织机构
-                            </a>
-                        </li> 
-                        
-                                 <li>
-                            <a href="member-employee-kiss.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                工作通知
-                            </a>
-                        </li> 
-                        </li>
-                    </ul>
-                </li>
-                <li class="list " >
-                    <a href="javascript:;">
-                        <i class="iconfont">&#xe705;</i>
-                        项目管理
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu">
-                             <li>
-                            <a href="member-project.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                项目信息
-                            </a>
-                        </li>
-                        
-          
-                        
-                                     <li>
-                            <a href="member-project-feedback.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                项目反馈
-                            </a>
-                        </li>
-      
-                                                   <li>
-                            <a href="member-project-comment.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                项目评论
-                            </a>
-                        </li>
-                        
-                                                      <li>
-                            <a href="member-project-ranking.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                项目排名
-                            </a>
-                        </li>
-                        
-    
-                    </ul>
-                </li>
-                
-                <li class="list" >
-                  <a href="javascript:;">
-                        <i class="layui-icon">&#xe62e;</i>
-                        活动管理
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a href="manage-activity.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                活动信息
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                
-                <li class="list" >
-                  <a href="javascript:;">
-                        <i class="layui-icon">&#xe600;</i>
-                        订单管理
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a href="manage-order.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                订单信息
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                
-                <li class="list" >
-                    <a href="javascript:;">
-                        <i class="layui-icon">&#xe62c;</i>
-                        系统统计
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a href="./echarts1.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                项目人气
-                            </a>
-                        </li>
-                        <li>
-                            <a href="./echarts2.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                每月收入
-                            </a>
-                        </li>
-                        <li>
-                            <a href="./echarts3.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                人气教官
-                            </a>
-                        </li>
-                        <li>
-                            <a href="./echarts4.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                人气活动
-                            </a>
-                        </li>
-                        <li>
-                            <a href="./echarts5.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                每月客户
-                            </a>
-                        </li>
-                        <li>
-                            <a href="./echarts6.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                员工考勤数据
-                            </a>
-                        </li>
-                        <li>
-                            <a href="./echarts7.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                问卷调查
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="list">
-                  <a href="javascript:;">
-                        <i class="layui-icon">&#xe614;</i>
-                        系统管理
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a href="manage-user.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                用户管理
-                            </a>
-                        </li>
-                        
-               
-                        
-                                     <li>
-                            <a href="manage-plate.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                模块管理
-                            </a>
-                        </li>
-                                                              <li>
-                            <a href="manage-role.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                角色管理
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-            </ul>
-				</div>
-			</div>
+		<div class="container" th:include="head :: header">
+    	
+    </div>
+    <!-- 顶部结束 -->
+    <!-- 中部开始 -->
+    <div class="wrapper">
+        <!-- 左侧菜单开始 -->
+        <div class="left-nav">
+        	<div id="side-nav"  th:include="left :: left_nav">
+        	
+        	</div>
+        </div>
 			<!-- 左侧菜单结束 -->
 			<!-- 右侧主体开始 -->
 			<div class="page-content">
@@ -329,21 +62,17 @@
 					<form class="layui-form xbs" action="">
 						<div class="layui-form-pane" style="text-align: center;">
 							<div class="layui-form-item" style="display: inline-block;">
-								<label class="layui-form-label xbs768">日期范围</label>
-								<div class="layui-input-inline xbs768">
-									<input class="layui-input" placeholder="开始日" id="LAY_demorange_s">
-								</div>
+							
+								
 								
 								<div class="layui-input-inline">
-									<input type="text" name="username" placeholder="请输入客户组名称" autocomplete="off" class="layui-input">
+									<input type="text" name="username" placeholder="请输入客户组名称" autocomplete="off" class="layui-input" v-model="name">
 								</div>
-								<div class="layui-input-inline" style="width:80px">
-									<button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
-								</div>
+								
 							</div>
 						</div>
 					</form>
-					<xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button><button class="layui-btn" onclick="member_add('添加用户','member-usergroup-add.html','600','500')"><i class="layui-icon">&#xe608;</i>添加</button><span class="x-right" style="line-height:40px">共有数据：88 条</span></xblock>
+					<xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button><button class="layui-btn" onclick="member_add('添加用户','/customergroup/tocustomergroupadd','600','500')"><i class="layui-icon">&#xe608;</i>添加</button><span class="x-right" style="line-height:40px">共有数据：{{pageInfo.total}}条</span></xblock>
 					<table class="layui-table">
 						<thead>
 							<tr>
@@ -361,9 +90,7 @@
 									负责人姓名
 								</th>
 								
-								<th>
-									创建时间
-								</th>
+								
 								
 								
                                
@@ -373,25 +100,21 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
+							<tr v-for="l in pageInfo.list">
 								<td>
-									<input type="checkbox" value="1" name="s1">
+									<input type="checkbox"  name="s1">
 								</td>
 								<td>
-									1
+									{{l.id}}
 								</td>
 								<td>
 									<u style="cursor:pointer" onclick="member_show('张三','member-usergroup-query.html','10001','1400','800')">
-                               北大青鸟
+                               {{l.groupname}}
                             </u>
 								</td>
 								
 								<td>
-									张三
-								</td>
-								
-								<td>
-									2019-08-08
+									{{l.fzr}}
 								</td>
 								
 							
@@ -416,8 +139,8 @@
 						</tbody>
 					</table>
 					<xblock>
-						<button class="layui-btn layui-btn-warm">上一页</button>
-						<button class="layui-btn layui-btn-danger">下一页</button>
+						<button class="layui-btn layui-btn-warm" v-on:click="prePage()">上一页</button>
+						<button class="layui-btn layui-btn-danger" v-on:click="nextPage()">下一页</button>
 					</xblock>
 
 					<!-- 右侧内容框架，更改从这里结束 -->
@@ -556,16 +279,78 @@
 				});
 			}
 		</script>
-		<script>
-			//百度统计可去掉
-			var _hmt = _hmt || [];
-			(function() {
-				var hm = document.createElement("script");
-				hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-				var s = document.getElementsByTagName("script")[0];
-				s.parentNode.insertBefore(hm, s);
-			})();
-		</script>
+		
 	</body>
+	
+<script type="text/javascript" th:src="@{/js/vue.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+
+var v=new Vue({
+	  el:".content",
+	  data:{
+		  pageInfo:"pageInfo",
+		  name:""
+	  },
+	  methods:{
+		  getGoodsHref:function(val){
+			    return 'queryd?id='+val
+			},
+			deleteHref:function(val){
+			    return 'delete?id='+val
+			},prePage:function(){
+	    		if(this.pageInfo.prePage==0){
+	    			alert("到顶了");
+	    			return;
+	    		}
+	    		getmethod(this.pageInfo.prePage);
+	    	},
+	    	nextPage:function(){
+	    		if(this.pageInfo.prePage==this.pageInfo.pages){
+	    			alert("到底了");
+	    		}
+	    		getmethod(this.pageInfo.nextPage);
+	    		
+	    	}
+
+	  },
+	  watch:{
+		  name:function(){
+			console.log(v.name);
+			getmethod(1,v.name)
+		},
+	  }
+});
+
+var urlpath = [[@{/customergroup/customergroupquerypage}]];
+
+$.ajax({
+		 url:urlpath,
+		 data:{},
+		 type:"post",
+		 datatype:"json",
+		 success:function(data){
+			 v.pageInfo=data;
+			 console.log(data);
+		 }
+	});
+
+
+function getmethod(page,name){
+	   $.ajax({
+		  	 url:urlpath,
+		  	 data:{
+		  		currentPage:page,
+		  		
+		  		groupname:name
+		  	 },
+		  	 datatype:"json",
+		  	 success:function(data){
+		  		v.pageInfo=data;
+		  		
+		  	 }
+		   })
+}
+
+</script>
 
 </html>
