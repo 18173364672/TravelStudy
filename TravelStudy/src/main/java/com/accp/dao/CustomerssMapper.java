@@ -38,7 +38,11 @@ public interface CustomerssMapper {
     
     List<Customerss> dcall();
     
+    Customerss cuqueryusername(@Param("username") String username);
+    
     List<Customerss> cupquerys(@Param("createtime")String createtime,@Param("username")String username);
 
     Customerss dl(@Param("Username")String Username,@Param("UserPassWord")String UserPassWord);
+
+    int delbygroupid(Integer id);
 }

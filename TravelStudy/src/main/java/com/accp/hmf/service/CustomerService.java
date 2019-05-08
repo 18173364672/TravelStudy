@@ -2,13 +2,15 @@ package com.accp.hmf.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.accp.domain.Customergroup;
 import com.accp.domain.Customerss;
 import com.accp.domain.Employee;
 import com.github.pagehelper.PageInfo;
 
 public interface CustomerService {
-
+     
 	 public PageInfo<Customerss> querypage(Integer currentPage,Integer pageSize,String createtime,String username);
 	 
 	 Customergroup groupname(Integer id);
@@ -25,5 +27,9 @@ public interface CustomerService {
 	 
 	 int deleteByPrimaryKey(Integer id);
 	 
+	 Customerss cuqueryusername(@Param("username") String username);
+	 
 	 public PageInfo<Customerss> querypages(Integer currentPage,Integer pageSize,String createtime,String username);
+
+	 int delbygroupid(Integer id);
 }

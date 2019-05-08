@@ -3,18 +3,18 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title>后台登录-X-admin1.1</title>
+		<title>研学旅行</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-		<link rel="stylesheet" href="static/css/font.css">
-		<link rel="stylesheet" href="static/css/xadmin.css">
+		<link rel="stylesheet" th:href="@{/css/font.css}">
+		<link rel="stylesheet" th:href="@{/css/xadmin.css}">
 		<link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
 
 		<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 		<script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
-		<script src="static/lib/layui/layui.js" charset="utf-8"></script>
+		<script th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
 
-		<script type="text/javascript" src="static/js/xadmin.js"></script>
+		<script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
 		<!--    <script type="text/javascript" src="static/js/jquery-1.8.3.js" ></script>-->
 	</head>
 	<script>
@@ -100,9 +100,9 @@
 									1
 								</td>
 								<td>
-									<u style="cursor:pointer" onclick="member_show('张三','member-show.html','10001','1400','800')">
+						
                                 小明
-                            </u>
+                     
 								</td>
 								<td>
 									男

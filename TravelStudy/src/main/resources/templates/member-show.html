@@ -1,19 +1,19 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<title>后台登录-X-admin1.1</title>
+	<title>研学旅行</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="static/css/font.css">
-	<link rel="stylesheet" href="static/css/xadmin.css">
-	<link rel="stylesheet" href="static/css/bootstrap.css" />
+    <link rel="stylesheet" th:href="@{/css/font.css}">
+	<link rel="stylesheet" th:href="@{/css/xadmin.css}">
+	<link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
     <link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
-    <script src="static/lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="static/js/xadmin.js"></script>
-    <script type="text/javascript" src="static/css/bootstrap.js" ></script>
+    <script th:src="@{/lib/layui/layui.js}" charset="utf-8"></script>
+    <script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
+    <script type="text/javascript" th:src="@{/css/bootstrap.js}" ></script>
     
     <style> 
 		.round_icon{
@@ -51,7 +51,7 @@
         <div class="container">
           <div class="head row">
           	<div class="col-md-2">
-	        	<img src="static/images/45d7225a273cb36b6a04fa92bac22aec.jpg" class="round_icon"/>
+	        	<img th:src="@{/images/45d7225a273cb36b6a04fa92bac22aec.jpg}" class="round_icon"/>
           	</div>
         	<div class="col-md-10 span">
         		<span>姓名：</span>张三<br>

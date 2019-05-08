@@ -21,6 +21,8 @@ public interface CustomergroupService {
 	 
 	 Customergroup groupname(Integer id);
 	 
+	 int deleteByPrimaryKey(Integer id);
+	 
 	 int insertSelective(Customergroup record);
 	 
 	 public PageInfo<Customergroup> querypage(Integer currentPage, Integer pageSize,String groupname);

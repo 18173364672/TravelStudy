@@ -69,6 +69,7 @@ public class UserController {
 	public String index(Model model , HttpSession session) {
 		Employee es = (Employee)session.getAttribute("user");
 		List<Plate> plate = plateservice.queryLeftNav(es.getId());
+		System.out.println(JSON.toJSONString(plate));
 		model.addAttribute("plist", plate);
 		return "index";
 	}

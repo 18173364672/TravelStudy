@@ -44,7 +44,7 @@
 		<!-- 顶部开始 -->
 		<div class="container" th:include="head :: header">
     	
-    </div>
+    	</div>
     <!-- 顶部结束 -->
     <!-- 中部开始 -->
     <div class="wrapper">
@@ -54,7 +54,6 @@
         	
         	</div>
         </div>
-			<!-- 左侧菜单结束 -->
 			<!-- 右侧主体开始 -->
 			<div class="page-content">
 				<div class="content">
@@ -72,7 +71,7 @@
 							</div>
 						</div>
 					</form>
-					<xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button><button class="layui-btn" onclick="member_add('添加用户','/customergroup/tocustomergroupadd','600','500')"><i class="layui-icon">&#xe608;</i>添加</button><span class="x-right" style="line-height:40px">共有数据：{{pageInfo.total}}条</span></xblock>
+					<xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button><button class="layui-btn" onclick="member_add('添加客户组','/customergroup/tocustomergroupadd','600','500')"><i class="layui-icon">&#xe608;</i>添加</button><span class="x-right" style="line-height:40px">共有数据：{{pageInfo.total}}条</span></xblock>
 					<table class="layui-table">
 						<thead>
 							<tr>
@@ -108,9 +107,10 @@
 									{{l.id}}
 								</td>
 								<td>
-									<u style="cursor:pointer" onclick="member_show('张三','member-usergroup-query.html','10001','1400','800')">
+									<u style="cursor:pointer" onclick="member_show('客户组信息','/customergroup/tousergroupquery','10001','1400','800',this)">
                                {{l.groupname}}
                             </u>
+                             <div style="display: none">{{l.id}}</div>
 								</td>
 								
 								<td>
@@ -121,13 +121,11 @@
 
 								<td class="td-manage">
 
-									<a title="编辑" href="javascript:;" onclick="member_edit('编辑','member-user-update.html','4','','510')" class="ml-5" style="text-decoration:none">
+									<a title="编辑" href="javascript:;" onclick="member_edit('编辑','/customergroup/togroupupdate','4','','510',this)" class="ml-5" style="text-decoration:none">
 										<i class="layui-icon">&#xe642;</i>
 									</a>
+									<div style="display: none">{{l.id}}</div>
 									
-									<a title="删除" href="javascript:;" onclick="member_del(this,'1')" style="text-decoration:none">
-										<i class="layui-icon">&#xe640;</i>
-									</a>
 								</td>
 							</tr>
 		
@@ -215,14 +213,7 @@
 			});
 
 			//批量删除提交
-			function delAll() {
-				layer.confirm('确认要删除吗？', function(index) {
-					//捉到所有被选中的，发异步进行删除
-					layer.msg('删除成功', {
-						icon: 1
-					});
-				});
-			}
+			
 			/*用户-添加*/
 			function member_add(title, url, w, h) {
 				x_admin_show(title, url, w, h);
@@ -260,9 +251,7 @@
 				});
 			}
 			// 用户-编辑
-			function member_edit(title, url, id, w, h) {
-				x_admin_show(title, url, w, h);
-			}
+		
 			/*密码-修改*/
 			function member_password(title, url, id, w, h) {
 				x_admin_show(title, url, w, h);
@@ -284,6 +273,58 @@
 	
 <script type="text/javascript" th:src="@{/js/vue.js}"></script>
 <script type="text/javascript" th:inline="javascript">
+
+
+function delAll() {
+	var urlpath1=[[@{/customergroup/customergroupdeleteall}]]
+	
+	var modules=[];
+	  $("[name='s1']").each(function() {
+		if(this.checked){
+			var model={};
+			model.id=parseInt($(this).parent().next().text());
+			
+			
+			modules.push(model);
+		}
+	})
+	
+	var customergroup={};
+	 
+	  customergroup.mlist=modules;
+	  
+	  var customergroupStr=JSON.stringify(customergroup);
+	  console.log(customergroupStr);
+	
+	
+	
+	layer.confirm('客户的数据也会被删除，确认要删除吗？', function(index) {
+		//捉到所有被选中的，发异步进行删除
+		  $.ajax({
+			  url:urlpath1,
+			  data:customergroupStr,
+			  type:"post",
+			  processData:false,
+			  contentType:"application/json",
+			  datatype:"text",
+			  success:function(result){
+				  window.location.reload();
+				  console.log(result);
+			  }
+		  })
+	});
+}
+
+
+
+function member_edit(title, url, id, w, h,obj) {
+	var id=$(obj).next().text();
+
+	var url1="?id="+id;
+	
+	x_admin_show(title, url+url1, w, h);
+}
+
 
 var v=new Vue({
 	  el:".content",

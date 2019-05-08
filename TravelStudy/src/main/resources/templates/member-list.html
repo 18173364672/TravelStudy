@@ -42,6 +42,7 @@
 
 	<body>
 		<!-- 顶部开始 -->
+
 		<div class="container" th:include="head :: header">
     	
     	</div>
@@ -167,7 +168,7 @@
 									{{l.id}}
 								</td>
 								<td>
-									<u style="cursor:pointer" onclick="member_show('张三','member-show.html','10001','1400','800')">
+									<u style="cursor:pointer" onclick="member_show('客户','/customer/tocustomershow','10001','1400','800')">
                                {{l.username}}
                             </u>
 								</td>

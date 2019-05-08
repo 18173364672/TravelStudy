@@ -24,6 +24,16 @@
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
   
+    <delete id="delbygroupid">
+      delete from customerss where groupid=#{id}
+    
+    </delete>
+  
+   <select id="cuqueryusername" resultMap="BaseResultMap">
+       select * from customerss where username=#{username}
+   
+   </select>
+  
    <select id="cupquerys" resultMap="BaseResultMap">
      select * from customerss
      <where>

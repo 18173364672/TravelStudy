@@ -38,6 +38,7 @@ import com.github.pagehelper.PageInfo;
 @Controller
 @RequestMapping("/customer")
 public class CustomerController {
+
 	@Autowired
 	CustomerService cs;
 	@Autowired
@@ -46,6 +47,39 @@ public class CustomerController {
 	HttpServletResponse response;
 	@Autowired
 	PlateService plateservice;
+
+	// 客户信息
+	@RequestMapping("/tocustomershow")
+	public String tocustomershow() {
+		return "member-show";
+	}
+
+	// 客户反馈页面
+	@RequestMapping("/tocustomerfeedback")
+	public String tocustomerfeedback(Model model, HttpSession session) {
+		Employee es = (Employee) session.getAttribute("user");
+		List<Plate> plate = plateservice.queryLeftNav(es.getId());
+		model.addAttribute("plist", plate);
+		return "member-feedback";
+	}
+
+	// 活动通知页面
+	@RequestMapping("/tocustomerhdtz")
+	public String tocustomerhdtz(Model model, HttpSession session) {
+		Employee es = (Employee) session.getAttribute("user");
+		List<Plate> plate = plateservice.queryLeftNav(es.getId());
+		model.addAttribute("plist", plate);
+		return "member-kiss";
+	}
+
+	// 活动推荐页面
+	@RequestMapping("/tocustomerhdtj")
+	public String tocustomerhdtj(Model model, HttpSession session) {
+		Employee es = (Employee) session.getAttribute("user");
+		List<Plate> plate = plateservice.queryLeftNav(es.getId());
+		model.addAttribute("plist", plate);
+		return "member-level";
+	}
 
 	@RequestMapping("/customerdeletes")
 	public String customerdelete(Integer id) {
