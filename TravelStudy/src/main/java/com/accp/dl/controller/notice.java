@@ -172,8 +172,9 @@ public class notice {
 	 */
 	@RequestMapping("/addnotice")
 	@ResponseBody
-	public String addnotice(String title ,String content,Integer uid,MultipartFile file) {
-		notices.add(title, content, 1);			//缺少登录的id
+	public String addnotice(String title ,String content,MultipartFile file , HttpSession session) {
+		Employee user = (Employee)session.getAttribute("user");
+		notices.add(title, content, user.getId());			//缺少登录的id
 		Notice dueix = notices.queryAll();
 		noticesecond.toAdd(dueix.getId());
 		Notice stu = notices.selectOrderBy();
@@ -225,8 +226,9 @@ public class notice {
 	 */
 	@RequestMapping("/addBuMen")
 	@ResponseBody
-	public String addBuMen(String title ,String content,Integer uid,Integer rid,MultipartFile file) {
-		notices.add(title, content, 1);			//缺少登录的id
+	public String addBuMen(String title ,String content, HttpSession session,Integer rid,MultipartFile file) {
+		Employee user = (Employee)session.getAttribute("user");
+		notices.add(title, content, user.getId());			//缺少登录的id
 		Notice stu = notices.selectOrderBy();
 		int nid = stu.getId();
 		String url = "D:\\Fileupload\\";
@@ -271,10 +273,10 @@ public class notice {
 	 */
 	@RequestMapping("toAdd")
 	@ResponseBody
-	public String toAdd(String title ,String content,Integer uid,String spare1[],MultipartFile file) {
-		
+	public String toAdd(String title ,String content, HttpSession session,String spare1[],MultipartFile file) {
+		Employee user = (Employee)session.getAttribute("user");
 		for (int i = 0; i < spare1.length; i++) {
-			notices.toAdd(title, content, 1, spare1[i]);			//缺少登录的id
+			notices.toAdd(title, content, user.getId(), spare1[i]);			//缺少登录的id
 			
 			Notice stu = notices.selectOrderBy();
 			int nid = stu.getId();

@@ -47,8 +47,24 @@
             </div>
             <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
             <div id="main" style="width: 100%;height:400px;"></div>
-            <blockquote class="layui-elem-quote">
-
+            <blockquote class="layui-elem-quote" style="text-align: center;">
+            
+            	<p style="font-size:20px;font-weight:600;">每月收入表格数据图</p>
+            	
+            	<a id="daoru" class="layui-btn" style="position:absolute;right: 50px;top:540px" onclick="daoru()" >生成Excel文件</a>
+                
+                <br>
+                <table class="layui-table" >
+  					<thead>
+  						<tr>
+  							<th>月份</th>
+  							<th>收入</th>
+  						</tr>
+  					</thead>
+  					<tbody id="tb">
+  							
+  					</tbody>
+				</table>				
             </blockquote>
             
             <!-- 右侧内容框架，更改从这里结束 -->
@@ -99,6 +115,13 @@
    		 }
    		 
    	 });
+   	 
+   	 function daoru(){
+   			var years = $("#select").val();
+    		MonthsSrExcel = "http://localhost:8080/MonthsSrExcel?years="+years;
+    		window.location.href=MonthsSrExcel; 
+    }
+   	 
    	 show();
    	function show(){
    		var id = $("#select").val();
@@ -112,11 +135,34 @@
 			success:function(data){
 				vue.data=data;
 				begin();
+				happy(id);
 			}
 			
 		});
    		
    	}
+   	function happy(years){
+    	$.ajax({
+ 			url:"http://localhost:8080/toAjaxQueryMonthSrTwo",
+ 			data:{
+ 				years:years
+ 			},
+ 			type:"post",
+ 			dataType:"json",
+ 			success:function(data){
+ 				var user='';
+ 				for(var i =0;i<data.length;i++){
+ 					user+="<tr>";
+					user+="<td>"+data[i].months+"</td>";
+					user+="<td>"+data[i].sumprice+"</td>";
+					user+="</tr>";
+				}
+ 				$("#tb").html(" ");
+				$("#tb").append(user);
+ 			}
+ 			
+ 		});
+    }
    	function begin(){
    		setTimeout(function(){       
    			var myChart = echarts.init(dom);
@@ -132,12 +178,35 @@
    			            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
    			        }
    			    },
+   			 title: {
+                 text: '每月收入统计'
+             },
    			    grid: {
    			        left: '3%',
    			        right: '4%',
    			        bottom: '3%',
    			        containLabel: true
    			    },
+   			 toolbox: {
+   				show: true,
+                feature: {
+                    dataZoom: {
+                        yAxisIndex: 'none'
+                    },
+                    dataView: {readOnly: false},
+                    magicType: {type: ['line', 'bar']},
+                    restore: {},
+                    saveAsImage: {}
+                },
+                itemSize:18,//工具栏 icon 的大小
+                iconStyle:{
+                    normal:{
+                      borderColor:'skyblue',
+                      
+                    }
+                
+                }
+             },
    			    xAxis : [
    			        {
    			            type : 'category',

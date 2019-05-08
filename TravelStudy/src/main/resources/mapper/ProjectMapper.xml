@@ -389,5 +389,15 @@ ORDER BY months
 	GROUP BY Satisfied
   </select>
   
+  <select id="selectXmTable" resultMap="BaseResultMap2" parameterType="com.accp.domain.ProjectByTimeAndName">
+  SELECT p.Projectname,COUNT(*) AS 'RenQi',SUM(dj) AS 'countPrice',DATE_FORMAT(`time`,'%m') months,DATE_FORMAT(`time`, '%Y') years FROM `project` AS p
+INNER JOIN `orderdetail` AS odt
+ON p.id = odt.pid
+INNER JOIN `order` AS o
+ON odt.oid = o.id
+WHERE o.tid=5  AND YEAR(`time`)=#{years,jdbcType=VARCHAR} AND p.Projectname = #{projectname,jdbcType=VARCHAR}
+GROUP BY months,p.Projectname
+ORDER BY months
+  </select>
 
 </mapper>

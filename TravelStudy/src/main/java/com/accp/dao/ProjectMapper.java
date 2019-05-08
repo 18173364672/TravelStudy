@@ -42,4 +42,6 @@ public interface ProjectMapper {
     List<Project>proselect(Integer pid);
     
     List<Project>proxmselect();
+    
+    List<ProjectByTimeAndName> selectXmTable(@Param("years") String years,@Param("projectname") String name);
 }

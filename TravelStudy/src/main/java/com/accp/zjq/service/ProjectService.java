@@ -28,4 +28,8 @@ public class ProjectService {
 	public List<QuestionTj> selectByQuestion(String projectname){
 		return pm.selectByQuestionTj(projectname);
 	}
+	
+	public List<ProjectByTimeAndName> selectXmTable(String years,String name){
+		return pm.selectXmTable(years,name);
+	}
 }
