@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.accp.domain.Order;
 import com.accp.domain.OrderExample;
+import com.accp.domain.ResultMapOrderDetail;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 
@@ -32,7 +33,11 @@ public interface OrderService {
 
     int updateByPrimaryKey(Order record);
     
-    List<Order> queryAll(@Param ("name") String name);
+    List<Order> queryAll(String name);
     
     PageInfo<Order> queryByPage(String name , Integer currentPage , Integer pageSize);
+    
+    List<ResultMapOrderDetail> queryOrderDetail(Integer oid);
+    
+	int deleteOrderDetail(Integer id);
 }

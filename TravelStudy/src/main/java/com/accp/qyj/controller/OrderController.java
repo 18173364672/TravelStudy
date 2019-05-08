@@ -12,11 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.accp.domain.Employee;
 import com.accp.domain.Plate;
 import com.accp.qyj.service.OrderService;
 import com.accp.qyj.service.PlateService;
+import com.alibaba.fastjson.JSON;
 
 @Controller
 @RequestMapping("/order")
@@ -46,4 +48,23 @@ public class OrderController {
 		return "manage-order";
 	}
 	
+	
+	@RequestMapping("/detail")
+	public String detail(Model model , Integer oid) {
+		model.addAttribute("list", orderservice.queryOrderDetail(oid));
+		JSON.toJSONString(orderservice.queryOrderDetail(oid));
+		return "manage-order-detail";
+	}
+	
+	@RequestMapping("/detaildel")
+	@ResponseBody
+	public int detaildel(Integer id) {
+		return orderservice.deleteOrderDetail(id);
+	}
+	
+	@RequestMapping("/member-project-group-up")
+	public String member_project_group_up(Model model , Integer id) {
+		
+		return "member-project-group-up";
+	}
 }

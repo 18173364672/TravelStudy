@@ -31,6 +31,9 @@
   <resultMap type="com.accp.domain.Order" id="BaseResultMapQueryAll" extends="BaseResultMap">
   		<result column="ename" property="ename" jdbcType="VARCHAR" />
   		<result column="cname" property="cname" jdbcType="VARCHAR" />
+  		<association property="zname" column="lid"  javaType="com.accp.domain.Employee" select="zl">
+  				
+  		</association>
   </resultMap> 
   
   <select id="queryAll" resultMap="BaseResultMapQueryAll">
@@ -47,6 +50,33 @@
 	</where>
   </select>
   
+  
+  <select id="zl" resultType="string">
+  		SELECT e.`Employeename` FROM `order` AS o LEFT JOIN `employee` AS e ON o.`lid` = e.`id` WHERE lid = #{lid}
+  </select>
+  
+  
+  <resultMap type="com.accp.domain.ResultMapOrderDetail" id="ResultMapOrderDetail">
+  		<id column="id" property="id"/>
+  		<result column="pname" property="pname"/>
+  		<result column="ename" property="ename"/>
+  		<result column="fname" property="fname"/>
+  		<result column="starttime" property="starttime"/>
+  		<result column="endtime" property="endtime"/>
+  </resultMap>
+  
+  <select id="queryOrderDetail" resultMap="ResultMapOrderDetail">
+  		SELECT od.`id` AS id , p.`Projectname` AS pname , e.`Employeename` AS ename , f.`name` AS fname , od.`starttime` , od.`endtime` FROM `orderdetail` AS od
+		LEFT JOIN `field` AS f ON od.`fid` = f.`id`
+		LEFT JOIN `project` AS p ON od.`pid` = p.`Id`
+		LEFT JOIN `employee` AS e ON od.`Spare1` = e.`id`
+		where od.`oid` = #{oid}
+  </select>
+  
+  
+  <delete id="deleteOrderDetail" parameterType="java.lang.Integer">
+  		delete from orderdetail where id = #{id}
+  </delete>
   
   <sql id="Example_Where_Clause" >
     <where >
