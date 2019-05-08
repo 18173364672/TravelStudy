@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.accp.dao.OrderMapper;
 import com.accp.domain.Order;
 import com.accp.domain.OrderExample;
+import com.accp.domain.ResultMapOrderDetail;
 import com.accp.qyj.service.OrderService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -36,7 +37,7 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public int deleteByPrimaryKey(Integer id) {
 		// TODO Auto-generated method stub
-		return 0;
+		return m.deleteByPrimaryKey(id);
 	}
 
 	@Override
@@ -100,6 +101,18 @@ public class OrderServiceImpl implements OrderService{
 		m.queryAll(name);
 		
 		return page.toPageInfo();
+	}
+
+	@Override
+	public List<ResultMapOrderDetail> queryOrderDetail(Integer oid) {
+		// TODO Auto-generated method stub
+		return m.queryOrderDetail(oid);
+	}
+
+	@Override
+	public int deleteOrderDetail(Integer id) {
+		// TODO Auto-generated method stub
+		return m.deleteOrderDetail(id);
 	}
 	
 }
