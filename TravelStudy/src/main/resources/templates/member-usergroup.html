@@ -64,7 +64,7 @@
 					</dl>
 				</li>
 				<li class="layui-nav-item">
-					<a href="/">前台首页</a>
+				
 				</li>
 			</ul>
 		</div>
@@ -371,9 +371,10 @@
 									{{l.id}}
 								</td>
 								<td>
-									<u style="cursor:pointer" onclick="member_show('客户组信息','/customergroup/tousergroupquery','10001','1400','800')">
+									<u style="cursor:pointer" onclick="member_show('客户组信息','/customergroup/tousergroupquery','10001','1400','800',this)">
                                {{l.groupname}}
                             </u>
+                             <div style="display: none">{{l.id}}</div>
 								</td>
 								
 								<td>
@@ -388,9 +389,7 @@
 										<i class="layui-icon">&#xe642;</i>
 									</a>
 									<div style="display: none">{{l.id}}</div>
-									<a title="删除" href="javascript:;" onclick="member_del(this,'1')" style="text-decoration:none">
-										<i class="layui-icon">&#xe640;</i>
-									</a>
+									
 								</td>
 							</tr>
 		

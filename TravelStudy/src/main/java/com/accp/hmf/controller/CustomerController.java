@@ -44,6 +44,12 @@ public class CustomerController {
     HttpServletResponse response;
     
     
+    //客户信息
+    @RequestMapping("/tocustomershow")
+    public String tocustomershow() {
+    	return "member-show";
+    }
+    
     //客户反馈页面
     @RequestMapping("/tocustomerfeedback")
     public String tocustomerfeedback() {
