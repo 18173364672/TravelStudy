@@ -64,7 +64,9 @@
   SELECT *FROM `project` WHERE `id`=#{pid}
   </select>
   
-  
+  <select id="queryByActId" resultMap="BaseResultMap">
+  SELECT p.* FROM activity a INNER JOIN eventitems e ON a.id=e.`aid` INNER JOIN project p ON e.`pid`=p.`Id` WHERE a.id=#{id}
+  </select>
   
   <sql id="Example_Where_Clause" >
     <where >
@@ -252,6 +254,9 @@
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
+  </select>
+  <select id="selectPorject" resultMap="BaseResultMap">
+  	SELECT * FROM project
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
     update project

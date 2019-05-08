@@ -104,4 +104,10 @@ public class ProjectServiceimpl implements ProjectService{
 		return pm.queryd(id);
 	}
 
+	@Override
+	public List<Project> selectPorject() {
+		// TODO Auto-generated method stub
+		return pm.selectPorject();
+	}
+
 }

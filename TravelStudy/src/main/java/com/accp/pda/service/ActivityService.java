@@ -5,6 +5,7 @@ import java.util.List;
 import com.accp.domain.Activity;
 import com.accp.domain.ActivityExample;
 import com.accp.domain.Project;
+import com.accp.pda.vo.ActivtyVo;
 
 public interface ActivityService {
 	
@@ -20,4 +21,8 @@ public interface ActivityService {
     
     List<Project> selectPorject();
 
+    ActivtyVo acvo(Integer id);
+    
+    int insertSelective(Activity record);
+    int insertevtime(Activity ac);
 }

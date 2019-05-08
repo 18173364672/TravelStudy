@@ -125,6 +125,7 @@
       #{spare3,jdbcType=VARCHAR}, #{spare4,jdbcType=VARCHAR}, #{spare5,jdbcType=VARCHAR}
       )
   </insert>
+  
   <insert id="insertSelective" parameterType="com.accp.domain.Eventitems" >
     insert into eventitems
     <trim prefix="(" suffix=")" suffixOverrides="," >

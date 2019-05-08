@@ -20,14 +20,14 @@
         <div class="page-content">
           <div class="content">
             <!-- 右侧内容框架，更改从这里开始 -->
-            <form class="layui-form">
+            <form class="layui-form" action="add" method="get">
               
                 <div class="layui-form-item">
                     <label for="L_username" class="layui-form-label">
                         <span class="x-red">*</span>活动名称
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="L_username" name="username" required="" lay-verify="nikename"
+                        <input type="text" id="L_username" name="aName" required="" lay-verify="nikename"
                         autocomplete="off" class="layui-input">
                     </div>
                 </div>
@@ -37,7 +37,7 @@
                         <span class="x-red">*</span>活动主办方
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="firstPeople" name="username" required="" lay-verify="nikename"
+                        <input type="text" id="firstPeople" name="aZbf" required="" lay-verify="nikename"
                         autocomplete="off" class="layui-input">
                     </div>
                 </div>
@@ -48,26 +48,55 @@
                         <span class="x-red">*</span>活动价格
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="L_address" name="address" required="" lay-verify="nikename"
+                        <input type="text" id="L_address" name="aPrice" required="" lay-verify="nikename"
                         autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 
                    <div class="layui-form-item" style="margin-left: 110px;">
-                    <button class="layui-btn layui-btn-danger" onclick="" style="width: 190px;">选择项目</button>
+                    <div class="page-content">
+			<div class="content" style="margin-left: -45px;">
+				<!-- 右侧内容框架，更改从这里开始 -->
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th><input type="checkbox" id="checkall" value=""></th>
+							<th>ID</th>
+							<th>活动名称</th>
+							<th>活动介绍</th>
+							<th>活动价格</th>
+						</tr>
+					</thead>
+					<tbody>
 
+						<tr th:each="item,state : ${list}">
+							<td><input type="checkbox" th:value="${item.id}" class="s1" th:name="elist[+${state.index}+].pid"></td>
+							<td th:text="${item.id}" class="acid" name="acid"></td>
+
+
+							<td th:text="${item.projectname}">
+
+							</td>
+
+
+							<td th:text="${item.context}"></td>
+
+
+							<td th:text="${item.price}"></td>
+							
+						</tr>
+					
+					</tbody>
+				</table>
+
+				<!-- 右侧内容框架，更改从这里结束 -->
+			</div>
+		</div>
                 </div>
-                
-                 
-                
-                
-                
-               
-                
                 <div class="layui-form-item">
                     <label for="L_repass" class="layui-form-label">
                     </label>
-                    <button  class="layui-btn" lay-filter="add" lay-submit="">
+                    <button  class="layui-btn" lay-filter="add" lay-submit="" onclick="submit_()">
                         增加
                     </button>
                 </div>
@@ -78,6 +107,17 @@
         <!-- 右侧主体结束 -->
     </div>
     <!-- 中部结束 -->
+    <script type="text/javascript">
+    function submit_(){
+    	var index = parent.layer.getFrameIndex(window.name);
+    	parent.layer.close(index);
+    }
+    
+    
+	    function member_show(title, url ) {
+			x_admin_show(title, url);
+		}
+    </script>
     <script>
     //百度统计可去掉
     var _hmt = _hmt || [];

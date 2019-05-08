@@ -35,4 +35,6 @@ public interface ActivityMapper {
     List<Activity> selectByName(@Param("name") String name);
     
     Activity activitylbselect(Integer id);
+    
+    int insertevtime(Activity ac);
 }

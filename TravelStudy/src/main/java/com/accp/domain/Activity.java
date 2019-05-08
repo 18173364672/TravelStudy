@@ -29,7 +29,10 @@ public class Activity {
 
     private String spare5;
     
+
     private List<Eventitems> evelist; 
+
+	private List<Eventitems> elist;
 
 	
 
@@ -39,6 +42,16 @@ public class Activity {
 
 	public void setEvelist(List<Eventitems> evelist) {
 		this.evelist = evelist;
+	}
+
+
+
+    public List<Eventitems> getElist() {
+		return elist;
+	}
+
+	public void setElist(List<Eventitems> elist) {
+		this.elist = elist;
 	}
 
 	public Integer getId() {
