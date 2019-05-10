@@ -69,7 +69,7 @@ public class OrganizationController {
 	//部门修改
 	@RequestMapping("/organizationedit")
 	public String organizationedit(@RequestBody Organization organization) {
-		os.updateByPrimaryKey(organization);
+		os.updateByPrimaryKeySelective(organization);
 		for (Organizationzw oz : organization.getOlist()) {
 			os.deletezw(oz.getId());
 		}

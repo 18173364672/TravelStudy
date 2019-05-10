@@ -159,7 +159,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.accp.domain.Project" >
+  <insert id="insert" parameterType="com.accp.domain.Project"  >
     insert into project (Id, Projectname, Context, 
       Price, Type, ids, ids1, 
       Spare1, Spare2, Spare3, 
@@ -169,7 +169,7 @@
       #{spare1,jdbcType=VARCHAR}, #{spare2,jdbcType=VARCHAR}, #{spare3,jdbcType=VARCHAR}, 
       #{spare4,jdbcType=VARCHAR}, #{spare5,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.accp.domain.Project" >
+  <insert id="insertSelective" parameterType="com.accp.domain.Project" keyProperty="id" useGeneratedKeys="true">
     insert into project
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

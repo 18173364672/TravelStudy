@@ -44,6 +44,7 @@ import com.accp.zjq.service.ActivityService;
 import com.accp.zjq.service.OrderService;
 import com.accp.zjq.service.ProjectService;
 import com.accp.zjq.service.UserprojectdiscussService;
+import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.core.sym.Name;
 import com.mysql.cj.conf.StringProperty;
 
@@ -527,6 +528,7 @@ public class TjController {
 		Employee es = (Employee)session.getAttribute("user");
 		List<Plate> plate = plateservice.queryLeftNav(es.getId());
 		model.addAttribute("plist", plate);
+		
 		System.out.println("正在加载每月订单数...");
 		System.out.println("查询到以下数据:");
 		 Calendar date = Calendar.getInstance();

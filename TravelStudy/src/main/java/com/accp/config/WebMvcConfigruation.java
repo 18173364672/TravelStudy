@@ -54,7 +54,6 @@ public class WebMvcConfigruation extends WebMvcConfigurationSupport {
 	public StringHttpMessageConverter stringHttpMessageConverter() {
 		return new StringHttpMessageConverter(StandardCharsets.UTF_8);
 	}
-
 	@Bean
 	public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
 		return new MappingJackson2HttpMessageConverter();

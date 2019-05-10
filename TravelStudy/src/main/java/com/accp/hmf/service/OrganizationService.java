@@ -13,7 +13,7 @@ public interface OrganizationService {
 	 int deleteByPrimaryKey(Integer id);
 	
 	 //更新部门
-	 int updateByPrimaryKey(Organization record);
+	 int updateByPrimaryKeySelective(Organization record);
 	
 	 //查询部门名称
 	public Organization queryOrname(Integer id);

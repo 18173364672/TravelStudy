@@ -162,8 +162,8 @@
                             {{l.createtime}}
                         </td>
                         
-                        <td v-for="i in list">
-                        	<span v-if="i.rid == l.id">{{i.name}}</span>
+                        <td v-for="i in list" v-if="i.rid == l.id">
+                        	{{i.name}}
                         </td>
                       
                         <td class="td-manage" v-if="l.state==1">

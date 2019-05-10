@@ -48,12 +48,7 @@ public class OrganizationServiceimpl implements OrganizationService{
 		return om.queryOrname(id);
 	}
 
-	@Override
-	public int updateByPrimaryKey(Organization record) {
-		// TODO Auto-generated method stub
-		return om.updateByPrimaryKey(record);
-	}
-
+	
 	@Override
 	public int deleteByPrimaryKey(Integer id) {
 		// TODO Auto-generated method stub
@@ -82,6 +77,12 @@ public class OrganizationServiceimpl implements OrganizationService{
 	public int deletezw(Integer id) {
 		// TODO Auto-generated method stub
 		return oim.deletezw(id);
+	}
+
+	@Override
+	public int updateByPrimaryKeySelective(Organization record) {
+		// TODO Auto-generated method stub
+		return om.updateByPrimaryKeySelective(record);
 	}
      
 	

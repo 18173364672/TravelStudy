@@ -411,8 +411,8 @@ public class notice {
 	 */
 	@RequestMapping("/MynoticeQuery")
 	@ResponseBody
-	public PageInfo<Notice> MynoticeQuery(Model model,Integer currentPage,String title,Integer pageSize,Integer uid) {
-			
+	public PageInfo<Notice> MynoticeQuery(Model model,Integer currentPage, HttpSession session,String title,Integer pageSize,Integer uid) {
+		Employee user = (Employee)session.getAttribute("user");
 //		System.out.println("进来了!!");
 		
 		if (currentPage == null) {
@@ -422,7 +422,7 @@ public class notice {
 			title ="";
 		}
 //		String spare = uid.toString();
-		PageInfo<Notice> pageList = notices.Myquery(currentPage,title, 5,"2");
+		PageInfo<Notice> pageList = notices.Myquery(currentPage,title, 5,user.getId().toString());
 		return pageList;
 	}
 	
