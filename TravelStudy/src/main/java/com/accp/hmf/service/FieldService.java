@@ -44,5 +44,9 @@ public interface FieldService {
 	
 	 //查询类型下多个场地
 	 List<Field> fquerycd(Integer tid);
+	 
+	 int fcount(Integer tid);
+	 
+	
 	
 }

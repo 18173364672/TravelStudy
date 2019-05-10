@@ -111,6 +111,13 @@ public class FieldServiceimpl implements FieldService{
 		return fm.fquerycd(tid);
 	}
 
+
+	@Override
+	public int fcount(Integer tid) {
+		// TODO Auto-generated method stub
+		return fm.fcount(tid);
+	}
+
 	
 
 }

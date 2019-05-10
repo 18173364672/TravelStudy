@@ -73,8 +73,17 @@ public class CustomerController {
     
     @RequestMapping("/customerdeletes")
     public String customerdelete(Integer id) {
- 		cs.deleteByPrimaryKey(id);
- 	   
+ 		
+ 	   Customerss customerss=cs.cuqueryd(id);
+ 	   if(customerss.getSpare1().equals("负责人")) {
+ 		   cs.deleteByPrimaryKey(id);
+ 		   Customergroup customergroup=new Customergroup();
+ 		  customergroup.setFid(0);
+ 		  customergroup.setId(customerss.getGroupid());
+ 		  cgs.updateByPrimaryKeySelective(customergroup);
+ 	   }else {
+ 		  cs.deleteByPrimaryKey(id);
+ 	   }
  	   
  		return "redirect:/customer/tomemberdel";
     }
@@ -83,7 +92,18 @@ public class CustomerController {
        @RequestMapping("/customerdelete")
        public String customerdelete(@RequestBody Customerss customerss) {
     		for (Customerss c : customerss.getMlist()) {
-				cs.deleteByPrimaryKey(c.getId());
+    			Customerss c1=cs.cuqueryd(c.getId());
+    			if(c1.getSpare1().equals("负责人")) {
+    				cs.deleteByPrimaryKey(c.getId());
+    				 Customergroup customergroup=new Customergroup();
+    		 		  customergroup.setFid(0);
+    		 		 customergroup.setId(c1.getGroupid());
+    		 		  cgs.updateByPrimaryKeySelective(customergroup);
+    			}else {
+    				cs.deleteByPrimaryKey(c.getId());
+    			}
+    			
+				
 			}
     	   
     	   

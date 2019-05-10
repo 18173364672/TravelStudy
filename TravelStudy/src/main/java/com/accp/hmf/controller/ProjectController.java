@@ -136,7 +136,7 @@ public class ProjectController {
 	
 	 @RequestMapping("/fileupload")
 	 @ResponseBody
-	   public String fileUpload(MultipartFile []file,Integer pid) {
+	   public int fileUpload(MultipartFile []file,Integer pid) {
 		  System.out.println(pid);
 		  
 		   String url="E:\\file\\";
@@ -167,7 +167,7 @@ public class ProjectController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		   return "ok";
+		   return 0;
 	   }
 	
 	

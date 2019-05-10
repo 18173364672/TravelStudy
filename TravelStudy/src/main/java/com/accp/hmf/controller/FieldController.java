@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.accp.domain.Field;
 import com.accp.domain.Fieldtype;
 import com.accp.hmf.service.FieldService;
+import com.accp.hmf.service.FieldtypeService;
 import com.github.pagehelper.PageInfo;
 
 @Controller
@@ -19,6 +20,9 @@ public class FieldController {
         
 	   @Autowired
 	   FieldService fs;
+	   @Autowired
+	   FieldtypeService ffs;
+	 
 	   
 	   @RequestMapping("/fieldedit")
 	   public String fieldedit(Field field) {
@@ -38,7 +42,13 @@ public class FieldController {
 	   @RequestMapping("/fielddeletes")
 	   public String fielddeletes(@RequestBody Field field) {
 		   for (Field f : field.getMlist()) {
+			   Field f1=fs.fqueryd(f.getId());   
 			fs.deleteByPrimaryKey(f.getId());
+			 int count=fs.fcount(f1.getTid());
+			 if(count==0) {
+		    		
+	    		 ffs.deleteByPrimaryKey(f1.getTid());
+	    	 }
 		}
 		   
 		   return "redirect:/field/tofieldquerypage";
@@ -46,8 +56,14 @@ public class FieldController {
 	   
 	     @RequestMapping("/fielddelete")
 	     public String fielddelete(Integer id) {
-	    	 
+	    	 Field field=fs.fqueryd(id);
 	    	 fs.deleteByPrimaryKey(id);
+	    	 int count=fs.fcount(field.getTid());
+	    	 if(count==0) {
+	    		
+	    		 ffs.deleteByPrimaryKey(field.getTid());
+	    	 }
+	    	 
 	    	 
 	    	 return "redirect:/field/tofieldquerypage";
 	     }
@@ -63,7 +79,8 @@ public class FieldController {
 	     }
 	   
 	     @RequestMapping("/fieldadd")
-	     public String fieldadd(@RequestBody Fieldtype fieldtype) {
+	     @ResponseBody
+	     public int fieldadd(@RequestBody Fieldtype fieldtype) {
 	    	 fs.insertSelective(fieldtype);
 	    	
 	    	 for (Field f : fieldtype.getFlist()) {
@@ -73,7 +90,7 @@ public class FieldController {
 			}
 	    	 
 	    	 
-	    	 return "redirect:/field/tofieldquerypage";
+	    	 return 0;
 	     }
 	     
 	      @RequestMapping("/tofieldadd")

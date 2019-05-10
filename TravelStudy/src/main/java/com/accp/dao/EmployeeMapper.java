@@ -39,4 +39,6 @@ public interface EmployeeMapper {
     String emqueryname(Integer id);
     
     List<Employee> queryjl(@Param("job") String job);
+    
+    int deletebyspare1(Integer id);
 }

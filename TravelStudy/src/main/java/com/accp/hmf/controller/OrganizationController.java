@@ -1,6 +1,10 @@
 package com.accp.hmf.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.accp.domain.Employee;
 import com.accp.domain.Organization;
 import com.accp.domain.Organizationzw;
+import com.accp.hmf.service.EmployeeService;
 import com.accp.hmf.service.OrganizationService;
 import com.github.pagehelper.PageInfo;
 
@@ -20,12 +25,17 @@ import com.github.pagehelper.PageInfo;
 public class OrganizationController {
 	@Autowired
 	OrganizationService os;
+	@Autowired
+	EmployeeService es;
+	  @Autowired
+	    HttpServletResponse response;
 	
 	
 	//删除职位
 	@RequestMapping("/organizationzwdelete")
 	public String organizationzwdelete(Integer id,Integer bmid) {
 		os.deletezw(id);
+	
 		return "redirect:/organization/toorganizationedit?id="+bmid;
 	}
 	
@@ -45,6 +55,7 @@ public class OrganizationController {
 	@RequestMapping("/organizationdeletes")
 	public String organizationdeletes(Integer id) {
 		os.deleteByPrimaryKey(id);
+		es.deletebyspare1(id);
 		return "redirect:/organization/organizationquerypage";
 	}
 	
@@ -54,6 +65,7 @@ public class OrganizationController {
 	public String organizationdelete(@RequestBody Organization organization) {
 		for (Organization or : organization.getMlist()) {
 			os.deleteByPrimaryKey(or.getId());
+			es.deletebyspare1(or.getId());
 		}
 		
 		return "redirect:/organization/organizationquerypage";
@@ -92,7 +104,7 @@ public class OrganizationController {
 	//部门新增
 	@RequestMapping("/organizationadd")
 	@ResponseBody
-	public Organization organizationadd(@RequestBody Organization organization) {
+	public int organizationadd(@RequestBody Organization organization) {
 		
 		organization.setCount(0);
 		os.insertSelective(organization);
@@ -105,7 +117,9 @@ public class OrganizationController {
 		}
 		
 		
-		return organization;
+		
+		
+		return 0;
 	}
 	
 	//跳转到部门新增页面

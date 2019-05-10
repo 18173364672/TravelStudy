@@ -24,6 +24,11 @@
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
   
+    <select id="querybygroupid" resultMap="BaseResultMap">
+       select * from customerss where groupid=#{id}
+    
+    </select>
+  
     <delete id="delbygroupid">
       delete from customerss where groupid=#{id}
     

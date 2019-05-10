@@ -21,6 +21,10 @@
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
   
+  <delete id="deletebyspare1">
+    delete from employee where spare1=#{id}
+  
+  </delete>
   
   <select id="emqueryname" resultType="string">
      select employeename from employee where id=#{id}

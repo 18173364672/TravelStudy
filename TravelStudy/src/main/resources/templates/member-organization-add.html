@@ -75,7 +75,7 @@
               <div class="layui-form-item">
                     <label for="L_repass" class="layui-form-label">
                     </label>
-                    <button  class="layui-btn" lay-filter="add" onclick="submit_()">
+                    <button  class="layui-btn"  onclick="submit_()">
                         增加
                     </button>
                 </div>
@@ -122,12 +122,14 @@
 					  var cid=$("[name='name']").val();
 					  cid=data.id;
 					  console.log(cid);
-					  
+					  alert("新增成功！");
+					  var index=parent.layer.getFrameIndex(window.name);
+					  parent.layer.close(index);
+					    window.parent.location.reload();
 				  }
 			  })
 	   
-	  var index=parent.layer.getFrameIndex(window.name);
-	  parent.layer.close(index)
+	
 	  
 }
 

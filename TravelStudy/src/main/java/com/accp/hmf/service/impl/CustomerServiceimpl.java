@@ -118,6 +118,22 @@ public class CustomerServiceimpl implements CustomerService{
 		return cm.delbygroupid(id);
 	}
 
+	@Override
+	public List<Customerss> querybygroupid(Integer id) {
+		// TODO Auto-generated method stub
+		return cm.querybygroupid(id);
+	}
+
+	@Override
+	public PageInfo<Customerss> grquerypage(Integer currentPage, Integer pageSize,Integer id) {
+		// TODO Auto-generated method stub
+		Page<Customerss> p = PageHelper.startPage(currentPage, pageSize,true);
+		List<Customerss> list=cm.querybygroupid(id);
+		
+		
+		return p.toPageInfo();
+	}
+
 
 
 }

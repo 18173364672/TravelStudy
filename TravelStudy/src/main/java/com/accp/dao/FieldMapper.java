@@ -35,4 +35,6 @@ public interface FieldMapper {
     String fqueryname(Integer id);
     
     List<Field> fquerycd(Integer tid);
+    
+    int fcount(Integer tid);
 }

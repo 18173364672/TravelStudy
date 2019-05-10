@@ -127,6 +127,12 @@ public class EmployeeServiceimpl implements EmployeeService{
 		return em.queryjl(job);
 	}
 
+	@Override
+	public int deletebyspare1(Integer id) {
+		// TODO Auto-generated method stub
+		return em.deletebyspare1(id);
+	}
+
 	
 	
 	

@@ -32,4 +32,8 @@ public interface CustomerService {
 	 public PageInfo<Customerss> querypages(Integer currentPage,Integer pageSize,String createtime,String username);
 
 	 int delbygroupid(Integer id);
+	 
+	 List<Customerss> querybygroupid(Integer id);
+	 
+	 public PageInfo<Customerss> grquerypage(Integer currentPage,Integer pageSize,Integer id);
 }

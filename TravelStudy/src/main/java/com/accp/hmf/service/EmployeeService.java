@@ -50,7 +50,8 @@ public interface EmployeeService {
     
     //查询教练
     List<Employee> queryjl(@Param("job") String job);
- 
     
+    //删除部门对应员工
+    int deletebyspare1(Integer id);
     
 }

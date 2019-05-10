@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 	<head>
 		<meta charset="UTF-8">
@@ -58,7 +58,9 @@
 							</div>
 						</div>
 					</form>
-					<xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button><span class="x-right" style="line-height:40px">共有数据：88 条</span></xblock>
+					<xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button>
+					<button class="layui-btn" onclick="member_add('添加用户','/customer/tocustomeradd','600','500')"><i class="layui-icon">&#xe608;</i>添加</button>
+					<span class="x-right" style="line-height:40px">共有数据：{{pageInfo.total}} 条</span></xblock>
 					<table class="layui-table">
 						<thead>
 							<tr>
@@ -67,6 +69,7 @@
 								</th>
 								<th>
 									ID
+									<input type="hidden" th:value="${gid}" name="gid">
 								</th>
 								<th>
 									用户名
@@ -85,46 +88,52 @@
 								<th>
 									邮箱
 								</th>
-							
+							<th>
+									客户类型
+								</th>
 								<th>
 									操作
 								</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
+							<tr v-for="l in pageInfo.list">
 								<td>
 									<input type="checkbox" value="1" name="s1">
 								</td>
 								<td>
-									1
+									{{l.id}}
 								</td>
 								<td>
 						
-                                小明
+                                {{l.username}}
                      
 								</td>
 								<td>
-									男
+									{{l.sex}}
 								</td>
 								
 								<td>
 									
-									18
+									{{l.spare2}}
 								</td>
 								<td>
-									13000000000
+									{{l.phone}}
 								</td>
 								<td>
-									admin@mail.com
+									{{l.email}}
+								</td>
+								<td>
+									{{l.spare1}}
 								</td>
 								
 								<td class="td-manage">
 
 									
-									<a title="删除" href="javascript:;" onclick="member_del(this,'1')" style="text-decoration:none">
+									<a title="删除" href="javascript:;" onclick="member_del(this)" style="text-decoration:none">
 										<i class="layui-icon">&#xe640;</i>
 									</a>
+									<div style="display: none">{{l.id}}</div>
 								</td>
 							</tr>
 		
@@ -136,8 +145,8 @@
 						</tbody>
 					</table>
 					<xblock>
-						<button class="layui-btn layui-btn-warm">上一页</button>
-						<button class="layui-btn layui-btn-danger">下一页</button>
+						<button class="layui-btn layui-btn-warm" v-on:click="prePage()">上一页</button>
+						<button class="layui-btn layui-btn-danger" v-on:click="nextPage()">下一页</button>
 					</xblock>
 
 					<!-- 右侧内容框架，更改从这里结束 -->
@@ -265,16 +274,7 @@
 				x_admin_show(title, url, w, h);
 			}
 			/*用户-删除*/
-			function member_del(obj, id) {
-				layer.confirm('确认要删除吗？', function(index) {
-					//发异步删除数据
-					$(obj).parents("tr").remove();
-					layer.msg('已删除!', {
-						icon: 1,
-						time: 1000
-					});
-				});
-			}
+		
 		</script>
 		<script>
 			//百度统计可去掉
@@ -287,5 +287,114 @@
 			})();
 		</script>
 	</body>
+	
+<script type="text/javascript" th:src="@{/js/vue.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+
+
+function member_del(obj) {
+	var id=$(obj).next().text();
+	var urlpath2=[[@{/customer/customerdeletes}]];
+	layer.confirm('确认要删除吗？', function(index) {
+		//发异步删除数据
+
+		 $.ajax({
+			 url:urlpath2,
+			 data:{
+				 id:id
+				 
+			 },
+			 type:"post",
+			 datatype:"json",
+			 success:function(data){
+				 window.location.reload();
+			 }
+		});
+		
+		
+		
+	});
+}
+
+
+var v=new Vue({
+	  el:".content",
+	  data:{
+		  pageInfo:"pageInfo",
+		  name:""
+	  },
+	  methods:{
+		  getGoodsHref:function(val){
+			    return 'queryd?id='+val
+			},
+			deleteHref:function(val){
+			    return 'delete?id='+val
+			},prePage:function(){
+	    		if(this.pageInfo.prePage==0){
+	    			alert("到顶了");
+	    			return;
+	    		}
+	    		getmethod(this.pageInfo.prePage);
+	    	},
+	    	nextPage:function(){
+	    		if(this.pageInfo.prePage==this.pageInfo.pages){
+	    			alert("到底了");
+	    		}
+	    		getmethod(this.pageInfo.nextPage);
+	    		
+	    	}
+
+	  },
+	  watch:{
+		  name:function(){
+			console.log(v.name);
+			getmethod(1,v.name)
+		},
+	  }
+});
+
+
+
+
+var urlpath = [[@{/customergroup/grquerypage}]];
+var gid=$("[name='gid']").val();
+$(function(){
+
+
+	
+
+	$.ajax({
+			 url:urlpath,
+			 data:{
+				 id:gid
+			 },
+			 type:"post",
+			 datatype:"json",
+			 success:function(data){
+				 v.pageInfo=data;
+				 console.log(data);
+			 }
+		});
+	
+	
+})
+
+function getmethod(page){
+	   $.ajax({
+		  	 url:urlpath,
+		  	 data:{
+		  		currentPage:page,
+		  		id:gid
+		  		
+		  	 },
+		  	 datatype:"json",
+		  	 success:function(data){
+		  		v.pageInfo=data;
+		  		
+		  	 }
+		   })
+}
+
+</script>
 
 </html>

@@ -101,14 +101,17 @@
 				  processData:false,
 				  contentType:"application/json",
 				  datatype:"text",
-				  success:function(){
+				  success:function(res){
+					  console.log(res);
 					 alert("新增成功");
+					 var index=parent.layer.getFrameIndex(window.name);
+					  parent.layer.close(index);
+					  window.parent.location.reload();
 					  
 				  }
 			  })
 	   
-	  var index=parent.layer.getFrameIndex(window.name);
-	  parent.layer.close(index)
+	  
 
       
 

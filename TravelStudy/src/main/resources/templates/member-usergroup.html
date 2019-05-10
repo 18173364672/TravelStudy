@@ -483,9 +483,7 @@
 				x_admin_show(title, url, w, h);
 			}
 			/*用户-查看*/
-			function member_show(title, url, id, w, h) {
-				x_admin_show(title, url, w, h);
-			}
+		
 
 			/*用户-停用*/
 			function member_stop(obj, id) {
@@ -537,6 +535,14 @@
 	
 <script type="text/javascript" th:src="@{/js/vue.js}"></script>
 <script type="text/javascript" th:inline="javascript">
+
+function member_show(title, url, id, w, h,obj) {
+	var id=$(obj).next().text();
+	var url1="?id="+id;
+	
+	
+	x_admin_show(title, url+url1, w, h);
+}
 
 
 function delAll() {

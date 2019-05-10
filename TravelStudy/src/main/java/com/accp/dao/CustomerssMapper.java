@@ -45,4 +45,6 @@ public interface CustomerssMapper {
     Customerss dl(@Param("Username")String Username,@Param("UserPassWord")String UserPassWord);
 
     int delbygroupid(Integer id);
+    
+    List<Customerss> querybygroupid(Integer id);
 }

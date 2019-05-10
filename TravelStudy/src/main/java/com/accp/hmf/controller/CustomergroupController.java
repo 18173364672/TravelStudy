@@ -60,9 +60,13 @@ public class CustomergroupController {
 		 String username=customergroup.getFzr();
 		 Customerss customerss1=cs.cuqueryusername(username);
 		 if(customerss1!=null) {
-			 Customerss customerss=cs.cuqueryd(customergroup.getFid());
-			 customerss.setSpare1("普通客户");
-			 cs.updateByPrimaryKeySelective(customerss);
+			 if(customergroup.getFid()>0) {
+				 Customerss customerss=cs.cuqueryd(customergroup.getFid());
+				 customerss.setSpare1("普通客户");
+				 cs.updateByPrimaryKeySelective(customerss);
+			 }
+			
+			
 			 customerss1.setSpare1("负责人");
 			 cs.updateByPrimaryKeySelective(customerss1);
 			 customergroup.setFid(customerss1.getId());
@@ -119,19 +123,46 @@ public class CustomergroupController {
 	 //客户组更新页面
 	 @RequestMapping("/togroupupdate")
 	 public String togroupupdate(Model model,Integer id) {
-		 Customergroup customergroup=cgs.groupname(id);
-		 Customerss customerss=cs.cuqueryd(customergroup.getFid());
-		 customergroup.setFzr(customerss.getUsername());
-		 model.addAttribute("customergroup", customergroup);
+		
+			 Customergroup customergroup=cgs.groupname(id);
+			 if(customergroup.getFid()>0) {
+				 Customerss customerss=cs.cuqueryd(customergroup.getFid());
+				 customergroup.setFzr(customerss.getUsername());
+			 }else {
+				 customergroup.setFzr("无");
+			 }
+			
+			 model.addAttribute("customergroup", customergroup);
+		
+		
 		 
 		 return "member-user-update";
 	 }
 	
+	 //客户组信息页面
 	 @RequestMapping("/tousergroupquery")
-	 public String tousergroupquery() {
+	 public String tousergroupquery(Model model,Integer id) {
+		 model.addAttribute("gid", id);
 		 
 		 return "member-usergroup-query";
 	 }
+	 
+	 //客户组人员
+	 @RequestMapping("/grquerypage")
+	 @ResponseBody
+	 public  PageInfo<Customerss> grquerypage(Integer currentPage, Integer pageSize, Integer id) {
+	   	 if(currentPage==null) {
+				   currentPage = 1;
+			   }
+			   PageInfo<Customerss> pageInfo = cs.grquerypage(currentPage, 3, id);
+//				model.addAttribute("page",pageInfo);
+				
+				return pageInfo;
+	   	
+	   	
+	   	
+	   }
+	 
 	 
 	  @RequestMapping("/dr")
 		public String dr(MultipartFile file,String groupname) {
