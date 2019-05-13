@@ -134,6 +134,12 @@ public class CustomerServiceimpl implements CustomerService{
 		return p.toPageInfo();
 	}
 
+	@Override
+	public List<Customerss> cupquery() {
+		// TODO Auto-generated method stub
+		return cm.cupquery();
+	}
+
 
 
 }

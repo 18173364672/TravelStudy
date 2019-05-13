@@ -4,9 +4,17 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
+import javax.mail.Address;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.catalina.ssi.ByteArrayServletOutputStream;
@@ -28,9 +36,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.accp.domain.Customergroup;
 import com.accp.domain.Customerss;
 import com.accp.domain.Employee;
-
+import com.accp.domain.Project;
 import com.accp.hmf.service.CustomerService;
 import com.accp.hmf.service.CustomergroupService;
+import com.accp.hmf.service.ProjectService;
 import com.github.pagehelper.PageInfo;
 
 @Controller
@@ -41,7 +50,37 @@ public class CustomerController {
     @Autowired
     CustomergroupService cgs;
     @Autowired
+    ProjectService ps;
+    @Autowired
     HttpServletResponse response;
+    @Autowired
+    Sendmail sendMail;
+    
+    
+    //活动推荐，发送email
+    @RequestMapping("/sendmailall")
+    @ResponseBody
+    public int sendmailall(Integer id) {
+    	if(id==0) {
+    		 throw new RuntimeException();
+    	}
+        List<Customerss> list=cs.cupquery();
+        List<String> recipientAddress = new ArrayList<String>();
+        for (Customerss customerss : list) {
+        	recipientAddress.add(customerss.getEmail());
+		}
+    	Project project=ps.queryd(id);
+    	
+    	String mess="本公司特向你推荐项目:"+project.getProjectname()+",价格："+project.getPrice()+"/人,"+"欢迎您来体验。";
+    	try {
+    		sendMail.sendMsg(recipientAddress,mess);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    return 0;
+    }
+    
     
     
     //客户信息
@@ -66,8 +105,9 @@ public class CustomerController {
     
     //活动推荐页面
     @RequestMapping("/tocustomerhdtj")
-    public String tocustomerhdtj() {
-    	
+    public String tocustomerhdtj(Model model) {
+    	List<Project> list=ps.selectByExample(null);
+    	model.addAttribute("list", list);
     	return "member-level";
     }
     

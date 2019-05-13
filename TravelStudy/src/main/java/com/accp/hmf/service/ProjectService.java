@@ -4,6 +4,7 @@ package com.accp.hmf.service;
 import java.util.List;
 
 import com.accp.domain.Project;
+import com.accp.domain.ProjectExample;
 import com.accp.domain.Projectimg;
 import com.github.pagehelper.PageInfo;
 
@@ -23,5 +24,7 @@ public interface ProjectService {
 	 int deletes(Integer id);
 	 //查询单个项目信息
 	 Project queryd(Integer id);
+	 
+	 List<Project> selectByExample(ProjectExample example);
 	 
 }

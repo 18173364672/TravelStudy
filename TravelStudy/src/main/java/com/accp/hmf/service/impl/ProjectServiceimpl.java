@@ -14,6 +14,7 @@ import com.accp.dao.ProjectimgMapper;
 import com.accp.domain.Employee;
 import com.accp.domain.Field;
 import com.accp.domain.Project;
+import com.accp.domain.ProjectExample;
 import com.accp.domain.Projectimg;
 import com.accp.hmf.service.ProjectService;
 import com.github.pagehelper.Page;
@@ -102,6 +103,12 @@ public class ProjectServiceimpl implements ProjectService{
 	public Project queryd(Integer id) {
 		// TODO Auto-generated method stub
 		return pm.queryd(id);
+	}
+
+	@Override
+	public List<Project> selectByExample(ProjectExample example) {
+		// TODO Auto-generated method stub
+		return pm.selectByExample(example);
 	}
 
 }

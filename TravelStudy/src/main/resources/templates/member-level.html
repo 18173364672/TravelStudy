@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>研学旅行</title>
@@ -325,10 +325,10 @@
                    
                     </div>
                     <div class="layui-input-inline">
-                      <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
+                      <input type="text" name=""  placeholder="请输入用户名" autocomplete="off" class="layui-input" v-model="name">
                     </div>
                     <div class="layui-input-inline" style="width:80px">
-                        <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+                        
                     </div>
                   </div>
                 </div> 
@@ -338,16 +338,16 @@
             	
             			<button class="layui-btn layui-btn-danger"><i class="layui-icon">&#xe608;</i>批量推荐</button>
             		
-                        <button class="layui-btn layui-btn-warm">全部发送</button>
+                        <button class="layui-btn layui-btn-warm" name="qbfs">全部发送</button>
            
 							
             
-            	<span class="x-right" style="line-height:40px">共有数据：88 条</span></xblock>
+            	<span class="x-right" style="line-height:40px">共有数据：{{pageInfo.total}} 条</span></xblock>
             	<form class="layui-form" action="">
-          <select style="position: absolute;top: 150px;">
-            	<option>请选择推荐项目</option>
-            	<option>欢乐一家人</option>
-            	<option>体育健将</option>
+          <select style="position: absolute;top: 150px;" name="proj">
+            	<option th:value="0">请选择推荐项目</option>
+            	<option th:each="l1 : ${list}" th:text="${l1.projectname}" th:value="${l1.id}"></option>
+       
             	
             </select>
 					</form>
@@ -384,31 +384,31 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr v-for="l,state in pageInfo.list">
                         <td>
                             <input type="checkbox" value="1" name="s1">
                         </td>
                         <td>
-                            1
+                           {{l.id}}
                         </td>
                         <td>
-                            漆光头
+                            {{l.username}}
                         </td>
                         <td >
-                           470759662@qq.com
+                           {{l.email}}
                         </td>
                         <td class="td-manage">
-                        123456789
+                        {{l.phone}}
                         </td>
                         
                         <td class="">
-                         株洲市醴陵市狗村
+                         {{l.address}}
                         </td>
                         <td class="">
-                        男
+                        {{l.sex}}
                         </td>
                                      <td class="">
-                      18
+                     {{l.spare2}}
                         </td>
                     </tr>
                     
@@ -427,8 +427,8 @@
             	
             			
             			
-                        <button class="layui-btn layui-btn-warm">上一页</button>
-                        <button class="layui-btn layui-btn-danger">下一页</button>
+                        <button class="layui-btn layui-btn-warm" v-on:click="prePage()">上一页</button>
+                        <button class="layui-btn layui-btn-danger" v-on:click="nextPage()">下一页</button>
            
 							
             
@@ -532,15 +532,112 @@
                 });
             }
         </script>
-        <script>
-        //百度统计可去掉
-        var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-          var s = document.getElementsByTagName("script")[0]; 
-          s.parentNode.insertBefore(hm, s);
-        })();
-        </script>
+   
 </body>
+<script type="text/javascript" th:src="@{/js/vue.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+
+ $(function(){
+	 
+	 
+	 $("[name='qbfs']").click(function(){
+		 
+		 var projectid=$("[name='proj']").val();
+	
+		 var urlpath1 = [[@{/customer/sendmailall}]];
+		 $.ajax({
+			 url:urlpath1,
+			 data:{
+				 id:projectid
+			 },
+			 datatype:"json",
+			 success:function(data){
+				alert("发送成功！");
+			 },
+			 error:function(){
+				 alert("发送失败,请选择推荐项目")
+			 }
+		})
+		
+		 
+	 })
+	 
+	 
+	 
+ })
+
+
+var v=new Vue({
+	  el:".content",
+	  data:{
+		  pageInfo:"pageInfo",
+		  name:""
+	  },
+	  methods:{
+		  getGoodsHref:function(val){
+			    return 'queryd?id='+val
+			},
+			deleteHref:function(val){
+			    return 'delete?id='+val
+			},prePage:function(){
+	    		if(this.pageInfo.prePage==0){
+	    			alert("到顶了");
+	    			return;
+	    		}
+	    		getmethod(this.pageInfo.prePage);
+	    	},
+	    	nextPage:function(){
+	    		if(this.pageInfo.prePage==this.pageInfo.pages){
+	    			alert("到底了");
+	    		}
+	    		getmethod(this.pageInfo.nextPage);
+	    		
+	    	}
+
+	  },
+	  watch:{
+		  name:function(){
+			console.log(v.name);
+			getmethod(1,v.name)
+		},
+		createtime:function(){
+			
+		}
+		  
+	  }
+
+	  
+});
+
+var urlpath = [[@{/customer/customerquerypage}]];
+
+$.ajax({
+		 url:urlpath,
+		 data:{},
+		 datatype:"json",
+		 success:function(data){
+			 v.pageInfo=data;
+			 console.log(data.list);
+		 }
+	})
+
+	 function getmethod(page,name){
+	   $.ajax({
+		  	 url:urlpath,
+		  	 data:{
+		  		currentPage:page,
+		  		
+		  		username:name
+		  	 },
+		  	 datatype:"json",
+		  	 success:function(data){
+		  		v.pageInfo=data;
+		  		
+		  	 }
+		   })
+   }
+
+</script>
+
+
 </html>

@@ -47,4 +47,6 @@ public interface CustomerssMapper {
     int delbygroupid(Integer id);
     
     List<Customerss> querybygroupid(Integer id);
+    
+    List<Customerss> cupquery();
 }

@@ -35,5 +35,7 @@ public interface CustomerService {
 	 
 	 List<Customerss> querybygroupid(Integer id);
 	 
+	 List<Customerss> cupquery();
+	 
 	 public PageInfo<Customerss> grquerypage(Integer currentPage,Integer pageSize,Integer id);
 }
