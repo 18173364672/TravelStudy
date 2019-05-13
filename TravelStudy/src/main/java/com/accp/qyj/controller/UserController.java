@@ -207,9 +207,8 @@ public class UserController {
 	public String roletoupdate(Integer rid,Model model , HttpSession session) {
 		model.addAttribute("role1",roleservice.selectByPrimaryKey(rid));
 		model.addAttribute("list1", roleplateservice.querybyid(rid));
-		Employee es = (Employee)session.getAttribute("user");
-		List<Plate> plate = plateservice.queryLeftNav(es.getId());
-		model.addAttribute("plist", plate);
+		model.addAttribute("plist", plateservice.queryPlateAll());
+		System.out.println(JSON.toJSONString(plateservice.queryPlateAll()));
 		return "manage-role-update";
 	}
 	
@@ -228,9 +227,10 @@ public class UserController {
 	}
 	
 	@RequestMapping("/roleDetails")
-	public String roleDetails(Integer rid , String name , Model model) {
+	public String roleDetails(Integer rid , String name , Model model ,HttpSession session) {
 		model.addAttribute("name", name);
-		model.addAttribute("list", plateservice.queryPlate(rid));
+		model.addAttribute("plist", plateservice.queryRolePlate(rid));
+		System.out.println(JSON.toJSONString(plateservice.queryRolePlate(rid)));
 		return "manage-role-details";
 	}
 	

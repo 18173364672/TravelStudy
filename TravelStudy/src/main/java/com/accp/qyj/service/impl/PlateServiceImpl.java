@@ -127,4 +127,16 @@ public class PlateServiceImpl implements PlateService{
 		return m.queryLeftNav(uid);
 	}
 
+	@Override
+	public List<Plate> queryRolePlate(Integer rid) {
+		// TODO Auto-generated method stub
+		return m.queryRolePlate(rid);
+	}
+
+	@Override
+	public List<Plate> queryPlateAll() {
+		// TODO Auto-generated method stub
+		return m.queryPlateAll();
+	}
+
 }
