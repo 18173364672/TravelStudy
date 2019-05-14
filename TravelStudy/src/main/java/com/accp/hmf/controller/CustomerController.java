@@ -57,6 +57,30 @@ public class CustomerController {
     Sendmail sendMail;
     
     
+    //批量推荐，发送email
+    @RequestMapping("/sendmailpl")
+    @ResponseBody
+    public int sendmailpl(@RequestBody Customerss customerss) {
+    	if(customerss.getPid()==0) {
+    		throw new RuntimeException();
+    	}
+    	List<String> recipientAddress = new ArrayList<String>();
+    	 for (Customerss c1 : customerss.getMlist()) {
+         	recipientAddress.add(c1.getEmail());
+ 		}
+    	 Project project=ps.queryd(customerss.getPid());
+    	 String mess="本公司特向你推荐项目:"+project.getProjectname()+",价格："+project.getPrice()+"元/人,"+"欢迎您来体验。";
+    		try {
+        		sendMail.sendMsg(recipientAddress,mess);
+    		} catch (Exception e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+    	
+    	return 0;
+    }
+    
+    
     //活动推荐，发送email
     @RequestMapping("/sendmailall")
     @ResponseBody
@@ -71,7 +95,7 @@ public class CustomerController {
 		}
     	Project project=ps.queryd(id);
     	
-    	String mess="本公司特向你推荐项目:"+project.getProjectname()+",价格："+project.getPrice()+"/人,"+"欢迎您来体验。";
+    	String mess="本公司特向你推荐项目:"+project.getProjectname()+",价格："+project.getPrice()+"元/人,"+"欢迎您来体验。";
     	try {
     		sendMail.sendMsg(recipientAddress,mess);
 		} catch (Exception e) {
