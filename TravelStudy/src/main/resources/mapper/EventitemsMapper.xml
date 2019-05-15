@@ -17,7 +17,7 @@
   
     <collection property="prolist"  column="pid"  ofType="com.accp.domain.Project" select="com.accp.dao.ProjectMapper.proselect">
     </collection>
-  </resultMap> 
+  </resultMap>  
   
   
   <select id="eveselect" resultMap="kkk">

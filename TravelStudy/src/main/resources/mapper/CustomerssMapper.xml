@@ -23,11 +23,15 @@
     <result column="Spare4" property="spare4" jdbcType="VARCHAR" />
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
+<<<<<<< HEAD
   
     <select id="querybygroupid" resultMap="BaseResultMap">
        select * from customerss where groupid=#{id}
     
     </select>
+=======
+   
+>>>>>>> refs/remotes/origin/hx
   
     <delete id="delbygroupid">
       delete from customerss where groupid=#{id}

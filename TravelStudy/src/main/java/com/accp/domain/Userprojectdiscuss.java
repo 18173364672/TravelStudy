@@ -1,6 +1,7 @@
 package com.accp.domain;
 
 import java.util.Date;
+import java.util.List;
 
 public class Userprojectdiscuss {
     private Integer id;
@@ -24,8 +25,30 @@ public class Userprojectdiscuss {
     private String spare4;
 
     private String spare5;
+    
+    private List<Userprojectimg> userproimglist;
+    
+    private Customerss customersso;
+    
+    
 
-    public Integer getId() {
+    public Customerss getCustomersso() {
+		return customersso;
+	}
+
+	public void setCustomersso(Customerss customersso) {
+		this.customersso = customersso;
+	}
+
+	public List<Userprojectimg> getUserproimglist() {
+		return userproimglist;
+	}
+
+	public void setUserproimglist(List<Userprojectimg> userproimglist) {
+		this.userproimglist = userproimglist;
+	}
+
+	public Integer getId() {
         return id;
     }
 

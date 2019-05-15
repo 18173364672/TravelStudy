@@ -16,7 +16,7 @@
     <result column="Spare4" property="spare4" jdbcType="VARCHAR" />
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
-  
+   
   <resultMap id="ccc" type="com.accp.domain.Activity" extends="BaseResultMap">
     <collection property="evelist"  column="id"  ofType="com.accp.domain.Eventitems" select="com.accp.dao.EventitemsMapper.eveselect">
     </collection>

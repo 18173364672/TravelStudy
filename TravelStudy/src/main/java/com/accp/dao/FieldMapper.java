@@ -37,4 +37,6 @@ public interface FieldMapper {
     List<Field> fquerycd(Integer tid);
     
     int fcount(Integer tid);
+    
+    Field fieldselectids(Integer ids);
 }

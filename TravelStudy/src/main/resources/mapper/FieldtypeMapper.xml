@@ -17,7 +17,7 @@
   </select>
   
   <sql id="Example_Where_Clause" >
-    <where >
+    <where > 
       <foreach collection="oredCriteria" item="criteria" separator="or" >
         <if test="criteria.valid" >
           <trim prefix="(" suffix=")" prefixOverrides="and" >

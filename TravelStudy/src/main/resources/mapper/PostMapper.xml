@@ -16,7 +16,7 @@
     <result column="Spare4" property="spare4" jdbcType="VARCHAR" />
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
-  
+   
   
   <resultMap id="postdy" type="com.accp.domain.Post" extends="BaseResultMap">
   
@@ -67,6 +67,21 @@ ON po.id=dy.dyid
 </where>
   </select>
   
+     <select id="postgzselect" resultMap="postdy">
+   SELECT po.*,dy.url FROM post AS po
+INNER JOIN dynamicpicture AS dy
+ON po.id=dy.dyid
+INNER JOIN `social` AS so
+ON po.uid=so.sid
+<where>
+  <if test="tid!=null">
+   and po.`tid`=#{tid}
+    </if> 
+     <if test="uid!=uid">
+   and so.`uid`=#{uid}
+    </if>
+</where>
+  </select>
   
   <sql id="Example_Where_Clause" >
     <where >

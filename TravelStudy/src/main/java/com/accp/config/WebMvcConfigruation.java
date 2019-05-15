@@ -25,7 +25,6 @@ import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 @Configuration
 public class WebMvcConfigruation extends WebMvcConfigurationSupport {
 
-
 	/**
 	 * 静态资源路径配置，注意：如果不配置，则会404
 	 */
@@ -33,7 +32,8 @@ public class WebMvcConfigruation extends WebMvcConfigurationSupport {
 	protected void addResourceHandlers(ResourceHandlerRegistry registry) {
 		// registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
 		registry.addResourceHandler("/**").addResourceLocations("classpath:/static/")
-				.addResourceLocations("file:/E:/file/");
+				.addResourceLocations("file:/E:/file/").addResourceLocations("file:d://fileupload/");
+
 	}
 
 	/**
@@ -90,7 +90,7 @@ public class WebMvcConfigruation extends WebMvcConfigurationSupport {
 	@Override
 	protected void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**").allowedOrigins("*");
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub·
 		super.addCorsMappings(registry);
 	}
 

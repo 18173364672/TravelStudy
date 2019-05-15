@@ -15,6 +15,7 @@
     <result column="Spare4" property="spare4" jdbcType="VARCHAR" />
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
+<<<<<<< HEAD
      
      <select id="queryd" resultMap="BaseResultMap">
       select * from project where id=#{id}
@@ -31,17 +32,46 @@
      </where>
        </select>
    <resultMap id="ooo" type="com.accp.domain.Project" extends="BaseResultMap">
+=======
+   
+   
   
+>>>>>>> refs/remotes/origin/hx
+  
+   <resultMap id="proimg" type="com.accp.domain.Project" extends="BaseResultMap">
     <collection property="proimglist"  column="id"  ofType="com.accp.domain.Projectimg" select="com.accp.dao.ProjectimgMapper.proimgselect">
     </collection>
   </resultMap>
   
-  <select id="proxmselect" resultMap="ooo">
+     <resultMap id="field" type="com.accp.domain.Project" extends="proimg">
+  
+    <collection property="fieldlist"  column="ids"  ofType="com.accp.domain.Field" select="com.accp.dao.FieldMapper.fieldselectids">
+    </collection>
+  </resultMap> 
+  
+  
+     <resultMap id="userpro" type="com.accp.domain.Project" extends="field">
+  
+    <collection property="userprolist"  column="id"  ofType="com.accp.domain.Userprojectdiscuss" select="com.accp.dao.UserprojectdiscussMapper.userproselecid">
+    </collection>
+  </resultMap> 
+  
+
+  
+   <select id="proselectid" resultMap="userpro">
+  SELECT *FROM `project` WHERE id=#{id}
+  </select>
+  
+   <select id="proquery" resultMap="userpro">
+  SELECT *FROM `project`
+  </select>
+  
+  <select id="proxmselect" resultMap="proimg">
   SELECT *FROM `project` 
   </select>
   
   
-  <select id="proselect" resultMap="ooo">
+  <select id="proselect" resultMap="proimg">
   SELECT *FROM `project` WHERE `id`=#{pid}
   </select>
   

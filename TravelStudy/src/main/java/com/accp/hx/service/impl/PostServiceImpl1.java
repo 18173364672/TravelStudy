@@ -14,11 +14,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.accp.dao.PostMapper;
 import com.accp.domain.Post;
-import com.accp.hx.service.PostService;
+import com.accp.hx.service.PostService1;
 
 @Service
 @Transactional
-public class PostServiceImpl implements PostService{
+public class PostServiceImpl1 implements PostService1{
 
 	@Autowired
 	PostMapper PostMapper;
@@ -39,6 +39,12 @@ public class PostServiceImpl implements PostService{
 	public Post postxxselect(Integer id) {
 		// TODO Auto-generated method stub
 		return PostMapper.postxxselect(id);
+	}
+
+	@Override
+	public List<Post> postgzselect(Integer tid, Integer uid) {
+		// TODO Auto-generated method stub
+		return PostMapper.postgzselect(tid, uid);
 	}
 
 	

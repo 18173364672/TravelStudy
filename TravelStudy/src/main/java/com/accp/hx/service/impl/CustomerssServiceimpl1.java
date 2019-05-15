@@ -7,11 +7,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.accp.dao.CustomerssMapper;
 import com.accp.domain.Customerss;
-import com.accp.hx.service.CustomerssService;
+import com.accp.hx.service.CustomerssService1;
 
 @Service
 @Transactional
-public class CustomerssServiceimpl implements CustomerssService {
+public class CustomerssServiceimpl1 implements CustomerssService1 {
 
 	@Autowired
 	CustomerssMapper customerssmapper;

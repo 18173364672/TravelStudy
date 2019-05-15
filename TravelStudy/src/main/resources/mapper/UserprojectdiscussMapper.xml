@@ -13,7 +13,29 @@
     <result column="Spare3" property="spare3" jdbcType="VARCHAR" />
     <result column="Spare4" property="spare4" jdbcType="VARCHAR" />
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
+  </resultMap> 
+  
+   <resultMap id="user" type="com.accp.domain.Userprojectdiscuss" extends="BaseResultMap">
+    <collection property="customersso" ofType="com.accp.domain.Customerss">
+    <result column="uname" property="username" />
+       <result column="uimg" property="uimg"/>
+       <result column="email" property="email"/>
+    </collection>
   </resultMap>
+  
+  
+    <resultMap id="userproimg" type="com.accp.domain.Userprojectdiscuss" extends="user">
+    <collection property="userproimglist"  column="id"  ofType="com.accp.domain.Userprojectimg" select="com.accp.dao.UserprojectimgMapper.userproimgselecid">
+    </collection>
+  </resultMap>  
+  
+  <select id="userproselecid" resultMap="userproimg">
+  SELECT cuss.*,ss.`Uimg` AS uimg, ss.`Username` AS uname,ss.Email AS email FROM `userprojectdiscuss` AS cuss
+INNER JOIN `customerss` AS ss
+ON ss.`Id`=cuss.userid
+WHERE cuss.projectId=#{id}
+  </select>
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

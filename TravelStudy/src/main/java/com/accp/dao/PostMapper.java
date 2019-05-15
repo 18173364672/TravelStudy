@@ -31,4 +31,6 @@ public interface PostMapper {
     List<Post> postselect(@Param("tid")Integer tid);
     
     Post postxxselect(@Param("id")Integer id);
+    
+    List<Post>postgzselect(@Param("tid")Integer tid,@Param("uid")Integer uid);
 }

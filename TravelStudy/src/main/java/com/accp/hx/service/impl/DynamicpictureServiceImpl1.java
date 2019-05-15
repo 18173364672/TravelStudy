@@ -6,11 +6,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.accp.dao.DynamicpictureMapper;
 import com.accp.domain.Dynamicpicture;
-import com.accp.hx.service.DynamicpictureService;
+import com.accp.hx.service.DynamicpictureService1;
 
 @Service
 @Transactional
-public class DynamicpictureServiceImpl implements DynamicpictureService{
+public class DynamicpictureServiceImpl1 implements DynamicpictureService1{
 
 	@Autowired
 	DynamicpictureMapper DynamicpictureMapper;

@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 import com.accp.dao.ActivityMapper;
 import com.accp.domain.Activity;
 import com.accp.domain.ActivityExample;
-import com.accp.hx.service.ActivityService;
+import com.accp.hx.service.ActivityService1;
 
 @Service
-public class ActivityServiceImpl implements ActivityService{
+public class ActivityServiceImpl1 implements ActivityService1{
 
 	@Autowired
 	ActivityMapper ActivsityMapper;
