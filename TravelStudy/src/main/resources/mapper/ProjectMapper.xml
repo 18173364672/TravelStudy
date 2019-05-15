@@ -43,6 +43,10 @@
   SELECT *FROM `project` WHERE id=#{id}
   </select>
   
+   <select id="proquery" resultMap="userpro">
+  SELECT *FROM `project`
+  </select>
+  
   <select id="proxmselect" resultMap="proimg">
   SELECT *FROM `project` 
   </select>

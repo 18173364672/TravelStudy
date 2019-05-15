@@ -12,6 +12,6 @@ public interface ProjectService1 {
 	  List<Project>proxmselect();
 	  
 	  Project proselectid(Integer id);
-	
+	  List<Project>proquery();
 	
 }

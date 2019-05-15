@@ -36,4 +36,10 @@ public class ProjectServiceImpl1 implements ProjectService1{
 		return ProjectMapper.proselectid(id);
 	}
 
+	@Override
+	public List<Project> proquery() {
+		// TODO Auto-generated method stub
+		return ProjectMapper.proquery();
+	}
+
 }

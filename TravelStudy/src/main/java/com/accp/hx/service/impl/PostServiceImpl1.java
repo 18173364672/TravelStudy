@@ -41,5 +41,11 @@ public class PostServiceImpl1 implements PostService1{
 		return PostMapper.postxxselect(id);
 	}
 
+	@Override
+	public List<Post> postgzselect(Integer tid, Integer uid) {
+		// TODO Auto-generated method stub
+		return PostMapper.postgzselect(tid, uid);
+	}
+
 	
 }

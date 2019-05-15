@@ -11,6 +11,7 @@ import com.accp.dao.ActivityMapper;
 import com.accp.domain.Activity;
 import com.accp.domain.ActivityExample;
 import com.accp.domain.Post;
+import com.accp.hx.service.ActivityService1;
 import com.alibaba.fastjson.JSON;
 
 @Controller
@@ -19,11 +20,11 @@ import com.alibaba.fastjson.JSON;
 public class ActivsityController1 {
 
 	@Autowired
-	ActivityMapper ActivsityMapper;
+	ActivityService1 ActivityService1;
 	
 	@RequestMapping("/Activityselect")
 	public String Activityselect(ActivityExample example) {
-		List<Activity> list=ActivsityMapper.selectByExample(null);
+		List<Activity> list=ActivityService1.selectByExample(null);
 		String o=JSON.toJSONString(list);
 		System.out.println(o);
 		return o;
@@ -32,7 +33,7 @@ public class ActivsityController1 {
 	      
 	@RequestMapping("/activitylbselect")
 	public Activity activitylbselect(Integer id) {
-		Activity list=ActivsityMapper.activitylbselect(id);
+		Activity list=ActivityService1.activitylbselect(id);
 		String o=JSON.toJSONString(list);
 		System.out.println(o);
 		return list;
