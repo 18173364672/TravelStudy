@@ -64,7 +64,7 @@
   </select>
   
 
-  </resultMap> 
+
 
   <sql id="Example_Where_Clause" >
     <where >
