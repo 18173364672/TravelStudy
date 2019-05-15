@@ -15,7 +15,7 @@
     <result column="Spare4" property="spare4" jdbcType="VARCHAR" />
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
-<<<<<<< HEAD
+
      
      <select id="queryd" resultMap="BaseResultMap">
       select * from project where id=#{id}
@@ -31,12 +31,13 @@
        
      </where>
        </select>
-   <resultMap id="ooo" type="com.accp.domain.Project" extends="BaseResultMap">
-=======
+       
+  
+
    
    
   
->>>>>>> refs/remotes/origin/hx
+
   
    <resultMap id="proimg" type="com.accp.domain.Project" extends="BaseResultMap">
     <collection property="proimglist"  column="id"  ofType="com.accp.domain.Projectimg" select="com.accp.dao.ProjectimgMapper.proimgselect">
