@@ -23,15 +23,13 @@
     <result column="Spare4" property="spare4" jdbcType="VARCHAR" />
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
-<<<<<<< HEAD
+
   
     <select id="querybygroupid" resultMap="BaseResultMap">
        select * from customerss where groupid=#{id}
     
     </select>
-=======
-   
->>>>>>> refs/remotes/origin/hx
+
   
     <delete id="delbygroupid">
       delete from customerss where groupid=#{id}
@@ -87,6 +85,7 @@
        </if>
      </where>
   </select>
+  
    <select id="dl" resultMap="BaseResultMap">
   SELECT * FROM `customerss` WHERE `Username`=#{Username} and UserPassWord=#{UserPassWord}
   </select>
