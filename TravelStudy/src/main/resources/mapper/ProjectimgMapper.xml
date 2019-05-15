@@ -12,7 +12,7 @@
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
   
-<<<<<<< HEAD
+
   <delete id="deletes">
   delete from projectimg where projectid=#{id}
    
@@ -22,10 +22,10 @@
     select * from projectimg where projectid=#{id} 
      </select>
   
-=======
+
 
    
->>>>>>> refs/remotes/origin/hx
+
   
   <select id="proimgselect" resultMap="BaseResultMap">
   SELECT *FROM `projectimg` WHERE `projectId`=#{id}
