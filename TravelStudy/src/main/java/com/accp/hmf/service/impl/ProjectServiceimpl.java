@@ -1,5 +1,6 @@
 package com.accp.hmf.service.impl;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import com.accp.dao.EmployeeMapper;
 import com.accp.dao.FieldMapper;
 import com.accp.dao.ProjectMapper;
 import com.accp.dao.ProjectimgMapper;
+import com.accp.dao.UserprojectdiscussMapper;
 import com.accp.domain.Employee;
 import com.accp.domain.Field;
 import com.accp.domain.Project;
@@ -32,6 +34,8 @@ public class ProjectServiceimpl implements ProjectService{
      FieldMapper fm;
      @Autowired
      ProjectimgMapper ptm;
+     @Autowired
+     UserprojectdiscussMapper um;
 	
 	@Override
 	public PageInfo<Project> querypage(Integer currentPage, Integer pageSize, String projectname) {
@@ -61,6 +65,24 @@ public class ProjectServiceimpl implements ProjectService{
 			}
 			
 			project.setFlist(flist);
+			Integer zp=um.querycounthmf(project.getId());
+
+			Integer hpl=um.queryhphmf(project.getId());
+
+			Integer cpl=um.querycphmf(project.getId());
+			
+			 DecimalFormat df=new DecimalFormat("0.00");
+			df.format((float)hpl/zp);
+			String df1=df.format((float)hpl/zp);
+			float df2=Float.parseFloat(df1)*100;
+		    
+			String df3=df.format((float)cpl/zp);
+			float df4=Float.parseFloat(df3)*100;
+			project.setHp(df2);
+			project.setCp(df4);
+			
+			
+			
 		}
 		
 		

@@ -18,9 +18,11 @@ import com.accp.domain.Field;
 import com.accp.domain.Fieldtype;
 import com.accp.domain.Project;
 import com.accp.domain.Projectimg;
+import com.accp.domain.Userprojectdiscuss;
 import com.accp.hmf.service.EmployeeService;
 import com.accp.hmf.service.FieldService;
 import com.accp.hmf.service.ProjectService;
+import com.accp.hx.service.ProjectService1;
 import com.github.pagehelper.PageInfo;
 
 @Controller
@@ -32,6 +34,11 @@ public class ProjectController {
 	FieldService fs;
 	@Autowired
 	EmployeeService em;
+	@Autowired
+	ProjectService1 ps1;
+	
+
+	
 	
 	
 	//项目评论页面
@@ -40,6 +47,27 @@ public class ProjectController {
 		
 		return "member-project-comment";
 	}
+	
+	@RequestMapping("/toprojectcommentquery")
+	public String toprojectcommentquery(Model model,Integer id) {
+		model.addAttribute("id", id);
+		
+		
+		return "member-projectcomment-query";
+	}
+	
+	@RequestMapping("/projectcommentqueryquerypage")
+	@ResponseBody
+	 public PageInfo<Userprojectdiscuss> querypage(Integer currentPage,Integer id){
+   	 if(currentPage==null) {
+			   currentPage = 1;
+		   }
+   	 
+   	 PageInfo<Userprojectdiscuss> pageInfo=ps1.querypage(currentPage, 3, id);
+   	    return pageInfo;
+    }
+	
+
 	
 	@RequestMapping("/projectedit")
 	@ResponseBody

@@ -162,29 +162,30 @@
                         <i class="iconfont nav_right">&#xe697;</i>
                     </a>
                     <ul class="sub-menu opened">
-                             <li>
-                            <a href="member-project.html">
+                         <li >
+                            <a th:href="@{/project/toprojectquerypage}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 项目信息
                             </a>
                         </li>
                         
           
-             
       
                                                    <li class="current">
-                            <a href="member-project-comment.html">
+                            <a th:href="@{/project/toprojectcomment}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 项目评论
                             </a>
                         </li>
                         
-                                                      <li>
-                            <a href="member-project-ranking.html">
+                    
+                        
+                                                              <li>
+                                <a th:href="@{/field/tofieldquerypage}">
                                 <i class="iconfont">&#xe6a7;</i>
                                 项目场地
                             </a>
-                        </li>
+                        </li> 
                         
     
                     </ul>
@@ -317,102 +318,77 @@
                   <div class="layui-form-item" style="display: inline-block;">
                    
                     <div class="layui-input-inline">
-                      <input type="text" name="username"  placeholder="请输入项目名" autocomplete="off" class="layui-input">
+                      <input type="text" name="username"  placeholder="请输入项目名" autocomplete="off" class="layui-input" v-model="name">
                     </div>
-                    <div class="layui-input-inline" style="width:80px">
-                        <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
-                    </div>
+                  
                   </div>
                 </div> 
             </form>
-            <xblock>
-            	
-            	
-            			<button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button>
-            			
-                       
-           
-							
-            
-            	<span class="x-right" style="line-height:40px">共有数据：88 条</span></xblock>
+         
             
             	
             <table class="layui-table">
                 <thead>
                     <tr>
-                        <th>
-                            <input type="checkbox" id="checkall" value="">
-                        </th>
+                       
                       
                         <th>
                            项目名称
                         </th>
                         <th>
-                           用户名
+                           项目介绍
                         </th>
-                        <th>
-                        邮箱名
-                        </th>
-                                       <th>
-                       评论时间
-                        </th>
+           
+        
                         
                                        <th>
                         评论内容
                         </th>
                         
+                                                      <th>
+                       好评率
+                        </th>
                         
-                        
+                                                                   <th>
+             差评率
+                        </th>
          
-                                                        <th>
-                     满意度
-                        </th> 
+       
                         
-                                                        <th>
-                      操作
-                        </th> 
+        
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr v-for="l,state in pageInfo.list">
+                      
                         <td>
-                            <input type="checkbox" value="1" name="s1">
+                           {{l.projectname}}
                         </td>
                         <td>
-                           篮球赛
-                        </td>
-                        <td>
-                            小光
+                            {{l.context}}
                         </td>
                         <td >
-                           470759662@qq.com
-                        </td>
-                        <td class="">
-                       2019-3-18
+                         <u style="cursor:pointer" onclick="member_show('评论列表','/project/toprojectcommentquery','10001','1400','800',this)">
+                               查看评论
+                            </u>
+                            <div style="display: none">{{l.id}}</div>
                         </td>
                         
-                        <td class="">
-                         66666666666666666
+                              <td >
+                 {{l.hp}}%
                         </td>
+                        
+                              <td >
+                        {{l.cp}}%
+                        </td>
+                  
+                
         
                       
                         
                          
                    
-                        
-                                        <td class="td-status">
-                                <span class="layui-btn layui-btn-normal layui-btn-mini">
-                              满意
-                            </span>
-                        </td>
-                        <td class="td-manage">
-                           <a title="删除" href="javascript:;" onclick="level_del(this,'1')" 
-                            style="text-decoration:none">
-                                <i class="layui-icon">&#xe640;</i>
-                            </a>
-                            
-                            
-                        </td>
+          
                     </tr>
                     
            
@@ -434,8 +410,8 @@
             	
             			
             			
-                        <button class="layui-btn layui-btn-warm">上一页</button>
-                        <button class="layui-btn layui-btn-danger">下一页</button>
+                        <button class="layui-btn layui-btn-warm" v-on:click="prePage()">上一页</button>
+                        <button class="layui-btn layui-btn-danger" v-on:click="nextPage()">下一页</button>
            
 							
             
@@ -569,15 +545,87 @@
             }
             
         </script>
-        <script>
-        //百度统计可去掉
-        var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-          var s = document.getElementsByTagName("script")[0]; 
-          s.parentNode.insertBefore(hm, s);
-        })();
-        </script>
+    
 </body>
+<script type="text/javascript" th:src="@{/js/vue.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+
+function member_show(title,url,id,w,h,obj){
+	var id=$(obj).next().text();
+	var url1="?id="+id
+	
+    x_admin_show(title,url+url1,w,h);
+}
+
+
+var v=new Vue({
+	  el:".content",
+	  data:{
+		  pageInfo:"pageInfo",
+		  name:""
+	  },
+	  methods:{
+		  getGoodsHref:function(val){
+			    return 'queryd?id='+val
+			},
+			deleteHref:function(val){
+			    return 'delete?id='+val
+			},prePage:function(){
+	    		if(this.pageInfo.prePage==0){
+	    			alert("到顶了");
+	    			return;
+	    		}
+	    		getmethod(this.pageInfo.prePage);
+	    	},
+	    	nextPage:function(){
+	    		if(this.pageInfo.prePage==this.pageInfo.pages){
+	    			alert("到底了");
+	    		}
+	    		getmethod(this.pageInfo.nextPage);
+	    		
+	    	}
+
+	  },
+	  watch:{
+		  name:function(){
+			console.log(v.name);
+			getmethod(1,v.name)
+		},
+	  }
+});
+     
+var urlpath = [[@{/project/projectquerypage}]];
+
+$.ajax({
+		 url:urlpath,
+		 data:{},
+		 type:"post",
+		 datatype:"json",
+		 success:function(data){
+			 v.pageInfo=data;
+			 console.log(data);
+		 }
+	});
+      
+      
+function getmethod(page,name){
+	   $.ajax({
+		  	 url:urlpath,
+		  	 data:{
+		  		currentPage:page,
+		  		
+		  		projectname:name
+		  	 },
+		  	 datatype:"json",
+		  	 success:function(data){
+		  		v.pageInfo=data;
+		  		
+		  	 }
+		   })
+}
+
+
+
+</script>
+
 </html>

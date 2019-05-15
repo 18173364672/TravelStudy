@@ -36,6 +36,28 @@ ON ss.`Id`=cuss.userid
 WHERE cuss.projectId=#{id}
   </select>
   
+  <select id="queryplhmf" resultMap="BaseResultMap">
+     select * from `userprojectdiscuss` where projectid=#{projectid}
+  
+  </select>
+  
+  <select id="querycounthmf" resultType="int">
+    select count(satisfied) from `userprojectdiscuss` where projectid=#{projectid}
+  
+  </select>
+  
+  <select id="queryhphmf" resultType="int">
+    select count(satisfied) from `userprojectdiscuss` where projectid=#{projectid} and satisfied=1
+  
+  </select>
+  
+   <select id="querycphmf" resultType="int">
+    select count(satisfied) from `userprojectdiscuss` where projectid=#{projectid} and satisfied=3
+  
+  </select>
+  
+  
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

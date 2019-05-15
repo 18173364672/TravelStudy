@@ -33,6 +33,25 @@ public class Project {
  
     private List<Project> mlist;
     
+    public Float getHp() {
+		return hp;
+	}
+
+	public void setHp(Float hp) {
+		this.hp = hp;
+	}
+
+	public Float getCp() {
+		return cp;
+	}
+
+	public void setCp(Float cp) {
+		this.cp = cp;
+	}
+
+	private Float hp;
+    
+    private Float cp;
     
 	public List<Project> getMlist() {
 		return mlist;

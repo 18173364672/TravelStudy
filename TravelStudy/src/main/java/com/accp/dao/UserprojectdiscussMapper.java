@@ -29,4 +29,16 @@ public interface UserprojectdiscussMapper {
     int updateByPrimaryKey(Userprojectdiscuss record);
     
     List<Userprojectdiscuss>userproselecid(Integer id);
+    
+    //评论数
+    int querycounthmf(Integer id);
+    
+    //好评数量
+    int queryhphmf(Integer id);
+    
+    //差评数量
+    int querycphmf(Integer id);
+    
+    //查询评论
+    List<Userprojectdiscuss> queryplhmf(Integer id);
 }

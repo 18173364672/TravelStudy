@@ -3,6 +3,8 @@ package com.accp.domain;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Userprojectdiscuss {
     private Integer id;
 
@@ -13,7 +15,7 @@ public class Userprojectdiscuss {
     private String userdiscuss;
 
     private Integer satisfied;
-
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date discusstime;
 
     private String spare1;
@@ -30,9 +32,17 @@ public class Userprojectdiscuss {
     
     private Customerss customersso;
     
-    
+    private String uname;
 
-    public Customerss getCustomersso() {
+    public String getUname() {
+		return uname;
+	}
+
+	public void setUname(String uname) {
+		this.uname = uname;
+	}
+
+	public Customerss getCustomersso() {
 		return customersso;
 	}
 
