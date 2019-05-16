@@ -41,7 +41,7 @@
 							</p>
 						</div>
 						<div class="layui-form-item" style="font-size: 15px;float: right;">
-							<p>发送人:<span style="color: #002752;">1</span></p>
+							<p>发送人:<span style="color: #002752;" th:text="${edueixs.employeename}"></span></p>
 						</div>
 						<div class="layui-form-item" style="font-size: 18px;">
 							<p>员工姓名:<span style="color: red;" th:text="${edueix.employeename}"></span></p>
@@ -52,13 +52,9 @@
 						<div class="layui-form-item" style="font-size: 18px;">
 							<p>
 								文件:
-<!-- 								<span style="color: #002752;" th:text="${dueixTuPian.url}"></span> -->
-<!-- 								<video controls th:src="${dueixTuPian.url}" width="720" height="480"> -->
-<!--         						</video>	 -->
-								<a th:href="${dueixTuPian.url}">查看文件</a>
-<!-- 								<form id="form1" runat="server"> -->
-<!-- 									<iframe th:src="${dueixTuPian.url}" width="70%"   height="120px" runat="server" id="iframe1"></iframe> -->
-<!-- 								</form> -->
+									<img th:src="@{'http://localhost:8080/'+${dueixTuPian.url}}" width="100px" height="100px">
+<!-- 									<img th:src="${dueixTuPian.url}" width="100px" height="100px"> -->
+<!-- 								<a th:href="${dueixTuPian.url}">查看文件</a> -->
 							</p>
 						</div>
 					<!-- 右侧内容框架，更改从这里结束 -->

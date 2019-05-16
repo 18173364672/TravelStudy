@@ -82,10 +82,10 @@ public class noticeServiceImpl implements noticeService{
 	 * @return
 	 */
 	@Override
-	public PageInfo<Notice> Myquery(Integer currentPage, String title, Integer pageSize,String spare1) {
+	public PageInfo<Notice> Myquery(Integer currentPage, String title, Integer pageSize,String spare1,String spare2) {
 		Page<Notice> pageInfo = PageHelper.startPage(currentPage,pageSize,true);
 		
-		notices.Myquery(title,spare1);
+		notices.Myquery(title,spare1,spare2);
 		
 		return pageInfo.toPageInfo();
 	}

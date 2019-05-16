@@ -23,6 +23,7 @@ public class webSocket implements HandshakeInterceptor{
 		//从http:request中获取session中的用户对象
 		Employee zsgc = (Employee)servletRequest.getServletRequest().getSession().getAttribute("");
 		if (zsgc!=null) {
+			System.out.println(zsgc.getId()+"这里有没有数据id");
 			attributes.put("id", zsgc.getId());
 			return true;
 		}

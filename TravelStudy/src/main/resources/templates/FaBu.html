@@ -41,7 +41,7 @@
 							</p>
 						</div>
 						<div class="layui-form-item" style="font-size: 15px;float: right;">
-							<p>发送人:<span style="color: #002752;">1</span></p>
+							<p>发送人:<span style="color: #002752;" th:text="${edueixs.employeename}"></span></p>
 						</div>
 						<div class="layui-form-item" style="font-size: 18px;">
 							<p>员工姓名:<span style="color: red;" th:text="${edueix.employeename}"></span></p>
@@ -49,6 +49,7 @@
 						<div class="layui-form-item" style="font-size: 18px;">
 							<p>所属部门:<span style="color: #002752;" th:text="${odueix.name}"></span></p>
 						</div>
+						
 					<!-- 右侧内容框架，更改从这里结束 -->
 				</div>
 			</div>

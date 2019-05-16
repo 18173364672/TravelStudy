@@ -302,7 +302,8 @@
   </select>
   
    <select id="Myquery" resultType="com.accp.domain.Notice">
-  		SELECT * FROM `notice` WHERE title LIKE CONCAT('%',#{title},'%') AND spare1 = #{spare1}
+   SELECT * FROM `notice` ds INNER JOIN `noticesecond` cs ON ds.id = cs.nid WHERE ds.title LIKE CONCAT('%',#{title},'%') AND (cs.rid = -1 OR cs.rid = #{spare2}) OR ds.spare1=#{spare1}
+<!--   		SELECT * FROM `notice` WHERE title LIKE CONCAT('%',#{title},'%') AND spare1 = #{spare1} -->
   </select>
   
   

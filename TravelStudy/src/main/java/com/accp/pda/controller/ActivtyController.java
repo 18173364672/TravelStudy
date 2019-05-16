@@ -16,7 +16,7 @@ import com.accp.domain.Plate;
 import com.accp.pda.service.ActivityService;
 import com.accp.qyj.service.PlateService;
 
-@Controller
+//@Controller
 public class ActivtyController {
 
 	@Autowired

@@ -64,7 +64,7 @@ public interface noticeService {
 	 * @param pageSize
 	 * @return
 	 */
-	public PageInfo<Notice> Myquery(Integer currentPage,String title,Integer pageSize,String spare1);
+	public PageInfo<Notice> Myquery(Integer currentPage,String title,Integer pageSize,String spare1,String spare2);
 	
     
 }

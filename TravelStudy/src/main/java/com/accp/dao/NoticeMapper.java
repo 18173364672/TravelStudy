@@ -81,6 +81,6 @@ public interface NoticeMapper {
      * @param employeename
      * @return
      */
-    List<Notice> Myquery(String title,String spare1);
+    List<Notice> Myquery(String title,String spare1,String spare2);
     
 }

@@ -1,19 +1,19 @@
 package com.accp.dl.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.CopyOnWriteArrayList;
 
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.OnClose;
+import javax.websocket.OnError;
+import javax.websocket.OnMessage;
+import javax.websocket.OnOpen;
+import javax.websocket.Session;
+import javax.websocket.server.ServerEndpoint;
 
-import org.apache.poi.hssf.record.PageBreakRecord.Break;
-import org.apache.poi.sl.usermodel.TextParagraph.BulletStyle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,14 +34,72 @@ import com.accp.domain.Noticesecond;
 import com.accp.domain.Organization;
 import com.accp.domain.Plate;
 import com.accp.qyj.service.PlateService;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators.StringIdGenerator;
 import com.github.pagehelper.PageInfo;
 
 @Controller
 @RequestMapping("/notice")
+//@ServerEndpoint("/websocket")
 //@MultipartConfig 
 public class notice {
 
+//	private static int onlineCount=0;
+//    private static CopyOnWriteArrayList<notice> webSocketSet=new CopyOnWriteArrayList<notice>();
+//    HttpSession session;
+// 
+//    @OnOpen
+//    public void onOpen(HttpSession session){
+//        this.session=session;
+//        webSocketSet.add(this);//加入set中
+//        addOnlineCount();
+//        System.out.println("有新连接加入！当前在线人数为"+getOnlineCount());
+//    }
+// 
+//    @OnClose
+//    public void onClose(){
+//        webSocketSet.remove(this);
+//        subOnlineCount();
+//        System.out.println("有一连接关闭！当前在线人数为" + getOnlineCount());
+//    }
+// 
+//    @OnMessage
+//    public void onMessage(String message,HttpSession session){
+//        System.out.println("来自客户端的消息："+message);
+////        群发消息
+//        for (notice item:webSocketSet){
+//            try {
+//                item.sendMessage(message);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                continue;
+//            }
+//        }
+//    }
+// 
+//    @OnError
+//    public void onError(HttpSession session,Throwable throwable){
+//        System.out.println("发生错误！");
+//        throwable.printStackTrace();
+//    }
+////   下面是自定义的一些方法
+//    public void sendMessage(String message) throws IOException {
+//        ((Session) this.session).getBasicRemote().sendText(message);
+//    }
+//    
+//    public static synchronized int getOnlineCount(){
+//        return onlineCount;
+//    }
+//    public static synchronized void addOnlineCount(){
+//    	notice.onlineCount++;
+//    }
+//    public static synchronized void subOnlineCount(){
+//    	notice.onlineCount--;
+//    }
+	
+	
+	
+	
+	
+	
 	
 	@Autowired
 	noticeServiceImpl notices;
@@ -90,7 +148,7 @@ public class notice {
 	 * @return
 	 */
 	@RequestMapping("/member")
-	public String member(Model model , HttpSession session) {
+	public String member(Model model ,HttpSession session) {
 		Employee es = (Employee)session.getAttribute("user");
 		List<Plate> plate = plateservice.queryLeftNav(es.getId());
 		model.addAttribute("plist", plate);
@@ -172,10 +230,10 @@ public class notice {
 	 */
 	@RequestMapping("/addnotice")
 	@ResponseBody
-	public String addnotice(String title ,String content,Integer uid,MultipartFile file) {
-		notices.add(title, content, 1);			//缺少登录的id
-		Notice dueix = notices.queryAll();
-		noticesecond.toAdd(dueix.getId());
+	public String addnotice(String title ,String content,MultipartFile file,HttpSession session) {
+		Employee es = (Employee)session.getAttribute("user");
+		
+		notices.add(title, content,es.getId());			//缺少登录的id
 		Notice stu = notices.selectOrderBy();
 		int nid = stu.getId();
 		
@@ -190,9 +248,9 @@ public class notice {
 				String suffix = name.substring(name.lastIndexOf("."),name.length());
 				File chang = new File(url+uuid+suffix);
 				file.transferTo(chang);
-//				System.out.println(chang);
-				String urls = chang.toString();
-				noticepicture.addinsert(urls);	//新增图片文件
+				String urlName = uuid+suffix;
+//				String urls = chang.toString();
+				noticepicture.addinsert(urlName);	//新增图片文件
 				Noticepicture stus = noticepicture.selectOrderBy();
 				int iid = stus.getId();
 				
@@ -202,16 +260,15 @@ public class notice {
 				List<Employee> list = employee.selectByExample(null);
 				System.out.println("内容为:"+content);
 				
-				String [] id = new String[list.size()];
+				String[] neirong = new String[list.size()];
 				
-				for (int j = 0; j < id.length; j++) {
-					id[j] = dueix.getId().toString();
-					webSocke.sendMsg(content,id[j]);  	//webSocke 调用了方法
+				for (int i = 0; i < list.size(); i++) {
+					System.out.println(list.get(i).getId()+"有没有数据？");
+					neirong[i] = list.get(i).getId().toString(); 
+					System.out.println("用户id为:"+neirong);
 				}
-//				for (Employee ds : list) {
-//					webSocke.sendMsg(content,ds.getId().toString());  	//webSocke 调用了方法
-//				}
-//				
+				
+				webSocke.sendMsg(content,neirong);  	//webSocke 调用了方法
 				
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -225,8 +282,10 @@ public class notice {
 	 */
 	@RequestMapping("/addBuMen")
 	@ResponseBody
-	public String addBuMen(String title ,String content,Integer uid,Integer rid,MultipartFile file) {
-		notices.add(title, content, 1);			//缺少登录的id
+	public String addBuMen(String title ,String content,Integer uid,Integer rid,MultipartFile file,HttpSession session) {
+		Employee es = (Employee)session.getAttribute("user");
+		
+		notices.add(title, content, es.getId());			//缺少登录的id
 		Notice stu = notices.selectOrderBy();
 		int nid = stu.getId();
 		String url = "D:\\Fileupload\\";
@@ -241,8 +300,9 @@ public class notice {
 				File chang = new File(url+uuid+suffix);
 				file.transferTo(chang);
 //				System.out.println(chang);
-				String urls = chang.toString();
-				noticepicture.addinsert(urls);	//新增图片
+//				String urls = chang.toString();
+				String urlName = uuid+suffix;
+				noticepicture.addinsert(urlName);	//新增图片
 				
 				Noticepicture stus = noticepicture.selectOrderBy();
 				int iid = stus.getId();
@@ -271,10 +331,10 @@ public class notice {
 	 */
 	@RequestMapping("toAdd")
 	@ResponseBody
-	public String toAdd(String title ,String content,Integer uid,String spare1[],MultipartFile file) {
-		
+	public String toAdd(String title ,String content,Integer uid,String spare1[],MultipartFile file,HttpSession session) {
+		Employee es = (Employee)session.getAttribute("user");
 		for (int i = 0; i < spare1.length; i++) {
-			notices.toAdd(title, content, 1, spare1[i]);			//缺少登录的id
+			notices.toAdd(title, content, es.getId(), spare1[i]);			//缺少登录的id
 			
 			Notice stu = notices.selectOrderBy();
 			int nid = stu.getId();
@@ -290,8 +350,9 @@ public class notice {
 					File chang = new File(url+uuid+suffix);
 					file.transferTo(chang);
 //					System.out.println(chang+"路径");
-					String urls = chang.toString();
-					noticepicture.addinsert(urls);	//新增图片文件
+//					String urls = chang.toString();
+					String urlName = uuid+suffix;
+					noticepicture.addinsert(urlName);	//新增图片
 					
 					Noticepicture stus = noticepicture.selectOrderBy();
 					int iid = stus.getId();
@@ -303,14 +364,14 @@ public class notice {
 //					
 //					webSocke.sendMsg(content,dueix.getId().toString());  	//webSocke 调用了方法
 					
-					String [] id = new String[spare1.length];
-					
-					Employee dueix = employee.selectById(Integer.parseInt(spare1[i]));
-					System.out.println("内容为:"+content);
-					for (int j = 0; j < id.length; j++) {
-						id[j] = dueix.getId().toString();
-						webSocke.sendMsg(content,id[j]);  	//webSocke 调用了方法
-					}
+//					String [] id = new String[spare1.length];
+//					
+//					Employee dueix = employee.selectById(Integer.parseInt(spare1[i]));
+//					System.out.println("内容为:"+content);
+//					for (int j = 0; j < id.length; j++) {
+//						id[j] = dueix.getId().toString();
+//						webSocke.sendMsg(content,id[j]);  	//webSocke 调用了方法
+//					}
 					
 			}catch (Exception e) {
 				e.printStackTrace();
@@ -350,6 +411,21 @@ public class notice {
 		return pageList;
 	}
 	
+	/**
+	 * 查询所有员工
+	 * @param model
+	 * @param currentPage
+	 * @param title
+	 * @param pageSize
+	 * @return
+	 */
+	@RequestMapping("/queryAllss")
+	@ResponseBody
+	public List<Employee> queryAllss() {
+		List<Employee> list = employee.selectByExample(null);
+		return list;
+	}
+	
 	
 	/**
 	 * 详情
@@ -360,28 +436,15 @@ public class notice {
 //		System.out.println(LookIds+"这是有没有!!!");
 		if (LookIds!=null) {
 			Notice dueix = notices.selectById(LookIds);
-//			if (dueix.getSpare1()==null) {
-////				System.out.println(dueix.getUid());
-////				String rid = dueix.getSpare1();
-////				Noticesecond cdueix = noticesecond.selectById(LookIds);
-////				cdueix.getRid();
-////				System.out.println(cdueix.getRid());
-////				Organization odueix2 =  orgainzation.selectById(cdueix.getRid());
-////				model.addAttribute("rid",odueix2);
-//				return "gGao";
-//			}
+			Employee edueixs = employee.selectById(dueix.getUid());
 			int eid = Integer.parseInt(dueix.getSpare1());
 			Employee edueix = employee.selectById(eid);
-//			Noticesecond cdueix = noticesecond.selectById(dueix.getUid());
 			int oid = Integer.parseInt(edueix.getSpare1());
 			Organization odueix =  orgainzation.selectById(oid);
 			
-//			System.out.println(dueix.getTitle()+"标题!!!");
-//			System.out.println(edueix.getEmployeename()+"名称!!!");
-//			System.out.println(odueix.getName()+"部门!!!");
-			
 			model.addAttribute("dueix",dueix);		//公告内容
 			model.addAttribute("edueix",edueix);	//员工姓名
+			model.addAttribute("edueixs",edueixs);	//发送人姓名
 			model.addAttribute("odueix",odueix);	//部门名称
 		}
 		return "FaBu";
@@ -409,18 +472,17 @@ public class notice {
 	 */
 	@RequestMapping("/MynoticeQuery")
 	@ResponseBody
-	public PageInfo<Notice> MynoticeQuery(Model model,Integer currentPage,String title,Integer pageSize,Integer uid) {
-			
-//		System.out.println("进来了!!");
-		
+	public PageInfo<Notice> MynoticeQuery(Model model,Integer currentPage,HttpSession session,String title,Integer pageSize) {
+		Employee es = (Employee)session.getAttribute("user");
+		Employee dueix = employee.selectById(es.getId());
 		if (currentPage == null) {
 			currentPage=1;
 		}
 		if (title==null) {
 			title ="";
 		}
-//		String spare = uid.toString();
-		PageInfo<Notice> pageList = notices.Myquery(currentPage,title, 5,"2");
+		
+		PageInfo<Notice> pageList = notices.Myquery(currentPage,title, 5,es.getId().toString(),dueix.getSpare1());
 		return pageList;
 	}
 	
@@ -429,21 +491,25 @@ public class notice {
 	 * @return
 	 */
 	@RequestMapping("/GeRenxiangQing")
-	public String GeRenxiangQing(Integer LookIds,Model model) {
-		System.out.println(LookIds);
-		Notice dueix = notices.selectById(LookIds);
-		int eid = Integer.parseInt(dueix.getSpare1());
-		Employee edueix = employee.selectById(eid);
-		int oid = Integer.parseInt(edueix.getSpare1());
-		Organization odueix =  orgainzation.selectById(oid);
-		Noticesecond dueixWen = noticesecond.selectById(LookIds);
-		Noticepicture dueixTuPian = noticepicture.selectById(dueixWen.getIid());
-		
-		model.addAttribute("dueix",dueix);		//公告内容
-		model.addAttribute("edueix",edueix);	//员工姓名
-		model.addAttribute("odueix",odueix);	//部门名称
-		model.addAttribute("dueixTuPian",dueixTuPian);	//图片文件
-		
+	public String GeRenxiangQing(Integer LookIds,Model model,HttpSession session) {
+			Employee es = (Employee)session.getAttribute("user");
+//			System.out.println(LookIds+"这是有没有!!!");
+				Notice dueix = notices.selectById(LookIds);
+				Employee edueixs = employee.selectById(dueix.getUid());
+				Employee edueix = employee.selectById(Integer.parseInt(edueixs.getSpare1()));
+				int oid = Integer.parseInt(edueix.getSpare1());
+				Organization odueix =  orgainzation.selectById(oid);
+				Noticesecond zhongjian = noticesecond.selectById(LookIds);
+				Noticepicture dueixTuPian = noticepicture.selectById(zhongjian.getIid());
+				
+//				System.out.println(dueixTuPian.getUrl()+"图片名称！！");
+				
+				model.addAttribute("dueix",dueix);		//公告内容
+				model.addAttribute("edueix",es);	//员工姓名
+				model.addAttribute("edueixs",edueixs);	//发送人姓名
+				model.addAttribute("odueix",odueix);	//部门名称
+				model.addAttribute("dueixTuPian",dueixTuPian);	//图片文件
+			
 		return "GeRen";
 	}
 	

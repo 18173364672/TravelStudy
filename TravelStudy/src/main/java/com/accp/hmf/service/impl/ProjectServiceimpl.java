@@ -20,8 +20,8 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
-@Service
-@Transactional
+//@Service
+//@Transactional
 public class ProjectServiceimpl implements ProjectService{
      @Autowired
      ProjectMapper pm;

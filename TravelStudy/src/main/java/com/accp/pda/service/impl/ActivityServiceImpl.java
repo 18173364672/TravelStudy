@@ -13,8 +13,8 @@ import com.accp.domain.ActivityExample;
 import com.accp.domain.Project;
 import com.accp.pda.service.ActivityService;
 
-@Transactional
-@Service
+//@Transactional
+//@Service
 public class ActivityServiceImpl implements ActivityService{
 
 	@Autowired

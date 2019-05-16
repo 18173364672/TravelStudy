@@ -97,21 +97,7 @@
 							<td>{{item.address}}</td>
 							<!--   th:text="${#dates.format(item.createtime,'yyyy-MM-dd HH:mm')}" -->
 							<td>{{item.createtime}}</td>
-<!-- 							<td v-for="(items,index) in list"> -->
-<!-- 								<td>{{items.name}}</td> -->
-<!-- 								<td v-if="item.spare1==='items.id'">{{items.name}}</td> -->
-<!-- 								<td v-if="item.spare1==='2'">教练部</td> -->
-<!-- 								<td v-if="item.spare1==='3'">助手部</td> -->
-<!-- 								<td v-if="item.spare1==='4'">员工部</td> --> 
-<!-- 								<td v-if="item.spare1==='5'">领队部</td> --> 
-<!-- 								<td v-if="item.spare1==='6'">其他部</td> --> 
-<!-- 							</td> -->
-								<td v-if="item.spare1==='1'">校友部</td>
-								<td v-if="item.spare1==='2'">教练部</td>
-								<td v-if="item.spare1==='3'">助手部</td>
-								<td v-if="item.spare1==='4'">员工部</td>
-								<td v-if="item.spare1==='5'">领队部</td>
-								<td v-if="item.spare1==='6'">其他部</td>
+							<td v-for="(items,index) in dluy" v-if="item.spare1==items.id">{{items.name}}</td>
 							<td>{{item.job}}</td>
 							<td>{{item.pay}}</td>
 							<td class="td-status" v-if="item.state===1"><span
@@ -197,6 +183,16 @@
 			  }
 			  
 		  });
+		  
+		  $.ajax({
+			  url:[[@{/notice/MyBuMen}]],
+			  type:"post",
+			  dataType:"json",
+			  success:function(result){
+// 				  alert(result);
+				  vue.dluy = result;
+			  }
+		 });
     	
     }
     
@@ -204,15 +200,7 @@
 	$(function(){
 		
 		
-		 $.ajax({
-			  url:[[@{/notice/MyBuMen}]],
-			  type:"post",
-			  dataType:"json",
-			  success:function(result){
-				  alert(result);
-				  vue.dluy = result;
-			  }
-		 });
+		 
 		
 		
 		

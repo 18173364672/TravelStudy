@@ -2,6 +2,7 @@ package com.accp.dl.webservice;
 
 import javax.jws.WebService;
 //import javax.websocket.server.ServerEndpoint;
+import javax.servlet.http.HttpSession;
 
 @WebService(targetNamespace="http://webservice.accp.com")
 //@ServerEndpoint("/ws/{user}")
@@ -15,7 +16,7 @@ public interface MyWebService {
      * @param spare1
      * @return
      */
-    int toAdd(String title,String content,Integer uid,String spare1);
+    int toAdd(String title,String content,int uid,String spare1);
     
     
     

@@ -87,32 +87,7 @@
 							<td class="buMenid">{{item.id}}</td>
 							<td>{{item.title}}</td>
 							<td>{{item.content}}</td>
-							<td class="td-status" v-if="item.spare1==='1'">
-								<a title="查看" href="javascript:;"  :data="item.id" onclick="show(this)" class="ml-5"  style="text-decoration:none">
-	                                <i class="layui-icon" >&#xe642;</i>
-	                            </a>
-							</td>
-							<td class="td-status" v-if="item.spare1==='2'">
-								<a title="查看" href="javascript:;"  :data="item.id" onclick="show(this)" class="ml-5"  style="text-decoration:none">
-	                                <i class="layui-icon" >&#xe642;</i>
-	                            </a>
-							</td>
-							<td class="td-status" v-if="item.spare1==='3'">
-								<a title="查看" href="javascript:;"  :data="item.id" onclick="show(this)" class="ml-5"  style="text-decoration:none">
-	                                <i class="layui-icon" >&#xe642;</i>
-	                            </a>
-							</td>
-							<td class="td-status" v-if="item.spare1==='4'">
-								<a title="查看" href="javascript:;"  :data="item.id" onclick="show(this)" class="ml-5"  style="text-decoration:none">
-	                                <i class="layui-icon" >&#xe642;</i>
-	                            </a>
-							</td>
-							<td class="td-status" v-if="item.spare1==='5'">
-								<a title="查看" href="javascript:;"  :data="item.id" onclick="show(this)" class="ml-5"  style="text-decoration:none">
-	                                <i class="layui-icon" >&#xe642;</i>
-	                            </a>
-							</td>
-							<td class="td-status" v-if="item.spare1==='6'">
+							<td class="td-status" v-for="(items,index) in text" v-if="item.spare1==items.id">
 								<a title="查看" href="javascript:;"  :data="item.id" onclick="show(this)" class="ml-5"  style="text-decoration:none">
 	                                <i class="layui-icon" >&#xe642;</i>
 	                            </a>
@@ -167,7 +142,8 @@
     	el:'.wrapper',
     	data:{
     		
-    		page:''
+    		page:'',
+    		text:''
     		
     	},methods:{
     		queryPage(ind){
@@ -194,6 +170,17 @@
 			  dataType:"json",
 			  success:function(data){
 				  vue.page = data;
+			  }
+			  
+		  });
+		  
+		  
+		  $.ajax({
+			  url:[[@{/notice/queryAllss}]],
+			  type:"post",
+			  dataType:"json",
+			  success:function(data){
+				  vue.text = data;
 			  }
 			  
 		  });

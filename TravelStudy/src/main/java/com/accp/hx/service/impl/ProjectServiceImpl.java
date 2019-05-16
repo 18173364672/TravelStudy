@@ -11,8 +11,8 @@ import com.accp.domain.Project;
 import com.accp.domain.ProjectExample;
 import com.accp.hx.service.ProjectService;
 
-@Service
-@Transactional
+//@Service
+//@Transactional
 public class ProjectServiceImpl implements ProjectService{
 
 	@Autowired

@@ -44,7 +44,7 @@
 <!-- 						<div id="preview" style="float:left"> -->
 <!-- 							<img id="imghead" width="100px" height="100px" class="logo-size" src='' /> -->
 <!-- 						</div> -->
-						<input id="filgo" style="margin-left: 70px; margin-top: 30px;" type="file" name="file" onchange="changeToop('filgo','imghead');" value="上传图片">
+						<input id="filgo" style="margin-left: 70px; margin-top: 30px;" type="file" name="file" value="上传图片">
 					</div>
 					<div style="text-align: center;">
 						<label class="layui-form-label xbs768">请输入内容:</label>
@@ -68,141 +68,182 @@
     <!-- 中部结束 -->
     
     <script th:inline="javascript">
-    //百度统计可去掉
-   /*  var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })(); */
     
+    var ws = null;
+	
+	//判断当前浏览器是否支持WebSocket
+    if ('WebSocket' in window) {
+    	ws = new WebSocket('ws://localhost:8080/websocket');
+    }else {
+        alert('当前浏览器 Not support websocket')
+    }
+
+	
+  //连接发生错误的回调方法
+//     ws.onerror = function () {
+//         setMessageInnerHTML("WebSocket连接发生错误");
+//     };
+ 
+    //连接成功建立的回调方法
+//     ws.onopen = function () {
+//         setMessageInnerHTML("WebSocket连接成功");
+//     }
+ 
+    //接收到消息的回调方法
+//     ws.onmessage = function (event) {
+//         setMessageInnerHTML(event.data);
+//     }
+ 
+//     //连接关闭的回调方法
+//     ws.onclose = function () {
+//         setMessageInnerHTML("WebSocket连接关闭");
+//     }
+ 
+ 	ws.onopen = function(){ 
+ 		console.log("连接成功!!");
+	}
+ 	ws.onerror = function(){
+		console.log("连接失败!!"); 
+	}
+    //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+    ws.onbeforeunload = function () {
+        closeWebSocket();
+    }
     
-    
-    
-//     $(function(){
-    	
-//     	$(".layui-btn").click(function(){
-//     		var title = $("[name=title]").val();
-//         	var content = $("[name=content]").val();
-//         	var uid = $("[name=uid]").val();
-        	
-//         	$.ajax({
-//         		url:[[@{/notice/addnotice}]],
-//         		type:"post",
-// 				data:{
-// 					"title":title,
-// 					"content":content,
-// 					"uid":uid
-// 				},
-// 				dataType:"text",
-// 				success:function(result){
-// 					console.log(result);
-// 					window.parent.$("#layui-layer-shade1").remove();
-// 			    	window.parent.$("#layui-layer1").remove(); 
-// 				},error:function(date){
-// 					window.parent.$("#layui-layer-shade1").remove();
-// 			    	window.parent.$("#layui-layer1").remove(); 
-// 					console.log(date)
-// 				}
-				
-        		
-//         	});
-        	
-        	
-        	
-//     	});
-    	
-//     });
-    
-    
+    ws.onmessage = function(result){ 
+    	console.log(result.data);
+    	alert(result.data);
+    } 
     
     	 
     $(function(){
     	
     	$(".layui-btn").click(function(){
-    		var title = $("[name=title]").val();
-        	var content = $("[name=content]").val();
-        	var uid = $("[name=uid]").val();
-        	var form = $("form")[0];
-        	var formData=new FormData(form);
-        	
-        	$.ajax({
-        		url:[[@{/notice/addnotice}]],
-        		type:"post",
-        		data:formData,
-				dataType:"text",
-				contentType:false,
-				processData:false,
-				success:function(result){
-					var index = parent.layer.getFrameIndex(window.name);
-		   		    parent.layer.close(index);
-					window.parent.$("#layui-layer-shade1").remove();
-			    	window.parent.$("#layui-layer1").remove(); 
-				},error:function(date){
-					var index = parent.layer.getFrameIndex(window.name);
-		   		    parent.layer.close(index);
-					window.parent.$("#layui-layer-shade1").remove();
-			    	window.parent.$("#layui-layer1").remove(); 
-				}
-        	});
-
-    	});
-    	
-    	var ws = new WebSocket("ws://localhost:8080/mywebsocket");
-    	ws.onopen = function(){
-    		console.log("连接成功!!");
-    	}
-    	ws.onerror = function(){
-    		console.log("失败!!");
-    	}
-
-    	ws.onmessage = function(result){
-    		console.log(result.data);
-    		alert(result.data);
-    	}
-    	
-    	
-    	
-//     	var socket;
-// 		if(typeof(WebSocket) == "undefined") {
-// 			alert("您的浏览器不支持WebSocket");
-// 			return;
-// 		}
-
-// 		$("#btnConnection").click(function() {
-// 			//实现化WebSocket对象，指定要连接的服务器地址与端口
-// 			socket = new WebSocket("ws://localhost:8080/WebSocketServer/ws/张三");
-// 			//打开事件
-// 			socket.onopen = function() {
-// 				alert("Socket 已打开");
-// 				//socket.send("这是来自客户端的消息" + location.href + new Date());
-// 			};
-// 			//获得消息事件
-// 			socket.onmessage = function(msg) {
-// 				alert(msg.data);
-// 			};
-// 			//关闭事件
-// 			socket.onclose = function() {
-// 				alert("Socket已关闭");
-// 			};
-// 			//发生了错误事件
-// 			socket.onerror = function() {
-// 				alert("发生了错误");
-// 			}
-// 		});
-
-// 		$("#btnSend").click(function() {
-// 			socket.send("这是来自客户端的消息" + location.href + new Date());
-// 		});
-
-// 		$("#btnClose").click(function() {
-// 			socket.close();
-// 		});
+	    		var title = $("[name=title]").val();
+	        	var content = $("[name=content]").val();
+	        	var uid = $("[name=uid]").val();
+	        	var form = $("form")[0];
+	        	var formData=new FormData(form);
+	        	
+	        	$.ajax({
+	        		url:[[@{/notice/addnotice}]],
+	        		type:"post",
+	        		data:formData,
+					dataType:"text",
+					contentType:false,
+					processData:false,
+					success:function(result){
+						var index = parent.layer.getFrameIndex(window.name);
+			   		    parent.layer.close(index);
+					},error:function(date){
+						var index = parent.layer.getFrameIndex(window.name);
+			   		    parent.layer.close(index);
+					}
+	        	});
+	
+	    	});
     	
     	});
     
     </script>
+    
+    
+    
+    
+     
+<!-- //         //将消息显示在网页上 -->
+<!-- //         function setMessageInnerHTML(innerHTML) { -->
+<!-- //             document.getElementById('message').innerHTML += innerHTML + '<br/>'; -->
+<!-- //         } -->
+     
+<!-- //         //关闭WebSocket连接 -->
+<!-- //         function closeWebSocket() { -->
+<!-- //             websocket.close(); -->
+<!-- //         } -->
+     
+<!-- //         //发送消息 -->
+<!-- //         function send() { -->
+<!-- //             var message = document.getElementById('text').value; -->
+<!-- //             websocket.send(message); -->
+<!-- //         } -->
+
+    	
+    	
+<!-- //     	var ws = new WebSocket("ws://localhost:8080/mywebsocket"); -->
+<!-- //     	ws.onopen = function(){ -->
+<!-- //     		console.log("连接成功!!"); -->
+<!-- //     	} -->
+<!-- //     	ws.onerror = function(){ -->
+<!-- //     		console.log("失败!!"); -->
+<!-- //     	} -->
+
+<!-- //     	ws.onmessage = function(result){ -->
+<!-- //     		console.log(result.data); -->
+<!-- //     		alert(result.data); -->
+<!-- //     	} -->
+    	
+    	
+    	
+
+<!-- //     	// 初始化一个 WebSocket 对象 -->
+<!-- //     	var ws = new WebSocket("ws://localhost:9998/echo"); -->
+    	 
+<!-- //     	// 建立 web socket 连接成功触发事件 -->
+<!-- //     	ws.onopen = function () { -->
+<!-- //     	  // 使用 send() 方法发送数据 -->
+<!-- //     	  ws.send("发送数据"); -->
+<!-- //     	  alert("数据发送中..."); -->
+<!-- //     	}; -->
+    	 
+<!-- //     	// 接收服务端数据时触发事件 -->
+<!-- //     	ws.onmessage = function (evt) { -->
+<!-- //     	  var received_msg = evt.data; -->
+<!-- //     	  alert("数据已接收..."); -->
+<!-- //     	}; -->
+    	 
+<!-- //     	// 断开 web socket 连接成功触发事件 -->
+<!-- //     	ws.onclose = function () { -->
+<!-- //     	  alert("连接已关闭..."); -->
+<!-- //     	}; -->
+    	
+    	
+    	
+<!-- //     	var socket; -->
+<!-- // 		if(typeof(WebSocket) == "undefined") { -->
+<!-- // 			alert("您的浏览器不支持WebSocket"); -->
+<!-- // 			return; -->
+<!-- // 		} -->
+
+<!-- // 		$("#btnConnection").click(function() { -->
+<!-- // 			//实现化WebSocket对象，指定要连接的服务器地址与端口 -->
+<!-- // 			socket = new WebSocket("ws://localhost:8080/WebSocketServer/ws/张三"); -->
+<!-- // 			//打开事件 -->
+<!-- // 			socket.onopen = function() { -->
+<!-- // 				alert("Socket 已打开"); -->
+<!-- // 				//socket.send("这是来自客户端的消息" + location.href + new Date()); -->
+<!-- // 			}; -->
+<!-- // 			//获得消息事件 -->
+<!-- // 			socket.onmessage = function(msg) { -->
+<!-- // 				alert(msg.data); -->
+<!-- // 			}; -->
+<!-- // 			//关闭事件 -->
+<!-- // 			socket.onclose = function() { -->
+<!-- // 				alert("Socket已关闭"); -->
+<!-- // 			}; -->
+<!-- // 			//发生了错误事件 -->
+<!-- // 			socket.onerror = function() { -->
+<!-- // 				alert("发生了错误"); -->
+<!-- // 			} -->
+<!-- // 		}); -->
+
+<!-- // 		$("#btnSend").click(function() { -->
+<!-- // 			socket.send("这是来自客户端的消息" + location.href + new Date()); -->
+<!-- // 		}); -->
+
+<!-- // 		$("#btnClose").click(function() { -->
+<!-- // 			socket.close(); -->
+<!-- // 		}); -->
+    	
     
     
 <!--     <script language="javascript" type="text/javascript"> -->

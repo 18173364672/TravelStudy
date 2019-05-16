@@ -27,8 +27,8 @@ import com.accp.hmf.service.ProjectService;
 import com.accp.qyj.service.PlateService;
 import com.github.pagehelper.PageInfo;
 
-@Controller
-@RequestMapping("/project")
+//@Controller
+//@RequestMapping("/project")
 public class ProjectController {
 	@Autowired
 	ProjectService ps;

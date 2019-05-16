@@ -14,9 +14,9 @@ import com.accp.hx.service.CustomerssService;
 import com.accp.hx.service.ProjectService;
 import com.alibaba.fastjson.JSON;
 
-@Controller
-@RestController
-@RequestMapping("/projectcontroller") 
+//@Controller
+//@RestController
+//@RequestMapping("/projectcontroller") 
 public class ProjectController {
 
 	
