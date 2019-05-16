@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<title>研学旅行</title>
+	<title>研学旅行后台管理系统</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" th:href="@{/css/font.css}">
@@ -12,27 +12,167 @@
     <script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
     <script type="text/javascript" th:src="@{/js/xadmin.js}"></script>
     <script th:src="@{/lib/layui/lay/modules/layer.js}" charset="utf-8"></script>
-        <script th:src="@{/layui-v2.4.5/layui/layui.js}" charset="utf-8"></script>
+    <script th:src="@{/layui-v2.4.5/layui/layui.js}" charset="utf-8"></script>
+	<style>
+	input[type="checkbox"]{width:20px;height:20px;display: inline-block;text-align: center;vertical-align: middle; line-height: 18px;position: relative;}
+	input[type="checkbox"]::before{content: "";position: absolute;top: 0;left: 0;background: #fff;width: 100%;height: 100%;border: 1px solid #d9d9d9}
+	input[type="checkbox"]:checked::before{content: "\2713";background-color: #fff;position: absolute;top: 0;left: 0;width:100%;border: 1px solid #e50232;color:#e50232;font-size: 20px;font-weight: bold;}
+	</style>
     
     
-    <script type="text/javascript" th:inline="javascript">
+    <script>
 	$(function(){
+		  
+		  $("[data=pid1f]").click(function(){
+		  	if(this.checked==true){
+	  		   $("[data='pid1z']").each(function(){
+	  		   	this.checked=true;
+	  		   	
+	  		   })
+		  	}else{
+		  		$("[data='pid1z']").each(function(){
+	  		   	this.checked=false;
+	  		   	
+	  		   })
+		  	}
+		  });
+		  $("[data=pid1z]").click(function(){
+			  	if(this.checked==true){
+		  		   $("[data='pid1f']").each(function(){
+		  		   	this.checked=true;
+		  		   	
+		  		   })
+			  	}
+		  });
+		  $("[data=pid2z]").click(function(){
+			  	if(this.checked==true){
+		  		   $("[data='pid2f']").each(function(){
+		  		   	this.checked=true;
+		  		   	
+		  		   })
+			  	}
+		  });
+		  $("[data=pid3z]").click(function(){
+			  	if(this.checked==true){
+		  		   $("[data='pid3f']").each(function(){
+		  		   	this.checked=true;
+		  		   	
+		  		   })
+			  	}
+		  });
+		  $("[data=pid4z]").click(function(){
+			  	if(this.checked==true){
+		  		   $("[data='pid4f']").each(function(){
+		  		   	this.checked=true;
+		  		   	
+		  		   })
+			  	}
+		  });
+		  $("[data=pid5z]").click(function(){
+			  	if(this.checked==true){
+		  		   $("[data='pid5f']").each(function(){
+		  		   	this.checked=true;
+		  		   	
+		  		   })
+			  	}
+		  });
+		  $("[data=pid6z]").click(function(){
+			  	if(this.checked==true){
+		  		   $("[data='pid6f']").each(function(){
+		  		   	this.checked=true;
+		  		   	
+		  		   })
+			  	}
+		  });
+		  $("[data=pid7z]").click(function(){
+			  	if(this.checked==true){
+		  		   $("[data='pid7f']").each(function(){
+		  		   	this.checked=true;
+		  		   	
+		  		   })
+			  	}
+		  });
+		  
+		  $("[data=pid2f]").click(function(){
+			  	if(this.checked==true){
+		  		   $("[data='pid2z']").each(function(){
+		  		   	this.checked=true;
+		  		   	
+		  		   })
+			  	}else{
+			  		$("[data='pid2z']").each(function(){
+		  		   	this.checked=false;
+		  		   	
+		  		   })
+			  	}
+			  });
+		  $("[data=pid3f]").click(function(){
+			  	if(this.checked==true){
+		  		   $("[data='pid3z']").each(function(){
+		  		   	this.checked=true;
+		  		   	
+		  		   })
+			  	}else{
+			  		$("[data='pid3z']").each(function(){
+		  		   	this.checked=false;
+		  		   	
+		  		   })
+			  	}
+			  });
+		  $("[data=pid4f]").click(function(){
+			  	if(this.checked==true){
+		  		   $("[data='pid4z']").each(function(){
+		  		   	this.checked=true;
+		  		   	
+		  		   })
+			  	}else{
+			  		$("[data='pid4z']").each(function(){
+		  		   	this.checked=false;
+		  		   	
+		  		   })
+			  	}
+			  });
+		  $("[data=pid5f]").click(function(){
+			  	if(this.checked==true){
+		  		   $("[data='pid5z']").each(function(){
+		  		   	this.checked=true;
+		  		   	
+		  		   })
+			  	}else{
+			  		$("[data='pid5z']").each(function(){
+		  		   	this.checked=false;
+		  		   	
+		  		   })
+			  	}
+			  });
+		  $("[data=pid6f]").click(function(){
+			  	if(this.checked==true){
+		  		   $("[data='pid6z']").each(function(){
+		  		   	this.checked=true;
+		  		   	
+		  		   })
+			  	}else{
+			  		$("[data='pid6z']").each(function(){
+		  		   	this.checked=false;
+		  		   	
+		  		   })
+			  	}
+			  });
+		  $("[data=pid7f]").click(function(){
+			  	if(this.checked==true){
+		  		   $("[data='pid7z']").each(function(){
+		  		   	this.checked=true;
+		  		   	
+		  		   })
+			  	}else{
+			  		$("[data='pid7z']").each(function(){
+		  		   	this.checked=false;
+		  		   	
+		  		   })
+			  	}
+			  });
 		
-		layui.use('form', function(){
-			  var form = layui.form;
-			  form.on('checkbox(number)', function(data){
-				var parentid = data.value;
-				var len = $(".ez");
-				for(var i = 0 ; i < len.length ; i++){
-					if($(".ez:eq('"+i+"')").attr("data") == parentid){
-						$(".ez:eq('"+i+"')").attr("checked","checked");
-					}
-				}
-				form.render();
-			});
-		});
-	});
-		
+	})
 	</script>
     
 </head>
@@ -43,7 +183,7 @@
         <div class="page-content">
           <div class="content">
             <!-- 右侧内容框架，更改从这里开始 -->
-            <form class="layui-form" th:action="@{/user/roletoAdd}" method="post">
+            <form th:action="@{/user/roletoAdd}" method="post">
                 <div class="layui-form-item">
                     <label for="L_email" class="layui-form-label">
                         <span class="x-red">*</span>角色名称
@@ -69,11 +209,11 @@
                     </label>
                     <div class="layui-inline" style="margin-left:110px;margin-top:-27px;">
                    		<span  th:each="item,index : ${plist}">
-                   			<input type="checkbox" lay-filter="number" th:if="${item.parentid == 0}" th:title="${item.name+'（父级）'}" th:value="${item.pid}"  name="pid" class="gcs-checkbox parent">
+                   			<input type="checkbox" th:if="${item.parentid == 0}" th:text="${item.name+'（父级）'}" th:value="${item.pid}" name="pid" th:data="${'pid'+item.pid}+'f'"  style="margin-right:5px;">
                    			<br>
                    			<br>
-                   			<span th:each="item1 : ${item.plist}">
-                   				<input type="checkbox" th:if="${item1.parentid == item.pid}"  th:title="${item1.name}" th:value="${item1.pid}" th:data="${item1.parentid}"  name="pid" class="gcs-checkbox ez">
+                   			<span th:each="item1 : ${item.plist}" style="margin-right:20px;">
+                   				<input type="checkbox" th:if="${item1.parentid == item.pid}"  th:text="${item1.name}" th:value="${item1.pid}" th:data="${'pid'+item.pid}+'z'" name="pid" style="margin-right:5px;">
                    			</span>
                    			<br>
                    			<br>

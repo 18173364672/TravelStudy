@@ -110,4 +110,16 @@ public class ProjectServiceimpl implements ProjectService{
 		return pm.selectPorject();
 	}
 
+	@Override
+	public List<Project> pquery(String projectname) {
+		// TODO Auto-generated method stub
+		return pm.pquery(projectname);
+	}
+
+	@Override
+	public List<Project> queryByaid(Integer id) {
+		// TODO Auto-generated method stub
+		return pm.queryByaid(id);
+	}
+
 }

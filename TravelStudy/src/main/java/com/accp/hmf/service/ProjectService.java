@@ -3,6 +3,8 @@ package com.accp.hmf.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.accp.domain.Employee;
 import com.accp.domain.Project;
 import com.accp.domain.Projectimg;
@@ -26,5 +28,9 @@ public interface ProjectService {
 	 Project queryd(Integer id);
 	 //查询所有项目
 	 List<Project> selectPorject();
+	 
+	 List<Project> pquery(String projectname);
+	 
+     List<Project> queryByaid(@Param("id")Integer id);
 	 
 }

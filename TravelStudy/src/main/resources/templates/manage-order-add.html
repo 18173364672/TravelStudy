@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>研学旅行</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" th:href="@{/css/font.css}">
+<link rel="stylesheet" th:href="@{/css/xadmin.css}">
+<link rel="stylesheet"
+	href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">
+<script type="text/javascript"
+	src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
+<script type="text/javascript" th:src="@{/js/xadmin2.js}"></script>
+
+<link rel="stylesheet" th:href="@{/layui-v2.4.5/layui/css/layui.css}" />
+<script type="text/javascript" th:src="@{/layui-v2.4.5/layui/layui.js}"></script>
+
+	<style>
+	.select {
+		display: inline-block;
+		width: 300px;
+		position: relative;
+		vertical-align: middle;
+		padding: 0;
+		overflow: hidden;
+		background-color: #fff;
+		color: black;
+		border: 1px solid #aaa;
+		text-shadow: none;
+		border-radius: 4px;	
+		transition: box-shadow 0.25s ease;
+		z-index: 2;
+	}
+ 
+	.select:hover {
+		box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+	}
+ 
+	.select:before {
+		content: "";
+		position: absolute;
+		width: 0;
+		height: 0;
+		border: 10px solid transparent;
+		border-top-color: #ccc;
+		top: 14px;
+		right: 10px;
+		cursor: pointer;
+		z-index: -2;
+	}
+	.select select {
+		cursor: pointer;
+		padding: 10px;
+		width: 100%;
+		border: none;
+		background: transparent;
+		background-image: none;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+	}
+ 
+	.select select:focus {
+		outline: none;
+	}
+		
+	</style>
+
+</head>
+
+<body>
+
+	<div class="layui-collapse" lay-accordion="">
+		<div class="layui-colla-item">
+			<h2 class="layui-colla-title">添加活动</h2>
+			<div class="layui-colla-content">
+				<input type="text" name="name" placeholder="请输入活动名称"
+					style="color: black; height: 38px; line-height: 38px;">
+				<button class="layui-btn" lay-submit="" lay-filter="sreach" onclick="searchActivity(this)">
+					<i class="layui-icon">&#xe615;</i>
+				</button>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>活动名称</th>
+							<th>活动详情</th>
+							<th>活动价格（元/1人）</th>
+							<th>项目使用次数</th>
+							<th>操作</th>
+
+						</tr>
+					</thead>
+					<tbody class="activity1">
+
+						<tr th:each="item:${alist}">
+							<td th:text="${item.id}" name="activity"></td>
+
+							<td><u th:text="${item.aName}" style="cursor: pointer"
+								title="点击查看"
+								th:onclick="member_show('查看项目','/order/projectDetails',[[${item.id}]],'800','800')">
+							</u></td>
+
+							<td th:text="${item.aJieshao}"></td>
+							<td th:text="${item.aPrice}"></td>
+							<td th:text="${item.count}"></td>
+
+							<td><a title="添加" href="javascript:;" onclick="addActivity(this)"
+								class="ml-5" style="text-decoration: none"><i
+									class="layui-icon">&#xe654;</i> </a></td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	</div>
+
+
+	<div class="layui-collapse" lay-accordion="">
+		<div class="layui-colla-item">
+			<h2 class="layui-colla-title">添加项目</h2>
+			<div class="layui-colla-content">
+				<input type="text" name="name" placeholder="请输入项目名称"
+					style="color: black; height: 38px; line-height: 38px;">
+				<button class="layui-btn" lay-submit="" lay-filter="sreach" onclick="searchProject(this)">
+					<i class="layui-icon">&#xe615;</i>
+				</button>
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>项目名称</th>
+							<th>项目介绍</th>
+							<th>项目价格（元/1人）</th>
+							<th>项目类型</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody  class="project1">
+						<tr th:each="item:${ilist}">
+							<td th:text="${item.id}" name="project"></td>
+							<td th:text="${item.projectname}"></td>
+							<td th:text="${item.context}"></td>
+
+
+							<td th:text="${item.price}"></td>
+
+							<td th:text="${item.type}"></td>
+
+							<td><a title="添加" href="javascript:;" th:onclick="addProject(this);"
+								class="ml-5" style="text-decoration: none"><i
+									class="layui-icon">&#xe654;</i> </a></td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	</div>
+
+	<fieldset class="layui-elem-field layui-field-title"
+		style="margin-top: 20px;">
+		<legend>已选活动</legend>
+	</fieldset>
+
+	<table class="layui-table">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>活动名称</th>
+				<th>活动详情</th>
+				<th>活动价格（元/1人）</th>
+				<th>项目使用次数</th>
+				<th>操作</th>
+
+			</tr>
+		</thead>
+		<tbody class="activity">
+			
+		</tbody>
+	</table>
+
+	<fieldset class="layui-elem-field layui-field-title"
+		style="margin-top: 20px;">
+		<legend>已选项目</legend>
+	</fieldset>
+
+	<table class="layui-table">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>项目名称</th>
+				<th>项目介绍</th>
+
+				<th>项目价格（元/1人）</th>
+				<th>项目类型</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody class="project">
+
+		</tbody>
+	</table>
+
+	<div class="" style="position: relative; top: 10px; left: 10px;">
+		<input type="text" name="name" placeholder="请输入客户组名称" style="color: black; height: 38px; line-height: 38px;">
+		<button class="layui-btn" lay-submit="" lay-filter="sreach" onclick="select_(this)">
+				<i class="layui-icon">&#xe615;</i>
+		</button>
+		
+		
+		<div class="select">
+		<select name="kh"  style="color:black;background-color:white;">
+			<option style="color:black;" value="0">点击选择客户组</option>
+			<option style="color:black;"  th:each="item:${glist}" th:text="${item.groupname}" th:value="${item.id}"></option>
+		</select>
+		</div>
+		
+		<button class="layui-btn" style="position: relative;top:200px;right:-500px;"
+			onclick="add_()">提交订单</button>
+	</div>
+
+	<!-- 右侧主体结束 -->
+	</div>
+
+	<script>
+			layui.use('element', function() {
+				var element = layui.element();
+				element.on('tab(demo)', function(data) {
+					console.log(data);
+				});
+			});
+
+			layui.use(['element', 'table', 'layer', 'form', 'laydate'], function() {
+						var element = layui.element;
+						var layer = layui.layer;
+						var table = layui.table;
+						var form = layui.form;
+						var laydate = layui.laydate;
+					}
+		</script>
+		
+		
+		<script>
+				function member_show(title,url,id,w,h){
+					x_admin_show(title,url+"?id="+id,w,h);
+		  		}
+				function addActivity(obj){
+					var tr_ = $(obj).parent().parent();
+					var a_ = $("<a title='删除' href='javascript:;' onclick='delActivity(this)' class='ml-5' style='text-decoration: none'></a>")
+					var i_ = $("<i class='layui-icon'>&#xe640;</i>");
+					a_.append(i_);
+					$(obj).parent().html(a_);
+					$(".activity").append(tr_);
+				}
+				
+				function addProject(obj){
+					var tr_ = $(obj).parent().parent();
+					var a_ = $("<a title='删除' href='javascript:;' onclick='delProject(this)' class='ml-5' style='text-decoration: none'></a>")
+					var i_ = $("<i class='layui-icon'>&#xe640;</i>");
+					a_.append(i_);
+					$(obj).parent().html(a_);
+					$(".project").append(tr_);
+				}
+				
+				function delActivity(obj){
+					var tr_ = $(obj).parent().parent();
+					var a_ = $("<a title='添加' href='javascript:;' onclick='addActivity(this)' class='ml-5' style='text-decoration: none'></a>")
+					var i_ = $("<i class='layui-icon'>&#xe654;</i>");
+					a_.append(i_);
+					$(obj).parent().html(a_);
+					$(".activity1").append(tr_);
+				}
+				
+				function delProject(obj){
+					var tr_ = $(obj).parent().parent();
+					var a_ = $("<a title='删除' href='javascript:;' onclick='addProject(this)' class='ml-5' style='text-decoration: none'></a>")
+					var i_ = $("<i class='layui-icon'>&#xe654;</i>");
+					a_.append(i_);
+					$(obj).parent().html(a_);
+					$(".project1").append(tr_);
+				}
+				
+				function searchActivity(obj){
+					var name = $(obj).prev().val();
+					$.ajax({
+						url:"/order/activity",
+						data:{name},
+						type:"post",
+						dataType:"json",
+						success:function(data){
+							$(".activity1").html("");
+							for(var i = 0 ; i < data.length ; i++){
+								var tr_ = $("<tr></tr>");
+								var td1 = $("<td>"+data[i].id+"</td>");
+								var td2 = $("<td><u style='cursor: pointer' title='点击查看'  onclick='member_show('张三','/order/projectDetails',"+data[i].id+",'800','800')'>"+data[i].aName+"</u></td>");
+								var td3 = $("<td>"+data[i].aJieshao+"</td>");
+								var td4 = $("<td>"+data[i].aPrice+"</td>");
+								var td5 = $("<td>"+data[i].count+"</td>");
+								var td6 = $("<td></td>");
+								var a_ = $("<a title='添加' href='javascript:;' onclick='addActivity(this)' class='ml-5' style='text-decoration: none'></a>")
+								var i_ = $("<i class='layui-icon'>&#xe654;</i>");
+								a_.append(i_);
+								td6.append(a_);
+								tr_.append(td1);
+								tr_.append(td2);
+								tr_.append(td3);
+								tr_.append(td4);
+								tr_.append(td5);
+								tr_.append(td6);
+								$(".activity1").append(tr_);
+							}
+							
+							
+						},
+					});
+				}
+				
+				function searchProject(obj){
+					var name = $(obj).prev().val();
+					$.ajax({
+						url:"/order/project",
+						data:{name},
+						type:"post",
+						dataType:"json",
+						success:function(data){
+							$(".project1").html("");
+							for(var i = 0 ; i < data.length ; i++){
+								var tr_ = $("<tr></tr>");
+								var td1 = $("<td>"+data[i].id+"</td>");
+								var td2 = $("<td>"+data[i].projectname+"</td>");
+								var td3 = $("<td>"+data[i].context+"</td>");
+								var td4 = $("<td>"+data[i].price+"</td>");
+								var td5 = $("<td>"+data[i].type+"</td>");
+								var td6 = $("<td></td>");
+								var a_ = $("<a title='添加' href='javascript:;' onclick='addProject(this)' class='ml-5' style='text-decoration: none'></a>")
+								var i_ = $("<i class='layui-icon'>&#xe654;</i>");
+								a_.append(i_);
+								td6.append(a_);
+								tr_.append(td1);
+								tr_.append(td2);
+								tr_.append(td3);
+								tr_.append(td4);
+								tr_.append(td5);
+								tr_.append(td6);
+								$(".project1").append(tr_);
+							}
+						},
+					});
+				}
+				
+				
+				function select_(obj){
+					var name = $(obj).prev().val();
+					$.ajax({
+						url:"/order/khz",
+						data:{name},
+						type:"post",
+						dataType:"json",
+						success:function(data){
+							$("[name='kh']").html("");
+							var option_ = $("<option style='color:black;' value='0'>点击选择客户组</option>");
+							$("[name='kh']").append(option_);
+							for(var i = 0 ; i < data.length ; i++){
+								var option1 = $("<option style='color:black;' value='"+data[i].id+"'>"+data[i].groupname+"</option>");
+								$("[name='kh']").append(option1);
+							}
+						},
+					});
+				}
+				
+				function add_(){
+					var activityid = [];
+					var itemid = [];
+					for(var i = 0 ; i < $(".activity tr").length ; i++){
+						activityid.push($(".activity tr [name='activity']:eq("+i+")").text());
+					}
+					for(var i = 0 ; i < $(".project tr").length ; i++){
+						itemid.push($(".project tr [name='project']:eq("+i+")").text());
+					}
+					if(activityid==''&&itemid==''){
+						alert("请添加最少一个项目!");
+						return;
+					}
+					var kh = $("[name='kh']").val();
+					if(kh==0){
+						alert("请选择客户组!");
+						return;
+					}
+					$.ajax({
+						url:"/order/addorder?activityid="+activityid+"&itemid="+itemid+"&kh="+kh,
+						data:{
+						},
+						type:"post",
+						dataType:"json",
+						success:function(data){
+							
+						}
+						
+					});
+				}
+		</script>
+</body>
+
+</html>

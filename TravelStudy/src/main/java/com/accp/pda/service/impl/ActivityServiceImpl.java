@@ -83,5 +83,11 @@ public class ActivityServiceImpl implements ActivityService{
 		return mapper.insertevtime(ac);
 	}
 
+	@Override
+	public List<Activity> query(String name) {
+		// TODO Auto-generated method stub
+		return mapper.query(name);
+	}
+
 
 }

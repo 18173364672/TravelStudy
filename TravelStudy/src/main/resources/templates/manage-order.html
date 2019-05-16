@@ -76,7 +76,7 @@
 					<i class="layui-icon">&#xe640;</i>批量删除
 				</button>
 				<button class="layui-btn"
-					onclick="member_add('添加订单','member-project-group-add.html','1200','920')">
+					onclick="member_add('添加订单','/order/member-project-group-up','1200','920')">
 					<i class="layui-icon">&#xe608;</i>添加订单
 				</button>
 				<span class="x-right" style="line-height: 40px"
@@ -127,10 +127,12 @@
 				</table>
 				<xblock>
 				<button class="layui-btn layui-btn-warm">
-					<a th:href="@{/order/query}+'?currentPage='+${currentPage-1}+'&pages='+${page.pages}">上一页</a>
+					<a
+						th:href="@{/order/query}+'?currentPage='+${page.prePage}+'&pages='+${page.pages}">上一页</a>
 				</button>
 				<button class="layui-btn layui-btn-danger">
-					<a th:href="@{/order/query}+'?currentPage='+${currentPage+1}+'&pages='+${page.pages}">下一页</a>
+					<a
+						th:href="@{/order/query}+'?currentPage='+${page.nextPage}+'&pages='+${page.pages}">下一页</a>
 				</button>
 				</xblock>
 
@@ -249,8 +251,7 @@
 
 		/*用户-停用*/
 		function member_stop(obj, id) {
-			layer
-					.confirm(
+			layer.confirm(
 							'确认要停用吗？',
 							function(index) {
 								//发异步把用户状态进行更改
@@ -298,7 +299,7 @@
 		}
 		// 用户-编辑
 		function member_edit(title, url, id, w, h) {
-			x_admin_show(title, url+"?oid="+id, w, h);
+			x_admin_show(title, url + "?oid=" + id, w, h);
 		}
 
 		//查看项目
@@ -374,16 +375,6 @@
 		function member_ck(url, id, w, h) {
 			x_admin_show(url, w, h);
 		}
-	</script>
-	<script>
-		//百度统计可去掉
-		var _hmt = _hmt || [];
-		(function() {
-			var hm = document.createElement("script");
-			hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-			var s = document.getElementsByTagName("script")[0];
-			s.parentNode.insertBefore(hm, s);
-		})();
 	</script>
 </body>
 

@@ -95,13 +95,12 @@ public class UserController {
 		if("null".equals(name)) {
 			name = null;
 		}
-		if(currentPage == null || currentPage<=1) {
+		if(currentPage == null) {
 			currentPage = 1;
 		}
 		if(pageSize == null) {
 			pageSize = 5;
 		}
-		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("name", name);
 		model.addAttribute("page", plateservice.queryByPage(currentPage, pageSize, name));
 		Employee es = (Employee)session.getAttribute("user");
@@ -155,7 +154,7 @@ public class UserController {
 		if("null".equals(name)) {
 			name = null;
 		}
-		if(currentPage == null || currentPage<=1) {
+		if(currentPage == null) {
 			currentPage = 1;
 		}
 		if(pageSize == null) {
@@ -208,7 +207,6 @@ public class UserController {
 		model.addAttribute("role1",roleservice.selectByPrimaryKey(rid));
 		model.addAttribute("list1", roleplateservice.querybyid(rid));
 		model.addAttribute("plist", plateservice.queryPlateAll());
-		System.out.println(JSON.toJSONString(plateservice.queryPlateAll()));
 		return "manage-role-update";
 	}
 	
@@ -218,7 +216,6 @@ public class UserController {
 		Roleplate rp = new Roleplate();
 		rp.setRid(role.getRid());
 		roleplateservice.deleteByRid(role.getRid());
-		
 		for (int i = 0; i < role.getPid().length; i++) {
 			rp.setPid(role.getPid()[i]);
 			roleplateservice.insert(rp);
@@ -230,7 +227,6 @@ public class UserController {
 	public String roleDetails(Integer rid , String name , Model model ,HttpSession session) {
 		model.addAttribute("name", name);
 		model.addAttribute("plist", plateservice.queryRolePlate(rid));
-		System.out.println(JSON.toJSONString(plateservice.queryRolePlate(rid)));
 		return "manage-role-details";
 	}
 	

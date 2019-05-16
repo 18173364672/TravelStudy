@@ -31,6 +31,18 @@
   SELECT *FROM `activity` WHERE id=#{id}
   </select>
   
+  <select id="query" resultMap="BaseResultMap">
+  		select * from `activity`
+	  	<where>
+	  		<if test="name!=null and name!=''">
+	  			A_name like CONCAT('%',#{name},'%')
+	  		</if>
+	  		<if test="name!=null and name!=''">
+	  			or A_jieshao like CONCAT('%',#{name},'%');
+	  		</if>
+	  	</where>
+  </select>
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

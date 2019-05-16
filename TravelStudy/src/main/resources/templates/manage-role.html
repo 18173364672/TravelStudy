@@ -140,8 +140,8 @@
                 </tbody>
             </table>
              <xblock>
-            		<button class="layui-btn layui-btn-warm"><a th:href="@{/user/role}+'?currentPage='+${currentPage-1}">上一页</a></button>
-                    <button class="layui-btn layui-btn-danger"><a th:href="@{/user/role}+'?currentPage='+${currentPage+1}">下一页</a></button>
+            		<button class="layui-btn layui-btn-warm"><a th:href="@{/user/role}+'?currentPage='+${page.prePage}">上一页</a></button>
+                    <button class="layui-btn layui-btn-danger"><a th:href="@{/user/role}+'?currentPage='+${page.nextPage}">下一页</a></button>
            	 </xblock><!-- 右侧内容框架，更改从这里结束 -->
           </div>
         </div>

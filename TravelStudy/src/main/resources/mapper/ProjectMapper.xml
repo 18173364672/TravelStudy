@@ -31,6 +31,12 @@
   </resultMap>
   
   
+  <select id="queryByaid" resultMap="BaseResultMap">
+  		SELECT p.* FROM `eventitems` AS e 
+		LEFT JOIN `project` AS p ON e.pid = p.id
+		WHERE e.aid = #{id}
+  </select>
+  
   
      
      <select id="queryd" resultMap="BaseResultMap">

@@ -48,4 +48,7 @@ public interface ProjectMapper {
     List<Project>proxmselect();
     
     List<ProjectByTimeAndName> selectXmTable(@Param("years") String years,@Param("projectname") String name);
+    
+    List<Project> queryByaid(@Param("id")Integer id);
+    
 }

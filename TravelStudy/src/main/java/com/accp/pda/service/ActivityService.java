@@ -25,4 +25,6 @@ public interface ActivityService {
     
     int insertSelective(Activity record);
     int insertevtime(Activity ac);
+    
+    List<Activity> query(String name);
 }

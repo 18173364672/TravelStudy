@@ -84,6 +84,12 @@ public class CustomergroupServiceimpl implements CustomergroupService{
 		return cgm.deleteByPrimaryKey(id);
 	}
 
+	@Override
+	public List<Customergroup> cgquerypage(String groupname) {
+		// TODO Auto-generated method stub
+		return cgm.cgquerypage(groupname);
+	}
+
 	
 
 }

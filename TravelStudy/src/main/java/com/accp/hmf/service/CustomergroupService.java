@@ -26,4 +26,6 @@ public interface CustomergroupService {
 	 int insertSelective(Customergroup record);
 	 
 	 public PageInfo<Customergroup> querypage(Integer currentPage, Integer pageSize,String groupname);
+	 
+     List<Customergroup> cgquerypage(@Param("groupname") String groupname);
 }

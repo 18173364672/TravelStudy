@@ -102,18 +102,13 @@
   </resultMap> 
 	
 	<select id="queryPlateAll" resultMap="BaseResultMapQueryPlateAll">
-		SELECT p.*,r.`rid` FROM `plate` AS p
-		LEFT JOIN `roleplate` AS rp ON rp.`pid` = p.`pid`
-		LEFT JOIN `role` AS r ON rp.`rid` = r.rid
+		SELECT p.* FROM `plate` AS p
 		WHERE p.`parentid`=0
 	</select>
 	
 	
 	<select id="queryPlateAll2" resultMap="BaseResultMap">
-		SELECT p.* FROM `plate` AS p
-		LEFT JOIN `roleplate` AS rp ON rp.`pid` = p.`pid`
-		LEFT JOIN `role` AS r ON rp.`rid` = r.rid
-		LEFT JOIN `userrole` AS ur ON ur.`rid` = r.`rid` WHERE parentid = #{pid}
+		SELECT * FROM `plate`  WHERE parentid = #{pid}
 	</select>
   
   
