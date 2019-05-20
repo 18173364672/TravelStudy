@@ -48,6 +48,7 @@ public class ProjectController {
 		return "member-project-comment";
 	}
 	
+	//跳转到项目详细评论页面
 	@RequestMapping("/toprojectcommentquery")
 	public String toprojectcommentquery(Model model,Integer id) {
 		model.addAttribute("id", id);
@@ -56,6 +57,8 @@ public class ProjectController {
 		return "member-projectcomment-query";
 	}
 	
+	
+	//项目评论分页
 	@RequestMapping("/projectcommentqueryquerypage")
 	@ResponseBody
 	 public PageInfo<Userprojectdiscuss> querypage(Integer currentPage,Integer id){
@@ -68,7 +71,7 @@ public class ProjectController {
     }
 	
 
-	
+	//项目信息修改
 	@RequestMapping("/projectedit")
 	@ResponseBody
 	public int projectedit(@RequestBody Project project) {
@@ -97,6 +100,7 @@ public class ProjectController {
 	}
 	
 	
+	//跳转到项目修改
 	@RequestMapping("/toprojectedit")
 	public String toprojectedit(Model model,Integer id) {
 		Project project=ps.queryd(id);
@@ -106,6 +110,7 @@ public class ProjectController {
 		return "member-project-edit";
 	}
 	
+	//项目单个删除
     @RequestMapping("/projectdeletes")
     public String projectdeletes(Integer id) {
     	  ps.deleteByPrimaryKey(id);
@@ -113,6 +118,7 @@ public class ProjectController {
     	  return "redirect:/project/toprojectquerypage";
     }
 	
+    //项目多个删除
 	@RequestMapping("/projectdelete")
 	public String projectdelete(@RequestBody Project project) {
 		
@@ -127,6 +133,8 @@ public class ProjectController {
 		return "redirect:/project/toprojectquerypage";
 	}
 	
+	
+	//跳转到项目图片页面
 	@RequestMapping("/toprojectimg")
 	public String toprojectimg(Integer id , Model model) {
 		List<Projectimg> list=ps.queryimg(id);
@@ -136,7 +144,7 @@ public class ProjectController {
 	
 	
 	
-	
+	//项目添加
 	@RequestMapping("/projectadd")
 	@ResponseBody
 	public int projectadd(@RequestBody Project project) {
@@ -162,6 +170,8 @@ public class ProjectController {
 		return project.getId();
 	}
 	
+	
+	//图片上传
 	 @RequestMapping("/fileupload")
 	 @ResponseBody
 	   public int fileUpload(MultipartFile []file,Integer pid) {
@@ -199,6 +209,7 @@ public class ProjectController {
 	   }
 	
 	
+	 //查询场地
 	@RequestMapping("/querycd")
 	@ResponseBody
 	public List<Field> querycd(Model model,Integer tid){
@@ -208,6 +219,7 @@ public class ProjectController {
 		return flist;
 	}
 	
+	//查询教练
 	@RequestMapping("/queryjl")
 	@ResponseBody
 	public List<Employee> queryjl(Integer fid) {
@@ -218,6 +230,7 @@ public class ProjectController {
 		return elist;
 	}
 	
+	//跳转到项目添加页面
 	@RequestMapping("/toprojectadd")
 	public String toprojectadd(Model model,String name) {
 		
@@ -226,6 +239,7 @@ public class ProjectController {
 		return "member-project-add";
 	}
 	
+	//项目信息分页
 	@RequestMapping("/projectquerypage")
 	@ResponseBody
 	 public PageInfo<Project> querypage(Integer currentPage,String projectname){
@@ -238,6 +252,7 @@ public class ProjectController {
     }
 	
 	
+	//跳转到项目信息页面
 	@RequestMapping("/toprojectquerypage")
 	public String toprojectquerypage() {
 		

@@ -135,6 +135,7 @@ public class CustomerController {
     	return "member-level";
     }
     
+    //客户单个删除
     @RequestMapping("/customerdeletes")
     public String customerdelete(Integer id) {
  		
@@ -153,6 +154,7 @@ public class CustomerController {
     }
        
        
+     //客户多个删除
        @RequestMapping("/customerdelete")
        public String customerdelete(@RequestBody Customerss customerss) {
     		for (Customerss c : customerss.getMlist()) {
@@ -173,12 +175,15 @@ public class CustomerController {
     	   
     		return "redirect:/customer/tomemberdel";
        }
-    
+      
+       
+       //客户删除页面
        @RequestMapping("/tomemberdel")
        public String tomemberdel() { 
     	   return "member-del";
        }
        
+       //客户删除页面分页
        @RequestMapping("/customerquerypages")
        @ResponseBody
        public  PageInfo<Customerss> customerquerypages(Integer currentPage, Integer pageSize, String createtime, String username) {
@@ -194,7 +199,7 @@ public class CustomerController {
        	
        }
        
-    
+      //导出客户信息
        @RequestMapping("/dc")
 	   public ResponseEntity<byte[]> dc(String groupname) {
 		   if(groupname.equals("全部")) {
@@ -371,6 +376,7 @@ public class CustomerController {
 	   }
 	   
 	 
+	   //客户状态
 	   @RequestMapping("/customerupstatess")
 	    public String customerupstatess(@RequestBody Customerss customerss) {
 	    	for (Customerss c : customerss.getMlist()) {
@@ -382,7 +388,7 @@ public class CustomerController {
 	    	return "redirect:/customer/tomemberdel";
 	    }
 	   
-    
+	 //客户状态
     @RequestMapping("/customerupstates")
     public String customerupstates(Integer id) {
     	Customerss customerss=new Customerss();
@@ -404,6 +410,7 @@ public class CustomerController {
     	return "redirect:/customer/tocustomerquerypage";
     }
     
+    	//客户修改
     @RequestMapping("/customeredit")
     public String customeredit(Customerss customerss) {
     	
@@ -444,7 +451,7 @@ public class CustomerController {
    
     }
    
-    
+    //客户修改页面
     @RequestMapping("/tocustomeredit")
     public String tocustomeredit(Model model,Integer id) {
     	
@@ -457,6 +464,7 @@ public class CustomerController {
     	return "member-edit";
     }
     
+    //客户添加
     @RequestMapping("/customeradd")
     public String customeradd(Customerss customerss) {
     	 Customergroup customergroup=new Customergroup();
@@ -650,6 +658,7 @@ public class CustomerController {
     	
     }
     
+    //客户添加页面
     @RequestMapping("/tocustomeradd")
     public String tocustomeradd(Model model) {
     	List<Customergroup> list=cgs.selectByExample(null);
@@ -658,6 +667,8 @@ public class CustomerController {
     	return "member-add";
     }
     
+    
+    //客户信息分页
     @RequestMapping("/customerquerypage")
     @ResponseBody
     public  PageInfo<Customerss> customerquerypage(Integer currentPage, Integer pageSize, String createtime, String username) {
@@ -673,7 +684,7 @@ public class CustomerController {
     	
     }
     
-    
+    //跳转到客户信息页面
     @RequestMapping("/tocustomerquerypage")
     public String tocustomerquerypage(Model model) {
     	

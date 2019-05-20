@@ -24,6 +24,7 @@ public class FieldController {
 	   FieldtypeService ffs;
 	 
 	   
+	   //场地修改
 	   @RequestMapping("/fieldedit")
 	   public String fieldedit(Field field) {
 		   
@@ -32,6 +33,8 @@ public class FieldController {
 		   return "redirect:/field/tofieldquerypage";
 	   }
 	   
+	   
+	   //跳转到场地修改页面
 	   @RequestMapping("/tofieldedit")
 	   public String tofieldedit(Model model,Integer id) {
 		   Field field= fs.fqueryd(id);
@@ -54,6 +57,8 @@ public class FieldController {
 		   return "redirect:/field/tofieldquerypage";
 	   }
 	   
+	   
+	   //场地删除
 	     @RequestMapping("/fielddelete")
 	     public String fielddelete(Integer id) {
 	    	 Field field=fs.fqueryd(id);
@@ -68,6 +73,8 @@ public class FieldController {
 	    	 return "redirect:/field/tofieldquerypage";
 	     }
 	   
+	     
+	     //更新场地状态
 	     @RequestMapping("/updatestate")
 	     public String updatestate(Integer id,Integer occupy) {
 	    	 Field field=new Field();
@@ -78,6 +85,8 @@ public class FieldController {
 	    	 return "redirect:/field/tofieldquerypage";
 	     }
 	   
+	     
+	     //场地添加
 	     @RequestMapping("/fieldadd")
 	     @ResponseBody
 	     public int fieldadd(@RequestBody Fieldtype fieldtype) {
@@ -93,17 +102,23 @@ public class FieldController {
 	    	 return 0;
 	     }
 	     
+	     
+	     //跳转到场地添加页面
 	      @RequestMapping("/tofieldadd")
 	      public String tofieldadd() {
 	    	  return "member-project-fieldadd";
 	      }
 	   
 	   
+	      
+	      //跳转到场地信息页面
 	     @RequestMapping("/tofieldquerypage")
 	     public String tofield() {
 	    	 return "member-project-field";
 	     }
 	     
+	     
+	     //场地信息分页
 	     @RequestMapping("/fieldquerypage")
 	     @ResponseBody
 	     public PageInfo<Field> querypage(Integer currentPage,String name){

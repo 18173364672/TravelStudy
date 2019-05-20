@@ -40,7 +40,7 @@ public class CustomergroupController {
 	 @Autowired
 	 HttpServletResponse response;
 	
-	 
+	 //客户组删除
 	 @RequestMapping("/customergroupdeleteall")
 	 @ResponseBody
 	 public int customergroupdeleteall(@RequestBody Customergroup customergroup) {
@@ -296,7 +296,7 @@ public class CustomergroupController {
 			return "member-usergroup";
 		}
 	
-	
+	//模板下载
 	@RequestMapping("/mb")
 	public ResponseEntity<byte[]> mb() {
 		 org.springframework.http.HttpHeaders hea=new org.springframework.http.HttpHeaders();
@@ -318,11 +318,15 @@ public class CustomergroupController {
 		 return new ResponseEntity<byte[]>(bytes, hea, HttpStatus.OK);
 	}
 	
+	
+	//跳转到客户组添加页面
 	@RequestMapping("/tocustomergroupadd")
 	public String tocustomergroupadd() {
 		return "member-usergroup-add";
 	}
 	
+	
+	//跳转到客户组信息页面
 	@RequestMapping("/tocustomergroupquery")
 	public String tocustomergroupquery() {
 		
@@ -331,6 +335,7 @@ public class CustomergroupController {
 		return "member-usergroup";	
 	}
 	
+	//客户组分页
 	@RequestMapping("/customergroupquerypage")
 	@ResponseBody
 	 public  PageInfo<Customergroup> customergroupquerypage(Integer currentPage, Integer pageSize, String groupname) {
