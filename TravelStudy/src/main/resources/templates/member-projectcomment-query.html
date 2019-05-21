@@ -59,14 +59,12 @@
 						</div>
 					</form>
 					<xblock>
-					<button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button>
+					<button class="layui-btn layui-btn-danger" >评论列表</button>
 					<span class="x-right" style="line-height:40px">共有数据：{{pageInfo.total}} 条</span></xblock>
 					<table class="layui-table">
 						<thead>
 							<tr>
-								<th>
-									<input type="checkbox" id="checkall" value="">
-								</th>
+								
 								<th>
 									ID
 									<input type="hidden" th:value="${id}" name="pid">
@@ -90,9 +88,7 @@
 						</thead>
 						<tbody>
 							<tr v-for="l in pageInfo.list">
-								<td>
-									<input type="checkbox" value="1" name="s1">
-								</td>
+							
 								<td>
 									{{l.id}}
 								</td>

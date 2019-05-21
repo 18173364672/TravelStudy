@@ -71,15 +71,20 @@ public class ProjectServiceimpl implements ProjectService{
 
 			Integer cpl=um.querycphmf(project.getId());
 			
-			 DecimalFormat df=new DecimalFormat("0.00");
-			df.format((float)hpl/zp);
-			String df1=df.format((float)hpl/zp);
-			float df2=Float.parseFloat(df1)*100;
-		    
-			String df3=df.format((float)cpl/zp);
-			float df4=Float.parseFloat(df3)*100;
-			project.setHp(df2);
-			project.setCp(df4);
+			
+			if(zp>0) {
+				 DecimalFormat df=new DecimalFormat("0.00");
+					df.format((float)hpl/zp);
+					String df1=df.format((float)hpl/zp);
+					float df2=Float.parseFloat(df1)*100;
+				    
+					String df3=df.format((float)cpl/zp);
+					float df4=Float.parseFloat(df3)*100;
+					project.setHp(df2);
+					project.setCp(df4);
+			}
+			
+			
 			
 			
 			

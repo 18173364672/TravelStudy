@@ -374,17 +374,25 @@
                             <div style="display: none">{{l.id}}</div>
                         </td>
                         
-                              <td >
+                              <td v-if="l.hp!=null">
                  {{l.hp}}%
+      </td>
+                        
+                        <td v-else>
+                        暂无评论
+                        
                         </td>
                         
-                              <td >
+                              <td v-if="l.cp!=null">
                         {{l.cp}}%
-                        </td>
-                  
+  </td>
                 
         
-                      
+                                   
+                        <td v-else>
+                        暂无评论
+                        
+                        </td>
                         
                          
                    

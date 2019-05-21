@@ -424,14 +424,15 @@ $(function(){
 		  contentType:"application/json",
 		  datatype:"text",
 		  success:function(data){
-			  
+			  alert("修改成功！");
 			
 		    imgadd(data);
 		  }
 	  })
 	  
-	 var index=parent.layer.getFrameIndex(window.name);
+	  var index=parent.layer.getFrameIndex(window.name);
 	  parent.layer.close(index);
+	 window.parent.location.reload();
 }
 
 
