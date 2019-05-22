@@ -15,6 +15,20 @@
     <result column="Spare4" property="spare4" jdbcType="VARCHAR" />
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
+  
+  
+  <select id="queryByOid" resultMap="BaseResultMap">
+  		select * from orderdetail where oid = #{oid}
+  </select>
+  
+  <select id="queryByFid" resultMap="BaseResultMap">
+  		SELECT * FROM `orderdetail` WHERE fid = #{fid}  AND starttime = #{starttime1} AND endtime = #{endtime1}
+  </select>
+  
+  <select id="queryEndtime" resultMap="BaseResultMap">
+  		SELECT * FROM `orderdetail` WHERE fid = #{fid} ORDER BY endtime DESC LIMIT 1
+  </select>
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >

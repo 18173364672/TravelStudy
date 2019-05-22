@@ -92,8 +92,8 @@
 							<th>下单时间</th>
 							<th>订单状态</th>
 							<th>订单总价格(元)</th>
-							<th>领队</th>
-							<th>助理</th>
+<!-- 							<th>领队</th> -->
+<!-- 							<th>助理</th> -->
 
 
 							<th>操作</th>
@@ -114,12 +114,24 @@
 							<td class="zt" th:if="${item.tid == 4}">正在执行</td>
 							<td class="zt" th:if="${item.tid == 5}">已结束</td>
 							<td th:text="${item.price}"></td>
-							<td th:text="${item.ename}"></td>
-							<td th:text="${item.zname}"></td>
+<!-- 							<td th:text="${item.ename}"></td> -->
+<!-- 							<td th:text="${item.lname}"></td> -->
 							<td class="td-manage"><a title="查看" href="javascript:;"
 								th:onclick="member_edit('订单详情','/order/detail',[[${item.id}]],'1200','510')"
 								class="ml-5" style="text-decoration: none"><i
-									class="layui-icon">&#xe615;</i> </a></td>
+									class="layui-icon">&#xe615;</i> </a>
+									
+									
+<!-- 									<a title="编辑" href="javascript:;" -->
+<!-- 								th:onclick="member_edit('订单编辑','/order/xiugai',[[${item.id}]],'500','500')" -->
+<!-- 								class="ml-5" style="text-decoration: none"> <i -->
+<!-- 									class="layui-icon">&#xe642;</i> -->
+<!-- 								</a> -->
+									
+									
+									</td>
+									
+							
 						</tr>
 
 

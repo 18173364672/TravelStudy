@@ -11,6 +11,7 @@ import com.accp.domain.Order;
 import com.accp.domain.OrderExample;
 import com.accp.domain.ResultMapOrderDetail;
 import com.accp.qyj.service.OrderService;
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -43,13 +44,13 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public int insert(Order record) {
 		// TODO Auto-generated method stub
-		return 0;
+		return m.insert(record);
 	}
 
 	@Override
 	public int insertSelective(Order record) {
 		// TODO Auto-generated method stub
-		return 0;
+		return m.insertSelective(record);
 	}
 
 	@Override
@@ -79,7 +80,7 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public int updateByPrimaryKeySelective(Order record) {
 		// TODO Auto-generated method stub
-		return 0;
+		return m.updateByPrimaryKeySelective(record);
 	}
 
 	@Override
@@ -109,6 +110,7 @@ public class OrderServiceImpl implements OrderService{
 		return m.queryOrderDetail(oid);
 	}
 
+	
 	@Override
 	public int deleteOrderDetail(Integer id) {
 		// TODO Auto-generated method stub

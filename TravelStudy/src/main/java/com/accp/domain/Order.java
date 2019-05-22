@@ -35,6 +35,8 @@ public class Order {
 	private String cname;
 
 	private String zname;
+	
+	private String lname;
 
 	public String getEname() {
 		return ename;
@@ -154,5 +156,13 @@ public class Order {
 
 	public void setZname(String zname) {
 		this.zname = zname;
+	}
+
+	public String getLname() {
+		return lname;
+	}
+
+	public void setLname(String lname) {
+		this.lname = lname;
 	}
 }

@@ -2,6 +2,8 @@ package com.accp.domain;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Orderdetail {
     private Integer id;
 
@@ -9,8 +11,10 @@ public class Orderdetail {
 
     private Integer fid;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date starttime;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date endtime;
 
     private Integer pid;
@@ -26,6 +30,28 @@ public class Orderdetail {
     private String spare4;
 
     private String spare5;
+    
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date starttime1;
+    
+    public Date getStarttime1() {
+		return starttime1;
+	}
+
+	public void setStarttime1(Date starttime1) {
+		this.starttime1 = starttime1;
+	}
+
+	public Date getEndtime1() {
+		return endtime1;
+	}
+
+	public void setEndtime1(Date endtime1) {
+		this.endtime1 = endtime1;
+	}
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date endtime1;
 
     public Integer getId() {
         return id;

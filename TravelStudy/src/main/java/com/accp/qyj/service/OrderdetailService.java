@@ -1,11 +1,16 @@
-package com.accp.dao;
+package com.accp.qyj.service;
 
-import com.accp.domain.Orderdetail;
-import com.accp.domain.OrderdetailExample;
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
-public interface OrderdetailMapper {
+import com.accp.domain.Order;
+import com.accp.domain.Orderdetail;
+import com.accp.domain.OrderdetailExample;
+
+public interface OrderdetailService {
     int countByExample(OrderdetailExample example);
 
     int deleteByExample(OrderdetailExample example);
@@ -28,9 +33,17 @@ public interface OrderdetailMapper {
 
     int updateByPrimaryKey(Orderdetail record);
     
-    List<Orderdetail> queryByOid(@Param("oid")Integer oid);
+    //每个订单时间大致
+    Orderdetail queryTime(Integer oid);
     
+    //查看此订单此场地这个时间是否可以执行
     Orderdetail queryByFid(Orderdetail od);
     
-    Orderdetail queryEndtime(@Param("fid")Integer fid);
+    Orderdetail queryTime1(Orderdetail od);
+    
+    Orderdetail queryByFid1(Orderdetail od);
+    
+    Integer[] qeuryid(Order oid);
+    
+    List<Orderdetail> queryByOid(Integer oid);
 }

@@ -31,21 +31,20 @@
   <resultMap type="com.accp.domain.Order" id="BaseResultMapQueryAll" extends="BaseResultMap">
   		<result column="ename" property="ename" jdbcType="VARCHAR" />
   		<result column="cname" property="cname" jdbcType="VARCHAR" />
-  		<association property="zname" column="lid"  javaType="com.accp.domain.Employee" select="zl">
-  				
-  		</association>
+  		<result column="lname" property="lname" jdbcType="VARCHAR" />
   </resultMap> 
   
   <select id="queryAll" resultMap="BaseResultMapQueryAll">
-  	SELECT c.`Username` AS cname , e.`Employeename` AS ename , o.* FROM `order` AS o 
-	LEFT JOIN `customer` AS c ON o.`yid` = c.`Id`
+  	SELECT c.`Username` AS cname , e.`Employeename` AS ename , es.`Employeename` AS lname , o.* FROM `order` AS o 
+	LEFT JOIN `customerss` AS c ON o.`yid` = c.`Id`
 	LEFT JOIN `employee` AS e ON o.`sid` = e.`id`
+	LEFT JOIN `employee` AS es ON es.`id` = o.`lid`
 	<where>
 		<if test="name!=null">
   			c.`Username` like CONCAT('%',#{name},'%') 
   		</if>
   		<if test="name!=null">
-  			or e.`Employeename` like CONCAT('%',#{name},'%') 
+  			or e.`Employeename` like CONCAT('%',#{name},'%')
   		</if>
 	</where>
   </select>
@@ -70,7 +69,7 @@
 		LEFT JOIN `field` AS f ON od.`fid` = f.`id`
 		LEFT JOIN `project` AS p ON od.`pid` = p.`Id`
 		LEFT JOIN `employee` AS e ON od.`Spare1` = e.`id`
-		where od.`oid` = #{oid}
+		where od.`oid` = #{oid} order by  od.`starttime`
   </select>
   
   
@@ -169,7 +168,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.accp.domain.Order" >
+  <insert id="insert" parameterType="com.accp.domain.Order" keyProperty="id" useGeneratedKeys="true">
     insert into order (id, yid, sid, 
       time, tid, price, 
       lid, Spare1, Spare2, 
@@ -181,8 +180,8 @@
       #{spare3,jdbcType=VARCHAR}, #{spare4,jdbcType=VARCHAR}, #{spare5,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.accp.domain.Order" >
-    insert into order
+  <insert id="insertSelective" parameterType="com.accp.domain.Order"  keyProperty="id" useGeneratedKeys="true">
+    insert into `order`
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -329,7 +328,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.accp.domain.Order" >
-    update order
+    update `order`
     <set >
       <if test="yid != null" >
         yid = #{yid,jdbcType=INTEGER},

@@ -194,7 +194,7 @@ public class TjController {
 	 * @param model每月收入数据
 	 * @return
 	 */
-	@RequestMapping("toMonthSr")
+	@RequestMapping("/toMonthSr")
 	public String toMonthSr(Model model , HttpSession session) {
 		Employee es = (Employee)session.getAttribute("user");
 		List<Plate> plate = plateservice.queryLeftNav(es.getId());
@@ -330,7 +330,7 @@ public class TjController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("toRqTeacher")
+	@RequestMapping("/toRqTeacher")
 	public String toRqTeacher(Model model , HttpSession session) {
 		Employee es = (Employee)session.getAttribute("user");
 		List<Plate> plate = plateservice.queryLeftNav(es.getId());
@@ -425,7 +425,7 @@ public class TjController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("toRqActivity")
+	@RequestMapping("/toRqActivity")
 	public String toRqActivity(Model model , HttpSession session) {
 		Employee es = (Employee)session.getAttribute("user");
 		List<Plate> plate = plateservice.queryLeftNav(es.getId());
@@ -523,7 +523,7 @@ public class TjController {
 	 * 跳转每月订单量页面
 	 * @return
 	 */
-	@RequestMapping("toMothKh")
+	@RequestMapping("/toMothKh")
 	public String toMothKh(Model model , HttpSession session) {
 		Employee es = (Employee)session.getAttribute("user");
 		List<Plate> plate = plateservice.queryLeftNav(es.getId());
@@ -631,7 +631,7 @@ public class TjController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("toYgKq")
+	@RequestMapping("/toYgKq")
 	public String toYgKq(Model model, HttpSession session) {
 		Employee es = (Employee)session.getAttribute("user");
 		List<Plate> plate = plateservice.queryLeftNav(es.getId());
@@ -723,7 +723,7 @@ public class TjController {
 	 * @return
 	 */
 	
-	@RequestMapping("toQuestion")
+	@RequestMapping("/toQuestion")
 	public String toQuestion(Model model,String projectName, HttpSession session) {
 		Employee es = (Employee)session.getAttribute("user");
 		List<Plate> plate = plateservice.queryLeftNav(es.getId());
