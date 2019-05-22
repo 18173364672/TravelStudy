@@ -7,6 +7,7 @@ import com.accp.domain.ActivityExample;
 
 public interface ActivityService1 {
 	List<Activity> selectByExample(ActivityExample example);
-	
+	 
 	Activity activitylbselect(Integer id);
+    List<Activity> activitycselect();
 }

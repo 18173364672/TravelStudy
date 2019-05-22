@@ -4,7 +4,7 @@ import com.accp.domain.Social;
 import com.accp.domain.SocialExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-
+ 
 public interface SocialMapper {
     int countByExample(SocialExample example);
 
@@ -17,6 +17,8 @@ public interface SocialMapper {
     int insertSelective(Social record);
 
     List<Social> selectByExample(SocialExample example);
+    
+    List<Social>sidselect(@Param("uid")Integer uid);
 
     Social selectByPrimaryKey(Integer id);
 

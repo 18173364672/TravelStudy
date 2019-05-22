@@ -4,7 +4,7 @@ import com.accp.domain.Royalty;
 import com.accp.domain.RoyaltyExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-
+ 
 public interface RoyaltyMapper {
     int countByExample(RoyaltyExample example);
 

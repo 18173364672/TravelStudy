@@ -1,5 +1,5 @@
 package com.accp.dao;
-
+ 
 import com.accp.domain.Wages;
 import com.accp.domain.WagesExample;
 import java.util.List;

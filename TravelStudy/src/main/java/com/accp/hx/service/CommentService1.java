@@ -4,4 +4,4 @@ import com.accp.domain.Comment;
 
 public interface CommentService1 {
 	int insert(Comment record);
-}
+} 

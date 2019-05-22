@@ -4,7 +4,7 @@ import com.accp.domain.Eventitems;
 import com.accp.domain.EventitemsExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-
+ 
 public interface EventitemsMapper {
     int countByExample(EventitemsExample example);
 

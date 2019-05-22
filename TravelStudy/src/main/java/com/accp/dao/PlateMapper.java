@@ -4,7 +4,7 @@ import com.accp.domain.Plate;
 import com.accp.domain.PlateExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-
+ 
 public interface PlateMapper {
     int countByExample(PlateExample example);
 

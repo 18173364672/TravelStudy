@@ -4,7 +4,7 @@ import com.accp.domain.Projectimg;
 import com.accp.domain.ProjectimgExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-
+ 
 public interface ProjectimgMapper {
     int countByExample(ProjectimgExample example);
 

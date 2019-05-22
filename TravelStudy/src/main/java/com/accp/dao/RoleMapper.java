@@ -4,7 +4,7 @@ import com.accp.domain.Role;
 import com.accp.domain.RoleExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-
+ 
 public interface RoleMapper {
     int countByExample(RoleExample example);
 

@@ -12,7 +12,7 @@
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
-    <where > 
+    <where >  
       <foreach collection="oredCriteria" item="criteria" separator="or" >
         <if test="criteria.valid" >
           <trim prefix="(" suffix=")" prefixOverrides="and" >

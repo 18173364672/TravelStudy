@@ -11,7 +11,7 @@ import com.accp.hx.service.DynamicpictureService1;
 @Service
 @Transactional
 public class DynamicpictureServiceImpl1 implements DynamicpictureService1{
-
+ 
 	@Autowired
 	DynamicpictureMapper DynamicpictureMapper;
 	

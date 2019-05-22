@@ -15,13 +15,15 @@
     <result column="Spare3" property="spare3" jdbcType="VARCHAR" />
     <result column="Spare4" property="spare4" jdbcType="VARCHAR" />
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
-  </resultMap>
+  </resultMap> 
    
   <resultMap id="ccc" type="com.accp.domain.Activity" extends="BaseResultMap">
     <collection property="evelist"  column="id"  ofType="com.accp.domain.Eventitems" select="com.accp.dao.EventitemsMapper.eveselect">
     </collection>
   </resultMap>
-  
+    <select id="activitycselect" resultMap="ccc">
+  SELECT *FROM `activity`
+  </select>
   
   <select id="activitylbselect" resultMap="ccc">
   SELECT *FROM `activity` WHERE id=#{id}

@@ -4,7 +4,7 @@ import com.accp.domain.Thumbup;
 import com.accp.domain.ThumbupExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-
+ 
 public interface ThumbupMapper {
     int countByExample(ThumbupExample example);
 

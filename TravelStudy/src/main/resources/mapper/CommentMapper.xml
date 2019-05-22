@@ -12,7 +12,7 @@
     <result column="Spare3" property="spare3" jdbcType="VARCHAR" />
     <result column="Spare4" property="spare4" jdbcType="VARCHAR" />
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
-  </resultMap>
+  </resultMap> 
    
     <resultMap id="user" type="com.accp.domain.Comment" extends="BaseResultMap">
     <collection property="customersso" ofType="com.accp.domain.Customerss">

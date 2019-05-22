@@ -4,7 +4,7 @@ import com.accp.domain.Dynamicpicture;
 import com.accp.domain.DynamicpictureExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-
+ 
 public interface DynamicpictureMapper {
     int countByExample(DynamicpictureExample example);
 

@@ -12,7 +12,7 @@ import com.accp.hx.service.ActivityService1;
 
 @Service
 public class ActivityServiceImpl1 implements ActivityService1{
-
+ 
 	@Autowired
 	ActivityMapper ActivsityMapper;
 	
@@ -26,6 +26,12 @@ public class ActivityServiceImpl1 implements ActivityService1{
 	public Activity activitylbselect(Integer id) {
 		// TODO Auto-generated method stub
 		return ActivsityMapper.activitylbselect(id);
+	}
+
+	@Override
+	public List<Activity> activitycselect() {
+		// TODO Auto-generated method stub
+		return ActivsityMapper.activitycselect();
 	}
 
 }

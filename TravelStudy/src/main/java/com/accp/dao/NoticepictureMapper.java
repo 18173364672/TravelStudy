@@ -4,7 +4,7 @@ import com.accp.domain.Noticepicture;
 import com.accp.domain.NoticepictureExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-
+ 
 public interface NoticepictureMapper {
     int countByExample(NoticepictureExample example);
 

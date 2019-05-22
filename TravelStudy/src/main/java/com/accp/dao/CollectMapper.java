@@ -4,7 +4,7 @@ import com.accp.domain.Collect;
 import com.accp.domain.CollectExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-
+ 
 public interface CollectMapper {
     int countByExample(CollectExample example);
 

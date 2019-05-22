@@ -27,6 +27,7 @@
   
       <resultMap id="user" type="com.accp.domain.Post" extends="BaseResultMap">
     <collection property="Customerss" ofType="com.accp.domain.Customerss">
+    <result column="uid" property="id" />
     <result column="uname" property="username" />
        <result column="uimg" property="uimg"/>
        <result column="email" property="email"/>

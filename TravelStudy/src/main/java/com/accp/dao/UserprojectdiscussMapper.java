@@ -4,7 +4,7 @@ import com.accp.domain.Userprojectdiscuss;
 import com.accp.domain.UserprojectdiscussExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-
+ 
 public interface UserprojectdiscussMapper {
     int countByExample(UserprojectdiscussExample example);
 

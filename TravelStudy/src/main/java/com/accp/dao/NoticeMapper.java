@@ -4,7 +4,7 @@ import com.accp.domain.Notice;
 import com.accp.domain.NoticeExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-
+ 
 public interface NoticeMapper {
     int countByExample(NoticeExample example);
 

@@ -4,7 +4,7 @@ import com.accp.domain.Customergroup;
 import com.accp.domain.CustomergroupExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-
+ 
 public interface CustomergroupMapper {
     int countByExample(CustomergroupExample example);
 

@@ -4,7 +4,7 @@ import com.accp.domain.Activity;
 import com.accp.domain.ActivityExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-
+ 
 public interface ActivityMapper {
     int countByExample(ActivityExample example);
 
@@ -16,6 +16,7 @@ public interface ActivityMapper {
 
     int insertSelective(Activity record);
 
+    List<Activity> activitycselect();
     List<Activity> selectByExample(ActivityExample example);
 
     Activity selectByPrimaryKey(Integer id);

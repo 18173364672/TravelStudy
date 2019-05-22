@@ -4,7 +4,7 @@ import com.accp.domain.BasePay;
 import com.accp.domain.BasePayExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-
+ 
 public interface BasePayMapper {
     int countByExample(BasePayExample example);
 

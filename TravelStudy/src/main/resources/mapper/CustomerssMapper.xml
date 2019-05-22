@@ -23,6 +23,21 @@
     <result column="Spare4" property="spare4" jdbcType="VARCHAR" />
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
+  
+     <resultMap id="ccc" type="com.accp.domain.Customerss" extends="BaseResultMap">
+    <collection property="customergroup"  ofType="com.accp.domain.Customergroup">
+    <result column="id" property="id" />
+    <result column="groupname" property="groupname" />
+    <result column="fid" property="fid"/>
+    </collection>
+  </resultMap> 
+  
+  <select id="selectuidkhz" resultMap="ccc">
+  SELECT *FROM `customerss` AS ss
+  INNER JOIN `customergroup` AS up
+  ON up.id=ss.`GroupId`
+  where ss.id=#{id}			
+  </select>
    
   
    <select id="dl" resultMap="BaseResultMap">

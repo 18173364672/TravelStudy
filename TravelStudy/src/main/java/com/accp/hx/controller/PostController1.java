@@ -7,22 +7,21 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
+import com.accp.domain.Collect;
 import com.accp.domain.Comment;
 import com.accp.domain.Dynamicpicture;
-
 import com.accp.domain.Post;
-import com.accp.domain.Project;
-import com.accp.domain.ProjectExample;
+import com.accp.domain.Social;
+import com.accp.hx.service.CollectService1;
 import com.accp.hx.service.CommentService1;
 import com.accp.hx.service.DynamicpictureService1;
 import com.accp.hx.service.PostService1;
+import com.accp.hx.service.SocialService1;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -33,7 +32,7 @@ import com.github.pagehelper.PageInfo;
 @RestController
 @RequestMapping("/postcontroller") 
 public class PostController1 {
-
+ 
 	@Autowired
 	PostService1 PostService;
 	
@@ -42,6 +41,34 @@ public class PostController1 {
 	
 	@Autowired
 	CommentService1 CommentService;
+	
+	@Autowired
+	SocialService1 SocialService;
+	
+	@Autowired 
+	CollectService1 Collectservice;
+
+	@RequestMapping("/insertsc")
+	public String insertsc(Collect record) {
+		 record.setTime(new Date());
+		Collectservice.insert(record);
+		return "新增成功";
+	}
+	
+	@RequestMapping("/insertgz")
+	public String insertgz(Social record) { 
+		System.out.println(record.getUid());
+		System.out.println(record.getSid());
+		Integer id=record.getUid();
+		List<Social> list=SocialService.sidselect(id);
+		String o=JSON.toJSONString(list);
+		System.out.println(o); 
+
+			if (!record.getUid().equals(record.getSid())) {
+				SocialService.insert(record);
+		}
+		return "gz";
+	}
 	
 	@RequestMapping("/insertpl")
 	public String insertcomment(Comment record) {
@@ -60,7 +87,7 @@ public class PostController1 {
 		System.out.println(o);
 		return list;
 	}
-
+ 
 	
 	@RequestMapping("/postselect")
 	public PageInfo<Post> postselect(Integer cuur,Integer tid) {

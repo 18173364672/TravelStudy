@@ -4,7 +4,7 @@ import com.accp.domain.Project;
 import com.accp.domain.ProjectExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-
+ 
 public interface ProjectMapper {
     int countByExample(ProjectExample example);
 

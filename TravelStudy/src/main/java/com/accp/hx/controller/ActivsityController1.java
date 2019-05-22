@@ -18,7 +18,7 @@ import com.alibaba.fastjson.JSON;
 @RestController
 @RequestMapping("/ActivityController") 
 public class ActivsityController1 {
-
+ 
 	@Autowired
 	ActivityService1 ActivityService1;
 	
@@ -29,6 +29,15 @@ public class ActivsityController1 {
 		System.out.println(o);
 		return o;
 	}
+	
+	@RequestMapping("/activitycselect")
+	public String activitycselect() {
+		List<Activity> list=ActivityService1.activitycselect();
+		String o=JSON.toJSONString(list);
+		System.out.println(o);
+		return o;
+	}
+ 
  
 	      
 	@RequestMapping("/activitylbselect")

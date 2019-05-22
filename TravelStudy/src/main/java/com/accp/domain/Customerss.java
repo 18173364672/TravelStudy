@@ -42,8 +42,20 @@ public class Customerss {
     private String spare4;
 
     private String spare5;
+    
+    private Customergroup customergroup; 
+    
+    
 
-    public Integer getId() {
+    public Customergroup getCustomergroup() {
+		return customergroup;
+	}
+
+	public void setCustomergroup(Customergroup customergroup) {
+		this.customergroup = customergroup;
+	}
+
+	public Integer getId() {
         return id;
     }
 

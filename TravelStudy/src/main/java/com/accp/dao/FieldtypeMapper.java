@@ -4,7 +4,7 @@ import com.accp.domain.Fieldtype;
 import com.accp.domain.FieldtypeExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-
+ 
 public interface FieldtypeMapper {
     int countByExample(FieldtypeExample example);
 

@@ -4,7 +4,7 @@ import com.accp.domain.Comment;
 import com.accp.domain.CommentExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-
+ 
 public interface CommentMapper {
     int countByExample(CommentExample example);
 

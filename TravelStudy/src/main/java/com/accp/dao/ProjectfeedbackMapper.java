@@ -4,7 +4,7 @@ import com.accp.domain.Projectfeedback;
 import com.accp.domain.ProjectfeedbackExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-
+ 
 public interface ProjectfeedbackMapper {
     int countByExample(ProjectfeedbackExample example);
 

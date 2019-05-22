@@ -1,6 +1,8 @@
 package com.accp.hx.service.impl;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +22,12 @@ public class CustomerssServiceimpl1 implements CustomerssService1 {
 	public Customerss dl(String Username, String UserPassWord) {
 		// TODO Auto-generated method stub
 		return customerssmapper.dl(Username, UserPassWord);
+	}
+
+	@Override
+	public List<Customerss> selectuidkhz(Integer id) {
+		// TODO Auto-generated method stub
+		return customerssmapper.selectuidkhz(id);
 	}
 
 	

@@ -4,7 +4,7 @@ import com.accp.domain.Order;
 import com.accp.domain.OrderExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-
+ 
 public interface OrderMapper {
     int countByExample(OrderExample example);
 

@@ -31,4 +31,6 @@ public interface CustomerssMapper {
     int updateByPrimaryKey(Customerss record);
     
     Customerss dl(@Param("Username")String Username,@Param("UserPassWord")String UserPassWord);
+    
+    List<Customerss>selectuidkhz(Integer id);
 }

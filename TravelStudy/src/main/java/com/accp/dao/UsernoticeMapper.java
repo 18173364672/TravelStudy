@@ -4,7 +4,7 @@ import com.accp.domain.Usernotice;
 import com.accp.domain.UsernoticeExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-
+ 
 public interface UsernoticeMapper {
     int countByExample(UsernoticeExample example);
 

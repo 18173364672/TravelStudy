@@ -4,7 +4,7 @@ import com.accp.domain.Roleplate;
 import com.accp.domain.RoleplateExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-
+ 
 public interface RoleplateMapper {
     int countByExample(RoleplateExample example);
 

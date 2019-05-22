@@ -13,7 +13,7 @@
     <result column="Spare4" property="spare4" jdbcType="VARCHAR" />
     <result column="Spare5" property="spare5" jdbcType="VARCHAR" />
   </resultMap>
-  
+   
   
   
   <select id="fieldselectids" resultMap="BaseResultMap">

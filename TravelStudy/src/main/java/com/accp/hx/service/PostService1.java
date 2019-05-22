@@ -14,3 +14,4 @@ public interface PostService1 {
 	 Post postxxselect(@Param("id")Integer id);
 	 List<Post>postgzselect(@Param("tid")Integer tid,@Param("uid")Integer uid);
 }
+ 

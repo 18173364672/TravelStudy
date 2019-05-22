@@ -19,7 +19,7 @@ import com.accp.hx.service.PostService1;
 @Service
 @Transactional
 public class PostServiceImpl1 implements PostService1{
-
+ 
 	@Autowired
 	PostMapper PostMapper;
 	

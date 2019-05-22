@@ -4,7 +4,7 @@ import com.accp.domain.Post;
 import com.accp.domain.PostExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-
+ 
 public interface PostMapper {
     int countByExample(PostExample example);
 
